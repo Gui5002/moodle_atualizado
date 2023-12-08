@@ -1,0 +1,228 @@
+<style>
+
+
+
+    @media (max-width: 320px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+
+        .main-title h3 {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500!important;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .main-title p {
+            font-size: 14px;
+            text-align: justify!important;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: center!important;
+        }
+        .rtable tbody tr {
+            border: 1px solid #e5e5e5;
+
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            content: none!important;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+
+    }
+
+    @media (max-width: 790px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column;}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: right;
+        }
+        .rtable tbody tr {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            width: 40%;
+            content: attr(data-title);
+            text-align: left;
+            display: block;
+            position: absolute;
+            background-color: #0c3551;
+            top: 0;
+            left: 0;
+            height: 50px;
+            padding: 10px 20px;
+            color: #FFFFFF;
+
+        }
+        .rtable tbody tr .btnbg:before {
+            display: none;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+
+    }
+
+    .main-title h3 {
+        display: inline-block;
+        font-size: 25px;
+        font-weight: 600!important;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .card {
+        border: 1px solid rgba(0,0,0,.125);;
+    }
+    .tableprimary {
+        background: #0c3551;
+        color: white;
+    }
+    .tableprimary:hover {
+        background: #0c3551;
+    }
+    .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
+        padding: 12px 16px;
+        background-color: #01101f;
+        border: 1px solid #01101f;
+        color: #fff;
+
+    }
+    .btn-thm:hover {
+        color: #0c3551!important;
+    }
+    .fa-fw {
+        font-size: 1rem;
+    }
+
+</style>
+{{> block_eva_form_barema/customize_config}}
+<h5 class="card-title">Avaliadores Cadastrados</h5>
+<div class="section mb20">
+    <div class="row">
+        <div class="col-lg-12">
+            <a class="btn-primary btn-thm btnAdicionarModal"
+               data-baremaid="{{baremaid}}"
+               data-root="{{{ config.wwwroot }}}"
+               href="/blocks/eva_barema_bolsa/create.php?id=1"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
+
+            <a class="btn-primary btn-thm btnAdicionarModal"
+               data-baremaid="{{baremaid}}"
+               data-root="{{{ config.wwwroot }}}"
+               data-header="Adicionar um avaliador"
+               data-btn="Adicionar"
+               data-toggle="modal"
+               data-target="#avaliador_afast_Modal"
+               href="#"><i class="icon fa ccn-flaticon-user fa-fw"></i>Adicionar um avaliador</a>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <table class="table table-striped table-hover text-left rtable">
+        <thead class="tableprimary">
+        <tr>
+            <th>#</th>
+            <th>Posicão</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th class="text-center">Qtd Ant.proj. Pendentes</th>
+            <th class="text-center">status</th>
+            <th class="text-center">Açao</th>
+        </tr>
+        </thead>
+        <tbody class="">
+        {{#dadosuser}}
+            <tr>
+                <td data-title="#">{{id_user}}</td>
+                <td data-title="posicao">{{posicao}}</td>
+                <td data-title="Nome">{{nome}}</td>
+                <td data-title="E-mail">{{email}}</td>
+                <td data-title="qtd_anteprojeto" class="text-center">{{qtd_anteprojeto}}</td>
+                <td data-title="status" class="text-center">
+                    <div>
+                        <img class="icon navicon" title="{{title}}" src="https://icons.iconarchive.com/icons/franksouza183/fs/24/Status-tray-{{icon}}-icon.png" tabindex="-1">
+                    </div>
+                </td>
+                <td class="btnbg text-center" >
+                    <!--                                    <a class="btn-primary btn-thm" data-toggle="modal" data-target="#editModalCenter" href="{{{ config.wwwroot }}}/mod/page/view.php?id={{numero_barema}}&edit={{id}}&user={{iduser}}">Edit</a>-->
+                    <a class="btnDeleteModal"
+                       id="id_status_ava"
+                       data-id="{{id}}"
+                       data-iduser="{{id_user}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       data-status = "{{status}}"
+                       data-colunastatus = "{{coluna_status}}"
+                       data-colunauserid = "{{coluna_user_id}}"
+                       href="javascript:void(0);" onclick="status_avaliadores(this)">
+                        <i class="icon fa fa-eye{{icon_eye}} fa-fw " title="{{status}} avaliador" role="img" aria-label="{{status}} Avaliador"></i>
+                    </a>
+
+
+<!--                    <a class="btnEditModal"-->
+<!--                       data-id="{{id}}"-->
+<!--                       data-posicao="{{posicao}}"-->
+<!--                       data-baremaid="{{baremaid}}"-->
+<!--                       data-iduser="{{id_user}}"-->
+<!--                       data-colunauserid = "{{coluna_user_id}}"-->
+<!--                       data-eixo="{{eixo}}"-->
+<!--                       data-root="{{{ config.wwwroot }}}"-->
+<!--                       data-header="Alterar avaliador"-->
+<!--                       data-btn="Alterar"-->
+<!--                       data-toggle="modal"-->
+<!--                       data-target="#avaliador_edit_Modal"-->
+<!--                       href="javascript:void(0);" title="Edit"><i class="icon fa flaticon-settings fa-fw"></i></a>-->
+
+                </td>
+            </tr>
+        {{/dadosuser}}
+        </tbody>
+    </table>
+<!--    page 1, {{results}} results-->
+
+</div>
+
+<br>
+<br>
+{{> block_eva_barema_bolsa/modal_action_avaliador }}
+{{> block_eva_barema_bolsa/modal_edit_avaliador }}
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+{{> block_eva_barema_bolsa/msg_sucesso }}
+{{> block_eva_barema_bolsa/msg_pergunta }}
+<script type="text/javascript" src="/blocks/eva_barema_bolsa/js/modal_action_avaliadores.js"></script>
+<script>$('.ccnDashBlHd ').addClass('hidden')</script>
+
+

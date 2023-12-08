@@ -1,0 +1,213 @@
+
+<!--<link rel="stylesheet" href="/blocks/eva_form_barema/js/jquery-ui-custom/jquery-ui.css">-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.9.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link rel="stylesheet" href="/blocks/eva_barema_bolsa/css/avaliacao_bolsa.css">
+
+
+{{> block_eva_barema_bolsa/customize_config}}
+<form autocomplete="off" action="{{url_atrib}}" method="post" accept-charset="utf-8" id="mform1" class="mform" data-boost-form-errors-enhanced="1">
+    <input type="hidden" name="avaliador_tb_user_id" value="{{id_avaliador}}">
+    <input type="hidden" name="tb_anteprojeto_id" value="{{id_anteprojeto}}">
+    <input type="hidden" id="id_wwwroot" value="{{{ config.wwwroot }}}">
+    <input type="hidden" id="id_aluno">
+
+    <fieldset class="clearfix collapsible " id="id_recursosrandpass">
+    <!--    <div class="bg_btoggle">-->
+    <!--        <legend class="btoggler">-->
+    <!--            <a href="javascript:void(0)" class="fheader" id="id_recursos_pass" role="button" aria-controls="id_recursosrandpass" aria-expanded="true">{{#str}}recursosrandpass, block_eva_form_barema{{/str}}</a>-->
+    <!--        </legend>-->
+    <!--    </div>-->
+        <!--========================================== VISUALIZAÇÃO DA ATIVIDADE OU RECURSO ================================================ -->
+
+        <div class="fcontainer clearfix bg_area">
+
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_aluno" style="margin-top: 10px;"><b>Anteprojeto</b></label>
+                </div>
+                <div class="col-md-8 form-inline align-items-center felement px-0">
+                    {{anteprojeto}}
+                </div>
+            </div>
+
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_aluno" style="margin-top: 10px;"><b>Programa</b></label>
+                </div>
+                <div class="col-md-8 form-inline align-items-center felement px-0">
+                    {{programa}}
+                </div>
+            </div>
+
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_aluno" style="margin-top: 10px;"><b>Nome da Pesquisa</b></label>
+                </div>
+                <div class="col-md-8 form-inline align-items-center felement px-0">
+                    {{pesquisa}}
+                </div>
+            </div>
+
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_aluno" style="margin-top: 10px;"><b>Área prioritária para capacitação</b></label>
+                </div>
+                <div class="col-md-8 form-inline align-items-center felement px-0">
+                    <ul class="unlist">
+                        {{#areaprioritaria}}
+                            <li>{{numero}} - {{areas}}</li>
+                        {{/areaprioritaria}}
+                    </ul>
+                </div>
+            </div>
+
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_aluno" style="margin-top: 10px;"><b>Documento Anteprojeto</b></label>
+                </div>
+                <div class="col-md-8 form-inline align-items-start felement px-0">
+<!--                    <div class="row gx-4">-->
+<!--                        <div class="col">-->
+<!--                            <div class="border bg-light" style="padding: 11px; margin-top: 3px;">{{namefile}}</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                   <a target="_blank" href="{{pathfile}}" class="btn" style="margin-left: 20px;"><i class="icon fa fa-file-pdf-o"></i> Ver Anteprojeto</a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="clearfix collapsible " id="id_analiserandpass">
+    <!--    <div class="bg_btoggle">-->
+    <!--        <legend class="btoggler">-->
+    <!--            <a href="javascript:void(0)" class="fheader" id="id_analise_pass" role="button" aria-controls="id_analiserandpass" aria-expanded="true">{{#str}}analiserandpass, block_eva_form_barema{{/str}}</a>-->
+    <!--        </legend>-->
+    <!--    </div>-->
+        <div class="fcontainer clearfix bg_area">
+            <div id="bitem_id_envio" class="form-group row bitem  ">
+                <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement" style="overflow-x:auto;">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="width: 250px">QUESITO</th>
+                            <th style="width: 460px">CRITÉRIO DE AVALIAÇÃO</th>
+                            <th>FAIXA</th>
+                            <th style="width: 70px">NOTA</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {{#barema}}
+                            <tr>
+                                <td class="text-center">{{id}}</td>
+                                <td>{{nota_maxima}}</td>
+                                <td>{{criterio}}</td>
+                                <td style="padding-right: 30px;">
+                                    <ul class="unlist">
+                                        <li class="form-check">
+                                            <label {{hidden_baixa}} for="id_f1{{id}}">{{label_baixa}}</label>
+                                            <input {{hidden_baixa}} class="custom-radio ntfaixa_{{id}}" type="radio" id="id_f1{{id}}" name="nt_faixa_{{id}}" value="{{valor_baixa}}">
+                                        </li>
+                                        <li class="form-check">
+                                            <label {{hidden_media1}} for="id_f2{{id}}">{{label_media1}}</label>
+                                            <input {{hidden_media1}} class="custom-radio ntfaixa_{{id}}" type="radio" id="id_f2{{id}}" name="nt_faixa_{{id}}" value="{{valor_media1}}">
+                                        </li>
+                                        <li class="form-check">
+                                            <label {{hidden_media2}} for="id_f3{{id}}">{{label_media2}}</label>
+                                            <input {{hidden_media2}} class="custom-radio ntfaixa_{{id}}" type="radio" id="id_f3{{id}}" name="nt_faixa_{{id}}" value="{{valor_media2}}">
+                                        </li>
+                                        <li class="form-check">
+                                            <label {{hidden_media3}} for="id_f4{{id}}">{{label_media3}}</label>
+                                            <input {{hidden_media3}} class="custom-radio ntfaixa_{{id}}" type="radio" id="id_f4{{id}}" name="nt_faixa_{{id}}" value="{{valor_media3}}">
+                                        </li>
+                                        <li class="form-check">
+                                            <label {{hidden_alta}} for="id_f5{{id}}">{{label_alta}}</label>
+                                            <input {{hidden_alta}} class="custom-radio ntfaixa_{{id}}" type="radio" id="id_f5{{id}}" name="nt_faixa_{{id}}" value="{{valor_alta}}">
+                                        </li>
+                                    </ul>
+                                    <input type="hidden" class="form-control nt_faixa_{{id}}" value="{{id}}">
+                                    <div class="form-control-feedback invalid-feedback">- Selecione um Nota</div>
+                                </td>
+                            <td class="text-center" id="idnota{{id}}" style="font-size: 19px;">0</td>
+                            </tr>
+                        {{/barema}}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="4" >NOTA FINAL</td>
+                            <td id="idnota_final" style="font-size: 19px;"></td>
+
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <id>
+                        <input type="hidden" id="nota_final" name="nt_avaliador">
+                        <div class="hidden" id="id_qtd">{{qtd}}</div>
+                    </id>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div id="fgroup_id_buttonar" class="form-group row  bitem">
+        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+            <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+        </div>
+        <div class="col-md-9 form-inline align-items-start felement">
+            <div class="d-flex flex-wrap align-items-center">
+                <div class="form-group  bitem  ">
+<!--                    <input type="submit" class="btn btn-primary " name="submitbutton" id="id_submitbuttonBtn" value="{{#str}}submitbarema, block_eva_barema_bolsa{{/str}}">-->
+                    <button type="button" class="btn btn-primary " id="id_submitbuttonBtn">{{#str}}submitbarema, block_eva_barema_bolsa{{/str}}</button>
+                    <div class="form-control-feedback invalid-feedback" id="id_error_submitbutton"></div>
+                </div>
+
+                <div class="form-group  bitem   btn-cancel">
+<!--                    <input type="submit" class="btn btn-secondary " name="cancelbutton" id="id_cancel" value="">-->
+                    <a  href="/blocks/eva_barema_bolsa/avaliacao.php?gerenciar={{id_user}}" class="btn btn-secondary" id="id_cancel">{{#str}}cancelatbarema, block_eva_form_barema{{/str}}</a>
+                    <div class="form-control-feedback invalid-feedback" id="id_error_cancel"></div>
+                </div>
+
+                <div class="position-fixed p-3" style="z-index: 11; bottom: -5px; right: 0px;">
+                    <div id="id_submitbutton" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto" style="color: red">Atenção</strong>
+                        </div>
+                        <div class="toast-body">
+                            <p style="color: #032a4d">
+                                Tem certeza que deseja enviar essa avaliação? Se clicar em 'OK' não será mais possível alterar essa nota para essa avaliação.
+                            </p>
+                            <div class="mt-2 pt-2 border-top">
+                                <input type="submit" class="btn btn-primary " name="submitbutton" id="id_submitbutton" value="Ok">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fdescription required">
+        Este formulário contém campos obrigatórios marcados com
+        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" aria-label="Campo obrigatório">
+        </i>.
+    </div>
+</form>
+
+
+
+<!--<script src="/blocks/eva_form_barema/js/jquery-ui-custom/jquery-ui.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/blocks/eva_barema_bolsa/js/barema_bolsa.js"></script>
+
+<script>
+
+    setTimeout(function (){
+        $(".notifications .alert").fadeOut("slow", function () {
+            $(this).alert('close');
+            window.location.href = "/blocks/eva_barema_bolsa/avaliacao.php?gerenciar={{id_user}}";
+        });
+    }, 4000);
+</script>
+
+

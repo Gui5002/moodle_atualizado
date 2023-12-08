@@ -1,0 +1,413 @@
+<style>
+
+    .dashbord_nav_list ul li a{
+        text-decoration: none;
+    }
+    .dashbord_nav_list ul li{
+        padding-left: unset;
+    }
+    .ccnDashBlCt .ccnMdlHeading{
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 50px;
+    }
+
+    .accordion-button {
+        padding: 10px 10px 10px 10px !important;
+    }
+
+    /*.accordion-button::after {*/
+    /*    margin-left: -73px !important;*/
+    /*}*/
+
+
+    .form-inline .form-control {
+        width: 100%;
+    }
+
+    .modal-preview {
+        background-color: rgba(0,0,0,.9);
+    }
+
+    .modal:not(.sign_up_modal) .modal-dialog .modal-header .modal-title {
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: unset!important;
+        font-size: 16px!important;
+    }
+    .modal:not(.sign_up_modal) .modal-dialog .modal-header {
+        padding: 13px 25px!important;
+    }
+    .modal:not(.sign_up_modal) .modal-dialog {
+        width: 56%!important;
+        margin: 0 auto!important;
+        padding: 5vh 0!important;
+        position: relative;
+    }
+
+
+    .custom-radio {
+        float: right;
+    }
+
+
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+<h2 class=" ccnMdlHeading">Configurando um bloco Modelo Barema Bolsa</h2>
+
+<form autocomplete="off" action="/blocks/eva_barema_bolsa/criar_modelo.php?modelo=novo" method="post" class="needs-validation " novalidate>
+
+    <fieldset class="clearfix collapsible" id="id_configheader" >
+        <div class="fcontainer clearfix">
+            <div id="fitem_id_title" class="form-group row  fitem   ">
+                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_title">Título do Barema</label>
+                    <div class="form-label-addon d-flex align-items-center align-self-start">
+                        <div class="text-danger" title="Necessários">
+                            <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                    <input type="text" class="form-control " name="title" id="id_title" value="" required>
+                    <div class="invalid-feedback">- O Campo Titulo esta vazio.</div>
+                </div>
+            </div>
+            <div id="fitem_id_subtitle" class="form-group row  fitem   ">
+                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_subtitle">Descrição do Barema</label>
+                    <div class="form-label-addon d-flex align-items-center align-self-start">
+                        <div class="text-danger" title="Necessários">
+                            <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                    <input type="text" class="form-control " name="subtitle" id="id_subtitle" value="" required>
+                    <div class="invalid-feedback">- O Campo Descrição esta vazio.</div>
+                </div>
+            </div>
+            <div id="fitem_id_items" class="form-group row  fitem   ">
+                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                    <label class="d-inline word-break " for="id_items">Itens</label>
+                    <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                </div>
+                <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="select">
+                    <select class="custom-select" name="items" id="id_items">
+                        <option value="1" selected="">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <div class="form-control-feedback invalid-feedback" id="id_error_items"></div>
+                </div>
+            </div>
+            <div id="fitem_id_quantidadeItemInfo" class="form-group row  fitem femptylabel  ">
+                <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                    <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                </div>
+                <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="static">
+                    <div class="form-control-static">
+                        Os itens definem a quantidade de Quesitos a serem criados nesse modelo de Bolsa.
+                    </div>
+                    <div class="form-control-feedback invalid-feedback" id="id_error_quantidadeItemInfo"></div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="accordion item_padrao" id="accordionPanelsStayOpenExample">
+        {{#tablequesito}}
+        <div class="accordion-item hides">
+            <h2 class="accordion-header" id="heading{{num}}">
+                <button class="accordion-button {{colapsed}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{num}}" aria-expanded="{{condition}}" aria-controls="collapse{{num}}">
+                    Item {{num}}
+                </button>
+            </h2>
+            <div id="collapse{{num}}" class="accordion-collapse collapse {{show}}" aria-labelledby="heading{{num}}">
+                <div class="accordion-body">
+                    <div class="fcontainer clearfix">
+                        <div id="fitem_id_notamaxima{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_notamaxima{{num}}">Quesito</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="notamaxima{{num}}" id="id_notamaxima{{num}}" value="" required>
+                                <div class="invalid-feedback">- O Campo Quesito está vazio.</div>
+                            </div>
+                        </div>
+<!--                        <div id="fitem_id_maxnotainfo" class="form-group row  fitem femptylabel  ">-->
+<!--                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">-->
+<!--                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="static">-->
+<!--                                <div class="form-control-static">-->
+<!--                                    Exemplo: "Até 30 Pontos".-->
+<!--                                </div>-->
+<!--                                <div class="form-control-feedback invalid-feedback" id="id_error_maxnotainfo"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div id="fitem_id_criterio{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_criterio{{num}}">Critério de avaliação</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="criterio{{num}}" id="id_criterio{{num}}" value="" required>
+                                <div class="invalid-feedback">- O Campo Critério está vazio.</div>
+                            </div>
+                        </div>
+                        <hr>
+
+<!--                        <div id="fitem_id_criterioinfo" class="form-group row  fitem femptylabel  ">-->
+<!--                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">-->
+<!--                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="static">-->
+<!--                                <div class="form-control-static">-->
+<!--                                    Exemplo: pode ser informado a atividade, se é especialização ou estágio, a quantidade em horas do curso que esse aluno está fazendo.-->
+<!--                                </div>-->
+<!--                                <div class="form-control-feedback invalid-feedback" id="id_error_criterioinfo"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div id="fitem_id_radiobuttoninfo" class="form-group row  fitem femptylabel">-->
+<!--                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">-->
+<!--                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="static">-->
+<!--                                <div class="form-control-static">-->
+<!--                                    O preenchimento dos campos abaixo são os critérios de pontuação. Após o preenchimento serão criados botões de escolha, onde o campo “Nome do Botão” informa a descrição que esse botão vai representar e o campo “Valor do Botão” atribui o valor dos pontos da avaliação para este subitem.-->
+<!--                                </div>-->
+<!--                                <div class="form-control-feedback invalid-feedback" id="id_error_radiobuttoninfo"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <div id="fitem_id_labelbaixa{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_labelbaixa{{num}}">Nome do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="labelbaixa{{num}}" id="id_labelbaixa{{num}}" value="" required>
+                                <div class="invalid-feedback">- O Campo Nome do Botão está vazio.</div>
+                            </div>
+                        </div>
+
+                        <div id="fitem_id_valorbaixa{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_valorbaixa{{num}}">Valor do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários" role="img" aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="valorbaixa{{num}}" id="id_valorbaixa{{num}}" value="" required onkeydown="return so_numeros(event)">
+                                <div class="invalid-feedback">- O Campo Valor está vazio.</div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="fitem_id_labelmedia1{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_labelmedia1{{num}}">Nome do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="labelmedia1{{num}}" id="id_labelmedia1{{num}}" value="">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_labelmedia1{{num}}"></div>
+                            </div>
+                        </div>
+                        <div id="fitem_id_valormedia1{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_valormedia1{{num}}">Valor do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="valormedia1{{num}}" id="id_valormedia1{{num}}" value="" onkeydown="return so_numeros(event)">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_valormedia1{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="fitem_id_labelmedia2{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_labelmedia2{{num}}">Nome do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="labelmedia2{{num}}" id="id_labelmedia2{{num}}" value="">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_labelmedia2{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <div id="fitem_id_valormedia2{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_valormedia2{{num}}">Valor do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="valormedia2{{num}}" id="id_valormedia2{{num}}" value="" onkeydown="return so_numeros(event)">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_valormedia2{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="fitem_id_labelmedia3{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_labelmedia3{{num}}">Nome do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="labelmedia3{{num}}" id="id_labelmedia3{{num}}" value="">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_labelmedia3{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <div id="fitem_id_valormedia3{{num}}" class="form-group row  fitem ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_valormedia3{{num}}">Valor do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="valormedia3{{num}}" id="id_valormedia3{{num}}" value="" onkeydown="return so_numeros(event)">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_valormedia3{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div id="fitem_id_labelalta{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_labelalta{{num}}">Nome do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="labelalta{{num}}" id="id_labelalta{{num}}" value="">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_labelalta{{num}}"></div>
+                            </div>
+                        </div>
+
+                        <div id="fitem_id_valoralta{{num}}" class="form-group row  fitem   ">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_valoralta{{num}}">Valor do botão</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start"></div>
+                            </div>
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text">
+                                <input type="text" class="form-control valor" name="valoralta{{num}}" id="id_valoralta{{num}}" value="" onkeydown="return so_numeros(event)">
+                                <div class="form-control-feedback invalid-feedback" id="id_error_valoralta{{num}}"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/tablequesito}}
+    </div>
+    <br>
+    <a href=""></a>
+
+    <div class="fcontainer clearfix">
+        <div id="fitem_id_button" class="form-group row  fitem   ">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <button type="button" href="#" class="btn btn-outline-secondary align-items-middle felement" id="id_preview" data-bs-toggle="modal" data-bs-target="#modalPreview">
+                    <i class="flaticon-preview"></i> Preview
+                </button>
+            </div>
+            <div class="col-md-9 form-inline align-items-middle felement" data-fieldtype="text">
+                <input type="submit" class="btn btn-primary" name="submitbutton" id="id_submitbutton" value="Cadastrar">
+                <input type="submit" class="btn btn-secondary" name="cancel" id="id_cancel" value="Cancelar">
+            </div>
+        </div>
+<!--        <div id="fitem_id_button_submit" class="form-group row  fitem   ">-->
+<!--            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">-->
+<!--                <span>teste</span>-->
+<!--                <div class="form-label-addon d-flex align-items-center align-self-start"></div>-->
+
+<!--            </div>-->
+<!--            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="text" style="margin-left: 40%;">-->
+<!--                <div class="form-group">-->
+<!--                    <span data-fieldtype="submit">-->
+<!--                        <input type="submit" class="btn btn-primary" name="submitbutton" id="id_submitbutton" value="Cadastrar">-->
+<!--                    </span>-->
+<!--                    <div class="form-control-feedback invalid-feedback" id="id_error_submitbutton"></div>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <span data-fieldtype="submit">-->
+<!--                        <input type="submit" class="btn btn-secondary" name="cancel" id="id_cancel" value="Cancelar">-->
+<!--                    </span>-->
+<!--                    <div class="form-control-feedback invalid-feedback" id="id_error_cancel"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" ></script>
+<script src="/blocks/eva_barema_bolsa/js/crirar_modelo_bolsa.js" defer></script>
+
+<script>
+    $('.ccnDashBlHd ').addClass('hidden')
+    $('.dashbord_nav_list ').addClass('unlist')
+
+    $('#id_cancel').click(function (){
+        window.location.href = "/blocks/eva_barema_bolsa/create.php?id=1";
+    });
+
+</script>
+
+
+<div class="modal-preview modal fade" id="modalPreview" data-bs-keyboard="false" aria-labelledby="previewModalLabel" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="previewModalLabel">Pre Visualização dos Critério de Avaliação</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body tabela">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width: 250px">QUESITO</th>
+                        <th style="width: 460px">CRITÉRIO DE AVALIAÇÃO</th>
+                        <th>FAIXA</th>
+                        <th style="width: 70px">NOTA</th>
+                    </tr>
+                    </thead>
+                    <tbody id="id_linhas">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

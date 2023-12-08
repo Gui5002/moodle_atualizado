@@ -1,0 +1,98 @@
+.em10{
+    font-size: 1em;
+}
+
+.em15{
+    font-size: 1.5em;
+}
+
+.em30{
+    font-size: 3em;
+}
+
+.em20{
+    font-size: 2em;
+}
+
+.em25{
+    font-size: 2.5em;
+}
+
+.floatR{
+    float: right;
+}
+
+.floatL{
+    float: left;
+}
+
+.negrito{
+    font-weight: bold;
+}
+
+.sombreamento{
+    -webkit-box-shadow: 2px 3px 20px 1px rgba(0,0,0,0.42);
+    box-shadow: 2px 3px 20px 1px rgba(0,0,0,0.42);
+}
+
+.fGray{
+    color: rgb(102, 153, 153);
+}
+
+.fWhite{
+    color: rgb(255, 255, 255);
+}
+
+.verticalLine{
+    border-right: 1px solid #669999;
+}
+
+.checkContainer { 
+    border:1px solid #669999; 
+    width:100%; 
+    height: 150px; 
+    overflow-y: scroll; 
+}
+
+#box::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+  
+#box::-webkit-scrollbar-track {
+    background: #c7c9c9;        /* color of the tracking area */
+    border-radius: 20px;
+}
+  
+#box::-webkit-scrollbar-thumb {
+    background-color: rgb(130, 130, 131);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid rgb(130, 130, 131);  /* creates padding around scroll thumb */
+}
+
+#box{
+    border: none;
+}
+
+.search_overlay{
+    display: none !important;
+}
+
+.copyButton{ 
+    margin-right: 1em;
+}
+
+.pdfButton{
+    margin-right: 1em;
+}
+
+.excelButton{
+    margin-right: 1em;
+}
+
+.csvButton{
+    margin-right: 1em;
+}
+
+.ccnDashBlHd{
+    display: none;
+}

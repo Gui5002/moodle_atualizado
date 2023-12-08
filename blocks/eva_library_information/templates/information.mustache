@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/blocks/eva_library_information/information.css"> {{#info}}
+<div class="container-fluid pt10" style="background-color: {{color}}">
+    <div class="container">
+        <div class="row ">
+            <div class="col-sm-12 col-lg-12 pt30 pb10">
+                <h5 class="mt-0 text-center" style="font-size: 24px; font-weight: 600; color: #575757; text-shadow: 1px 1px 7px rgba(132,132,132,0.55);">{{{title}}}</h5>
+                <div class="mt30 ml35">
+                    <p data-ccn="" data-ccn-c="color_body{{id}}" class="ml10">{{{info_body}}}</p>
+                    <!--                            <p data-ccn="body{{id}}" data-ccn-c="color_body{{id}}" class="ml10">{{{info_body}}}</p>-->
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center pl20">
+            <div class="col-sm-12 col-lg-4 {{hidden}}">
+                <div class="info_cards" style="background-color: {{color}};">
+                    <h4 data-ccn="title1{{id}}" style="padding: 0px 20px; font-size: 18px;">{{{info_title1}}}</h4>
+                    <p data-ccn="subtitle1{{id}}" data-ccn-c="color_body{{id}}" style="padding: 0px 20px; text-align: justify">{{{info_subtitle1}}}</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 {{hidden}}">
+                <div class="info_cards" style="background-color: {{color}};">
+                    <h4 data-ccn="title2{{id}}" style="padding: 0px 20px; font-size: 18px;">{{{info_title2}}}</h4>
+                    <p data-ccn="subtitle2{{id}}" style="padding: 0px 20px;" class="text-justify">{{{info_subtitle2}}}</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 {{hidden}}">
+                <div class="info_cards" style="background-color: {{color}};">
+                    <h4 data-ccn="title3{{id}}" style="padding: 0px 20px; font-size: 18px;">{{{info_title3}}}</h4>
+                    <p data-ccn="subtitle3{{id}}" style="padding: 0px 20px; text-align: justify">{{{info_subtitle3}}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/info}}

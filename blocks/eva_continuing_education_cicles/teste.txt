@@ -1,0 +1,40 @@
+<section class="sectionPadding cardSection">
+    <div class="u-layout-row rowPosition">
+        <div class="u-container-style u-layout-cell u-left-cell u-white u-layout-cell-1">
+            <div class="u-border-1 u-border-grey-40 u-container-layout u-container-layout-1 mr-2 mt-2 ml-2 mb-2" style="background: #fff;" id="box1">
+                <h3 class="u-align-center u-text u-text-grey-70 u-text-3">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="'.$data->slide_url1.'">'.$data->card_title1.'</a>
+                </h3>
+                <p class="u-align-left u-text u-text-grey-50 u-text-4">'.$data->card_subtitle1.'</p>
+            </div>
+        </div>
+        <div class="u-container-style u-layout-cell u-left-cell u-white u-layout-cell-1">
+            <div class="u-border-1 u-border-grey-40 u-container-layout u-container-layout-1 mr-2 mt-2 ml-2 mb-2" style="background: #fff;" id="box2">
+                <h3 class="u-align-center u-text u-text-grey-70 u-text-3">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="'.$data->slide_url2.'">'.$data->card_title2.'</a>
+                </h3>
+                <p class="u-align-left u-text u-text-grey-50 u-text-4">'.$data->card_subtitle2.'</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sectionPadding cardSection">
+    <div class="u-layout-row rowPosition">
+        <div class="u-container-style u-layout-cell u-left-cell u-white u-layout-cell-1">
+            <div class="u-border-1 u-border-grey-40 u-container-layout u-container-layout-1 mr-2 mt-2 ml-2 mb-2" style="background: #fff;" id="box3">
+                <h3 class="u-align-center u-text u-text-grey-70 u-text-3">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="'.$data->slide_url3.'">'.$data->card_title3.'</a>
+                </h3>
+                <p class="u-align-left u-text u-text-grey-50 u-text-4">'.$data->card_subtitle3.'</p>
+            </div>
+        </div>
+        <div class="u-container-style u-layout-cell u-left-cell u-white u-layout-cell-1">
+            <div class="u-border-1 u-border-grey-40 u-container-layout u-container-layout-1 mr-2 mt-2 ml-2 mb-2" style="background: #fff;" id="box4">
+                <h3 class="u-align-center u-text u-text-grey-70 u-text-3">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="'.$data->slide_url4.'">'.$data->card_title4.'</a>
+                </h3>
+                <p class="u-align-left u-text u-text-grey-50 u-text-4">'.$data->card_subtitle4.'</p>
+            </div>
+        </div>
+    </div>
+</section>

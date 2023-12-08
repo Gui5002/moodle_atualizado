@@ -1,0 +1,10 @@
+{
+  "name": "moodle-atto_reciteditor-button",
+  "builds": {
+    "moodle-atto_reciteditor-button": {
+      "jsfiles": [
+        "button.js"
+      ]
+    }
+  }
+}

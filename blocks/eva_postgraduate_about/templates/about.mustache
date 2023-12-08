@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/blocks/eva_postgraduate_about/about.css">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="text-center">
+                <h4 class="mt-0" style="font-size: 30px; color: #000; font-weight: 600; text-shadow: 1px 1px 7px #aeaeae;">{{title}}</h4>
+                <p>{{subtitle}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row cor_acordion2 pt-5 pb-5 mt15 {{reverso}} " style="margin-bottom: 30px !important;">
+        <div class="col-lg-6">
+            <div class="text-{{posicion_info}}">
+                <!--                    <img src="" alt="" width="500px" height="520px">-->
+                <img data-ccn="image" data-ccn-img="src" class="img-fluid img_about" src="{{img}}">
+            </div>
+        </div>
+        <div class="col-lg-6 fl-{{posicion_img}}">
+            <div id="accordion">
+                {{#info}}
+                <style>
+                    .titleTextColor[data-ccn-c=color{{id}}]{
+                        color: #000;
+                    }
+
+                    .titleTextColor[data-ccn-c=color{{id}}]:hover{
+                        color: #0d638f;
+                    }
+                </style>
+                <div class="card w-card">
+                    <div class="panel-title card-header2 text-left" data-ccn="{{{ccnAccTitle}}}">
+                        <a href="#" data-ccn-c="color{{id}}" class="font-weight-bold titleTextColor" data-target="#collapse{{{id}}}" data-toggle="collapse" aria-expanded="false">{{{info_title}}}</a>
+                    </div>
+                    <div class="collapse {{{info_show}}}" id="collapse{{{id}}}" data-parent="#accordion">
+                        <div class="card-body cor_acordion2 pl text-left" data-ccn="{{{ccnAccBody}}}" style="padding-left: 20px !important;padding-right: 20px !important;">
+                            {{{info_text}}}
+                        </div>
+                    </div>
+                </div>
+                {{/info}}
+            </div>
+        </div>
+    </div>
+</div>

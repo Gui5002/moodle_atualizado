@@ -1,0 +1,56 @@
+.banner-btn2 {
+    background-color: #fff0;
+    color: #f1e6e6;
+    font-size: 16px;
+    height: 55px;
+    animation-name: fadeInUp;
+    animation-delay: .5s;
+    border: 2px solid #fff;
+    border-radius: 27px;
+    padding: 12px 50px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all .4s ease;
+    margin-top: 20px;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    backface-visibility: visible!important;
+}
+
+.banner-btn2:hover,
+.banner-btn2:active, 
+.banner-btn2:focus {
+    background-color: #fff0;
+    color: #f1e6e6;
+    border: 2px solid #fff;
+}
+
+@media (min-width: 300px) and (max-width: 575px){
+    .correctMargin{
+        margin-top: -160px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+    .correctMargin{
+        margin-top: -160px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .correctMargin{
+        margin-top: -160px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px){
+    .correctMargin{
+        margin-top: -160px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .correctMargin{
+        margin-top: -260px;
+    }
+}

@@ -1,0 +1,180 @@
+<style>
+    @media (max-width: 320px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+        .main-title h3 {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500!important;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .main-title p {
+            font-size: 14px;
+            text-align: justify!important;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: center!important;
+        }
+        .rtable tbody tr {
+            border: 1px solid #e5e5e5;
+
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            content: none!important;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+
+    }
+
+    @media (max-width: 790px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column;}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: right;
+        }
+        .rtable tbody tr {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            width: 40%;
+            content: attr(data-title);
+            text-align: left;
+            display: block;
+            position: absolute;
+            background-color: #0c3551;
+            top: 0;
+            left: 0;
+            height: 50px;
+            padding: 10px 20px;
+            color: #FFFFFF;
+
+        }
+        .rtable tbody tr .btnbg:before {
+            display: none;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+
+    }
+
+    .main-title h3 {
+        display: inline-block;
+        font-size: 25px;
+        font-weight: 600!important;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .card {
+        border: 1px solid rgba(0,0,0,.125);;
+    }
+    .tableprimary {
+        background: #0c3551;
+        color: white;
+    }
+    .tableprimary:hover {
+        background: #0c3551;
+    }
+    .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
+        padding: 12px 16px;
+        background-color: #01101f;
+        border: 1px solid #01101f;
+        color: #fff;
+
+    }
+    .btn-thm:hover {
+        color: #0c3551!important;
+    }
+
+    .status_red{
+        color: red;
+    }
+    .status_blue{
+        color: #0a78d1;
+    }
+    .status_orange{
+        color: #e78900;
+    }
+
+</style>
+
+<div class="{{avaliador}}">
+    <!--{{> block_eva_form_barema/customize_config}}-->
+    <h5 class="card-title">Gerenciamento de Anteprojeto</h5>
+    <h5>Avaliador(a): {{avaliador}}</h5>
+    <table class="table table-striped table-responsive-sm table-hover text-left rtable">
+        <thead class="tableprimary text-center">
+        <tr>
+<!--            <th>#</th>-->
+            <th>Anteprojeto</th>
+<!--            <th>Avaliador</th>-->
+            <th>Data de Atribuição</th>
+            <th>Data do Envio</th>
+            <th>Tempo Restante</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {{#avaliacao_afastamento}}
+            <tr>
+<!--                <td data-title="#">{{userid}}</td>-->
+                <td data-title="link"> Anteprojeto {{anteprojeto}}<a href="{{link}}">{{{lapis}}}</a></td>
+                <td>{{data_ini_avaliacao}}</td>
+                <td>{{data_avaliacao}}</td>
+                <td>{{{timerestante}}}</td>
+                <td data-title="status" class="font-weight-bold {{statuscolor}}">
+                    {{status}}
+                </td>
+                <td>
+                    <a class="" href="" onclick="open('avaliacao.php?gerenciar={{userid}}&espelho={{idavaliacao}}','','status=no, Width=1000, Height=800');">
+                        <i class="flaticon-{{preview}}" id="yui_3_17_2_1_1647205690370_21" style="font-weight: 400;font-size: 20px;"></i>
+                    </a>
+                </td>
+            </tr>
+        {{/avaliacao_afastamento}}
+        </tbody>
+    </table>
+<!--    page 1, {{results}} results-->
+
+</div>
+
+<br>
+<br>
+
+

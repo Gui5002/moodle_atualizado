@@ -1,0 +1,65 @@
+<style>
+    .emailpendente_modal:before {
+        background-color: rgba(0,0,0,.9);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .modal-content {
+        width: 55%;
+        margin: 13% auto;
+    }
+</style>
+
+<div class="emailpendente_modal modal fade" id="modalemailpendente" tabindex="-1" aria-labelledby="modalemailpendenteLabel" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalemailpendenteLabel">Email</h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!--                <form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_barema_bolsa/create.php?id={{id}}" method="post">-->
+            <form method="post" action="{{{ config.wwwroot }}}/blocks/eva_barema_bolsa/avaliacao.php?admin={{iduser}}&email=pendente">
+                <input type="hidden" id="idatribuicao" name="id_atribuicao" value="">
+                <input type="hidden" id="idtempo" name="tempo_restante" value="">
+                <div class="fcontainer clearfix m_area">
+                    <div id="bitem_id_anteprojeto" class="form-group row bitem">
+                        <div class="col-md-12 form-inline align-items-start felement">
+                            <div class="card" style="width: 100%; margin-bottom: 5px;">
+                                <div class="card-body">
+                                    <p class="card-text" id="msg_para"></p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+<!--                                    <h5 class="card-title">Mensagem</h5>-->
+                                    <p class="card-text">Prezado Avaliador(a),</p>
+                                    <p class="card-text msg"></p>
+                                    <div class="card-text">
+                                        <ul class="unlist">
+                                            <li class="msg_anteprojeto">Anteprojeto: 002-2022</li>
+                                            <li class="msg_avaliador">Avaliador: Celio Pereira Batalha Filho</li>
+                                            <li class="msg_link">Link: Celio Pereira Batalha Filho</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer eventButton">
+<!--                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>-->
+                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar" data-dismiss="modal" aria-label="Close">Fechar</button>
+                    <input type="submit" id="btnanteprojeto" class="btn btn-primary btnEvento" name="btn_email_pendente" value="Enviar Email">
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

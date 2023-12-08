@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/blocks/eva_postgraduate_contact/contact.css">
+
+<div class="container-fluid bg-block p20">
+    <div class="container">
+        <div class="row justify-content-end mb90">
+            <div class="col-lg-12" >
+
+                <img data-ccn="image" data-ccn-img="src" class="img_contact shadow_contact" src="{{img}}">
+
+            </div>
+            <div class="row card_contato">
+                <div class="col-lg-12">
+                    <div class="bg-white shadow_contact form_contact">
+                        <form action="{{{config.wwwroot}}}/local/contact/index.php" method="post">
+                            <div class="row contact_pg">
+                                <div class="col-sm-12 text-center">
+                                    <span class="font-weight-normal fz50">CONTATO</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name" id="namelabel">{{#str}}your_name, theme_evagu{{/str}}</label>
+                                        <input class="form-input" id="name" name="name" type="text"
+                                               title="{{#str}}your_name_requirements, theme_evagu{{/str}}" required="required"
+                                               value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="email" id="emaillabel">{{#str}}email_address, theme_evagu{{/str}}</label>
+                                        <input class="form-input" id="email" name="email" type="email" required="required"
+                                               title="{{#str}}email_address_requirements, theme_evagu{{/str}}" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="message" id="messagelabel">{{#str}}message, theme_evagu{{/str}}</label>
+                                        <textarea class="form-input" id="message" name="message" rows="5"
+                                                  title="{{#str}}message_requirements, theme_evagu{{/str}}"
+                                                  required="required">
+                                        </textarea>
+                                        <input type="hidden" id="sesskey" name="sesskey" value="">
+                                        <script>document.getElementById('sesskey').value = M.cfg.sesskey;</script>
+                                        <a class="mt40 mb20 btn btn-danger {{hiden}}" href="{{{config.wwwroot}}}/admin/settings.php?section=manageauths"><i class="fa fa-warning"></i> Configure reCAPTCHA keys</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <button type="submit" name="submit" id="submit" class="btn btn-lg btn-thm5 white">{{#str}}send, theme_evagu{{/str}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container posicion">
+                <div class="row cards mt40 justify-content-center">
+                    {{#cards}}
+                        <div class="col-sm-12 col-lg-3" style="padding-left: 0px; padding-right: 0px;">
+                            <div class="contact_cards border-left">
+                                <!--<div class="icon"><span data-ccn="icon_{{{id}}}" class="{{{card_icon}}}"></span></div>-->
+                                <h4 data-ccn="title_{{{id}}}">
+                                    <i data-ccn="icon_{{{id}}}" class="{{{card_icon}}}"></i>
+                                    &nbsp;
+                                    {{{card_title}}}
+                                </h4>
+                                <p data-ccn="subtitle_{{{id}}}" style="padding: 0px 20px">{{{card_subtitle}}}</p>
+                            </div>
+                        </div>
+                    {{/cards}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

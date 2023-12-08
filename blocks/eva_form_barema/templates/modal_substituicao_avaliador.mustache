@@ -1,0 +1,111 @@
+<style>
+    .substituirAvaliador_modal:before {
+        background-color: rgba(0,0,0,.9);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .modal-content {
+        width: 55%;
+        margin: 13% auto;
+    }
+
+    .ct-select {
+        padding: .375rem 1.75rem .375rem .75rem;
+        font-size: .9375rem;
+        color: #495057;
+        width: 96%;
+    }
+</style>
+
+<div class="substituirAvaliador_modal modal fade" id="modalSubstituirAvaliador" aria-labelledby="modalSubstituirAvaliadorLabel" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalSubstituirAvaliadorLabel">Substituição de Avaliadores</h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close" data-userid="{{iduser}}"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="fcontainer clearfix m_area">
+                    <div id="bitem" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break "><strong>Avaliador Antigo</strong></label>
+                        </div>
+                        <div class="col-md-8 form-inline felement" data-fieldtype="select">
+                            <div id="js_avaliador"></div>
+                        </div>
+                    </div>
+                    <div id="bitem" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break "><strong>Curso</strong></label>
+                        </div>
+                        <div class="col-md-8 form-inline felement" data-fieldtype="select">
+                            <div id="js_curso"></div>
+                        </div>
+                    </div>
+                    <div id="bitem" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break "><strong>Total de Alunos</strong></label>
+                        </div>
+                        <div class="col-md-8 form-inline felement" data-fieldtype="select">
+                            <div id="js_total_alunos"></div>
+                        </div>
+                    </div>
+                    <div id="bitem" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break "><strong>Qtd. de Alunos Avaliados</strong></label>
+                        </div>
+                        <div class="col-md-8 form-inline felement" data-fieldtype="select">
+                            <div id="js_qtd_avaliados"></div>
+                        </div>
+                    </div>
+                    <div id="bitem_id_substituto_user_id" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label d-flex pb-0 pr-md-0">
+                            <label class="d-inline word-break " for="id_substituto_user_id"><stron>Avaliador Substituto</stron></label>
+                            <div class="form-label-addon d-flex align-items-center align-self-start">
+                                <div class="text-danger" title="Necessários">
+                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
+                                       aria-label="Necessários"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 form-inline align-items-center felement" data-fieldtype="select">
+                            <select class="ct-select selectsubstituto substituto_user_id" name="user_id" id="ava_id_pos" data-root="{{{ config.wwwroot }}}">
+                                    <option value="">--Selecione um Avaliador--</option>
+                                {{#avaliadores_substituto}}
+                                    <option value="{{user_id}}">{{ava_substituto}}</option>
+                                {{/avaliadores_substituto}}
+                            </select>
+                            <div class="load_1" style="margin-left: 15px"></div>
+                        </div>
+                    </div>
+                    <div id="bitem_id_substituto_user_id" class="form-group row bitem">
+                        <div class="col-md-4 col-form-label align-items-center float-right d-flex pb-0 pr-md-0">
+                            <div class="load_2" style="margin-left: auto;"></div>
+                        </div>
+
+                        <div class="col-md-8 form-inline align-items-center felement" data-fieldtype="select">
+                            <ul style="margin-left: 20px">
+                                <li class="d-none substituicao text-danger" id="">Fazendo a substituicao...</li>
+                                <li class="d-none emailsubstituido text-danger" id="">Enviando email para o Substituido...</li>
+                                <li class="d-none emailsubstituto text-danger" id="">Enviando email para o Substituto...</li>
+                            </ul>
+                            <div class="d-none user_restrict w-100" style="margin-left:0px"></div>
+
+                        </div>
+                    </div>
+                <div class="modal-footer eventButton">
+<!--                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>-->
+                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar" data-dismiss="modal" aria-label="Close" data-userid="{{iduser}}">Fechar</button>
+                    <input type="submit" id="id_substituicao" class="btn btn-primary btnSubstituir" name="btn_subistituir" value="Substituir" disabled="disabled" data-root="{{{ config.wwwroot }}}" data-id="{{id_atribuicao}}">
+                    <div hidden id="id_atribuicao"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

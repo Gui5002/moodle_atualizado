@@ -1,0 +1,89 @@
+<style>
+    @media (min-width: 320px) {
+
+        .contentmodal {
+            width: 90%;
+            margin: 13% auto;
+        }
+    }
+
+    @media (min-width: 1240px) {
+
+        .contentmodal {
+            width: 30%;
+            margin: 13% auto;
+        }
+
+    }
+
+    .c1 {
+        font-size: 19px;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        box-sizing: content-box;
+        margin-right: .5rem;
+        margin-left: .5rem;
+    }
+
+
+
+    .msgSucess_modal:before {
+        background-color: rgba(0,0,0,.9);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .bg_area {
+        color: #000;
+        /*background-color: #d1e9ff4d;*/
+        padding: 15px 13px;
+        border-top: 0px solid #aac3e84f;
+    }
+    /*.fcontainer .bitem {*/
+    /*    width: 50%;*/
+    /*    margin-left: 25%;*/
+    /*}*/
+
+    #id_avaliador_userid {
+        width: 95%;
+    }
+    .ml200 {
+        margin-left: 252px;
+    }
+
+
+</style>
+
+<div class="msgSucess_modal modal fade" id="msgSuccess" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content contentmodal">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+
+                <div class="hidden" class="id_barema"></div>
+
+                <ul class="unlist">
+                    <li>
+                        <div class="column c1">
+                            <div class="msg">
+                                <span class="msgsuccess"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modalClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

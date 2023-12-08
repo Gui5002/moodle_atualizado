@@ -1,0 +1,119 @@
+<style>
+    .avaliador_afast_modal:before {
+        background-color: rgba(0,0,0,.9);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .m_area {
+        color: #000;
+        /*background-color: #d1e9ff4d;*/
+        padding: 15px 13px;
+        border-top: 0px solid #aac3e84f;
+    }
+    /*.fcontainer .bitem {*/
+    /*    width: 50%;*/
+    /*    margin-left: 25%;*/
+    /*}*/
+    .modal-content {
+        width: 50%;
+        margin: 13% auto;
+    }
+    #id_titular_user_id, #id_suplente_user_id {
+        width: 95%;
+    }
+    .ml200 {
+        margin-left: 252px;
+    }
+
+
+</style>
+
+<div class="avaliador_afast_modal modal fade" id="avaliador_afast_Modal" tabindex="-1" aria-labelledby="avaliador_afast_ModalLabel" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="avaliador_afast_ModalLabel"></h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+<!--                <form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_form_barema/avaliadores.php?baremaid={{baremaid}}" method="post"-->
+<!--                <form autocomplete="off" action="" method="post"-->
+<!--                      accept-charset="utf-8" id="mform1" class="mform" data-boost-form-errors-enhanced="1">-->
+                    <input type="hidden" name="editavaliador_afast" id="id_edit_avaliador_afast" value="">
+                    <div class="fcontainer clearfix m_area">
+                        <div id="bitem_id_titular_user_id" class="form-group row bitem">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_titular_user_id">Avaliador Titular</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
+                                           aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="select">
+                                <select class="custom-select selecttitular titular_user_id" name="titular_user_id" id="id_titular_user_id" data-root="{{{ config.wwwroot }}}">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="bitem_id_suplente_user_id" class="form-group row bitem">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break " for="id_suplente_user_id">Avaliador Suplente</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
+                                           aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 form-inline align-items-start felement" data-fieldtype="select">
+                                <select class="custom-select selectsuplente" name="suplente_user_id" id="id_suplente_user_id" data-root="{{{ config.wwwroot }}}">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="bitem_id_eixojuridico" class="form-group row bitem">
+                            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                                <label class="d-inline word-break ">Distribuição</label>
+                                <div class="form-label-addon d-flex align-items-center align-self-start">
+                                    <div class="text-danger" title="Necessários">
+                                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
+                                           aria-label="Necessários"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-inline align-items-start felement">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="j" id="juridico" name="distribuicao">
+                                    <label class="form-check-label fontSize2" for="juridico">Jurídico</label>
+                                </div>
+                                <input type="hidden" class="form-control distribuicao">
+                                <div class="form-control-feedback invalid-feedback">- Escolha uma distribuição</div>
+                            </div>
+                            <div class="col-md-4 form-inline align-items-start felement">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="g" id="tecnico" name="distribuicao">
+                                    <label class="form-check-label fontSize2" for="tecnico">Gestão</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer eventButton">
+                        <button type="button" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>
+                        <button type="button" name="editarbutton_avaliador" class="btn btn-primary btnEvento" data-root="{{{ config.wwwroot }}}" onclick="add_alter_avaliador_afast(this)"></button>
+                    </div>
+<!--                </form>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
