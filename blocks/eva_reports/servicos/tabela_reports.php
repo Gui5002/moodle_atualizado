@@ -12,8 +12,9 @@ class tabela_reports
                     `id`,
                     course_id,
                     UPPER(`nome_curso`) as nome_curso,
-                    UPPER(`categoria`) as categoria,
-                    UPPER(`subcategoria`) as subcategoria,
+                    UPPER(`pcategoria`) as pcategoria,
+                    UPPER(`scategoria`) as scategoria,
+                    UPPER(`tcategoria`) as tcategoria,
                     `carga_horaria`,
                     `inscritos`,
                     `concluintes`,
@@ -100,8 +101,8 @@ class tabela_reports
         $nowDate = new DateTime();
         $nowDate = $nowDate->format('Y-m-d');
 
-        $start = isset($_REQUEST['matriculaStart4']) ? $_REQUEST['matriculaStart4'] : "1969-12-31";
-        $end   = isset($_REQUEST['matriculaEnd4'])   ? $_REQUEST['matriculaEnd4']   : $nowDate;
+        $start = isset($_REQUEST['matriculaStart3']) ? $_REQUEST['matriculaStart3'] : "1969-12-31";
+        $end   = isset($_REQUEST['matriculaEnd3'])   ? $_REQUEST['matriculaEnd3']   : $nowDate;
         if(empty($end)){
             $end = $nowDate;
         }
@@ -124,14 +125,14 @@ class tabela_reports
 
                 $sql = "SELECT 
                     id,
+                    user_id,
                     nome_completo,
+                    course_id,
+                    nome_curso,
                     email,
                     cidade,
                     exercicio,
                     cargo,
-                    lotacao,
-                    nome_curso,
-                    nome_categoria,
                     progresso,
                     COALESCE(
                         (
