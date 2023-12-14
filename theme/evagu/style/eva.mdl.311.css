@@ -28,7 +28,7 @@
 }
 
 #course-category-listings .listitem[data-selected="1"] {
-    border-left: calc(1px + 5px) solid '[[setting: color_primary]]';
+    border-left: calc(1px + 5px) solid '[[setting:color_primary]]';
 }
 
 @media (min-width: 992px) {

@@ -2254,7 +2254,7 @@
 
     .block_eva_tabs .nav-tabs .nav-link.active {
         background-color: #fff !important;
-        color: '[[setting: color_primary]]' !important;
+        color: [[setting:color_primary]] !important;
     }
 
     .block_eva_tabs .nav-tabs .nav-link:focus {

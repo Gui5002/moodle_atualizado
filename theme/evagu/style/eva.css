@@ -2669,8 +2669,8 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     color: #ffffff;
 }
 .block_eva_course_categories_2 .courses_all_btn .btn:hover {
-    background: '[[setting: color_primary]]' !important;
-    border-color: '[[setting: color_primary]]' !important;
+    background: [[setting:color_primary]] !important;
+    border-color: [[setting:color_primary]] !important;
     color: #fff !important;
 }
 .course-single2 {
@@ -2994,7 +2994,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     margin-right: 50px;
 }
 .details .cc_tab .panel-body .cs_list li:hover a {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 .details .cc_tab .panel-body .cs_list li a span.cs_time {
     float: right;
@@ -3695,7 +3695,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     background-color: #8e9298;
 }
 .view_edit_delete_list li:nth-child(2) {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .view_edit_delete_list li:last-child {
     background-color: '[[setting: color_secondary]]';
@@ -3754,7 +3754,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     line-height: 1.714;
 }
 .courses_list_content .top_courses.list:hover .details .tc_content h5 {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 .original_price {
     font-size: 13px;
@@ -4172,7 +4172,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 }
 .footer_apps_widget .app_grid .apple_btn:hover,
 .footer_apps_widget .app_grid .play_store_btn:hover {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .footer_apps_widget .app_grid .play_store_btn {
     margin-bottom: 0;
@@ -4312,7 +4312,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     width: 80%;
 }
 .footer_apps_widget .mailchimp_form button {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     border: transparent;
     height: 52px;
     width: 52px;
@@ -4628,7 +4628,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     margin-top: -50px;
 }
 .home3_about_icon_box.six {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     margin-bottom: 0;
 }
 .home3_about_icon_box.seven {
@@ -5007,7 +5007,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     font-size: 18px;
 }
 .testimonial_item.home2 .thumb .subtitle {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     font-family: "[[setting:primary_font]]", sans-serif;
     font-size: 14px;
     margin-bottom: 40px;
@@ -5025,7 +5025,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 }
 .testimonial_slider_home2 .owl-item.active.center .testimonial_item.home2 .details,
 .ccn_testimonial_slider_home2 .owl-item.active.center .testimonial_item.home2 .details {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .testimonial_slider_home2 .owl-item.active.center .testimonial_item.home2 .details .icon,
 .ccn_testimonial_slider_home2 .owl-item.active.center .testimonial_item.home2 .details .icon {
@@ -5527,7 +5527,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     background-color: transparent;
 }
 .blog_post_home4.home8 .bph4_thumb .bph4_date_meta .year {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     color: #ffffff;
 }
 .blog_post_home4.home8 .bph4_thumb .bph4_date_meta .date {
@@ -5932,12 +5932,12 @@ ul.mc_parent_list ul.mc_child_list.one:hover .membership_header,
 ul.mc_parent_list ul.mc_child_list.two:hover .membership_header,
 ul.mc_parent_list ul.mc_child_list.three:hover .membership_header,
 ul.mc_parent_list ul.mc_child_list.four:hover .membership_header {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 ul.mc_parent_list ul.mc_child_list:hover .membership_header .price,
 ul.mc_parent_list ul.mc_child_list:hover .membership_header h4,
 ul.mc_parent_list ul.mc_child_list:hover .membership_header p {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 ul.mc_parent_list ul.mc_child_list:hover .membership_header .price,
 ul.mc_parent_list ul.mc_child_list:hover .membership_header h4,
@@ -5956,7 +5956,7 @@ ul.mc_parent_list ul.mc_child_list .pricing_btn {
     width: 200px;
 }
 ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     color: #ffffff;
 }
 /*== Our Partners ==*/
@@ -6349,7 +6349,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     transition: all 0.3s ease 0s;
 }
 .faq_question_widget ul li:hover a {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     padding-left: 15px;
 }
 .faq_according .panel .panel-body {
@@ -6429,7 +6429,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     overflow: hidden;
 }
 .ui_kit_table .table th {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     padding: 20px;
     border-bottom: transparent;
     color: #ffffff;
@@ -6580,7 +6580,7 @@ legend {
     margin-bottom: 8px;
 }
 .ui_kit_radiobox .radio input[type=radio]:checked+label .radio-label {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     box-shadow: inset 0 0 0 5px #fff;
 }
 .ui_kit_radiobox .radio input[type=radio]+label .radio-label {
@@ -6623,7 +6623,7 @@ legend span {
     display: block;
 }
 .ui_kit_radiobox .radio input[type=radio]+label .radio-label:after {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     box-sizing: border-box;
     border-radius: 50%;
     content: "";
@@ -6669,8 +6669,8 @@ legend span {
     top: .50rem;
 }
 .ui_kit_checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: '[[setting: color_primary]]';
-    border-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
+    border-color: [[setting:color_primary]];
 }
 .ui_kit_checkbox .custom-control-label {
     color: #4f4f4f;
@@ -6697,7 +6697,7 @@ legend span {
     padding-left: 25px;
 }
 .ui_kit_whitchbox .custom-control-input:checked~.custom-control-label::before {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .ui_kit_whitchbox .custom-switch .custom-control-label::before {
     height: 1.25rem;
@@ -7641,7 +7641,7 @@ legend span {
 .mbp_pagination_tab .pag_next p:hover,
 .mbp_pagination_tab .pag_prev a:hover,
 .mbp_pagination_tab .pag_next a:hover {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 /*== Commenting Blog Sinlge Page ==*/
 .mbp_pagination_comments {
@@ -7788,7 +7788,7 @@ legend span {
   overflow-y: scroll !important; */
 }
 .ccn_context_dashboard.ccn_dashboard_header_scroll .dashboard_main_content .main_content_container {
-    padding: 80px 0 0;
+    padding: 50px 0 0;
 }
 .main_content_container::-webkit-scrollbar {
     display: none;
@@ -7846,17 +7846,17 @@ legend span {
 }
 .dashbord_nav_list li:hover a,
 .dashbord_nav_list li:hover a span {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 .dashbord_nav_list li.active {
     background-color: #f9fafc;
 }
 .dashbord_nav_list li.active a,
 .dashbord_nav_list li a.active {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 .dashbord_nav_list li.active:before {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     bottom: 0;
     content: "";
     height: 50px;
@@ -8275,7 +8275,7 @@ legend span {
     display: none;
 }
 .my_resume_eduarea .content .circle {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     border-radius: 50%;
     height: 10px;
     left: 5px;
@@ -8285,7 +8285,7 @@ legend span {
 }
 .my_resume_eduarea .content .circle:before {
     background-color: #ffffff;
-    border: 2px solid '[[setting: color_primary]]';
+    border: 2px solid [[setting:color_primary]];
     border-radius: 50%;
     content: "";
     height: 18px;
@@ -8343,7 +8343,7 @@ legend span {
     z-index: -1;
 }
 .my_resume_eduarea .content .edu_center {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     margin-bottom: 0;
 }
 .my_resume_eduarea .content .edu_stats {
@@ -8870,11 +8870,11 @@ legend span {
     margin-top: 25px;
 }
 .cl_pricing_slider .ui-slider-range.ui-corner-all.ui-widget-header {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .cl_pricing_slider span.ui-slider-handle.ui-corner-all.ui-state-default {
     background-color: #fff;
-    border: 2px solid '[[setting: color_primary]]';
+    border: 2px solid [[setting:color_primary]];
     border-radius: 50%;
     height: 18px;
     outline: none;
@@ -9024,8 +9024,8 @@ legend span {
     padding: 0 0 5px;
 }
 .alpha-pag ul.option-set li a.selected {
-    border-bottom: 2px solid '[[setting: color_primary]]';
-    color: '[[setting: color_primary]]';
+    border-bottom: 2px solid [[setting:color_primary]];
+    color: [[setting:color_primary]];
 }
 .alpha-pag li a {
     color: #7d7d7d;
@@ -9270,7 +9270,7 @@ legend span {
 }
 .blog_post_slider_home4.owl-carousel.owl-theme.owl-loaded .owl-prev:hover,
 .blog_post_slider_home4.owl-carousel.owl-theme.owl-loaded .owl-next:hover {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     color: #ffffff;
 }
 .blog_post_slider_home4.owl-carousel.owl-theme.owl-loaded .owl-prev {
@@ -9281,7 +9281,7 @@ legend span {
 }
 .popular_course_slider.owl-carousel.owl-theme.owl-loaded .owl-prev:hover,
 .popular_course_slider.owl-carousel.owl-theme.owl-loaded .owl-next:hover {
-    background-color: '[[setting: color_primary]]' !important;
+    background-color: [[setting:color_primary]] !important;
     color: #ffffff;
 }
 .media_slider_home7.owl-carousel.owl-theme.owl-loaded .owl-prev:hover,
@@ -9321,7 +9321,7 @@ legend span {
 .media_slider_home7.home8.owl-carousel.owl-theme.owl-loaded .owl-next:hover,
 .ccn_media_slider_home7.home8.owl-carousel.owl-theme.owl-loaded .owl-prev:hover,
 .ccn_media_slider_home7.home8.owl-carousel.owl-theme.owl-loaded .owl-next:hover {
-    background-color: '[[setting: color_primary]]' !important;
+    background-color: [[setting:color_primary]] !important;
     color: #ffffff;
 }
 /*== Testimonials Home V3 ==*/
@@ -9362,7 +9362,7 @@ legend span {
     margin-bottom: 0;
 }
 .testimonial_content .thumb p {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     margin-bottom: 0;
 }
 .testimonial_content .thumb img {
@@ -9509,7 +9509,7 @@ legend span {
     width: 100% !important;
 }
 .text-thm {
-    color: '[[setting: color_primary]]' !important;
+    color: [[setting:color_primary]] !important;
 }
 .text-thm2 {
     color: #00d664 !important;
@@ -9614,7 +9614,7 @@ legend span {
     color: #ff4b53;
 }
 .bgc-thm {
-    background-color: '[[setting: color_primary]]' !important;
+    background-color: [[setting:color_primary]] !important;
 }
 .bgc-thm2 {
     background-color: #192675 !important;
@@ -9868,7 +9868,7 @@ legend span {
     transition: all 0.3s ease;
 }
 .btn-thm.rounded {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     border-radius: 5px;
     color: #fff;
 }
@@ -9876,7 +9876,7 @@ legend span {
 .btn-thm:active,
 .btn-thm:focus {
     background-color: transparent !important;
-    border-color: '[[setting: color_primary]]';
+    border-color: [[setting:color_primary]];
     color: #000;
 }
 .btn-thm.white:hover,
@@ -9893,8 +9893,8 @@ legend span {
 .block_eva_contact_form .btn-thm:hover,
 .block_eva_contact_form .btn-thm:focus,
 .block_eva_contact_form .btn-thm:active {
-    background-color: '[[setting: color_primary]]' !important;
-    border-color: '[[setting: color_primary]]' !important;
+    background-color: [[setting:color_primary]] !important;
+    border-color: [[setting:color_primary]] !important;
     color: #ffffff;
 }
 /* End */
@@ -10025,7 +10025,7 @@ legend span {
 .btn-gray:hover,
 .btn-gray:active,
 .btn-gray:focus {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     color: #ffffff;
 }
 .btn-green {
@@ -10054,8 +10054,8 @@ legend span {
 .btn-blue:hover,
 .btn-blue:active,
 .btn-blue:focus {
-    background-color: '[[setting: color_primary]]';
-    border-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
+    border-color: [[setting:color_primary]];
     color: #ffffff;
 }
 .btn-transparent {
@@ -11092,7 +11092,7 @@ section {
     height: 40px;
     line-height: 40px;
     border-radius: 50%;
-    background: '[[setting: color_primary]]';
+    background: [[setting:color_primary]];
     position: fixed;
     right: 20px;
     text-align: center;
@@ -11437,7 +11437,7 @@ section {
     font-size: 15px;
 }
 .divider-one .divider-btn:hover {
-    border: 2px solid '[[setting: color_primary]]';
+    border: 2px solid [[setting:color_primary]];
 }
 .divider-one p {
     margin-bottom: 15px;
@@ -12142,7 +12142,7 @@ body.translated {
     margin-bottom: 0;
 }
 .cart_page_form tr.carttable_row {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .cart_page_form tr.carttable_row th.cartm_title {
     border: none;
@@ -12478,8 +12478,8 @@ body.translated {
     border: none;
 }
 .shop_single_tab_content .nav-tabs .nav-link.active {
-    border-bottom: 2px solid '[[setting: color_primary]]';
-    color: '[[setting: color_primary]]';
+    border-bottom: 2px solid [[setting:color_primary]];
+    color: [[setting:color_primary]];
 }
 .mbp_comment_form.style2 {
     padding-bottom: 50px;
@@ -12963,7 +12963,7 @@ textarea.form-control {
     color: #000;
     border-style: solid;
     border-width: 2px;
-    border-color: '[[setting: color_primary]]';
+    border-color: [[setting:color_primary]];
 }
 .comment-area .fd {
     text-align: left;
@@ -13202,7 +13202,7 @@ textarea.form-control {
     -moz-box-shadow: 0px 1px 4px 0px rgba(36, 65, 231, 0.3);
     box-shadow: 0px 1px 4px 0px rgba(36, 65, 231, 0.3);
     background-color: #ffffff;
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
 }
 .inner_page_breadcrumb {
     background-size: cover;
@@ -13835,7 +13835,7 @@ header.header-nav .header_top_lang_widget .ht-widget-container .vertical-wrapper
     top: 45%
 }
 .ccn_header_style_1 header.header-nav.stricky-fixed .vertical-wrapper .title-vertical {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     color: #fff;
 }
 .instructor_pricing_widget .price i {
@@ -14081,7 +14081,7 @@ header.header-nav .header_top_lang_widget .ht-widget-container .vertical-wrapper
     }
     .testimonial_slider_home2 .owl-item.active .testimonial_item.home2 .details,
     .ccn_testimonial_slider_home2 .owl-item.active .testimonial_item.home2 .details {
-        background-color: '[[setting: color_primary]]';
+        background-color: [[setting:color_primary]];
     }
     .testimonial_slider_home2 .owl-item.active .testimonial_item.home2 .details p,
     .ccn_testimonial_slider_home2 .owl-item.active .testimonial_item.home2 .details p {
@@ -14461,7 +14461,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
 }
 .work-block .inner-box:hover {
     box-shadow: 0px 1px 4px 0px rgba(13, 47, 129, 0.09);
-    border-color: '[[setting: color_primary]]';
+    border-color: [[setting:color_primary]];
 }
 .work-block .inner-box:before {
     position: absolute;
@@ -14596,7 +14596,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     }
 }
 .pricing-table.tagged .inner-box {
-    border-color: '[[setting: color_primary]]';
+    border-color: [[setting:color_primary]];
 }
 .pricing-table.tagged .table-content,
 .pricing-table.tagged .title-box {
@@ -14723,7 +14723,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     transition: all 0.3s ease;
 }
 .why_chose_us:hover .icon {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .why_chose_us:hover .icon span {
     color: #72b6f1;
@@ -14766,10 +14766,10 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     z-index: 1;
 }
 .why_chose_us.style2:hover:before {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .why_chose_us.style2:hover .icon {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .testimonial_grid {
     position: relative;
@@ -15022,7 +15022,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
 }
 .bs_carousel .property-carousel-controls a {
     background-color: #ffffff;
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     cursor: pointer;
     display: block;
     height: 90px;
@@ -15290,7 +15290,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     opacity: .6;
 }
 .feat_property .thumb .blog_tag {
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     border-radius: 3px;
     color: rgb(254, 254, 254);
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -15336,7 +15336,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     z-index: -1;
 }
 .feat_property.home8 a.fp_price {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     float: left;
     font-size: 22px;
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -15510,11 +15510,11 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
 }
 .icon_hvr_img_box:hover:before {
     opacity: .95;
-    border-color: '[[setting: color_primary]]';
+    border-color: [[setting:color_primary]];
     box-shadow: 0px 1px 35px 0px rgba(32, 51, 103, 0.1);
 }
 .icon_hvr_img_box .icon {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     font-size: 48px;
     margin-bottom: 8px;
     position: relative;
@@ -15535,7 +15535,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
 .icon_hvr_img_box .details h5 {
     font-size: 16px;
     font-weight: bold;
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     text-align: center;
 }
 .icon_hvr_img_box .details p {
@@ -15550,7 +15550,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
 .icon_hvr_img_box.ccn-box {
     text-align: left;
     padding: 40px 40px;
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     box-shadow: 0 6px 6px 0 rgb(0 0 10 / 15%) !important;
 }
 .icon_hvr_img_box.ccn-box:before {
@@ -15583,14 +15583,14 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     color: #ffffff;
     font-size: 16px;
     border-radius: 10px;
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
     font-weight: 700;
     padding: 8px 30px;
-    border: 2px solid '[[setting: color_primary]]';
+    border: 2px solid [[setting:color_primary]];
     line-height: 30px;
 }
 .btn-style-two:hover {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     background-color: transparent;
 }
 .btn-style-three {
@@ -15598,18 +15598,18 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     display: inline-block;
     text-align: center;
     white-space: nowrap;
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     font-size: 16px;
     border-radius: 10px;
     background-color: transparent;
     font-weight: 700;
     padding: 8px 30px;
-    border: 2px solid '[[setting: color_primary]]';
+    border: 2px solid [[setting:color_primary]];
     line-height: 30px;
 }
 .btn-style-three:hover {
     color: #ffffff;
-    background-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
 }
 .breadcrumb_content .ccn-external-stars span,
 .breadcrumb_content .block-controls.header .action-menu-trigger>.dropdown>a {
@@ -15952,7 +15952,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     }
 }
 .ccn-section-top-more a {
-    color: '[[setting: color_primary]]';
+    color: [[setting:color_primary]];
     font-size: 16px;
     font-weight: bold;
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -16383,8 +16383,8 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     border: 2px solid;
 }
 .block_eva_price_tables_dark .theme-btn:hover {
-    background-color: '[[setting: color_primary]]';
-    border-color: '[[setting: color_primary]]';
+    background-color: [[setting:color_primary]];
+    border-color: [[setting:color_primary]];
     color: #fff;
 }
 .block_eva_steps_dark .work-block .text,
@@ -16491,7 +16491,7 @@ ul.cs_course_syslebus, ul.cs_course_syslebus2, ul.list_requiremetn {
     background-color: transparent;
 }
 #menu .ccn_mob_menu_library>a {
-    background: '[[setting: color_primary]]';
+    background: [[setting:color_primary]];
     border-radius: 50px;
     min-width: 180px;
     text-align: center;

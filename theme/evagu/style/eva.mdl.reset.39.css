@@ -19,7 +19,7 @@ div.dropdown-item:focus-within {
 #ccnSettingsMenuContainer .dropdown-item:active,
 #ccnSettingsMenuContainer .dropdown-item:hover,
 #ccnSettingsMenuContainer .dropdown-item:focus {
-    background: '[[setting: color_primary]]';
+    background: [[setting:color_primary]];
     color: #fff;
 }
 

@@ -51,7 +51,7 @@
 }
 #fitem_id_button .felement .btn-primary:hover {
     background-color: transparent;
-    border-color: '[[setting: color_primary]]';
+    border-color: '[[setting:color_primary]]';
     color: #000!important;
 }
 

@@ -632,9 +632,7 @@ body.ccn_context_dashboard {
     -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.09);
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.09);
 }
-.forumsearch input.form-control,
-#page-heading-button .forumsearch input.form-control,
-.ccnSearchHuge input.form-control {
+.forumsearch input.form-control, #page-heading-button .forumsearch input.form-control, .ccnSearchHuge input.form-control {
     border-style: solid;
     border-width: 1px;
     border-color: rgb(221, 221, 221);
@@ -642,7 +640,7 @@ body.ccn_context_dashboard {
     background-color: rgb(255, 255, 255);
     box-shadow: none !important;
     flex: 1;
-    height: 80px;
+    height: 50px;
     font-size: 18px;
     padding-left: 30px;
     width: 100%;
@@ -2759,7 +2757,7 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
 .ccnDarkMode.ccn_context_dashboard.path-mod-quiz #mod_quiz_navblock .qnbutton.notyetanswered .trafficlight,
 .ccnDarkMode.ccn_context_dashboard.path-mod-quiz #mod_quiz_navblock .qnbutton.invalidanswer .trafficlight,
 .ccnDarkMode.ccn_context_dashboard .message_container .message_input {
-    background-color: rgb(0, 8, 70);
+    background-color: rgb(0, 0, 0);
 }
 .ccnDarkMode.ccn_context_dashboard .message_container_drawer {
     background-color: rgb(78, 88, 124);
