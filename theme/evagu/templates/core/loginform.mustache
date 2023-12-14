@@ -1,24 +1,19 @@
 {{!
     This file is part of Moodle - http://moodle.org/
-
     Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     Moodle is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template core/loginform
-
     Moodle template for the login page.
-
     Context variables required for this template:
     * autofocusform: Auto focus on form ?,
     * canloginasguest - Is guest login allowed?,
@@ -41,7 +36,6 @@
     * sitename - Name of site.,
     * logintoken - Random token to protect login request.,
     * maintenance - Maintenance message
-
     Example context (json):
     {
         "autofocusform": false,
@@ -94,178 +88,162 @@
         "maintenance": "For full access to this site, you need to login in as an admin."
     }
 }}
-
 <div class="sign_up-container">
-    {{#cansignup}}
-      <div class="sr-only">
-        <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
-      </div>
-    {{/cansignup}}
-
-    {{#error}}
-      <div class="loginerrors mt-3">
-        <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
-        <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
-      </div>
-    {{/error}}
-
-    <form action="{{loginurl}}" method="post" id="login">
-
-      <div class="heading">
-        <h3 class="text-center">{{#str}} login_welcome, theme_evagu {{/str}}</h3>
-        {{#signup_is_enabled}}
-          <p class="text-center">{{#str}} login_no_account, theme_evagu {{/str}} <a class="text-thm" href="{{signupurl}}">{{#str}} signup, theme_evagu {{/str}}</a></p>
-        {{/signup_is_enabled}}
-      </div>
-
-      <input id="anchor" type="hidden" name="anchor" value="">
-      <script>
-        document.getElementById('anchor').value = location.hash;
-      </script>
-      <input type="hidden" name="logintoken" value="{{logintoken}}">
-      <div class="form-group">
-        <label for="username" class="sr-only">
-          {{^canloginbyemail}}
-            {{#str}} username {{/str}}
-          {{/canloginbyemail}}
-          {{#canloginbyemail}}
-            {{#str}} usernameemail {{/str}}
-          {{/canloginbyemail}}
-        </label>
-        <input type="text" name="username" id="username" class="form-control" value="{{username}}"
-          placeholder={{#quote}}{{^canloginbyemail}}{{#str}}username{{/str}}{{/canloginbyemail}}{{#canloginbyemail}}{{#str}}usernameemail{{/str}}{{/canloginbyemail}}{{/quote}} autocomplete="username">
-      </div>
-      <div class="form-group">
-        <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
-        <input type="password" name="password" id="password" value="" class="form-control" placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}} autocomplete="current-password">
-      </div>
-      <div class="form-group custom-control custom-checkbox">
-        {{#rememberusername}}
-          <input class="custom-control-input" type="checkbox" name="rememberusername1" id="rememberusername1" value="1" {{#username}}checked="checked" {{/username}} />
-          <label class="custom-control-label" for="rememberusername1">{{#str}} rememberusername, admin {{/str}}</label>
-        {{/rememberusername}}
-
-        <a class="tdu btn-fpswd float-right" href="{{forgotpasswordurl}}">{{#str}} forgot_password, theme_evagu {{/str}}</a>
-      </div>
-
-      <button type="submit" class="btn btn-log btn-block btn-thm2" id="loginbtn">{{#str}}login{{/str}}</button>
-    </form>
-
-    <div class="mt-3">
-      {{#str}} cookiesenabled {{/str}}
-      {{{cookieshelpiconformatted}}}
+  {{#cansignup}}
+    <div class="sr-only">
+      <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
     </div>
-    {{#canloginasguest}}
-      <div class="mt-2">
-        <p>{{#str}}someallowguest{{/str}}</p>
-        <form action="{{loginurl}}" method="post" id="guestlogin">
-          <input type="hidden" name="logintoken" value="{{logintoken}}">
-          <input type="hidden" name="username" value="guest" />
-          <input type="hidden" name="password" value="guest" />
-          <button class="btn btn-secondary btn-block" type="submit">{{#str}}loginguest{{/str}}</button>
-        </form>
-      </div>
-    {{/canloginasguest}}
-
-    {{#hasidentityproviders}}
-      <h6 class="mt-2">{{#str}} potentialidps, auth {{/str}}</h6>
-      <div class="potentialidplist" class="mt-3">
-        {{#identityproviders}}
-          <div class="potentialidp">
-            <a href="{{url}}" title={{#quote}}{{name}}{{/quote}} class="btn btn-secondary btn-block">
-              {{#iconurl}}
-                <img src="{{iconurl}}" alt="" width="24" height="24" />
-              {{/iconurl}}
-              {{name}}
-            </a>
-          </div>
-        {{/identityproviders}}
-      </div>
-    {{/hasidentityproviders}}
-
-    {{#hasinstructions}}
-      <div class="divide">
-        <span class="lf_divider">{{#str}} or, theme_evagu {{/str}}</span>
-        <hr>
-      </div>
-
-      <div class="ccn_first-time">
+  {{/cansignup}}
+  {{#error}}
+    <div class="loginerrors mt-3">
+      <a href="#" id="loginerrormessage" class="accesshide">{{error}}</a>
+      <div class="alert alert-danger" role="alert" data-aria-autofocus="true">{{error}}</div>
+    </div>
+  {{/error}}
+  <form action="{{loginurl}}" method="post" id="login">
+    <div class="heading">
+      <h3 class="text-center">{{#str}} login_welcome, theme_evagu {{/str}}</h3>
+      {{#signup_is_enabled}}
+        <p class="text-center">{{#str}} login_no_account, theme_evagu {{/str}} <a class="text-thm"
+            href="{{signupurl}}">{{#str}} signup, theme_evagu {{/str}}</a></p>
+      {{/signup_is_enabled}}
+    </div>
+    <input id="anchor" type="hidden" name="anchor" value="">
+    <script>
+      document.getElementById('anchor').value = location.hash;
+    </script>
+    <input type="hidden" name="logintoken" value="{{logintoken}}">
+    <div class="form-group">
+      <label for="username" class="sr-only">
+        {{^canloginbyemail}}
+          {{#str}} username {{/str}}
+        {{/canloginbyemail}}
+        {{#canloginbyemail}}
+          {{#str}} usernameemail {{/str}}
+        {{/canloginbyemail}}
+      </label>
+      <input type="text" name="username" id="username" class="form-control" value="{{username}}"
+        placeholder={{#quote}}{{^canloginbyemail}}{{#str}}username{{/str}}{{/canloginbyemail}}{{#canloginbyemail}}{{#str}}usernameemail{{/str}}{{/canloginbyemail}}{{/quote}}
+        autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
+      <input type="password" name="password" id="password" value="" class="form-control"
+        placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}} autocomplete="current-password">
+    </div>
+    <div class="form-group custom-control custom-checkbox">
+      {{#rememberusername}}
+        <input class="custom-control-input" type="checkbox" name="rememberusername1" id="rememberusername1" value="1"
+          {{#username}}checked="checked" {{/username}} />
+        <label class="custom-control-label" for="rememberusername1">{{#str}} rememberusername, admin {{/str}}</label>
+      {{/rememberusername}}
+      <a class="tdu btn-fpswd float-right" href="{{forgotpasswordurl}}">{{#str}} forgot_password, theme_evagu
+        {{/str}}</a>
+    </div>
+    <button type="submit" class="btn btn-log btn-block btn-thm2" id="loginbtn">{{#str}}login{{/str}}</button>
+  </form>
+  <div class="mt-3">
+    {{#str}} cookiesenabled {{/str}}
+    {{{cookieshelpiconformatted}}}
+  </div>
+  {{#canloginasguest}}
+    <div class="mt-2">
+      <p>{{#str}}someallowguest{{/str}}</p>
+      <form action="{{loginurl}}" method="post" id="guestlogin">
+        <input type="hidden" name="logintoken" value="{{logintoken}}">
+        <input type="hidden" name="username" value="guest" />
+        <input type="hidden" name="password" value="guest" />
+        <button class="btn btn-secondary btn-block" type="submit">{{#str}}loginguest{{/str}}</button>
+      </form>
+    </div>
+  {{/canloginasguest}}
+  {{#hasidentityproviders}}
+    <h6 class="mt-2">{{#str}} potentialidps, auth {{/str}}</h6>
+    <div class="potentialidplist" class="mt-3">
+      {{#identityproviders}}
+        <div class="potentialidp">
+          <a href="{{url}}" title={{#quote}}{{name}}{{/quote}} class="btn btn-secondary btn-block">
+            {{#iconurl}}
+              <img src="{{iconurl}}" alt="" width="24" height="24" />
+            {{/iconurl}}
+            {{name}}
+          </a>
+        </div>
+      {{/identityproviders}}
+    </div>
+  {{/hasidentityproviders}}
+  {{#hasinstructions}}
+    <div class="divide">
+      <span class="lf_divider">{{#str}} or, theme_evagu {{/str}}</span>
+      <hr>
+    </div>
+    <div class="ccn_first-time">
+      <div class="">
         <div class="">
           <div class="">
             <div class="">
-              <div class="">
-
-              </div>
-              <div>
-                {{#cansignup}}
-                  <form class="mt-3" action="{{signupurl}}" method="get" id="signup">
-
-                          <div class="card border border-dark mb-3" style="width: 100%;">
-                              <div class="card-header text-center" style="font-weight: 600">Informaçoes para o Acesso.</div>
-                              <div class="card-body">
-                                  <h4>{{#str}}firsttime{{/str}}</h4>
-                                    {{{instructions}}}
-                                  <p class="card-text">Clicando em: <a class="tdu btn-fpswd" href="{{signupurl}}" style="color: red">Cadastre-se</a></p>
-                                  <h5>Não é usuário da AGU?</h5>
-                                  <p class="card-text"><a class="tdu btn-fpswd" href="/mod/page/view.php?id=9" style="color: red">Clique aqui</a>
-                                    para saber mais sobre os próximos eventos da ESAGU, alguns dos eventos são abertos ao público.
-                                  </p>
-                                  <p class="card-text">Se o Problema persistir : <a class="tdu btn-fpswd" href="/mod/page/view.php?id=1" style="color: red">Fale Conosco</a></p>
-                              </div>
-                          </div>
-
-
-                  </form>
-    <!--                <div class="row">-->
-    <!--                    <div class="col-md-7">-->
-    <!--                        <div class="alert alert-primary" role="alert">Você não é usuário da agu:</div>-->
-    <!--                    </div>-->
-    <!--                    <div class="col-md-5 text-md-right">-->
-    <!--                        <button type="submit" class="btn btn-secondary">{{#str}}startsignup{{/str}}</button>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-                {{/cansignup}}
-              </div>
+              <h3>{{#str}}firsttime{{/str}}</h3>
+            </div>
+            <div>
+              {{{instructions}}}
+              {{#cansignup}}
+                <form class="mt-3" action="{{signupurl}}" method="get" id="signup">
+                  <div class="card border border-dark mb-3" style="width: 100%;">
+                    <div class="card-header text-center" style="font-weight: 600">Informaçoes para o Acesso.</div>
+                    <div class="card-body">
+                      <h4>{{#str}}firsttime{{/str}}</h4>
+                      {{{instructions}}}
+                      <p class="card-text">Clicando em: <a class="tdu btn-fpswd" href="{{signupurl}}"
+                          style="color: red">Cadastre-se</a></p>
+                      <h5>Não é usuário da AGU?</h5>
+                      <p class="card-text"><a class="tdu btn-fpswd" href="/mod/page/view.php?id=9"
+                          style="color: red">Clique aqui</a>
+                        para saber mais sobre os próximos eventos da ESAGU, alguns dos eventos são abertos ao público.
+                      </p>
+                      <p class="card-text">Se o Problema persistir : <a class="tdu btn-fpswd"
+                          href="/mod/page/view.php?id=1" style="color: red">Fale Conosco</a></p>
+                    </div>
+                  </div>
+                </form>
+              {{/cansignup}}
             </div>
           </div>
         </div>
       </div>
-    {{/hasinstructions}}
-
-    {{#maintenance}}
-      <div class="row justify-content-center mt-3">
-        <div class="col-xl-6 col-sm-8">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-title">
-                <h2>{{#str}}sitemaintenance, core_admin{{/str}}</h2>
-              </div>
-              <div>
-                {{{maintenance}}}
-              </div>
+    </div>
+  {{/hasinstructions}}
+  {{#maintenance}}
+    <div class="row justify-content-center mt-3">
+      <div class="col-xl-6 col-sm-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h2>{{#str}}sitemaintenance, core_admin{{/str}}</h2>
+            </div>
+            <div>
+              {{{maintenance}}}
             </div>
           </div>
         </div>
       </div>
-    {{/maintenance}}
-    {{#js}}
-      {{#error}}
+    </div>
+  {{/maintenance}}
+  {{#js}}
+    {{#error}}
+      require(['jquery'], function($) {
+      $('#loginerrormessage').focus();
+      });
+    {{/error}}
+    {{^error}}
+      {{#autofocusform}}
         require(['jquery'], function($) {
-        $('#loginerrormessage').focus();
+        if ($('#username').val()) {
+        $('#password').focus();
+        } else {
+        $('#username').focus();
+        }
         });
-      {{/error}}
-      {{^error}}
-        {{#autofocusform}}
-          require(['jquery'], function($) {
-          if ($('#username').val()) {
-          $('#password').focus();
-          } else {
-          $('#username').focus();
-          }
-          });
-        {{/autofocusform}}
-      {{/error}}
-    {{/js}}
-
+      {{/autofocusform}}
+    {{/error}}
+  {{/js}}
 </div>

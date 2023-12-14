@@ -13,36 +13,25 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
-
 global $PAGE;
-
 require_once($CFG->dirroot. '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
 // require_once(__DIR__ . '/lib.php');
-
 $ccnMdlHandler = new ccnMdlHandler();
 $ccnMdlVersion = $ccnMdlHandler->ccnGetCoreVersion();
-
 $THEME->name = 'evagu';
-
 $THEME->supportscssoptimisation = true;
-
 $THEME->editor_sheets = [];
-
 $THEME->parents = ['boost'];
-
 $ccnAdminLayout = 'ccn_dashboard.php';
 if (isset($_GET['bui_editid']) && isset($_GET['eva_live_customizer'])) {
   $ccnAdminLayout = 'ccn_visualize_block.php';
 }
-
 $ccnInCourseRegions = array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre');
 if(!empty($THEME->settings->quiz_layout) && $THEME->settings->quiz_layout == '1'){
   $ccnInCourseRegions = array('side-pre', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'fullwidth-top');
 }
-
 $THEME->layouts = [
     // Most backwards compatible layout without the blocks - this is the layout used by default.
     'base' => array(
@@ -86,6 +75,12 @@ $THEME->layouts = [
         'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
         'defaultregion' => 'side-pre',
     ),
+'mycourses' => array(
+        'file' => 'ccn_my.php',
+        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+        'defaultregion' => 'side-pre',
+        'options' => array('nonavbar' => true),
+    ),
     // My dashboard page.
     'mydashboard' => array(
         'file' => 'ccn_my.php',
@@ -105,7 +100,6 @@ $THEME->layouts = [
         'options' => array('langmenu' => true),
         'defaultregion' => 'below-content',
     ),
-
     // Pages that appear in pop-up windows - no navigation, no blocks, no header.
     'popup' => array(
         'file' => 'ccn_minimal.php',
@@ -154,39 +148,37 @@ $THEME->layouts = [
         'defaultregion' => 'side-pre'
     ),
 ];
-
-$ccnSheetsReset = array();
-$ccnSheetsTheme = array(
-  'bootstrap.min',
-  'jquery-ui.min',
-  'font-awesome.min',
-  'font-awesome-animation.min',
-  'line-awesome.min',
-  'nouislider.min',
-  'menu',
-  'ace-responsive-menu',
-  'megadropdown',
-  'bootstrap-select.min',
-  'simplebar.min',
-  'progressbar',
-  'ccn-flaticon',
-  'flaticon',
-  'animate',
-  'slider',
-  'magnific-popup',
-  'timecounter',
-  'jquery.fancybox.min',
-  'spectrum',
-  'eva',
-  'dashbord_navitaion',
-  'eva-mdl',
-  'eva-dashboard',
-  'responsive',
-  'html2canvas'
-);
-$ccnSheetsAppend = array();
-
-// ccnComm: No else, chained because we combine.
+$ccnSheetsReset = [];
+$ccnSheetsTheme = [];
+if((int)$ccnMdlVersion < 400) {
+  $ccnSheetsTheme[] = 'bootstrap.min';
+}
+$ccnSheetsTheme[] = 'jquery-ui.min';
+$ccnSheetsTheme[] = 'font-awesome.min';
+$ccnSheetsTheme[] = 'font-awesome-animation.min';
+$ccnSheetsTheme[] = 'line-awesome.min';
+$ccnSheetsTheme[] = 'nouislider.min';
+$ccnSheetsTheme[] = 'menu';
+$ccnSheetsTheme[] = 'ace-responsive-menu';
+$ccnSheetsTheme[] = 'megadropdown';
+$ccnSheetsTheme[] = 'bootstrap-select.min';
+$ccnSheetsTheme[] = 'simplebar.min';
+$ccnSheetsTheme[] = 'progressbar';
+$ccnSheetsTheme[] = 'ccn-flaticon';
+$ccnSheetsTheme[] = 'flaticon';
+$ccnSheetsTheme[] = 'animate';
+$ccnSheetsTheme[] = 'slider';
+$ccnSheetsTheme[] = 'swiper-bundle.min';
+$ccnSheetsTheme[] = 'magnific-popup';
+$ccnSheetsTheme[] = 'timecounter';
+$ccnSheetsTheme[] = 'jquery.fancybox.min';
+$ccnSheetsTheme[] = 'spectrum';
+$ccnSheetsTheme[] = 'eva';
+$ccnSheetsTheme[] = 'dashbord_navitaion';
+$ccnSheetsTheme[] = 'eva-mdl';
+$ccnSheetsTheme[] = 'eva-dashboard';
+$ccnSheetsTheme[] = 'responsive';
+$ccnSheetsAppend = [];
 $ccnSheetsReset[] = 'eva-mdl-reset';
 if($ccnMdlVersion == '37') {
   $ccnSheetsReset[] = 'eva.mdl.reset.37';
@@ -208,8 +200,6 @@ if($ccnMdlVersion == '311') {
   $ccnSheetsReset[] = 'eva.mdl.reset.311';
   $ccnSheetsAppend[] = 'eva.mdl.311';
 }
-
-
 if(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 2 ){
   $ccnSheetsAppend[] = 'eva.header.2';
 } elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 3 ){
@@ -239,33 +229,24 @@ if(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 2 ){
 } else {
   $ccnSheetsAppend[] = 'eva.header.1';
 }
-
 if(!empty($THEME->settings->footertype) && $THEME->settings->footertype == 9 ){
   $ccnSheetsAppend[] = 'eva.footer.9';
 }
-
 $ccnSheetsAppend[] = 'custom';
-
 $ccnSheets = array_merge($ccnSheetsReset, $ccnSheetsTheme, $ccnSheetsAppend);
-
 $THEME->sheets = $ccnSheets;
-
 // A dock is a way to take blocks out of the page and put them in a persistent floating area on the side of the page. Boost
 // does not support a dock so we won't either - but look at bootstrapbase for an example of a theme with a dock.
 $THEME->enable_dock = false;
-
 // This is an old setting used to load specific CSS for some YUI JS. We don't need it in Boost based themes because Boost
 // provides default styling for the YUI modules that we use. It is not recommended to use this setting anymore.
 $THEME->yuicssmodules = array();
-
 // Most themes will use this rendererfactory as this is the one that allows the theme to override any other renderer.
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
-
 // This is a list of blocks that are required to exist on all pages for this theme to function correctly. For example
 // bootstrap base requires the settings and navigation blocks because otherwise there would be no way to navigate to all the
 // pages in Moodle. Boost does not require these blocks because it provides other ways to navigate built into the theme.
 $THEME->requiredblocks = '';
-
 // This is a feature that tells the blocks library not to use the "Add a block" block. We don't want this in boost based themes
 // because it forces a block region into the page when editing is enabled and it takes up too much room.
 $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
@@ -295,6 +276,7 @@ $THEME->javascripts = array(
   'wow.min',
   'progressbar',
   'slider',
+'swiper-bundle.min',
   'timepicker',
   'lozad.min',
   'spectrum',
@@ -302,11 +284,10 @@ $THEME->javascripts = array(
   'jquery.youtubebackground',
   'jquery.fancybox.min',
   'dashboard-script',
-  'script',
-  'html2canvas'
+  'script'
 );
-
-
 $THEME->iconsystem = '\\theme_evagu\\output\\icon_system_fontawesome';
-
 $THEME->csspostprocess = 'theme_evagu_process_css';
+$THEME->activityheaderconfig = [
+    'notitle' => true
+];

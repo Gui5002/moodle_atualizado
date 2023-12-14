@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * This file is responsible for serving the fonts used in CSS.
  *
@@ -23,14 +22,11 @@
  * @copyright 2013 Petr Skoda (skodak)  {@link http://skodak.org}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 // Disable moodle specific debug messages and any errors in output,
 // comment out when debugging or better look into error log!
 define('NO_DEBUG_DISPLAY', true);
-
 define('ABORT_AFTER_CONFIG', true);
 require('../config.php');
-
 if ($slashargument = min_get_slash_argument()) {
     $slashargument = ltrim($slashargument, '/');
     if (substr_count($slashargument, '/') < 3) {
@@ -41,48 +37,34 @@ if ($slashargument = min_get_slash_argument()) {
     $component = min_clean_param($component, 'SAFEDIR');
     $rev       = min_clean_param($rev, 'INT');
     $font      = min_clean_param($font, 'RAW');
-
 } else {
     $themename = min_optional_param('theme', 'standard', 'SAFEDIR');
     $component = min_optional_param('component', 'core', 'SAFEDIR');
     $rev       = min_optional_param('rev', -1, 'INT');
     $font      = min_optional_param('font', '', 'RAW');
 }
-
-if (!min_is_revision_valid_and_current($rev)) {
-    // If the rev is invalid, normalise it to -1 to disable all caching.
-    $rev = -1;
-}
-
 if (!$font) {
     font_not_found();
 }
-
 if ($to = strpos($font, '?')) {
     $font = substr($font, 0, $to);
 }
-
 if (empty($component) or $component === 'moodle' or $component === 'core') {
     $component = 'core';
 }
-
 if (preg_match('/^[a-z0-9_-]+\.woff2$/i', $font, $matches)) {
     $font = $matches[0];
     $mimetype = 'font/woff2';
-
 } else if (preg_match('/^[a-z0-9_-]+\.woff$/i', $font, $matches)) {
     // This is the real standard!
     $font = $matches[0];
     $mimetype = 'font/woff';
-
 } else if (preg_match('/^[a-z0-9_-]+\.ttf$/i', $font, $matches)) {
     $font = $matches[0];
     $mimetype = 'font/ttf';
-
 } else if (preg_match('/^[a-z0-9_-]+\.otf$/i', $font, $matches)) {
     $font = $matches[0];
     $mimetype = 'font/otf';
-
 } else if (preg_match('/^[a-z0-9_-]+\.eot$/i', $font, $matches)) {
     // IE8 must die!!!
     $font = $matches[0];
@@ -90,11 +72,9 @@ if (preg_match('/^[a-z0-9_-]+\.woff2$/i', $font, $matches)) {
 } else if (preg_match('/^[a-z0-9_-]+\.svg$/i', $font, $matches)) {
     $font = $matches[0];
     $mimetype = 'image/svg+xml';
-
 } else {
     font_not_found();
 }
-
 if (file_exists("$CFG->dirroot/theme/$themename/config.php")) {
     // Normal theme exists.
 } else if (!empty($CFG->themedir) and file_exists("$CFG->themedir/$themename/config.php")) {
@@ -102,15 +82,12 @@ if (file_exists("$CFG->dirroot/theme/$themename/config.php")) {
 } else {
     font_not_found();
 }
-
 $candidatelocation = "$CFG->localcachedir/theme/$rev/$themename/fonts/$component";
 $etag = sha1("$rev/$themename/$component/$font");
-
 if ($rev > 0) {
     if (file_exists("$candidatelocation/$font.error")) {
         font_not_found();
     }
-
     if (file_exists("$candidatelocation/$font")) {
         if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) || !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             // We do not actually need to verify the etag value because our files
@@ -127,20 +104,14 @@ if ($rev > 0) {
         send_cached_font("$candidatelocation/$font", $etag, $font, $mimetype);
     }
 }
-
 // Ok, now we need to start normal moodle script, we need to load all libs and $DB.
 define('ABORT_AFTER_CONFIG_CANCEL', true);
-
 define('NO_MOODLE_COOKIES', true); // Session not used here.
 define('NO_UPGRADE_CHECK', true);  // Ignore upgrade check.
-
 require("$CFG->dirroot/lib/setup.php");
-
 $theme = theme_config::load($themename);
 $themerev = theme_get_revision();
-
 $fontfile = $theme->resolve_font_location($font, $component);
-
 if ($themerev <= 0 or $rev != $themerev) {
     // Do not send caching headers if they do not request current revision,
     // we do not want to pollute browser caches with outdated fonts.
@@ -149,9 +120,7 @@ if ($themerev <= 0 or $rev != $themerev) {
     }
     send_uncached_font($fontfile, $font, $mimetype);
 }
-
 make_localcache_directory('theme', false);
-
 if (empty($fontfile) or !is_readable($fontfile)) {
     if (!file_exists($candidatelocation)) {
         @mkdir($candidatelocation, $CFG->directorypermissions, true);
@@ -162,7 +131,6 @@ if (empty($fontfile) or !is_readable($fontfile)) {
     fclose($fp);
     font_not_found();
 }
-
 $cachefont = cache_font($font, $fontfile, $candidatelocation);
 if (connection_aborted()) {
     die;
@@ -172,20 +140,13 @@ clearstatcache();
 if (file_exists($cachefont)) {
     send_cached_font($cachefont, $etag, $font, $mimetype);
 }
-
 send_uncached_font($fontfile, $font, $mimetype);
-
-
-
 // Utility functions.
-
 function send_cached_font($fontpath, $etag, $font, $mimetype) {
     global $CFG;
     require("$CFG->dirroot/lib/xsendfilelib.php");
-
     // 90 days only - based on Moodle point release cadence being every 3 months.
     $lifetime = 60 * 60 * 24 * 90;
-
     header('Etag: "'.$etag.'"');
     header('Content-Disposition: inline; filename="'.$font.'"');
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', filemtime($fontpath)) .' GMT');
@@ -195,17 +156,13 @@ function send_cached_font($fontpath, $etag, $font, $mimetype) {
     header('Accept-Ranges: none');
     header('Content-Type: '.$mimetype);
     header('Content-Length: '.filesize($fontpath));
-
     if (xsendfile($fontpath)) {
         die;
     }
-
     // No need to gzip already compressed fonts.
-
     readfile($fontpath);
     die;
 }
-
 function send_uncached_font($fontpath, $font, $mimetype) {
     header('Content-Disposition: inline; filename="'.$font.'"');
     header('Last-Modified: '. gmdate('D, d M Y H:i:s', time()) .' GMT');
@@ -214,16 +171,13 @@ function send_uncached_font($fontpath, $font, $mimetype) {
     header('Accept-Ranges: none');
     header('Content-Type: '.$mimetype);
     header('Content-Length: '.filesize($fontpath));
-
     readfile($fontpath);
     die;
 }
-
 function font_not_found() {
     header('HTTP/1.0 404 not found');
     die('font was not found, sorry.');
 }
-
 /**
  * Caches a given font file.
  *
@@ -235,12 +189,10 @@ function font_not_found() {
 function cache_font($font, $fontfile, $candidatelocation) {
     global $CFG;
     $cachefont = "$candidatelocation/$font";
-
     clearstatcache();
     if (!file_exists($candidatelocation)) {
         @mkdir($candidatelocation, $CFG->directorypermissions, true);
     }
-
     // Prevent serving of incomplete file from concurrent request,
     // the rename() should be more atomic than copy().
     ignore_user_abort(true);

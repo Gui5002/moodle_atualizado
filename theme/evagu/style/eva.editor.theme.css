@@ -210,7 +210,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   color: #a22;
 }
 .CodeMirror-matchingtag {
-  background: rgba(255, 150, 0, 0.3);
+  background: rgba(255, 150, 0, .3);
 }
 .CodeMirror-activeline-background {
   background: #e8f2ff;
@@ -536,7 +536,6 @@ span.CodeMirror-selectedtext {
   text-decoration: underline;
   color: white !important;
 }
-
 /* .CodeMirror-line {
   padding-left: 40px!important;
 } */

@@ -13,11 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace theme_evagu\output\core_user\myprofile;
-
 defined('MOODLE_INTERNAL') || die;
-
 use \core_user\output\myprofile\category;
 use core_user\output\myprofile\tree;
 use core_user\output\myprofile\node;
@@ -27,25 +24,18 @@ use context_course;
 use core_course_list_element;
 use DateTime;
 use core_date;
+use moodle_url;
 use ccnUserHandler;
-
 class renderer extends \core_user\output\myprofile\renderer {
-
   public function render_tree(tree $tree) {
       global $CFG, $USER, $DB, $SESSION, $SITE, $PAGE, $OUTPUT;
-
       $ccn_user_id = optional_param('id', 0, PARAM_INT);
       $ccn_user_id = $ccn_user_id ? $ccn_user_id : $USER->id;       // Owner of the page.
-
       $ccn_page = new \stdClass();
       $ccn_page->id = $ccn_user_id;
-
-
       $ccnUserHandler = new ccnUserHandler();
       $ccnUser = $ccnUserHandler->ccnGetUserDetails($ccn_user_id);
-
       // print_object($ccnUser);
-
       if(!($ccn_page->id == $USER->id)) {
         if (!isset($SESSION->theme_evagu_counter)) {
           $SESSION->theme_evagu_counter = array();
@@ -53,24 +43,18 @@ class renderer extends \core_user\output\myprofile\renderer {
         if (!isset($SESSION->theme_evagu_counter[$ccn_page->id])) {
           $SESSION->theme_evagu_counter[$ccn_page->id] = array();
         }
-
         $ccn_ip = getremoteaddr();
         $ccn_ip = bin2hex($ccn_ip);
         $ccn_ip = substr($ccn_ip, 0, 15); //char15 limit
         $ccn_time_difference = 0;
-
         if (!isset($SESSION->theme_evagu_counter[$ccn_page->id]['time'])) {
           $sql = "SELECT MAX(time) AS mintime FROM {$CFG->prefix}theme_evagu_counter
               WHERE course = {$ccn_page->id}
               AND ip = '$ccn_ip'";
-
           $time = $DB->get_record_sql($sql);
-
           $SESSION->theme_evagu_counter[$ccn_page->id]['time'] = $time && $time->mintime ? $time->mintime : 0;
         }
-
         $ccn_increase = false;
-
         if ($SESSION->theme_evagu_counter[$ccn_page->id]['time'] < (time() - $ccn_time_difference)) {
           $dataobject = new \stdClass();
           $dataobject->ip = $ccn_ip;
@@ -80,12 +64,9 @@ class renderer extends \core_user\output\myprofile\renderer {
           $SESSION->theme_evagu_counter[$ccn_page->id]['time'] = time();
           $ccn_increase = true;
         }
-
       }
-
       // need return first
       $return = '';
-
       if($PAGE->theme->settings->user_profile_layout != 1){ //evagu Frontend
         $ccn_col_main = 'col-md-12 col-lg-8 col-xl-9';
         $ccn_col_side = 'col-lg-4 col-xl-3';
@@ -101,13 +82,11 @@ class renderer extends \core_user\output\myprofile\renderer {
         $ccn_col_side_block_content = 'ccnDashBlCt siderbar_contact_widget';
         $ccn_col_main_block = 'ccnDashBl b0';
       }
-
       // begin new
       $userData = get_complete_user_data('id', $ccn_user_id);
       $moreUserData = $DB->get_record('user', array('id' => $ccn_user_id), '*', MUST_EXIST);
       $userDescription = file_rewrite_pluginfile_urls($moreUserData->description, 'pluginfile.php', $ccn_user_id, 'user', 'profile', null);
       $userDescription = format_text($userDescription, FORMAT_HTML, array('filter' => true));
-
       $userFirst = $userData->firstname;
       $userLast = $userData->lastname;
       $userIcq = $userData->icq;
@@ -127,13 +106,11 @@ class renderer extends \core_user\output\myprofile\renderer {
       }
       $userEnroledCourses = enrol_get_users_courses($ccn_user_id);
       $enrolmentCount = count($userEnroledCourses);
-
       //check if user is a teacher ANYWHERE in Moodle
       $teacherRole = $DB->get_field('role', 'id', array('shortname' => 'editingteacher'));
       $isTeacher = $DB->record_exists('role_assignments', ['userid' => $ccn_user_id, 'roleid' => $teacherRole]);
       $teachingCourses = $DB->get_records('role_assignments', ['userid' => $ccn_user_id, 'roleid' => $teacherRole]);
       $teachingCoursesCount = count($teachingCourses);
-
       $teachingStudentCount = 0;
       foreach($teachingCourses as $course) {
         $courseID = $course->id;
@@ -143,15 +120,15 @@ class renderer extends \core_user\output\myprofile\renderer {
           $teachingStudentCount+= $numberOfUsers;
         }
       }
-
       $userLastCourses = $userData->lastcourseaccess;
-
       $ccnProfileCountTable = 'theme_evagu_counter';
       $ccnProfileCountConditions = array('course'=>$ccn_page->id);
       $ccnProfileViews = $DB->get_records($ccnProfileCountTable,array('course'=>$ccn_page->id));
       $ccnProfileCount = count($ccnProfileViews);
-
-      $userAvatar = $OUTPUT->user_picture($userData, array('size' => 150, 'class' => 'img-fluid'));
+      // $userAvatar = $OUTPUT->user_picture($userData, array('size' => 150, 'class' => 'img-fluid'));
+$userAvatar = new moodle_url('/user/pix.php/'.$USER->id.'/f1.jpg');
+      $userAvatar = '<img src="'.$userAvatar.'" alt="'.$userFirst.' '. $userLast.'" height="150" width="150" />';
+      $hiddenFields = explode(',',$CFG->hiddenuserfields);
       $return .= '
       <section class="our-team">
 		    <div class="">';
@@ -168,7 +145,7 @@ class renderer extends \core_user\output\myprofile\renderer {
             <div class="'.$ccn_col_main.'">
               <div class="row">
                 <div class="col-lg-12">';
-                if($userDescription && $PAGE->theme->settings->user_profile_layout != 1){ // evaguFront
+                if(!in_array('description', $hiddenFields) && $userDescription && $PAGE->theme->settings->user_profile_layout != 1){ // evaguFront
                 $return .='
                   <div class="cs_row_two">
                     <div class="'.$ccn_col_main_block.' cs_overview ">
@@ -176,7 +153,7 @@ class renderer extends \core_user\output\myprofile\renderer {
                       '.$userDescription.'
                     </div>
                   </div>';
-                } elseif($PAGE->theme->settings->user_profile_layout == 1){ //evagu Dash even without userDescription present
+                } elseif(!in_array('description', $hiddenFields) && $PAGE->theme->settings->user_profile_layout == 1){ //evagu Dash even without userDescription present
                   $return .='
                   <div class="cs_row_two mb30">
                     <div class="'.$ccn_col_main_block.' cs_overview ">
@@ -194,9 +171,6 @@ class renderer extends \core_user\output\myprofile\renderer {
                     </div>
                   </div>';
                 }
-
-
-
                 $return .='
                 <div class="cs_row_three">
                   <div class="'.$ccn_col_main_block.' --course_content">';
@@ -207,7 +181,7 @@ class renderer extends \core_user\output\myprofile\renderer {
                     $return .='
                   </div>
                 </div>';
-                if($userLastCourses && $PAGE->theme->settings->user_profile_layout != 1){ //evagu Frontend
+                if(!in_array('mycourses', $hiddenFields) &&  $userLastCourses && $PAGE->theme->settings->user_profile_layout != 1){ //evagu Frontend
                 $return .='
                 <div class="'.$ccn_col_main_block.'">
                   <div class="row">
@@ -226,7 +200,6 @@ class renderer extends \core_user\output\myprofile\renderer {
                       $category = $DB->get_record('course_categories',array('id'=>$course->category));
                       $categoryName = $category->name;
                       $lastAccessed = userdate($accessed, '%d %b %Y');
-
                       $contentimages = '';
                       foreach ($course->get_course_overviewfiles() as $file) {
                           $isimage = $file->is_valid_image();
@@ -286,13 +259,11 @@ class renderer extends \core_user\output\myprofile\renderer {
                         $course = new core_course_list_element($course_record);
                         $courseTitle = $course->fullname;
                         $courseDesc = substr(format_string($course->summary, $striplinks = true,$options = null),0,200).'...';
-
                         $courseNewsItems = $course->newsitems;
                         $courseLink = $CFG->wwwroot.'/course/view.php?id='.$course_id;
                         $category = $DB->get_record('course_categories',array('id'=>$course->category));
                         $categoryName = $category->name;
                         $lastAccessed = userdate($accessed, '%d %b %Y');
-
                         $contentimages = '';
                         foreach ($course->get_course_overviewfiles() as $file) {
                             $isimage = $file->is_valid_image();
@@ -336,15 +307,11 @@ class renderer extends \core_user\output\myprofile\renderer {
                         </div>';
                       }
                   }
-
-
-
                   $return .='
                   </div>
                 </div></div>';
               }
               $return .='
-
             </div>
           </div>
         </div>
@@ -363,16 +330,16 @@ class renderer extends \core_user\output\myprofile\renderer {
               if($ccnUser->lang){
                 $return .='<p>'.get_string('preferredlanguage').'</p><i>'.$ccnUser->lang.'</i>';
               }
-              if($ccnUser->since){
+              if(!in_array('firstaccess', $hiddenFields) && $ccnUser->since){
                 $return .='<p>'.get_string('firstsiteaccess').'</p><i>'.$ccnUser->since.'</i>';
               }
-              if($ccnUser->lastLogin){
+              if(!in_array('lastaccess', $hiddenFields) && $ccnUser->lastLogin){
                 $return .='<p>'.get_string('lastsiteaccess').'</p><i>'.$ccnUser->lastLogin.'</i>';
               }
               if($ccnUser->phone1){
                 $return .='<p>'.get_string('phone').'</p><i>'.$ccnUser->phone1.'</i>';
               }
-              if($ccnUser->email){
+              if(!in_array('email', $hiddenFields) && $ccnUser->email){
                 $return .='<p>'.get_string('email').'</p><i>'.$ccnUser->email.'</i>';
               }
               if($ccnUser->socialSkype){
@@ -402,7 +369,9 @@ class renderer extends \core_user\output\myprofile\renderer {
               }
               $return .='
 						</div>
-					</div>
+					</div>';
+          if(!in_array('mycourses', $hiddenFields)) {
+            $return .= '
 					<div class="'.$ccn_col_side_block.'">
               <div class="'.$ccn_col_block_title.'">
                 <h4>'.get_string('recentactivity').'</h4>
@@ -427,15 +396,14 @@ class renderer extends \core_user\output\myprofile\renderer {
                 }
                 $return .='
 						</div>
-
-				</div>
+				</div>';
+      }
+      $return .='
 			</div>
 		</div>
 	</section>';
-
       return $return;
   }
-
   /**
    * Render a category.
    *
@@ -472,7 +440,6 @@ class renderer extends \core_user\output\myprofile\renderer {
       $return .= '</div></div></div>';
       return $return;
   }
-
   /**
    * Render a node.
    *
@@ -509,8 +476,6 @@ class renderer extends \core_user\output\myprofile\renderer {
       } else {
                 $return = $header;
       }
-
       return $return;
   }
-
 }

@@ -2,10 +2,11 @@
 /*
 @ccnRef: @theme_evagu/layout
 */
-
 defined('MOODLE_INTERNAL') || die();
 global $USER, $CFG, $SESSION, $OUTPUT, $COURSE, $DB;
 require_once($CFG->libdir . '/behat/lib.php');
+require_once($CFG->dirroot . '/course/lib.php');
+// require_once($CFG->libdir . '/lib/blocklib.php');
 include($CFG->dirroot . '/theme/evagu/ccn/ccn_loginform.php');
 include($CFG->dirroot . '/theme/evagu/ccn/ccn_forgotform.php');  //Linha adicionado para o funcionamento da tela de Recuperar senha
 include($CFG->dirroot . '/theme/evagu/ccn/ccn_globalsearch.php');
@@ -15,24 +16,19 @@ include($CFG->dirroot . '/theme/evagu/ccn/course_handler/ccn_activity_nav.php');
 require_once($CFG->dirroot. '/theme/evagu/ccn/user_handler/ccn_user_handler.php');
 require_once($CFG->dirroot. '/theme/evagu/ccn/page_handler/ccn_page_handler.php');
 require_once($CFG->dirroot. '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
-
 /* @ccnComm: Initialize */
 $ccnUserHandler = new ccnUserHandler();
 $ccnIsCourseCreator = $ccnUserHandler->ccnCheckRoleIsCourseCreatorAnywhere($USER->id);
 $ccnIsManager = $ccnUserHandler->ccnCheckRoleIsManagerAnywhere($USER->id);
 $ccnCurrentUserIsAuthenticated = $ccnUserHandler->ccnCurrentUserIsAuthenticated();
-
 $ccnPageHandler = new ccnPageHandler();
 $pageheading = $ccnPageHandler->ccnGetPageTitle();
-
 $ccnMdlHandler = new ccnMdlHandler();
 $ccnMdlVersion = $ccnMdlHandler->ccnGetCoreVersion();
-
 /* @ccnComm: Visualize */
 // if (isset($_GET['eva_customizer'])) {
 //   require_once($CFG->dirroot. '/theme/eagu/ccn/visualize/ccn_lcvb_construct.php');
 // }
-
 /* @ccnBreak */
 if (is_siteadmin()) {$user_status = 'role-supreme';} else {$user_status = 'role-standard';}
 if(method_exists('theme_evagu\output\core_renderer', 'get_theme_image_headerlogo1') && method_exists('theme_evagu\output\core_renderer_maintenance', 'get_theme_image_headerlogo1') && !empty($OUTPUT->get_theme_image_headerlogo1())){
@@ -49,6 +45,11 @@ if(method_exists('theme_evagu\output\core_renderer', 'get_theme_image_headerlogo
   $headerlogo3 = $OUTPUT->get_theme_image_headerlogo3(null, 100);
 } else {
   $headerlogo3 = $CFG->wwwroot . '/theme/evagu/images/header-logo4.png';
+}
+if(method_exists('theme_evagu\output\core_renderer', 'get_theme_image_headerlogo4') && method_exists('theme_evagu\output\core_renderer_maintenance', 'get_theme_image_headerlogo4') && !empty($OUTPUT->get_theme_image_headerlogo4())){
+  $headerlogo4 = $OUTPUT->get_theme_image_headerlogo4(null, 100);
+} else {
+  $headerlogo4 = $CFG->wwwroot . '/theme/evagu/images/header-logo.png';
 }
 if(method_exists('theme_evagu\output\core_renderer', 'get_theme_image_headerlogo_mobile') && method_exists('theme_evagu\output\core_renderer_maintenance', 'get_theme_image_headerlogo_mobile') && !empty($OUTPUT->get_theme_image_headerlogo_mobile())){
   $headerlogo_mobile = $OUTPUT->get_theme_image_headerlogo_mobile(null, 100);
@@ -70,6 +71,7 @@ if(method_exists('theme_evagu\output\core_renderer', 'get_theme_image_favicon') 
 } else {
   $favicon = $CFG->wwwroot . '/theme/evagu/pix/favicon.ico';
 }
+$langMenu = $OUTPUT->ccn_render_lang_menu();
 $headertype = get_config('theme_evagu', 'headertype');
 $headertype_settings = get_config('theme_evagu', 'headertype_settings');
 $header_search = get_config('theme_evagu', 'header_search');
@@ -194,7 +196,6 @@ if(get_config('theme_evagu', 'course_single_style') == 1) { // v2
 // if ($PAGE->bodyid == 'page-grade-report-overview-index') {
 //   $PAGE->set_pagelayout('admin');
 // }
-
 $ccnHook_userNotifIcon = '';
 $ccnHook_userMesseIcon = '';
 $ccnHook_custMenAuth = '';
@@ -211,7 +212,6 @@ if(get_config('theme_evagu', 'header_main_menu') == '1'){
 if($ccnCurrentUserIsAuthenticated == TRUE){
   $ccnUserBodyClass = 'ccnUA';
 }
-
 $extraclasses = array(
   'ccn_no_hero',
   'ccn_header_style_' . $headertype,
@@ -230,7 +230,6 @@ $extraclasses = array(
   $ccnUserBodyClass
 );
 // $pageheading = $PAGE->heading;
-
 $blockshtml = $OUTPUT->blocks('side-pre');
 $leftblocks = $OUTPUT->blocks('left');
 /* Deprecate these variables soon; copied & renamed immediately below */
@@ -239,17 +238,13 @@ $hasleftblocks = strpos($leftblocks, 'data-block=') !== false;
 /* End: Deprecate these variables soon; copied & renamed immediately below */
 $sidebar_left = strpos($leftblocks, 'data-block=') !== false;
 $sidebar_right = strpos($blockshtml, 'data-block=') !== false;
-
-$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+// $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
 $hassideblocks = ($hasblocks || $hasleftblocks);
 $sidebar_single = (($hasblocks && !$hasleftblocks) || (!$hasblocks && $hasleftblocks));
 $sidebar_single_left = (!$hasblocks && $hasleftblocks);
 $sidebar_single_right = ($hasblocks && !$hasleftblocks);
 $sidebar_double = ($hasblocks && $hasleftblocks);
 $sidebar_none = (!$hasblocks && !$hasleftblocks);
-
-
-
 $blocks_user_notifications = $OUTPUT->blocks('user-notif');
 $blocks_user_messages = $OUTPUT->blocks('user-messages');
 $blocks_fullwidth_top = $OUTPUT->blocks('fullwidth-top');
@@ -278,10 +273,8 @@ if($context){
 $courseMainPage = strpos($_SERVER['REQUEST_URI'], "course/view.php") !== false && !isset($_GET["section"]);
 $courseSectionPage = strpos($_SERVER['REQUEST_URI'], "course/view.php") !== false && isset($_GET["section"]);
 $courseEnrolPage = strpos($_SERVER['REQUEST_URI'], "enrol/index.php") !== false && isset($_GET["id"]);
-
 $incourse_layout_setting = get_config('theme_evagu', 'incourse_layout');
 $course_mainpage_layout_setting = get_config('theme_evagu', 'coursemainpage_layout');
-
 // if($incourse_layout_setting == 1 && $context->id == $context_site->id) {
 //   $incourse_layout_dashboard = 0;
 //   $incourse_layout_focus = 0;
@@ -295,10 +288,8 @@ $course_mainpage_layout_setting = get_config('theme_evagu', 'coursemainpage_layo
 //   $incourse_layout_dashboard = 0;
 //   $incourse_layout_focus = 0;
 // }
-
 $incourse_layout_dashboard = 0;
 $incourse_layout_focus = 0;
-
 if($incourse_layout_setting != 0 && $context->id != $context_site->id && !$courseMainPage && !$courseEnrolPage) {
   if($incourse_layout_setting == 1) { //evagu Dash
     $incourse_layout_dashboard = 1;
@@ -308,7 +299,6 @@ if($incourse_layout_setting != 0 && $context->id != $context_site->id && !$cours
     $incourse_layout_focus = 1;
   }
 }
-
 // Temporarily Disabling; Future Theme Setting; Set all to 0 for now!
 if($course_mainpage_layout_setting != 0 && $context->id == $context_site->id) {
   $course_mainpage_layout_dashboard = '0';
@@ -336,18 +326,21 @@ if($context->id == $context_site->id) {
 } elseif($context->id != $context_site->id){
   $incourse = 1;
 }
-
 $ccnDashLayoutSetting = get_config('theme_evagu', 'dashboard_layout');
 $ccnDashLayout = 0;
 if($ccnDashLayoutSetting == '1'){
   $ccnDashLayout = 1;
 }
-
-
 $singlecourse_blocks_setting = get_config('theme_evagu', 'singlecourse_blocks');
 $userProfileFromCourseParticipants = strpos($_SERVER['REQUEST_URI'], "user/view.php") !== false && isset($_GET["course"]);
-
-if ($singlecourse_blocks_setting == 1 && (strpos($_SERVER['REQUEST_URI'], "user/index.php") !== false || strpos($_SERVER['REQUEST_URI'], "course/edit.php") !== false || strpos($_SERVER['REQUEST_URI'], "course/completion.php") !== false || strpos($_SERVER['REQUEST_URI'], "course/admin.php") !== false || $courseSectionPage) || $userProfileFromCourseParticipants){
+if ($singlecourse_blocks_setting == 1 && (
+  strpos($_SERVER['REQUEST_URI'], "user/index.php") !== false ||
+  strpos($_SERVER['REQUEST_URI'], "course/edit.php") !== false ||
+  strpos($_SERVER['REQUEST_URI'], "course/completion.php") !== false ||
+  strpos($_SERVER['REQUEST_URI'], "course/admin.php") !== false ||
+  (strpos($_SERVER['REQUEST_URI'], "blocks/dedication/dedication.php") !== false && isset($_GET['courseid'])) ||
+  $courseSectionPage
+  ) || $userProfileFromCourseParticipants){
   // Disable ALL block regions, regardless of all other parameters and permission settings
   $sidebar_left = false;
   $sidebar_right = false;
@@ -376,7 +369,6 @@ if($course_content_enroled_only == 1 && ($is_enrolled == 1 || is_siteadmin() || 
 } else {
   $display_course_content = 1;
 }
-
 $numberofusers = count_enrolled_users($context);
 if (function_exists('isguestuser') && isguestuser() == 1) {
   $isloggedin = 'FALSE';
@@ -453,12 +445,10 @@ if(get_config('theme_evagu', 'custom_js_dashboard')){
 } else {
   $custom_js_dashboard = '';
 }
-
 $ccnProfileIconUsername = $USER->username;
 if(get_config('theme_evagu', 'profile_icon_username') == '1'){
   $ccnProfileIconUsername = $USER->firstname . ' '. $USER->lastname;
 }
-
 // Dash tab 1
 if(get_config('theme_evagu', 'dashboard_tablet_1_title')){
   $dash_tablet_1_title = get_config('theme_evagu', 'dashboard_tablet_1_title');
@@ -476,7 +466,6 @@ if(get_config('theme_evagu', 'dashboard_tablet_1_url')){
   $dash_tablet_1_link = $messages_link;
 }
 $dash_tablet_1_icon = get_config('theme_evagu', 'dashboard_tablet_1_ccn_icon_class');
-
 // Dash tab 2
 if(get_config('theme_evagu', 'dashboard_tablet_2_title')){
   $dash_tablet_2_title = get_config('theme_evagu', 'dashboard_tablet_2_title');
@@ -494,7 +483,6 @@ if(get_config('theme_evagu', 'dashboard_tablet_2_url')){
   $dash_tablet_2_link = $profile_link;
 }
 $dash_tablet_2_icon = get_config('theme_evagu', 'dashboard_tablet_2_ccn_icon_class');
-
 // Dash tab 3
 if(get_config('theme_evagu', 'dashboard_tablet_3_title')){
   $dash_tablet_3_title = get_config('theme_evagu', 'dashboard_tablet_3_title');
@@ -512,7 +500,6 @@ if(get_config('theme_evagu', 'dashboard_tablet_3_url')){
   $dash_tablet_3_link = $preferences_link;
 }
 $dash_tablet_3_icon = get_config('theme_evagu', 'dashboard_tablet_3_ccn_icon_class');
-
 // Dash tab 4
 if(get_config('theme_evagu', 'dashboard_tablet_4_title')){
   $dash_tablet_4_title = get_config('theme_evagu', 'dashboard_tablet_4_title');
@@ -530,7 +517,6 @@ if(get_config('theme_evagu', 'dashboard_tablet_4_url')){
   $dash_tablet_4_link = $grades_link;
 }
 $dash_tablet_4_icon = get_config('theme_evagu', 'dashboard_tablet_4_ccn_icon_class');
-
 // Dash tab column classes & visibility
 $dash_tablet_count = 0;
 $dash_tablet_1 = false;
@@ -564,7 +550,6 @@ if($dash_tablet_count == 4) {
 } else {
   $dash_tab_col_class = "col-sm-6 col-md-6 col-lg-6 col-xl-3";
 }
-
 // Footer col classes & visibility
 $footer_column_count = 0;
 $footer_column_1 = false;
@@ -597,19 +582,19 @@ if($footer_column_count == 4) {
   $footer_col_2_class = "col-sm-6 col-md-6 col-md-3 col-lg-3";
   $footer_col_3_class = "col-sm-6 col-md-6 col-md-3 col-lg-3";
   $footer_col_4_class = "col-sm-6 col-md-6 col-md-3 col-lg-3";
-  $footer_col_5_class = "";
+  $footer_col_5_class = "col-sm-6 col-md-6 col-md-3 col-lg-3";
 } elseif($footer_column_count == 3) {
   $footer_col_1_class = "col-sm-12 col-md-4 col-md-4 col-lg-4";
   $footer_col_2_class = "col-sm-12 col-md-4 col-md-4 col-lg-4";
   $footer_col_3_class = "col-sm-12 col-md-4 col-md-4 col-lg-4";
-  $footer_col_4_class = "";
-  $footer_col_5_class = "";
+  $footer_col_4_class = "col-sm-12 col-md-4 col-md-4 col-lg-4";
+  $footer_col_5_class = "col-sm-12 col-md-4 col-md-4 col-lg-4";
 } elseif($footer_column_count == 2) {
   $footer_col_1_class = "col-sm-6 col-md-6 col-md-6 col-lg-6";
   $footer_col_2_class = "col-sm-6 col-md-6 col-md-6 col-lg-6";
-  $footer_col_3_class = "";
-  $footer_col_4_class = "";
-  $footer_col_5_class = "";
+  $footer_col_3_class = "col-sm-6 col-md-6 col-md-6 col-lg-6";
+  $footer_col_4_class = "col-sm-6 col-md-6 col-md-6 col-lg-6";
+  $footer_col_5_class = "col-sm-6 col-md-6 col-md-6 col-lg-6";
 } elseif($footer_column_count == 1) {
   $footer_col_1_class = "col-sm-12 col-md-6 offset-md-3 text-center";
   $footer_col_2_class = "";
@@ -628,3 +613,25 @@ if(!empty($USER->firstname)){$USER->firstname = $USER->firstname;}else{$USER->fi
 if(!empty($USER->lastname)){$USER->lastname = $USER->lastname;}else{$USER->lastname = '';}
 if(!empty($USER->email)){$USER->email = $USER->email;}else{$USER->email = '';}
 if(!empty($USER->lang)){$USER->lang = $USER->lang;}else{$USER->lang = '';}
+$secondarynavigation = false;
+$overflow = '';
+if (method_exists($PAGE, 'has_secondary_navigation') && $PAGE->has_secondary_navigation()) {
+    $tablistnav = $PAGE->has_tablist_secondary_navigation();
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
+    $secondarynavigation = $moremenu->export_for_template($OUTPUT);
+    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (!is_null($overflowdata)) {
+        $overflow = $overflowdata->export_for_template($OUTPUT);
+    }
+}
+if((int)$ccnMdlVersion < 400) $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
+if(class_exists('core\navigation\output\primary')) {
+  $primary = new \theme_evagu\navigation\primary($PAGE);
+  $renderer = $PAGE->get_renderer('core');
+  $primarymenu = $primary->export_for_template($renderer);
+  $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions()  && !$PAGE->has_secondary_navigation();
+  // If the settings menu will be included in the header then don't add it here.
+  $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+  $header = $PAGE->activityheader;
+  $headercontent = $header->export_for_template($renderer);
+}

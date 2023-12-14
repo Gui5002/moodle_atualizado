@@ -13,9 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 namespace theme_evagu\output;
-
 defined('MOODLE_INTERNAL') || die;
 use action_link;
 use action_menu;
@@ -36,10 +34,7 @@ use navigation_node;
 use pix_icon;
 use stdClass;
 require_once($CFG->dirroot."/course/format/lib.php");
-
 class core_renderer_maintenance extends \core_renderer_maintenance {
-
-
   /**
    * Return the image URL, if any.
    *
@@ -59,7 +54,6 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_headerlogo1($maxwidth, $maxheight);
       }
-
   }
   public function get_theme_image_headerlogo2($maxwidth = null, $maxheight = 100) {
       global $CFG;
@@ -71,7 +65,6 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_headerlogo2($maxwidth, $maxheight);
       }
-
   }
   public function get_theme_image_headerlogo3($maxwidth = null, $maxheight = 100) {
       global $CFG;
@@ -83,7 +76,6 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_headerlogo3($maxwidth, $maxheight);
       }
-
   }
   public function get_theme_image_headerlogo_mobile($maxwidth = null, $maxheight = 100) {
       global $CFG;
@@ -95,7 +87,6 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_headerlogo_mobile($maxwidth, $maxheight);
       }
-
   }
   public function get_theme_image_footerlogo1($maxwidth = null, $maxheight = 100) {
       global $CFG;
@@ -107,7 +98,6 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_footerlogo1($maxwidth, $maxheight);
       }
-
   }
   public function get_theme_image_heading_bg($maxwidth = null, $maxheight = 100) {
       global $CFG;
@@ -141,9 +131,7 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_favicon($maxwidth, $maxheight);
       }
-
   }
-
   public function get_theme_image_preloader_image($maxwidth = null, $maxheight = 100) {
       global $CFG;
       if (!empty($this->page->theme->settings->preloader_image)) {
@@ -154,7 +142,38 @@ class core_renderer_maintenance extends \core_renderer_maintenance {
           return new moodle_url($url);
           return parent::get_theme_image_preloader_image($maxwidth, $maxheight);
       }
-
   }
-
+public function ccn_render_lang_menu() {
+    global $CFG;
+    $langs = get_string_manager()->get_list_of_translations();
+    $strlang = get_string('language');
+    $currentlang = current_language();
+    $haslangmenu = $this->lang_menu() != '';
+    if (isset($langs[$currentlang])) {
+      $currentlang = $langs[$currentlang];
+    } else {
+      $currentlang = $strlang;
+    }
+    $langArr = [];
+    foreach ($langs as $langtype => $langname) {
+      $langArr[] = [
+        'name' => $langname,
+        'url' => new moodle_url($this->page->url, array('lang' => $langtype)),
+        'code' => $langtype,
+        'icon' => $CFG->wwwroot.'/theme/evagu/pix/lang/'.strtoupper($langtype).'.svg',
+      ];
+    }
+    $current_icon = '';
+    foreach($langArr as $k=>$lang){
+      if($lang['name'] == $currentlang) $current_icon = $langArr[$k]['icon'];
+    }
+    $context =[
+      'has_lang_menu'=> $haslangmenu,
+      'current_lang'=> $currentlang,
+      'current_icon'=> $current_icon,
+      'strlang'=> $strlang,
+      'langs'=> $langArr,
+    ];
+    return $this->render_from_template('theme_evagu/ccn_lang_menu', $context);
+  }
 }

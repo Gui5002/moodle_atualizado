@@ -2,9 +2,7 @@
 /*
 @ccnRef: @block_eva/block.php
 */
-
 defined('MOODLE_INTERNAL') || die();
-
 // if (!($this->config)) {
 //   if(!($this->content)){
 //     $this->content = new \stdClass();
@@ -12,10 +10,8 @@ defined('MOODLE_INTERNAL') || die();
 //     $this->content->text = '<h5 class="mb30">'.$this->title.'</h5>';
 //     return $this->content->text;
 // }
-
 // print_object($this);
 $ccnBlockType = $this->instance->blockname;
-
 $ccnCollectionFullwidthTop =  array(
     "eva_about_1",
     "eva_about_3",
@@ -86,7 +82,6 @@ $ccnCollectionFullwidthTop =  array(
     "eva_reports",
     "eva_reports_controll",
 );
-
 $ccnCollectionAboveContent =  array(
     "eva_about_1",
     "eva_about_3",
@@ -156,7 +151,6 @@ $ccnCollectionAboveContent =  array(
     "eva_reports",
     "eva_reports_controll",
 );
-
 $ccnCollectionBelowContent =  array(
     "eva_about_1",
     "eva_about_3",
@@ -226,9 +220,7 @@ $ccnCollectionBelowContent =  array(
     "eva_reports",
     "eva_reports_controll",
 );
-
 $ccnCollection = array_merge($ccnCollectionFullwidthTop, $ccnCollectionAboveContent, $ccnCollectionBelowContent);
-
 if (empty($this->config)) {
   if (in_array($ccnBlockType, $ccnCollectionFullwidthTop)) {
     $this->instance->defaultregion = 'fullwidth-top';

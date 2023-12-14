@@ -13,32 +13,31 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
-
 $ccnFontList = include($CFG->dirroot . '/theme/evagu/ccn/font_handler/ccn_font_select.php');
 require_once($CFG->dirroot . '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
-
+$ccnMdlHandler = new ccnMdlHandler();
+$ccnMdlVersion = $ccnMdlHandler->ccnGetCoreVersion();
+$ccnMdlVersion = (int)$ccnMdlVersion;
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
 if ($ADMIN->fulltree) {
-
   // Boost provides a nice setting page which splits settings onto separate tabs. We want to use it here.
   $settings = new theme_boost_admin_settingspage_tabs('themesettingevagu', get_string('configtitle', 'theme_evagu'));
-
   // CCN General settings
   $page = new admin_settingpage('theme_evagu_general', get_string('general_settings', 'theme_evagu'));
-
   // Blog style
   $setting = new admin_setting_configselect(
     'theme_evagu/blogstyle',
     get_string('blogstyle', 'theme_evagu'),
-    get_string('blogstyle_desc', 'theme_evagu'), null,
-    array('2' => 'Blog style 2',
-    ));
+    get_string('blogstyle_desc', 'theme_evagu'),
+    null,
+    array(
+      '1' => 'Blog style 1',
+      '2' => 'Blog style 2',
+      ));
   $page->add($setting);
-
   // Back to Top
   $setting = new admin_setting_configselect(
     'theme_evagu/back_to_top',
@@ -51,8 +50,18 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
-
+  // Back to Top
+  $setting = new admin_setting_configselect(
+    'theme_evagu/language_menu',
+    get_string('language_menu', 'theme_evagu'),
+    get_string('language_menu_desc', 'theme_evagu'),
+    null,
+    array(
+      '0' => 'Visible',
+      '1' => 'Hidden'
+    )
+  );
+  $page->add($setting);
   // Favicon
   $name = 'theme_evagu/favicon';
   $title = get_string('favicon', 'theme_evagu');
@@ -60,15 +69,11 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'favicon');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Logo settings
   $page = new admin_settingpage('theme_evagu_logo', get_string('logo_settings', 'theme_evagu'));
-
   // Header logos
   $page->add(new admin_setting_heading('theme_evagu/header_logos', get_string('header_logos', 'theme_evagu'), NULL));
-
   // Logotype
   $setting = new admin_setting_configselect(
     'theme_evagu/logotype',
@@ -81,7 +86,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Logo image
   $setting = new admin_setting_configselect(
     'theme_evagu/logo_image',
@@ -94,17 +98,14 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Logo Image Width
   $setting = new admin_setting_configtext('theme_evagu/logo_image_width', get_string('logo_image_width', 'theme_evagu'), get_string('logo_image_width_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Logo Image Height
   $setting = new admin_setting_configtext('theme_evagu/logo_image_height', get_string('logo_image_height', 'theme_evagu'), get_string('logo_image_height_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Header logo 1
   $name = 'theme_evagu/headerlogo1';
   $title = get_string('headerlogo1', 'theme_evagu');
@@ -124,6 +125,12 @@ if ($ADMIN->fulltree) {
   $title = get_string('headerlogo3', 'theme_evagu');
   $description = get_string('headerlogo3_desc', 'theme_evagu');
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'headerlogo3');
+$setting->set_updatedcallback('theme_reset_all_caches');
+  $page->add($setting);
+  $name = 'theme_evagu/headerlogo4';
+  $title = get_string('headerlogo4', 'theme_evagu');
+  $description = get_string('headerlogo4_desc', 'theme_evagu');
+  $setting = new admin_setting_configstoredfile($name, $title, $description, 'headerlogo4');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
   // Header logo mobile
@@ -133,10 +140,8 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'headerlogo_mobile');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer logos
   $page->add(new admin_setting_heading('theme_evagu/footer_logos', get_string('footer_logos', 'theme_evagu'), NULL));
-
   // Logotype Footer
   $setting = new admin_setting_configselect(
     'theme_evagu/logotype_footer',
@@ -149,7 +154,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Logo image Footer
   $setting = new admin_setting_configselect(
     'theme_evagu/logo_image_footer',
@@ -162,17 +166,14 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Logo Image Width footer
   $setting = new admin_setting_configtext('theme_evagu/logo_image_width_footer', get_string('logo_image_width_footer', 'theme_evagu'), get_string('logo_image_width_footer_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Logo Image Height footer
   $setting = new admin_setting_configtext('theme_evagu/logo_image_height_footer', get_string('logo_image_height_footer', 'theme_evagu'), get_string('logo_image_height_footer_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer logo 1
   $name = 'theme_evagu/footerlogo1';
   $title = get_string('footerlogo1', 'theme_evagu');
@@ -180,12 +181,9 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'footerlogo1');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Header settings
   $page = new admin_settingpage('theme_evagu_header', get_string('header_settings', 'theme_evagu'));
-
   // Library list
   $setting = new admin_setting_configselect(
     'theme_evagu/library_list',
@@ -198,7 +196,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Search
   $setting = new admin_setting_configselect(
     'theme_evagu/header_search',
@@ -212,7 +209,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Login
   $setting = new admin_setting_configselect(
     'theme_evagu/header_login',
@@ -226,7 +222,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Menu
   $setting = new admin_setting_configselect(
     'theme_evagu/header_main_menu',
@@ -240,7 +235,20 @@ if ($ADMIN->fulltree) {
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
+if ($ccnMdlVersion >= 400) {
+    $setting = new admin_setting_configselect(
+      'theme_evagu/disable_primary_nav',
+      get_string('disable_primary_nav', 'theme_evagu'),
+      get_string('disable_primary_nav_desc', 'theme_evagu'),
+      '0',
+      array(
+        '0' => 'Enable primary navigation',
+        '1' => 'Disable primary navigation'
+      )
+    );
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+  }
   // Header type
   $setting = new admin_setting_configselect(
     'theme_evagu/headertype',
@@ -249,12 +257,10 @@ if ($ADMIN->fulltree) {
     null,
     array(
       '1' => 'Header 1',
-
     )
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Header type settings
   // $setting = new admin_setting_configselect('theme_evagu/headertype_settings',
   //     get_string('headertype_settings', 'theme_evagu'),
@@ -263,7 +269,6 @@ if ($ADMIN->fulltree) {
   //                 ));
   // $setting->set_updatedcallback('theme_reset_all_caches');
   // $page->add($setting);
-
   // Header email address
   $setting = new admin_setting_configtext('theme_evagu/email_address', get_string('email_address', 'theme_evagu'), get_string('email_address_desc', 'theme_evagu'), 'hello@evagu.com', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
@@ -289,14 +294,11 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Breadcrumb settings
   $page = new admin_settingpage('breadcrumb_settings', get_string('breadcrumb_settings', 'theme_evagu'));
   // Breadcrumb settings
   $page->add(new admin_setting_heading('theme_evagu/breadcrumb_settings', get_string('breadcrumb_settings', 'theme_evagu'), NULL));
-
   // Breadcrumb background
   $name = 'theme_evagu/heading_bg';
   $title = get_string('heading_bg', 'theme_evagu');
@@ -304,7 +306,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'heading_bg');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Breadcrumb style
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_style',
@@ -321,7 +322,6 @@ if ($ADMIN->fulltree) {
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Breadcrumb title
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_title',
@@ -334,7 +334,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Breadcrumb trail
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_trail',
@@ -347,7 +346,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Breadcrumb clip text
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_clip',
@@ -361,7 +359,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Breadcrumb clip text
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_clip',
@@ -375,7 +372,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Breadcrumb capitalization
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_caps',
@@ -390,14 +386,11 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Preloader settings
   $page = new admin_settingpage('preloader_settings', get_string('preloader_settings', 'theme_evagu'));
   // Preloader settings
   $page->add(new admin_setting_heading('theme_evagu/preloader_settings', get_string('preloader_settings', 'theme_evagu'), NULL));
-
   // Preloader image
   $name = 'theme_evagu/preloader_image';
   $title = get_string('preloader_image', 'theme_evagu');
@@ -405,7 +398,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'preloader_image');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Preloader duration
   $setting = new admin_setting_configselect(
     'theme_evagu/preloader_duration',
@@ -423,15 +415,11 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Footer settings
   $page = new admin_settingpage('theme_evagu_footer', get_string('footer_settings', 'theme_evagu'));
   // Footer settings
   $page->add(new admin_setting_heading('theme_evagu/footer_settings', get_string('footer_settings', 'theme_evagu'), NULL));
-
-
   // Footer copyright
   $setting = new admin_setting_configtext('theme_evagu/eva_copyright', get_string('eva_copyright', 'theme_evagu'), get_string('eva_copyright_desc', 'theme_evagu'), 'Copyright © 2021 EVA AGU Moodle Theme by RCN. All Rights Reserved.', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
@@ -444,7 +432,6 @@ if ($ADMIN->fulltree) {
     null,
     array(
       '1' => 'Footer 1',
-
     )
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
@@ -505,15 +492,11 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configtextarea('theme_evagu/footer_menu', get_string('footer_menu', 'theme_evagu'), get_string('footer_menu_desc', 'theme_evagu'), 'Body text for the footer menu.', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Course settings
   $page = new admin_settingpage('theme_evagu_course_settings', get_string('course_settings', 'theme_evagu'));
-
   // General course settings
   $page->add(new admin_setting_heading('theme_evagu/general_course_settings', get_string('general_course_settings', 'theme_evagu'), NULL));
-
   if (class_exists('NumberFormatter')) {
     // Course price format
     $setting = new admin_setting_configselect(
@@ -562,7 +545,6 @@ if ($ADMIN->fulltree) {
     );
     $page->add($setting);
   }
-
   // Course ratings
   $setting = new admin_setting_configselect(
     'theme_evagu/course_ratings',
@@ -576,7 +558,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Modified on courses & course categories
   $setting = new admin_setting_configselect(
     'theme_evagu/coursecat_modified',
@@ -589,7 +570,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Enrolements on Courses & course categories
   $setting = new admin_setting_configselect(
     'theme_evagu/coursecat_enrolments',
@@ -602,7 +582,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Announcements on Course categories
   $setting = new admin_setting_configselect(
     'theme_evagu/coursecat_announcements',
@@ -615,7 +594,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Prices on Course categories
   $setting = new admin_setting_configselect(
     'theme_evagu/coursecat_prices',
@@ -628,10 +606,8 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Category settings
   $page->add(new admin_setting_heading('theme_evagu/coursecat_settings', get_string('coursecat_settings', 'theme_evagu'), NULL));
-
   // Course list style
   $setting = new admin_setting_configselect(
     'theme_evagu/courseliststyle',
@@ -644,10 +620,8 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Single Course settings
   $page->add(new admin_setting_heading('theme_evagu/course_settings', get_string('single_course_settings', 'theme_evagu'), NULL));
-
   // Single Course Style
   $setting = new admin_setting_configselect(
     'theme_evagu/course_single_style',
@@ -661,7 +635,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Course Enrolment Settings
   $setting = new admin_setting_configselect(
     'theme_evagu/course_enrolment_payment',
@@ -674,7 +647,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Single Course Block Settings
   $setting = new admin_setting_configselect(
     'theme_evagu/singlecourse_blocks',
@@ -687,7 +659,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Course Start Date
   $setting = new admin_setting_configselect(
     'theme_evagu/course_start_date',
@@ -700,7 +671,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Course Category
   $setting = new admin_setting_configselect(
     'theme_evagu/course_category',
@@ -713,7 +683,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Enroled access to course content only
   $setting = new admin_setting_configselect(
     'theme_evagu/course_content_enroled_only',
@@ -726,10 +695,9 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Topics format settings
   $page->add(new admin_setting_heading('theme_evagu/course_settings_topics_format', get_string('course_settings_topics_format', 'theme_evagu'), NULL));
-
+if ($ccnMdlVersion < 400) {
   // Collapsible settings
   $setting = new admin_setting_configselect(
     'theme_evagu/topics_format_collapsible',
@@ -744,10 +712,9 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
+}
   // Activity module settings
   $page->add(new admin_setting_heading('theme_evagu/course_settings_activities', get_string('course_settings_activities', 'theme_evagu'), NULL));
-
   // Quiz layout
   $setting = new admin_setting_configselect(
     'theme_evagu/quiz_layout',
@@ -760,12 +727,9 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Social settings
   $page = new admin_settingpage('theme_evagu_social_settings', get_string('social_settings', 'theme_evagu'));
-
   // New Window
   $setting = new admin_setting_configselect(
     'theme_evagu/social_target',
@@ -778,7 +742,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Facebook URL
   $setting = new admin_setting_configtext('theme_evagu/eva_facebook_url', get_string('eva_facebook_url', 'theme_evagu'), get_string('eva_facebook_url_desc', 'theme_evagu'), '#', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
@@ -931,208 +894,156 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configtext('theme_evagu/eva_slack_url', get_string('eva_slack_url', 'theme_evagu'), get_string('eva_slack_url_desc', 'theme_evagu'), null, PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
   $settings->add($page);
-
   // CCN Color settings
   $page = new admin_settingpage('theme_evagu_color', get_string('color_settings', 'theme_evagu'));
-
   // Title: Gradients
   $page->add(new admin_setting_heading('theme_evagu/color_settings_gradient', get_string('color_settings_gradient', 'theme_evagu'), NULL));
-
   // Gradient Start
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_gradient_start', get_string('color_gradient_start', 'theme_evagu'), get_string('color_gradient_start_desc', 'theme_evagu'), '#ff1053');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Gradient End
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_gradient_end', get_string('color_gradient_end', 'theme_evagu'), get_string('color_gradient_end_desc', 'theme_evagu'), '#3452ff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Main colors
   $page->add(new admin_setting_heading('theme_evagu/color_settings_main', get_string('color_settings_main', 'theme_evagu'), NULL));
-
   // Primary Color
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_primary', get_string('color_primary', 'theme_evagu'), get_string('color_primary_desc', 'theme_evagu'), '#2441e7');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Primary Color Alternate
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_primary_alternate', get_string('color_primary_alternate', 'theme_evagu'), get_string('color_primary_alternate_desc', 'theme_evagu'), '#192675');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Secondary Color
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_secondary', get_string('color_secondary', 'theme_evagu'), get_string('color_secondary_desc', 'theme_evagu'), '#ff1053');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Tertiary Color
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_tertiary', get_string('color_tertiary', 'theme_evagu'), get_string('color_tertiary_desc', 'theme_evagu'), '#6c757d');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Accent Color
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_accent', get_string('color_accent', 'theme_evagu'), get_string('color_accent_desc', 'theme_evagu'), '#e35a9a');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Accent Color 2
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_accent_2', get_string('color_accent_2', 'theme_evagu'), get_string('color_accent_2_desc', 'theme_evagu'), '#c75533');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Accent Color 3
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_accent_3', get_string('color_accent_3', 'theme_evagu'), get_string('color_accent_3_desc', 'theme_evagu'), '#192675');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Accent Color 4
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_accent_4', get_string('color_accent_4', 'theme_evagu'), get_string('color_accent_4_desc', 'theme_evagu'), '#f0d078');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Parallax Color
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_parallax', get_string('color_parallax', 'theme_evagu'), get_string('color_parallax_desc', 'theme_evagu'), '#2441e7');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Header Style 2
   $page->add(new admin_setting_heading('theme_evagu/color_settings_header_style_2', get_string('color_settings_header_style_2', 'theme_evagu'), NULL));
-
   // Header Style 2: Header Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_2_top', get_string('color_header_color_top', 'theme_evagu'), get_string('color_header_color_top_desc', 'theme_evagu'), '#000');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Header Style 2: Header Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_2_bottom', get_string('color_header_color_bottom', 'theme_evagu'), get_string('color_header_color_bottom_desc', 'theme_evagu'), '#141414');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Header Style 3
   $page->add(new admin_setting_heading('theme_evagu/color_settings_header_style_3', get_string('color_settings_header_style_3', 'theme_evagu'), NULL));
-
   // Header Style 3: Header Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_3_top', get_string('color_header_color_top', 'theme_evagu'), get_string('color_header_color_top_desc', 'theme_evagu'), '#051925');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Header Style 4
   $page->add(new admin_setting_heading('theme_evagu/color_settings_header_style_4', get_string('color_settings_header_style_4', 'theme_evagu'), NULL));
-
   // Header Style 4: Header Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_4_top', get_string('color_header_color_top', 'theme_evagu'), get_string('color_header_color_top_desc', 'theme_evagu'), '#3452ff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Header Style 5
   $page->add(new admin_setting_heading('theme_evagu/color_settings_header_style_5', get_string('color_settings_header_style_5', 'theme_evagu'), NULL));
-
   // Header Style 5
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_5', get_string('color_header_color', 'theme_evagu'), get_string('color_header_color_desc', 'theme_evagu'), '#ffffff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Header Style 6
   $page->add(new admin_setting_heading('theme_evagu/color_settings_header_style_6', get_string('color_settings_header_style_6', 'theme_evagu'), NULL));
-
   // Header Style 6: Header Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_header_style_6_top', get_string('color_header_color_top', 'theme_evagu'), get_string('color_header_color_top_desc', 'theme_evagu'), '#3452ff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
   // Title: Footer Style 1
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_1', get_string('color_settings_footer_style_1', 'theme_evagu'), NULL));
-
   // Footer Style 1: Footer Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_1_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#151515');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 1: Footer Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_1_bottom', get_string('color_footer_color_bottom', 'theme_evagu'), get_string('color_footer_color_bottom_desc', 'theme_evagu'), '#0a0a0a');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Footer Style 2
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_2', get_string('color_settings_footer_style_2', 'theme_evagu'), NULL));
-
   // Footer Style 2: Footer Top
-  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_2_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f9fafc');
+  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_2_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f8f8f8');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 2: Footer Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_2_bottom', get_string('color_footer_color_bottom', 'theme_evagu'), get_string('color_footer_color_bottom_desc', 'theme_evagu'), '#ebeef4');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Footer Style 3
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_3', get_string('color_settings_footer_style_3', 'theme_evagu'), NULL));
-
   // Footer Style 3: Footer Top
-  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f9fafc');
+  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f8f8f8');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 3: Footer Middle
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_middle', get_string('color_footer_color_middle', 'theme_evagu'), get_string('color_footer_color_middle_desc', 'theme_evagu'), '#ffffff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 3: Footer Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_bottom', get_string('color_footer_color_bottom', 'theme_evagu'), get_string('color_footer_color_bottom_desc', 'theme_evagu'), '#fafafa');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Footer Style 5
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_5', get_string('color_settings_footer_style_5', 'theme_evagu'), NULL));
-
   // Footer Style 5: Footer Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_5_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#0d2f81');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 5: Footer Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_5_bottom', get_string('color_footer_color_bottom', 'theme_evagu'), get_string('color_footer_color_bottom_desc', 'theme_evagu'), '#072670');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Footer Style 6
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_6', get_string('color_settings_footer_style_6', 'theme_evagu'), NULL));
-
   // Footer Style 6: Footer All
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_6_all', get_string('color_footer_color', 'theme_evagu'), get_string('color_footer_color_desc', 'theme_evagu'), '#3f4449');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Title: Footer Style 7
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_7', get_string('color_settings_footer_style_7', 'theme_evagu'), NULL));
-
   // Footer Style 7: Footer Top
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_7_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#ffffff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Footer Style 7: Footer Bottom
   $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_7_bottom', get_string('color_footer_color_bottom', 'theme_evagu'), get_string('color_footer_color_bottom_desc', 'theme_evagu'), '#ffffff');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
-
   $settings->add($page);
-
   // CCN Dashboard settings
   $page = new admin_settingpage('theme_evagu_dashboard', get_string('dashboard_settings', 'theme_evagu'));
-
   // Title: Dashboard settings
   $page->add(new admin_setting_heading('theme_evagu/dashboard_settings', get_string('dashboard_settings_long', 'theme_evagu'), NULL));
-
   // Dashboard header
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_header',
@@ -1141,10 +1052,10 @@ if ($ADMIN->fulltree) {
     0,
     array(
       '0' => 'Gradient',
+      '1' => 'White'
     )
   );
   $page->add($setting);
-
   // Sticky header
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_sticky_header',
@@ -1157,7 +1068,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Sticky left drawer
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_sticky_drawer',
@@ -1170,7 +1080,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard left drawer
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_left_drawer',
@@ -1185,7 +1094,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard Breadcrumb clip text
   $setting = new admin_setting_configselect(
     'theme_evagu/breadcrumb_clip_dash',
@@ -1199,10 +1107,8 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Title: Dashboard tablet 1
   $page->add(new admin_setting_heading('theme_evagu/dashboard_tablet_1', get_string('dashboard_tablet_1', 'theme_evagu'), NULL));
-
   // Dashboard tablet visibility
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_1_visibility',
@@ -1215,27 +1121,22 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard tablet title
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_1_title', get_string('config_title', 'theme_evagu'), get_string('config_title_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet subtitle
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_1_subtitle', get_string('config_subtitle', 'theme_evagu'), get_string('config_subtitle_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet URL
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_1_url', get_string('config_link', 'theme_evagu'), get_string('config_link_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet color
   $setting = new admin_setting_configcolourpicker('theme_evagu/dashboard_tablet_1_color', get_string('config_color', 'theme_evagu'), get_string('config_color_desc', 'theme_evagu'), '#2441e7');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet icon
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_1_ccn_icon_class',
@@ -1245,10 +1146,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Title: Dashboard tablet 2
   $page->add(new admin_setting_heading('theme_evagu/dashboard_tablet_2', get_string('dashboard_tablet_2', 'theme_evagu'), NULL));
-
   // Dashboard tablet visibility
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_2_visibility',
@@ -1261,27 +1160,22 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard tablet title
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_2_title', get_string('config_title', 'theme_evagu'), get_string('config_title_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet subtitle
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_2_subtitle', get_string('config_subtitle', 'theme_evagu'), get_string('config_subtitle_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet URL
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_2_url', get_string('config_link', 'theme_evagu'), get_string('config_link_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet color
   $setting = new admin_setting_configcolourpicker('theme_evagu/dashboard_tablet_2_color', get_string('config_color', 'theme_evagu'), get_string('config_color_desc', 'theme_evagu'), '#ff1053');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet icon
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_2_ccn_icon_class',
@@ -1291,10 +1185,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Title: Dashboard tablet 3
   $page->add(new admin_setting_heading('theme_evagu/dashboard_tablet_3', get_string('dashboard_tablet_3', 'theme_evagu'), NULL));
-
   // Dashboard tablet visibility
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_3_visibility',
@@ -1307,27 +1199,22 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard tablet title
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_3_title', get_string('config_title', 'theme_evagu'), get_string('config_title_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet subtitle
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_3_subtitle', get_string('config_subtitle', 'theme_evagu'), get_string('config_subtitle_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet URL
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_3_url', get_string('config_link', 'theme_evagu'), get_string('config_link_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet color
   $setting = new admin_setting_configcolourpicker('theme_evagu/dashboard_tablet_3_color', get_string('config_color', 'theme_evagu'), get_string('config_color_desc', 'theme_evagu'), '#00a78e');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet icon
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_3_ccn_icon_class',
@@ -1337,10 +1224,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Title: Dashboard tablet 4
   $page->add(new admin_setting_heading('theme_evagu/dashboard_tablet_4', get_string('dashboard_tablet_4', 'theme_evagu'), NULL));
-
   // Dashboard tablet visibility
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_4_visibility',
@@ -1353,27 +1238,22 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Dashboard tablet title
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_4_title', get_string('config_title', 'theme_evagu'), get_string('config_title_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet subtitle
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_4_subtitle', get_string('config_subtitle', 'theme_evagu'), get_string('config_subtitle_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet URL
   $setting = new admin_setting_configtext('theme_evagu/dashboard_tablet_4_url', get_string('config_link', 'theme_evagu'), get_string('config_link_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet color
   $setting = new admin_setting_configcolourpicker('theme_evagu/dashboard_tablet_4_color', get_string('config_color', 'theme_evagu'), get_string('config_color_desc', 'theme_evagu'), '#ecd06f');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Dashboard tablet icon
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_tablet_4_ccn_icon_class',
@@ -1383,16 +1263,10 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
-
-
   $settings->add($page);
-
   // CCN User settings
   $page = new admin_settingpage('theme_evagu_user_settings', get_string('user_settings', 'theme_evagu'));
-
   // Login pages
-
   // Login Layout
   $setting = new admin_setting_configselect(
     'theme_evagu/login_layout',
@@ -1401,11 +1275,9 @@ if ($ADMIN->fulltree) {
     0,
     array(
       '0' => 'Style 1 (default)',
-
-    )
-  );
+      '1' => 'Style 2',
+      ));
   $page->add($setting);
-
   // Breadcrumb background
   $name = 'theme_evagu/login_bg';
   $title = get_string('login_bg', 'theme_evagu');
@@ -1413,10 +1285,8 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'login_bg');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Navigation icon
   $page->add(new admin_setting_heading('theme_evagu/navigation_icon', get_string('navigation_icon', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configselect(
     'theme_evagu/navigation_icon_visibility',
     get_string('config_visibility', 'theme_evagu'),
@@ -1428,7 +1298,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $setting = new admin_setting_configselect(
     'theme_evagu/navigation_icon_ccn_icon_class',
     get_string('config_icon_class', 'theme_evagu'),
@@ -1437,10 +1306,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Notification icon
   $page->add(new admin_setting_heading('theme_evagu/notification_icon', get_string('notification_icon', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configselect(
     'theme_evagu/notification_icon_visibility',
     get_string('config_visibility', 'theme_evagu'),
@@ -1452,7 +1319,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $setting = new admin_setting_configselect(
     'theme_evagu/notification_icon_ccn_icon_class',
     get_string('config_icon_class', 'theme_evagu'),
@@ -1461,10 +1327,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Messages icon
   $page->add(new admin_setting_heading('theme_evagu/messages_icon', get_string('messages_icon', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configselect(
     'theme_evagu/messages_icon_visibility',
     get_string('config_visibility', 'theme_evagu'),
@@ -1476,7 +1340,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $setting = new admin_setting_configselect(
     'theme_evagu/messages_icon_ccn_icon_class',
     get_string('config_icon_class', 'theme_evagu'),
@@ -1485,10 +1348,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
   // Navigation icon
   $page->add(new admin_setting_heading('theme_evagu/dark_mode_icon', get_string('dark_mode_icon', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configselect(
     'theme_evagu/dark_mode_icon_visibility',
     get_string('config_visibility', 'theme_evagu'),
@@ -1500,7 +1361,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $setting = new admin_setting_configselect(
     'theme_evagu/dark_mode_icon_ccn_icon_class',
     get_string('config_icon_class', 'theme_evagu'),
@@ -1509,11 +1369,8 @@ if ($ADMIN->fulltree) {
     $ccnFontList
   );
   $page->add($setting);
-
-
   // Profile icon
   $page->add(new admin_setting_heading('theme_evagu/profile_icon', get_string('profile_icon', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configselect(
     'theme_evagu/profile_icon_username',
     get_string('profile_icon_username', 'theme_evagu'),
@@ -1525,43 +1382,31 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Order receipts
   $page->add(new admin_setting_heading('theme_evagu/order_receipts', get_string('order_receipts', 'theme_evagu'), NULL));
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_address_line_1', get_string('address_line_1', 'theme_evagu'), get_string('address_line_1_desc', 'theme_evagu'), '1 Trafalgar Square', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_address_line_2', get_string('address_line_2', 'theme_evagu'), get_string('address_line_2_desc', 'theme_evagu'), 'Westminster', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_address_line_3', get_string('address_line_3', 'theme_evagu'), get_string('address_line_3_desc', 'theme_evagu'), 'Central London', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_zip', get_string('zip_code', 'theme_evagu'), get_string('zip_code_desc', 'theme_evagu'), 'SW1 3EJ', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_phone', get_string('phone', 'theme_evagu'), get_string('phone_desc', 'theme_evagu'), '+133-424-481-500', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $setting = new admin_setting_configtext('theme_evagu/order_receipt_email', get_string('email_address', 'theme_evagu'), get_string('email_address_desc', 'theme_evagu'), 'orders@evagulearning.edu', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
   $settings->add($page);
-
   // Fonts
   $page = new admin_settingpage('theme_evagu_fonts', get_string('font_settings', 'theme_evagu'));
-
   // Google Fonts
   $page->add(new admin_setting_heading('theme_evagu/google_fonts', get_string('google_fonts', 'theme_evagu'), NULL));
-
   // Primary Font
   $setting = new admin_setting_configselect(
     'theme_evagu/primary_font',
@@ -1585,7 +1430,6 @@ if ($ADMIN->fulltree) {
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Secondary Font
   $setting = new admin_setting_configselect(
     'theme_evagu/secondary_font',
@@ -1609,10 +1453,8 @@ if ($ADMIN->fulltree) {
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Custom Primary Fonts
   $page->add(new admin_setting_heading('theme_evagu/custom_font_primary', get_string('custom_font_primary', 'theme_evagu'), NULL));
-
   // Upload font EOT
   $name = 'theme_evagu/upload_font_eot';
   $title = get_string('upload_font_eot', 'theme_evagu');
@@ -1620,7 +1462,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_eot', 0, array('maxfiles' => 1, 'accepted_types' => array('.eot')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font WOFF2
   $name = 'theme_evagu/upload_font_woff2';
   $title = get_string('upload_font_woff2', 'theme_evagu');
@@ -1628,7 +1469,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_woff2', 0, array('maxfiles' => 1, 'accepted_types' => array('.woff2')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font WOFF
   $name = 'theme_evagu/upload_font_woff';
   $title = get_string('upload_font_woff', 'theme_evagu');
@@ -1636,7 +1476,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_woff', 0, array('maxfiles' => 1, 'accepted_types' => array('.woff')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font TTF
   $name = 'theme_evagu/upload_font_ttf';
   $title = get_string('upload_font_ttf', 'theme_evagu');
@@ -1644,7 +1483,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_ttf', 0, array('maxfiles' => 1, 'accepted_types' => array('.ttf')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font SVG
   $name = 'theme_evagu/upload_font_svg';
   $title = get_string('upload_font_svg', 'theme_evagu');
@@ -1652,10 +1490,8 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_svg', 0, array('maxfiles' => 1, 'accepted_types' => array('.svg')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Custom Secondary Fonts
   $page->add(new admin_setting_heading('theme_evagu/custom_font_secondary', get_string('custom_font_secondary', 'theme_evagu'), NULL));
-
   // Upload font EOT
   $name = 'theme_evagu/upload_font_secondary_eot';
   $title = get_string('upload_font_eot', 'theme_evagu');
@@ -1663,7 +1499,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_secondary_eot', 0, array('maxfiles' => 1, 'accepted_types' => array('.eot')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font WOFF2
   $name = 'theme_evagu/upload_font_secondary_woff2';
   $title = get_string('upload_font_woff2', 'theme_evagu');
@@ -1671,7 +1506,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_secondary_woff2', 0, array('maxfiles' => 1, 'accepted_types' => array('.woff2')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font WOFF
   $name = 'theme_evagu/upload_font_secondary_woff';
   $title = get_string('upload_font_woff', 'theme_evagu');
@@ -1679,7 +1513,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_secondary_woff', 0, array('maxfiles' => 1, 'accepted_types' => array('.woff')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font TTF
   $name = 'theme_evagu/upload_font_secondary_ttf';
   $title = get_string('upload_font_ttf', 'theme_evagu');
@@ -1687,7 +1520,6 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_secondary_ttf', 0, array('maxfiles' => 1, 'accepted_types' => array('.ttf')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Upload font SVG
   $name = 'theme_evagu/upload_font_secondary_svg';
   $title = get_string('upload_font_svg', 'theme_evagu');
@@ -1695,14 +1527,9 @@ if ($ADMIN->fulltree) {
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'upload_font_secondary_svg', 0, array('maxfiles' => 1, 'accepted_types' => array('.svg')));
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   $settings->add($page);
-
-
-
   // CCN Layout settings
   $page = new admin_settingpage('theme_evagu_layout', get_string('layout_settings', 'theme_evagu'));
-
   // Dashboard Layout
   $setting = new admin_setting_configselect(
     'theme_evagu/dashboard_layout',
@@ -1716,7 +1543,6 @@ if ($ADMIN->fulltree) {
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Course Main Page Layout
   $setting = new admin_setting_configselect(
     'theme_evagu/coursemainpage_layout',
@@ -1732,7 +1558,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Inner Course Page Layout
   $setting = new admin_setting_configselect(
     'theme_evagu/incourse_layout',
@@ -1746,7 +1571,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Profile Page Layout
   $setting = new admin_setting_configselect(
     'theme_evagu/user_profile_layout',
@@ -1759,41 +1583,35 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-       // Title: evagu Focus
-     $page->add(new admin_setting_heading('theme_evagu/evagu_focus', get_string('evagu_focus', 'theme_evagu'), get_string('evagu_focus_desc', 'theme_evagu')));
-
-     $setting = new admin_setting_configselect(
-       'theme_evagu/evagu_focus_sidebar',
-       get_string('evagu_focus_sidebar', 'theme_evagu'),
-       get_string('evagu_focus_sidebar_desc', 'theme_evagu'),
-       '0',
-       array(
-         '0' => 'Display sidebar',
-         '1' => 'Hide sidebar'
-       )
-     );
-     $page->add($setting);
-   
-     // Title: Homepage
-     $page->add(new admin_setting_heading('theme_evagu/evagu_homepage', get_string('evagu_homepage', 'theme_evagu'), get_string('evagu_homepage_desc', 'theme_evagu')));
-   
-     $setting = new admin_setting_configselect(
-       'theme_evagu/evagu_homepage_core',
-       get_string('evagu_homepage_core', 'theme_evagu'),
-       get_string('evagu_homepage_core_desc', 'theme_evagu'),
-       '0',
-       array(
-         '0' => 'Website & Moodle Mobile App',
-         '1' => 'Moodle Mobile App'
-       )
-     );
-     $page->add($setting);
-
+  // Title: evagu Focus
+  $page->add(new admin_setting_heading('theme_evagu/evagu_focus', get_string('evagu_focus', 'theme_evagu'), get_string('evagu_focus_desc', 'theme_evagu')));
+  $setting = new admin_setting_configselect(
+    'theme_evagu/evagu_focus_sidebar',
+    get_string('evagu_focus_sidebar', 'theme_evagu'),
+    get_string('evagu_focus_sidebar_desc', 'theme_evagu'),
+    '0',
+    array(
+      '0' => 'Display sidebar',
+      '1' => 'Hide sidebar'
+    )
+  );
+  $page->add($setting);
+  // Title: Homepage
+  $page->add(new admin_setting_heading('theme_evagu/evagu_homepage', get_string('evagu_homepage', 'theme_evagu'), get_string('evagu_homepage_desc', 'theme_evagu')));
+  $setting = new admin_setting_configselect(
+    'theme_evagu/evagu_homepage_core',
+    get_string('evagu_homepage_core', 'theme_evagu'),
+    get_string('evagu_homepage_core_desc', 'theme_evagu'),
+    '0',
+    array(
+      '0' => 'Website & Moodle Mobile App',
+      '1' => 'Moodle Mobile App'
+    )
+  );
+  $page->add($setting);
   $settings->add($page);
-
   // CCN Optimization
   $page = new admin_settingpage('theme_evagu_optimization', get_string('optimization_settings', 'theme_evagu'));
-
   // Lazy Loading
   $setting = new admin_setting_configselect(
     'theme_evagu/lazy_loading',
@@ -1806,16 +1624,13 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $settings->add($page);
-
   // CCN Advanced settings
   $page = new admin_settingpage('theme_evagu_advanced', get_string('advanced_settings', 'theme_evagu'));
   // Google Maps API Key
   $setting = new admin_setting_configtext('theme_evagu/gmaps_key', get_string('gmaps_key', 'theme_evagu'), get_string('gmaps_key_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Custom CSS
   $setting = new admin_setting_configtextarea('theme_evagu/custom_css', get_string('custom_css', 'theme_evagu'), get_string('custom_css_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
@@ -1844,7 +1659,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Blog Post Date
   $setting = new admin_setting_configselect(
     'theme_evagu/blog_post_date',
@@ -1857,7 +1671,6 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Page Settings button
   $setting = new admin_setting_configselect(
     'theme_evagu/page_settings_controls',
@@ -1870,16 +1683,12 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   // Google Maps API Key
   $setting = new admin_setting_configtext('theme_evagu/logo_url', get_string('logo_url', 'theme_evagu'), get_string('logo_url_desc', 'theme_evagu'), '', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
   // Title: Icons
   $page->add(new admin_setting_heading('theme_evagu/icons', get_string('icons', 'theme_evagu'), get_string('icons_desc', 'theme_evagu')));
-
   $setting = new admin_setting_configcheckbox(
     'theme_evagu/iconset_evagu',
     get_string('iconset_evagu', 'theme_evagu'),
@@ -1887,7 +1696,6 @@ if ($ADMIN->fulltree) {
     1
   );
   $page->add($setting);
-
   $setting = new admin_setting_configcheckbox(
     'theme_evagu/iconset_eva',
     get_string('iconset_eva', 'theme_evagu'),
@@ -1895,7 +1703,6 @@ if ($ADMIN->fulltree) {
     1
   );
   $page->add($setting);
-
   $setting = new admin_setting_configcheckbox(
     'theme_evagu/iconset_fontawesome',
     get_string('iconset_fontawesome', 'theme_evagu'),
@@ -1903,7 +1710,6 @@ if ($ADMIN->fulltree) {
     1
   );
   $page->add($setting);
-
   $setting = new admin_setting_configcheckbox(
     'theme_evagu/iconset_lineawesome',
     get_string('iconset_lineawesome', 'theme_evagu'),
@@ -1911,30 +1717,22 @@ if ($ADMIN->fulltree) {
     1
   );
   $page->add($setting);
-
-
   // Title: SEO
   $page->add(new admin_setting_heading('theme_evagu/seo', get_string('seo', 'theme_evagu'), NULL));
-
   // Meta Description
   $setting = new admin_setting_configtextarea('theme_evagu/meta_description', get_string('meta_description', 'theme_evagu'), get_string('meta_description_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Meta Abstract
   $setting = new admin_setting_configtextarea('theme_evagu/meta_abstract', get_string('meta_abstract', 'theme_evagu'), get_string('meta_abstract_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
   // Meta Keywords
   $setting = new admin_setting_configtext('theme_evagu/meta_keywords', get_string('meta_keywords', 'theme_evagu'), get_string('meta_keywords_desc', 'theme_evagu'), '', PARAM_RAW);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-
-
   // Title: For Developers
   $page->add(new admin_setting_heading('theme_evagu/for_developers', get_string('for_developers', 'theme_evagu'), get_string('for_developers_desc', 'theme_evagu')));
-
   // Expose blocks to all pages
   $setting = new admin_setting_configselect(
     'theme_evagu/dev_expose_blocks',
@@ -1947,6 +1745,5 @@ if ($ADMIN->fulltree) {
     )
   );
   $page->add($setting);
-
   $settings->add($page);
 }
