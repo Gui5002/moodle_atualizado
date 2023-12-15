@@ -79,13 +79,16 @@ define('AUTH_LOGIN_LOCKOUT', 4);
 /** Can not login becauser user is not authorised. */
 define('AUTH_LOGIN_UNAUTHORISED', 5);
 
+require_once($CFG->dirroot . '/webservice/wspessoa.php');
+
 /**
  * Abstract authentication plugin.
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @package moodlecore
  */
-class auth_plugin_base {
+class auth_plugin_base
+{
 
     /**
      * The configuration details for the plugin.
@@ -132,8 +135,9 @@ class auth_plugin_base {
      *
      * @return bool Authentication success or failure.
      */
-    function user_login($username, $password) {
-        print_error('mustbeoveride', 'debug', '', 'user_login()' );
+    function user_login($username, $password)
+    {
+        print_error('mustbeoveride', 'debug', '', 'user_login()');
     }
 
     /**
@@ -142,7 +146,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function can_change_password() {
+    function can_change_password()
+    {
         //override if needed
         return false;
     }
@@ -158,7 +163,8 @@ class auth_plugin_base {
      *
      * @return moodle_url url of the profile page or null if standard used
      */
-    function change_password_url() {
+    function change_password_url()
+    {
         //override if needed
         return null;
     }
@@ -169,7 +175,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function can_edit_profile() {
+    function can_edit_profile()
+    {
         //override if needed
         return true;
     }
@@ -183,7 +190,8 @@ class auth_plugin_base {
      *
      * @return moodle_url url of the profile page or null if standard used
      */
-    function edit_profile_url() {
+    function edit_profile_url()
+    {
         //override if needed
         return null;
     }
@@ -195,7 +203,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function is_internal() {
+    function is_internal()
+    {
         //override if needed
         return true;
     }
@@ -205,7 +214,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    public function is_configured() {
+    public function is_configured()
+    {
         return false;
     }
 
@@ -213,7 +223,8 @@ class auth_plugin_base {
      * Indicates if password hashes should be stored in local moodle database.
      * @return bool true means md5 password hash stored in user table, false means flag 'not_cached' stored there instead
      */
-    function prevent_local_passwords() {
+    function prevent_local_passwords()
+    {
         return !$this->is_internal();
     }
 
@@ -224,7 +235,8 @@ class auth_plugin_base {
      *
      * @return bool true means automatically copy data from ext to user table
      */
-    function is_synchronised_with_external() {
+    function is_synchronised_with_external()
+    {
         return !$this->is_internal();
     }
 
@@ -240,7 +252,8 @@ class auth_plugin_base {
      *
      * @return bool                  True on success
      */
-    function user_update_password($user, $newpassword) {
+    function user_update_password($user, $newpassword)
+    {
         //override if needed
         return true;
     }
@@ -255,7 +268,8 @@ class auth_plugin_base {
      * @return boolean true if updated or update ignored; false if error
      *
      */
-    function user_update($olduser, $newuser) {
+    function user_update($olduser, $newuser)
+    {
         //override if needed
         return true;
     }
@@ -268,7 +282,8 @@ class auth_plugin_base {
      * @param object $user       Userobject before delete    (without system magic quotes)
      * @return void
      */
-    function user_delete($olduser) {
+    function user_delete($olduser)
+    {
         //override if needed
         return;
     }
@@ -278,7 +293,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function can_reset_password() {
+    function can_reset_password()
+    {
         //override if needed
         return false;
     }
@@ -288,7 +304,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function can_signup() {
+    function can_signup()
+    {
         //override if needed
         return false;
     }
@@ -300,9 +317,10 @@ class auth_plugin_base {
      * @param object $user new user object
      * @param boolean $notify print notice with link and terminate
      */
-    function user_signup($user, $notify=true) {
+    function user_signup($user, $notify = true)
+    {
         //override when can signup
-        print_error('mustbeoveride', 'debug', '', 'user_signup()' );
+        print_error('mustbeoveride', 'debug', '', 'user_signup()');
     }
 
     /**
@@ -310,11 +328,12 @@ class auth_plugin_base {
      * This is used in /login/signup.php.
      * @return moodle_form A form which edits a record from the user table.
      */
-    function signup_form() {
+    function signup_form()
+    {
         global $CFG;
 
-        require_once($CFG->dirroot.'/login/signup_form.php');
-        return new login_signup_form(null, null, 'post', '', array('autocomplete'=>'on'));
+        require_once($CFG->dirroot . '/login/signup_form.php');
+        return new login_signup_form(null, null, 'post', '', array('autocomplete' => 'on'));
     }
 
     /**
@@ -322,7 +341,8 @@ class auth_plugin_base {
      *
      * @return bool
      */
-    function can_confirm() {
+    function can_confirm()
+    {
         //override if needed
         return false;
     }
@@ -333,9 +353,10 @@ class auth_plugin_base {
      * @param string $username
      * @param string $confirmsecret
      */
-    function user_confirm($username, $confirmsecret) {
+    function user_confirm($username, $confirmsecret)
+    {
         //override when can confirm
-        print_error('mustbeoveride', 'debug', '', 'user_confirm()' );
+        print_error('mustbeoveride', 'debug', '', 'user_confirm()');
     }
 
     /**
@@ -344,7 +365,8 @@ class auth_plugin_base {
      * @param string $username (with system magic quotes)
      * @return bool
      */
-    function user_exists($username) {
+    function user_exists($username)
+    {
         //override if needed
         return false;
     }
@@ -358,7 +380,8 @@ class auth_plugin_base {
      * @param mixed $username username (with system magic quotes)
      * @return integer
      */
-    function password_expire($username) {
+    function password_expire($username)
+    {
         return 0;
     }
     /**
@@ -366,7 +389,8 @@ class auth_plugin_base {
      *
      * @param $user object user object (without system magic quotes)
      */
-    function sync_roles($user) {
+    function sync_roles($user)
+    {
         //override if needed
     }
 
@@ -379,7 +403,8 @@ class auth_plugin_base {
      *
      * @return mixed array with no magic quotes or false on error
      */
-    function get_userinfo($username) {
+    function get_userinfo($username)
+    {
         //override if needed
         return array();
     }
@@ -395,7 +420,8 @@ class auth_plugin_base {
      * @param array $user_fields
      * @deprecated since Moodle 3.3
      */
-    function config_form($config, $err, $user_fields) {
+    function config_form($config, $err, $user_fields)
+    {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
         //override if needed
     }
@@ -407,7 +433,8 @@ class auth_plugin_base {
      * @param array $err array of error messages
      * @deprecated since Moodle 3.3
      */
-     function validate_form($form, &$err) {
+    function validate_form($form, &$err)
+    {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
         //override if needed
     }
@@ -418,7 +445,8 @@ class auth_plugin_base {
      * @param object object with submitted configuration settings (without system magic quotes)
      * @deprecated since Moodle 3.3
      */
-    function process_config($config) {
+    function process_config($config)
+    {
         debugging('Use of config.html files have been deprecated, please update your code to use the admin settings API.');
         //override if needed
         return true;
@@ -431,7 +459,8 @@ class auth_plugin_base {
      * @global object
      * @global object
      */
-    function loginpage_hook() {
+    function loginpage_hook()
+    {
         global $frm;  // can be used to override submitted login form
         global $user; // can be used to replace authenticate_user_login()
 
@@ -452,7 +481,8 @@ class auth_plugin_base {
      * also implement the loginpage_hook as well.
      *
      */
-    function pre_loginpage_hook() {
+    function pre_loginpage_hook()
+    {
         // override if needed, eg by redirecting to an external login page
         // or logging in a user:
         // complete_user_login($user);
@@ -466,7 +496,8 @@ class auth_plugin_base {
      *
      * @param object $user user object, later used for $USER
      */
-    public function pre_user_login_hook(&$user) {
+    public function pre_user_login_hook(&$user)
+    {
         // Override if needed.
     }
 
@@ -478,7 +509,8 @@ class auth_plugin_base {
      * @param string $username (with system magic quotes)
      * @param string $password plain text password (with system magic quotes)
      */
-    function user_authenticated_hook(&$user, $username, $password) {
+    function user_authenticated_hook(&$user, $username, $password)
+    {
         //override if needed
     }
 
@@ -488,7 +520,8 @@ class auth_plugin_base {
      *
      * @global object
      */
-    function prelogout_hook() {
+    function prelogout_hook()
+    {
         global $USER; // use $USER->auth to find the plugin used for login
 
         //override if needed
@@ -501,7 +534,8 @@ class auth_plugin_base {
      * @global object
      * @global string
      */
-    function logoutpage_hook() {
+    function logoutpage_hook()
+    {
         global $USER;     // use $USER->auth to find the plugin used for login
         global $redirect; // can be used to override redirect after logout
 
@@ -518,7 +552,8 @@ class auth_plugin_base {
      * @param int $timemodified user last seen
      * @return bool true means do not timeout session yet
      */
-    function ignore_timeout_hook($user, $sid, $timecreated, $timemodified) {
+    function ignore_timeout_hook($user, $sid, $timecreated, $timemodified)
+    {
         return false;
     }
 
@@ -527,7 +562,8 @@ class auth_plugin_base {
      *
      * @todo Document this function
      */
-    function get_title() {
+    function get_title()
+    {
         return get_string('pluginname', "auth_{$this->authtype}");
     }
 
@@ -536,7 +572,8 @@ class auth_plugin_base {
      *
      * @return string The description
      */
-    function get_description() {
+    function get_description()
+    {
         $authdescription = get_string("auth_{$this->authtype}description", "auth_{$this->authtype}");
         return $authdescription;
     }
@@ -547,7 +584,8 @@ class auth_plugin_base {
      * @abstract Implement in child classes
      * @return bool
      */
-    function is_captcha_enabled() {
+    function is_captcha_enabled()
+    {
         return false;
     }
 
@@ -561,7 +599,8 @@ class auth_plugin_base {
      * @return bool
      * @since Moodle 2.6
      */
-    function can_be_manually_set() {
+    function can_be_manually_set()
+    {
         // Override if needed.
         return false;
     }
@@ -588,7 +627,8 @@ class auth_plugin_base {
      * @param string $wantsurl The relative url fragment the user wants to get to.
      * @return array List of associative arrays with keys url, name, iconurl|icon
      */
-    function loginpage_idp_list($wantsurl) {
+    function loginpage_idp_list($wantsurl)
+    {
         return array();
     }
 
@@ -597,7 +637,8 @@ class auth_plugin_base {
      *
      * @return array list of custom fields.
      */
-    public function get_custom_user_profile_fields() {
+    public function get_custom_user_profile_fields()
+    {
         global $CFG;
         require_once($CFG->dirroot . '/user/profile/lib.php');
 
@@ -609,7 +650,7 @@ class auth_plugin_base {
         $this->customfields = array();
         if ($proffields = profile_get_custom_fields()) {
             foreach ($proffields as $proffield) {
-                $this->customfields[] = 'profile_field_'.$proffield->shortname;
+                $this->customfields[] = 'profile_field_' . $proffield->shortname;
             }
         }
         unset($proffields);
@@ -624,7 +665,8 @@ class auth_plugin_base {
      *
      * @param stdClass $user clone of USER object before the user session was terminated
      */
-    public function postlogout_hook($user) {
+    public function postlogout_hook($user)
+    {
     }
 
     /**
@@ -639,10 +681,11 @@ class auth_plugin_base {
      * @param bool $suspenduser Should the user be suspended?
      * @return stdClass|bool updated user record or false if there is no new info to update.
      */
-    protected function update_user_record($username, $updatekeys = false, $triggerevent = false, $suspenduser = false) {
+    protected function update_user_record($username, $updatekeys = false, $triggerevent = false, $suspenduser = false)
+    {
         global $CFG, $DB;
 
-        require_once($CFG->dirroot.'/user/profile/lib.php');
+        require_once($CFG->dirroot . '/user/profile/lib.php');
 
         // Just in case check text case.
         $username = trim(core_text::strtolower($username));
@@ -723,7 +766,8 @@ class auth_plugin_base {
      * @param array $authsequence site's auth sequence (list of auth plugins ordered)
      * @return array List of arrays describing the identity providers
      */
-    public static function get_identity_providers($authsequence) {
+    public static function get_identity_providers($authsequence)
+    {
         global $SESSION;
 
         $identityproviders = [];
@@ -742,7 +786,8 @@ class auth_plugin_base {
      * @param renderer_base $output
      * @return array the identity providers ready for output
      */
-    public static function prepare_identity_providers_for_output($identityproviders, renderer_base $output) {
+    public static function prepare_identity_providers_for_output($identityproviders, renderer_base $output)
+    {
         $data = [];
         foreach ($identityproviders as $idp) {
             if (!empty($idp['icon'])) {
@@ -767,7 +812,8 @@ class auth_plugin_base {
      * @param stdClass $user A user object
      * @return string[] An array of strings with keys subject and message
      */
-    public function get_password_change_info(stdClass $user) : array {
+    public function get_password_change_info(stdClass $user): array
+    {
 
         global $USER;
 
@@ -815,7 +861,8 @@ class auth_plugin_base {
  * @param stdClass $user
  * @return bool true if user locked out
  */
-function login_is_lockedout($user) {
+function login_is_lockedout($user)
+{
     global $CFG;
 
     if ($user->mnethostid != $CFG->mnet_localhost_id) {
@@ -858,7 +905,8 @@ function login_is_lockedout($user) {
  * To be called after valid user login.
  * @param stdClass $user
  */
-function login_attempt_valid($user) {
+function login_attempt_valid($user)
+{
     global $CFG;
 
     // Note: user_loggedin event is triggered in complete_user_login().
@@ -879,7 +927,8 @@ function login_attempt_valid($user) {
  * @param stdClass $user
  * @throws moodle_exception
  */
-function login_attempt_failed($user) {
+function login_attempt_failed($user)
+{
     global $CFG;
 
     if ($user->mnethostid != $CFG->mnet_localhost_id) {
@@ -944,7 +993,8 @@ function login_attempt_failed($user) {
  *
  * @param stdClass $user
  */
-function login_lock_account($user) {
+function login_lock_account($user)
+{
     global $CFG;
 
     if ($user->mnethostid != $CFG->mnet_localhost_id) {
@@ -977,7 +1027,7 @@ function login_lock_account($user) {
         $data->lastname  = $user->lastname;
         $data->username  = $user->username;
         $data->sitename  = format_string($site->fullname);
-        $data->link      = $CFG->wwwroot.'/login/unlock_account.php?u='.$user->id.'&s='.$secret;
+        $data->link      = $CFG->wwwroot . '/login/unlock_account.php?u=' . $user->id . '&s=' . $secret;
         $data->admin     = generate_email_signoff();
 
         $message = get_string('lockoutemailbody', 'admin', $data);
@@ -997,7 +1047,8 @@ function login_lock_account($user) {
  *
  * @param stdClass $user
  */
-function login_unlock_account($user) {
+function login_unlock_account($user)
+{
     unset_user_preference('login_lockout', $user);
     unset_user_preference('login_failed_count', $user);
     unset_user_preference('login_failed_last', $user);
@@ -1009,7 +1060,8 @@ function login_unlock_account($user) {
  * Returns whether or not the captcha element is enabled, and the admin settings fulfil its requirements.
  * @return bool
  */
-function signup_captcha_enabled() {
+function signup_captcha_enabled()
+{
     global $CFG;
     $authplugin = get_auth_plugin($CFG->registerauth);
     return !empty($CFG->recaptchapublickey) && !empty($CFG->recaptchaprivatekey) && $authplugin->is_captcha_enabled();
@@ -1023,7 +1075,8 @@ function signup_captcha_enabled() {
  * @return array list of errors, being the key the data element name and the value the error itself
  * @since Moodle 3.2
  */
-function signup_validate_data($data, $files) {
+function signup_validate_data($data, $files)
+{
     global $CFG, $DB;
 
     $errors = array();
@@ -1039,7 +1092,6 @@ function signup_validate_data($data, $files) {
             if ($data['username'] !== core_user::clean_field($data['username'], 'username')) {
                 $errors['username'] = get_string('invalidusername');
             }
-
         }
     }
 
@@ -1049,9 +1101,8 @@ function signup_validate_data($data, $files) {
         $errors['username'] = get_string('usernameexists');
     }
 
-    if (! validate_email($data['email'])) {
+    if (!validate_email($data['email'])) {
         $errors['email'] = get_string('invalidemail');
-
     } else if (empty($CFG->allowaccountssameemail)) {
         // Emails in Moodle as case-insensitive and accents-sensitive. Such a combination can lead to very slow queries
         // on some DBs such as MySQL. So we first get the list of candidate users in a subselect via more effective
@@ -1077,9 +1128,14 @@ function signup_validate_data($data, $files) {
             $errors['email'] = get_string('emailexists') . ' ' . get_string('emailexistssignuphint', 'moodle', $forgotpasswordlink);
         }
     }
+    $crendential = explode('@', $data['email']);
+
+    if ($crendential[1] == 'agu.gov.br') {
+        $errors['email'] = get_string('cpf_agupessoas');
+    }
+
     if (empty($data['email2'])) {
         $errors['email2'] = get_string('missingemail');
-
     } else if (core_text::strtolower($data['email2']) != core_text::strtolower($data['email'])) {
         $errors['email2'] = get_string('invalidemail');
     }
@@ -1088,7 +1144,40 @@ function signup_validate_data($data, $files) {
             $errors['email'] = $err;
         }
     }
+    //==============VALIDATE - CPF ======================
+    if (isset($data['cpf'])) {
 
+        $cpf = $data['cpf'];
+        if ($DB->record_exists('user', array('cpf' => $data['cpf'], 'mnethostid' => $CFG->mnet_localhost_id))) {
+            $errors['cpf'] = get_string('cpfexists');
+        } else
+        if (!ctype_digit($cpf)) {
+            $errors['cpf'] = get_string('cpf_digits');
+        } else
+            if (strlen($cpf) != 11) {
+            $errors['cpf'] = get_string('cpf_size');
+        } else
+                if (in_array($cpf, array('00000000000', '11111111111', '22222222222', '33333333333', '44444444444', '55555555555', '66666666666', '77777777777', '88888888888', '99999999999'))) {
+            $errors['cpf'] = get_string('cpf_invalid');
+        } else {
+            for ($t = 9; $t < 11; $t++) {
+                for ($d = 0, $c = 0; $c < $t; $c++) {
+                    $v = substr($cpf, $c, 1);
+                    $d += $v * (($t + 1) - $c);
+                }
+                $v = substr($cpf, $c, 1);
+                $d = ((10 * $d) % 11) % 10;
+                if ($v != $d) {
+                    $errors['cpf'] = get_string('cpf_invalid');
+                }
+            }
+        }
+
+        $existecpf = signup_get_user_confirmation_cpf($data);
+        if ($existecpf) {
+            $errors['cpf'] = get_string('cpf_agupessoas');
+        }
+    }
     // Construct fake user object to check password policy against required information.
     $tempuser = new stdClass();
     $tempuser->id = 1;
@@ -1110,6 +1199,11 @@ function signup_validate_data($data, $files) {
     return $errors;
 }
 
+function signup_get_user_confirmation_cpf($cpfusuario)
+{
+    $servico = new PessoaAgu();
+    return $servico->atualizaDadosUsuario($cpfusuario);
+}
 /**
  * Add the missing fields to a user that is going to be created
  *
@@ -1117,7 +1211,8 @@ function signup_validate_data($data, $files) {
  * @return stdClass the user filled
  * @since Moodle 3.2
  */
-function signup_setup_new_user($user) {
+function signup_setup_new_user($user)
+{
     global $CFG;
 
     $user->confirmed   = 0;
@@ -1141,7 +1236,8 @@ function signup_setup_new_user($user) {
  * @return stdClass the current auth plugin handling user registration or false if registration not enabled
  * @since Moodle 3.2
  */
-function signup_get_user_confirmation_authplugin() {
+function signup_get_user_confirmation_authplugin()
+{
     global $CFG;
 
     if (empty($CFG->registerauth)) {
@@ -1161,7 +1257,8 @@ function signup_get_user_confirmation_authplugin() {
  * @return mixed false if sign-up is not enabled, the authplugin instance otherwise.
  * @since  Moodle 3.2
  */
-function signup_is_enabled() {
+function signup_is_enabled()
+{
     global $CFG;
 
     if (!empty($CFG->registerauth)) {
@@ -1184,25 +1281,32 @@ function signup_is_enabled() {
  * @param array $customfields list of custom profile fields
  * @since Moodle 3.3
  */
-function display_auth_lock_options($settings, $auth, $userfields, $helptext, $mapremotefields, $updateremotefields, $customfields = array()) {
+function display_auth_lock_options($settings, $auth, $userfields, $helptext, $mapremotefields, $updateremotefields, $customfields = array())
+{
     global $CFG;
     require_once($CFG->dirroot . '/user/profile/lib.php');
 
     // Introductory explanation and help text.
     if ($mapremotefields) {
-        $settings->add(new admin_setting_heading($auth.'/data_mapping', new lang_string('auth_data_mapping', 'auth'), $helptext));
+        $settings->add(new admin_setting_heading($auth . '/data_mapping', new lang_string('auth_data_mapping', 'auth'), $helptext));
     } else {
-        $settings->add(new admin_setting_heading($auth.'/auth_fieldlocks', new lang_string('auth_fieldlocks', 'auth'), $helptext));
+        $settings->add(new admin_setting_heading($auth . '/auth_fieldlocks', new lang_string('auth_fieldlocks', 'auth'), $helptext));
     }
 
     // Generate the list of options.
-    $lockoptions = array ('unlocked'        => get_string('unlocked', 'auth'),
-                          'unlockedifempty' => get_string('unlockedifempty', 'auth'),
-                          'locked'          => get_string('locked', 'auth'));
-    $updatelocaloptions = array('oncreate'  => get_string('update_oncreate', 'auth'),
-                                'onlogin'   => get_string('update_onlogin', 'auth'));
-    $updateextoptions = array('0'  => get_string('update_never', 'auth'),
-                              '1'  => get_string('update_onupdate', 'auth'));
+    $lockoptions = array(
+        'unlocked'        => get_string('unlocked', 'auth'),
+        'unlockedifempty' => get_string('unlockedifempty', 'auth'),
+        'locked'          => get_string('locked', 'auth')
+    );
+    $updatelocaloptions = array(
+        'oncreate'  => get_string('update_oncreate', 'auth'),
+        'onlogin'   => get_string('update_onlogin', 'auth')
+    );
+    $updateextoptions = array(
+        '0'  => get_string('update_never', 'auth'),
+        '1'  => get_string('update_onupdate', 'auth')
+    );
 
     // Generate the list of profile fields to allow updates / lock.
     if (!empty($customfields)) {
@@ -1237,32 +1341,60 @@ function display_auth_lock_options($settings, $auth, $userfields, $helptext, $ma
             // Display a message that the field can not be mapped because it's too long.
             $url = new moodle_url('/user/profile/index.php');
             $a = (object)['fieldname' => s($fieldname), 'shortname' => s($field), 'charlimit' => 67, 'link' => $url->out()];
-            $settings->add(new admin_setting_heading($auth.'/field_not_mapped_'.sha1($field), '',
-                get_string('cannotmapfield', 'auth', $a)));
+            $settings->add(new admin_setting_heading(
+                $auth . '/field_not_mapped_' . sha1($field),
+                '',
+                get_string('cannotmapfield', 'auth', $a)
+            ));
         } else if ($mapremotefields) {
             // We are mapping to a remote field here.
             // Mapping.
-            $settings->add(new admin_setting_configtext("auth_{$auth}/field_map_{$field}",
-                    get_string('auth_fieldmapping', 'auth', $fieldname), '', '', PARAM_RAW, 30));
+            $settings->add(new admin_setting_configtext(
+                "auth_{$auth}/field_map_{$field}",
+                get_string('auth_fieldmapping', 'auth', $fieldname),
+                '',
+                '',
+                PARAM_RAW,
+                30
+            ));
 
             // Update local.
-            $settings->add(new admin_setting_configselect("auth_{$auth}/field_updatelocal_{$field}",
-                    get_string('auth_updatelocalfield', 'auth', $fieldname), '', 'oncreate', $updatelocaloptions));
+            $settings->add(new admin_setting_configselect(
+                "auth_{$auth}/field_updatelocal_{$field}",
+                get_string('auth_updatelocalfield', 'auth', $fieldname),
+                '',
+                'oncreate',
+                $updatelocaloptions
+            ));
 
             // Update remote.
             if ($updateremotefields) {
-                    $settings->add(new admin_setting_configselect("auth_{$auth}/field_updateremote_{$field}",
-                        get_string('auth_updateremotefield', 'auth', $fieldname), '', 0, $updateextoptions));
+                $settings->add(new admin_setting_configselect(
+                    "auth_{$auth}/field_updateremote_{$field}",
+                    get_string('auth_updateremotefield', 'auth', $fieldname),
+                    '',
+                    0,
+                    $updateextoptions
+                ));
             }
 
             // Lock fields.
-            $settings->add(new admin_setting_configselect("auth_{$auth}/field_lock_{$field}",
-                    get_string('auth_fieldlockfield', 'auth', $fieldname), '', 'unlocked', $lockoptions));
-
+            $settings->add(new admin_setting_configselect(
+                "auth_{$auth}/field_lock_{$field}",
+                get_string('auth_fieldlockfield', 'auth', $fieldname),
+                '',
+                'unlocked',
+                $lockoptions
+            ));
         } else {
             // Lock fields Only.
-            $settings->add(new admin_setting_configselect("auth_{$auth}/field_lock_{$field}",
-                    get_string('auth_fieldlockfield', 'auth', $fieldname), '', 'unlocked', $lockoptions));
+            $settings->add(new admin_setting_configselect(
+                "auth_{$auth}/field_lock_{$field}",
+                get_string('auth_fieldlockfield', 'auth', $fieldname),
+                '',
+                'unlocked',
+                $lockoptions
+            ));
         }
     }
 }
