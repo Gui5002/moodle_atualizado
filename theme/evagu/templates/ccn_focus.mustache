@@ -3,7 +3,7 @@
   {{> theme_evagu/ccn_preloader }}
   <div class="wrapper">
     {{> theme_evagu/ccn_focus_navbar }}
-    {{^disable_dashboard_drawer}}
+    {{#evagu_focus_sidebar}}
     <section data-simplebar="init"
       class="so_content dashboard_sidebar dn-1199 {{#dashboard_scroll_drawer}} ccn_dashboard_scroll_drawer {{/dashboard_scroll_drawer}}">
       <div class="dashboard_sidebars">
@@ -14,9 +14,9 @@
         </div>
       </div>
     </section>
-    {{/disable_dashboard_drawer}}
-    <div class="our-dashbord dashbord {{#disable_dashboard_drawer}} ccn_dashbord_disable_drawer {{/disable_dashboard_drawer}}">
-      <div class="dashboard_main_content">
+    {{/evagu_focus_sidebar}}
+    <div class="our-dashbord dashbord">
+      <div class="dashboard_main_content {{^evagu_focus_sidebar}}no-sidebar{{/evagu_focus_sidebar}}">
         <div class="container-fluid">
           <div class="main_content_container">
             <div class="row">
@@ -62,6 +62,17 @@
                       {{/disable_dashboard_drawer}}
                       {{{ output.standard_top_of_body_html }}}
                       {{{ output.full_header }}}
+                      {{#primarymoremenu}}
+                      <div class="primary-navigation">
+                        {{> core/moremenu}}
+                      </div>
+                      {{/primarymoremenu}}
+                      {{#secondarymoremenu}}
+                      <div class="secondary-navigation">
+                        {{> core/moremenu}}
+                      </div>
+                      {{/secondarymoremenu}}
+                      {{{ output.edit_switch }}}
                       <div id="ccnSettingsMenuContainer">
                         <div id="ccnSettingsMenuInner">
                           {{! @ccnIrrevocable: These container divs #ccnSettingsMenuContainer/Inner must exist
@@ -81,9 +92,9 @@
                       {{/has_blocks_above_content}}
                       {{{ output.course_content_header }}}
                       {{{ output.main_content }}}
-                      {{#incourse}}
+                      {{#in_course_activity}}
                       {{{ output.activity_navigation }}}
-                      {{/incourse}}
+                      {{/in_course_activity}}
                       {{{ output.course_content_footer }}}
                       {{#has_blocks_below_content}}
                       {{{ blocks_below_content }}}
