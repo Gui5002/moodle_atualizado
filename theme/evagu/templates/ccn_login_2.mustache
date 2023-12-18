@@ -1,4 +1,5 @@
 {{> theme_boost/head }}
+
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
   <div class="wrapper">
@@ -7,10 +8,10 @@
       <div class="login_box">
         <div class="login_box_inner">
           {{#logo}}
-          <a href="{{{ ccnLogoUrl }}}" class="login_page_logo text-center">
-            {{#logo_image}}<img class="logo2 img-fluid" src="{{{headerlogo4}}}{{!output.get_logo_url}}" alt="{{sitename}}" {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>{{/logo_image}}
-            {{#logotype}}<span>{{{ sitename }}}</span>{{/logotype}}
-          </a>
+            <a href="{{{ ccnLogoUrl }}}" class="login_page_logo text-center">
+              {{#logo_image}}<img class="logo2 img-fluid" src="{{{headerlogo2}}}{{!output.get_logo_url}}" alt="{{sitename}}" {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>{{/logo_image}}
+              {{#logotype}}<span>{{{ sitename }}}</span>{{/logotype}}
+            </a>
           {{/logo}}
           <div class="login_form inner_page style3">
             {{{ output.main_content }}}
@@ -19,18 +20,18 @@
       </div>
     </section>
   </div>
-  {{> theme_evagu/ccn_footer_essentials }}
   {{{ output.standard_after_main_region_html }}}
 </body>
+
 </html>
 {{#js}}
-M.util.js_pending('theme_boost/loader');
-require(['theme_boost/loader'], function() {
-M.util.js_complete('theme_boost/loader');
-});
-M.util.js_pending('theme_boost/drawer');
-require(['theme_boost/drawer'], function(mod) {
-mod.init();
-M.util.js_complete('theme_boost/drawer');
-});
+  M.util.js_pending('theme_boost/loader');
+  require(['theme_boost/loader'], function() {
+  M.util.js_complete('theme_boost/loader');
+  });
+  M.util.js_pending('theme_boost/drawer');
+  require(['theme_boost/drawer'], function(mod) {
+  mod.init();
+  M.util.js_complete('theme_boost/drawer');
+  });
 {{/js}}

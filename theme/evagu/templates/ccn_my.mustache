@@ -1,7 +1,8 @@
 {{> theme_evagu/head_dashboard }}
+
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
-  <div class="wrapper" id="page-content">
+  <div class="wrapper">
     {{> theme_evagu/ccn_dashboard_navbar }}
     {{^disable_dashboard_drawer}}
       <section class="dashboard_sidebar dn-1199 {{#dashboard_scroll_drawer}} ccn_dashboard_scroll_drawer {{/dashboard_scroll_drawer}}">
@@ -130,17 +131,7 @@
                   {{/disable_dashboard_drawer}}
                   {{{ output.standard_top_of_body_html }}}
                   {{{ output.full_header }}}
-{{#primarymoremenu}}
-                      <div class="primary-navigation">
-                          {{> core/moremenu}}
-                      </div>
-                  {{/primarymoremenu}}
-                  {{#secondarymoremenu}}
-                      <div class="secondary-navigation">
-                          {{> core/moremenu}}
-                      </div>
-                  {{/secondarymoremenu}}
-                  {{{ output.edit_switch }}}
+
                   {{{ output.region_main_settings_menu }}}
                   {{#has_blocks_above_content}}
                     {{{ blocks_above_content }}}
@@ -177,6 +168,7 @@
   </div>
   {{{ output.standard_after_main_region_html }}}
 </body>
+
 </html>
 {{#js}}
   M.util.js_pending('theme_boost/loader');

@@ -35,11 +35,6 @@ $(window).on('load', function() {
       });
     }
   }
-$(".moremenu .more-nav .dropdownmoremenu .dropdown-menu").each(function() {
-    $(this).find("a").each(function() {
-      if($(this).attr('href') === "#") $(this).removeAttr("href");
-    })
-  })
 });
 if ($(".bs_carousel").length) {
   $(".bs_carousel").carousel({

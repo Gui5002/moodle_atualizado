@@ -2,7 +2,7 @@
 
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
-  <div class="wrapper" id="page-content">
+  <div class="wrapper">
     {{> theme_boost/navbar }}
     <div id="ccn-page-wrapper">
       <div id="ccnSettingsMenuContainer">
@@ -21,17 +21,6 @@
       {{{ output.standard_top_of_body_html }}}
       <div>
         {{{ output.full_header }}}
-        {{#primarymoremenu}}
-        <div class="primary-navigation">
-          {{> core/moremenu}}
-        </div>
-        {{/primarymoremenu}}
-        {{#secondarymoremenu}}
-        <div class="secondary-navigation">
-          {{> core/moremenu}}
-        </div>
-        {{/secondarymoremenu}}
-        {{{ output.edit_switch }}}
         {{{ blocks_fullwidth_top }}}
         <div id="ccn-main-region">
           <div class="container">
@@ -72,12 +61,12 @@
                           <ul class="course_schdule float-right">
                             {{#show_course_start}}
                             <li class="list-inline-item"><a href="#">{{#str}}startdate{{/str}}:
-                            {{{ coursestartdate }}}
+                              {{{ coursestartdate }}}
                               </a></li>
                             {{/show_course_start}}
                             {{#show_course_category}}
                             <li class="list-inline-item"><a href="#">{{#str}}category{{/str}}:
-                            {{{ coursecategory }}}</a></li>
+                                {{{ coursecategory }}}</a></li>
                             {{/show_course_category}}
                           </ul>
                         </div>
@@ -87,9 +76,9 @@
                         {{/is_course}}
                         {{{ output.course_content_header }}}
                         {{{ output.main_content }}}
-                        {{#in_course_activity}}
+                        {{#incourse}}
                         {{{ output.activity_navigation }}}
-                        {{/in_course_activity}}
+                        {{/incourse}}
                         {{{ output.course_content_footer }}}
                         {{#is_course}}
                         {{#display_course_content}}
