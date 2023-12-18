@@ -50,7 +50,7 @@
   margin-top: 28px;
   margin-left: 15px;
   text-transform: uppercase;
-  display:none;
+  display: inline-block;
 }
 .mobile-menu .header.stylehome1.home5 .main_logo_home2 span,
 .mobile-menu .header.stylehome1.home5 #search-button i,
@@ -76,18 +76,14 @@ header.stylehome1.home3 a:not(.mobileBrand):not(.ccn-btn-backtocourse) {
 header.stylehome1.home4 a:not(.mobileBrand):not(.ccn-btn-backtocourse) {
   background-color: #201b72 !important;
 }
-.notification-area .content-area .footer a {
-  line-height: 50px;
-  color: #fff;
-}
 .mobile-menu .header, .content, .footer {
   text-align: center;
 }
 .mobile-menu .header, .footer {
-  background: #7e91a7cc;
+  background: #777;
   font-size: 16px;
   font-weight: bold;
-  color: #fff!important;
+  color: #fff;
   line-height: 40px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

@@ -38,7 +38,7 @@
     }
     /** Main Menu Custom Script Start **/
     $(window).on('load', function() {
-      $("#respMenu").aceResponsiveMenu({
+      $(".ace-responsive-menu").aceResponsiveMenu({
         resizeWidth: '768', // Set the same in Media query
         animationSpeed: 'fast', //slow, medium, fast
         accoridonExpAll: false //Expands all the accordion menu on click
@@ -942,12 +942,12 @@
     function ccnProcessSliderAttributes(selector) {
       var ccnSelectorValue = selector;
       var ccnSelector = document.querySelector(ccnSelectorValue);
-      var $ccnDtCaroAo = ccnSelector.getAttribute('data-ccn-caro-ao') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-ao') : 'fadeOut' ;
-      var $ccnDtCaroAi = ccnSelector.getAttribute('data-ccn-caro-ai') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-ai') : 'fadeIn' ;
-      var $ccnDtCaroS = ccnSelector.getAttribute('data-ccn-caro-s') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-s') : 1000 ;
-      var $ccnDtCaroL = ccnSelector.getAttribute('data-ccn-caro-l') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-l') : 1 ;
-      var $ccnDtCaroAutoplayT = ccnSelector.getAttribute('data-ccn-caro-ap-to') !== undefined ? parseInt(ccnSelector.getAttribute('data-ccn-caro-ap-to')) : Boolean(0) ;
-      var $ccnDtCaroAutoplayP = ccnSelector.getAttribute('data-ccn-caro-ap-p') !== undefined ? parseInt(ccnSelector.getAttribute('data-ccn-caro-ap-p')) : 0 ;
+      var $ccnDtCaroAo = ccnSelector.getAttribute('data-ccn-caro-ao') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-ao') : 'fadeOut';
+      var $ccnDtCaroAi = ccnSelector.getAttribute('data-ccn-caro-ai') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-ai') : 'fadeIn';
+      var $ccnDtCaroS = ccnSelector.getAttribute('data-ccn-caro-s') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-s') : 1000;
+      var $ccnDtCaroL = ccnSelector.getAttribute('data-ccn-caro-l') !== undefined ? ccnSelector.getAttribute('data-ccn-caro-l') : 1;
+      var $ccnDtCaroAutoplayT = ccnSelector.getAttribute('data-ccn-caro-ap-to') !== undefined ? parseInt(ccnSelector.getAttribute('data-ccn-caro-ap-to')) : Boolean(0);
+      var $ccnDtCaroAutoplayP = ccnSelector.getAttribute('data-ccn-caro-ap-p') !== undefined ? parseInt(ccnSelector.getAttribute('data-ccn-caro-ap-p')) : 0;
       var $ccnDtCaroAutoplay = ccnSelector.getAttribute('data-ccn-caro-ap') !== undefined ? parseInt(ccnSelector.getAttribute('data-ccn-caro-ap')) : 0;
       var ccnReturn = {
         selector: ccnSelector,
@@ -997,15 +997,19 @@
           autoplayHoverPause: ccnSliderAttr.app,
           autoplay: ccnSliderAttr.ap
         });
+if ($('.banner-carousel-btn .left-btn').length) {
         $('.banner-carousel-btn .left-btn').on('click', function() {
           $('.banner-style-one').trigger('prev.owl.carousel');
           return false;
         });
+}
+        if ($('.banner-carousel-btn .right-btn').length) {
         $('.banner-carousel-btn .right-btn').on('click', function() {
           $('.banner-style-one').trigger('next.owl.carousel');
           return false;
         });
       }
+}
       /*  Home7-Main-Slider-Owl-carousel  */
       if ($('.banner-style-two').length) {
         var ccnSliderAttr = ccnProcessSliderAttributes('.banner-style-two');
@@ -1227,6 +1231,114 @@
         })
       }
     });
+
+
+    if ($('.mySwiper').length) {
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 4,
+        centeredSlides: false,
+        slidesPerGroupSkip: 0,
+        spaceBetween: 0,
+        grabCursor: false,
+        autoplay: false,
+        loop: true,
+        keyboard: {
+          enabled: false,
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+          },
+          991: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+          },
+          1024: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+          },
+          1200: {
+            slidesPerView: 4,
+            slidesPerGroup: 1,
+          }
+        },
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: false,
+        },
+      });
+    }
+
+
+    if ($('.uv2_insta_slider').length) {
+      $('.uv2_insta_slider').owlCarousel({
+        loop: true,
+        margin: 0,
+        dots: false,
+        nav: false,
+        rtl: false,
+        autoplayHoverPause: false,
+        autoplay: 500,
+        singleItem: true,
+        smartSpeed: 1200,
+        navText: [
+          '<i class="flaticon-left-arrow"></i>',
+          '<i class="flaticon-right-arrow-1"></i>'
+        ],
+        responsive: {
+          0: {
+            items: 1,
+            center: false
+          },
+          480: {
+            items: 1,
+            center: false
+          },
+          520: {
+            items: 1,
+            center: false
+          },
+          600: {
+            items: 2,
+            center: false
+          },
+          768: {
+            items: 2
+          },
+          992: {
+            items: 3
+          },
+          1200: {
+            items: 4
+          },
+          1400: {
+            items: 5
+          }
+        }
+      })
+    }
+
+
+
+
     /* ----- Scroll To top ----- */
     function scrollToTop() {
       $(window).scroll(function() {
@@ -1324,6 +1436,8 @@
     $(window).on('load', function() {
       // add your functions
       counterNumber();
+/* We do this for M4 More Menu.Should have no effect on earlier Mdl versions */ window.dispatchEvent(new Event('resize'));
+
       /* Stellar init function was responsible for causing messy menu bug. Disabling for now. */
       // jQuery(window).stellar({
       //     horizontalScrolling: false,

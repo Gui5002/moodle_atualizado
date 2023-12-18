@@ -1,12 +1,11 @@
 {{> theme_boost/head }}
-
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
   <div class="wrapper" id="page-content">
     {{> theme_boost/navbar }}
     {{{ output.standard_top_of_body_html }}}
     <section class="our-log bgc-fa">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row">
           <div class="col-sm-12 col-lg-6 offset-lg-3">
             <div class="login_form inner_page">
@@ -23,7 +22,6 @@
   </div>
   {{{ output.standard_after_main_region_html }}}
 </body>
-
 </html>
 {{#js}}
 M.util.js_pending('theme_boost/loader');

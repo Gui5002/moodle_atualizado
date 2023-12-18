@@ -1,5 +1,4 @@
 {{> theme_boost/head }}
-
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
   <div class="wrapper">
@@ -9,8 +8,7 @@
         <div class="login_box_inner">
           {{#logo}}
           <a href="{{{ ccnLogoUrl }}}" class="login_page_logo text-center">
-            {{#logo_image}}<img class="logo2 img-fluid" src="{{{headerlogo2}}}{{!output.get_logo_url}}"
-              alt="{{sitename}}" {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>{{/logo_image}}
+            {{#logo_image}}<img class="logo2 img-fluid" src="{{{headerlogo4}}}{{!output.get_logo_url}}" alt="{{sitename}}" {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>{{/logo_image}}
             {{#logotype}}<span>{{{ sitename }}}</span>{{/logotype}}
           </a>
           {{/logo}}
@@ -24,7 +22,6 @@
   {{> theme_evagu/ccn_footer_essentials }}
   {{{ output.standard_after_main_region_html }}}
 </body>
-
 </html>
 {{#js}}
 M.util.js_pending('theme_boost/loader');
