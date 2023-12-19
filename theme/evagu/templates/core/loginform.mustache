@@ -182,8 +182,10 @@ Example context (json):
       <div class="">
         <div class="">
           <div class="">
+            <h3>{{#str}}firsttime{{/str}}</h3>
           </div>
           <div>
+            {{{instructions}}}
             {{#cansignup}}
             <form class="mt-3" action="{{signupurl}}" method="get" id="signup">
               <div class="card border border-dark mb-3" style="width: 100%;">
@@ -203,14 +205,6 @@ Example context (json):
                 </div>
               </div>
             </form>
-            <!--                <div class="row">-->
-            <!--                    <div class="col-md-7">-->
-            <!--                        <div class="alert alert-primary" role="alert">Você não é usuário da agu:</div>-->
-            <!--                    </div>-->
-            <!--                    <div class="col-md-5 text-md-right">-->
-            <!--                        <button type="submit" class="btn btn-secondary">{{#str}}startsignup{{/str}}</button>-->
-            <!--                    </div>-->
-            <!--                </div>-->
             {{/cansignup}}
           </div>
         </div>

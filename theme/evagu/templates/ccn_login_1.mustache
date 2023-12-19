@@ -10,7 +10,9 @@
           <div class="col-md-6 offset-md-3">
             {{#logo}}
               <a href="{{{ ccnLogoUrl }}}" class="login_page_logo text-center">
-                {{#logo_image}}<img class="logo2 img-fluid" src="{{{headerlogo2}}}{{!output.get_logo_url}}" alt="{{sitename}}" {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>{{/logo_image}}
+                {{#logo_image}} <img class="logo2 img-fluid" src="{{{headerlogo2}}}{{!output.get_logo_url}}" alt="{{sitename}}"
+                {{#logo_styles}} style="{{{logo_styles}}}" {{/logo_styles}}>
+                {{/logo_image}}
                 {{#logotype}}<span>{{{ sitename }}}</span>{{/logotype}}
               </a>
             {{/logo}}
@@ -25,8 +27,8 @@
         </div>
       </div>
     </section>
-
   </div>
+  {{> theme_evagu/ccn_footer_essentials }}
   {{{ output.standard_after_main_region_html }}}
 </body>
 
