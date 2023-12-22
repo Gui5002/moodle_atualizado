@@ -5,16 +5,12 @@ array_push($extraclasses, "ccn_context_dashboard ccn_context_visualize");
 $bodyclasses = implode(" ",$extraclasses);
 $bodyattributes = $OUTPUT->body_attributes($bodyclasses);
 include($CFG->dirroot . '/theme/evagu/ccn/ccn_themehandler_context.php');
-
 $PAGE->requires->css('/theme/evagu/style/ccn-visualize.css');
 $PAGE->requires->js('/theme/evagu/javascript/eva.lcvb.preprocess.min.js', true);
-
-
 if (isset($_GET['bui_editid'])) {
   $ccnvbid = $_GET['bui_editid'];
   $ccnLcVbUpdCall = $CFG->wwwroot . '/theme/evagu/ccn/visualize/ccn_lcvb_updresp.php?ccn_bid=' . $ccnvbid;
   $PAGE->requires->js_init_call('ccnLcVbMainProcessor', array($ccnLcVbCollection, $ccnLcVbUpdCall));
-
   function ccn_block_instance_by_id($blockinstanceid) {
       global $DB;
       $ccnBlockInstance = $DB->get_record('block_instances', ['id' => $blockinstanceid]);
@@ -30,11 +26,9 @@ if (isset($_GET['bui_editid'])) {
       $ccnReturn->ccnBlockRender = '<div class="'.$ccnBlockFullName.'">'.$ccnInstance->get_content()->text.'</div>';
       return $ccnReturn;
   }
-
   $ccnBlock = ccn_block_instance_by_id($ccnvbid);
   $templatecontext['ccn_lc_vb'] = $ccnBlock->ccnBlockRender;
   // $templatecontext['ccn_lc_vb_repitem'] = $ccnBlock->ccnRepItem;
   $templatecontext['ccn_lc_vb_title'] = $ccnBlock->ccnBlockTitle;
 }
-
 echo $OUTPUT->render_from_template('theme_evagu/ccn_lc_vb', $templatecontext);

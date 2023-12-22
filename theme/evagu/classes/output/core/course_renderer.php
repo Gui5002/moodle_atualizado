@@ -36,11 +36,9 @@ use context_system;
 require_once($CFG->dirroot . '/course/renderer.php');
 require_once($CFG->dirroot . '/theme/evagu/ccn/course_handler/ccn_course_handler.php');
 require_once($CFG->dirroot . '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
-require_once($CFG->dirroot . '/theme/evagu/ccn/user_handler/ccn_user_handler.php');
 use ccnCourseHandler;
 use ccnMdlHandler;
-class course_renderer extends \core_course_renderer
-{
+class course_renderer extends \core_course_renderer {
   /**
    * Returns HTML to display a tree of subcategories and courses in the given category
    *
@@ -48,8 +46,7 @@ class course_renderer extends \core_course_renderer
    * @param core_course_category $coursecat top category (this category's name and description will NOT be added to the tree)
    * @return string
    */
-  protected function coursecat_tree(coursecat_helper $chelper, $coursecat)
-  {
+  protected function coursecat_tree(coursecat_helper $chelper, $coursecat) {
       // Reset the category expanded flag for this course category tree first.
       $this->categoryexpandedonload = false;
       $categorycontent = $this->coursecat_category_content($chelper, $coursecat, 0);
@@ -58,9 +55,9 @@ class course_renderer extends \core_course_renderer
       }
       // Start content generation
       $content = '';
-    /*  if ($coursecat->get_children_count()) {
-          $content .= html_writer::link('#', $linkname, array('class' => implode(' ', $classes)));
-      }*/
+    // if ($coursecat->get_children_count()) {
+          //     $content .= html_writer::link('#', $linkname, array('class' => implode(' ', $classes)));
+      // }
       $content .= $categorycontent;
       return $content;
   }
@@ -74,8 +71,7 @@ class course_renderer extends \core_course_renderer
    * @param int $depth depth of the category in the current tree
    * @return string
    */
-  protected function coursecat_category_content(coursecat_helper $chelper, $coursecat, $depth)
-  {
+  protected function coursecat_category_content(coursecat_helper $chelper, $coursecat, $depth) {
       $content = '';
       // Subcategories
       $content .= $this->coursecat_subcategories($chelper, $coursecat, $depth);
@@ -96,13 +92,13 @@ class course_renderer extends \core_course_renderer
               if (isset($_GET['eva_filter'])) {
                 $ccnCourseHandler = new ccnCourseHandler();
                 $courses = $ccnCourseHandler->ccnFilterCourses($courses);
-                if (empty($courses)) {
+                if(empty($courses)){
                   $message = get_string('noresults', 'search');
                   return '
                     <span class="notifications" id="user-notifications">
                       <div class="alert alert-info alert-block fade in "  role="alert" data-aria-autofocus="true">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        ' . $message . '
+                        '.$message.'
                       </div>
                     </span>';
                 }
@@ -124,8 +120,7 @@ class course_renderer extends \core_course_renderer
       }
       return $content;
   }
-  public function course_category($category)
-  {
+  public function course_category($category) {
       global $CFG, $PAGE;
       $usertop = core_course_category::user_top();
       if (empty($category)) {
@@ -140,20 +135,20 @@ class course_renderer extends \core_course_renderer
       $ccnCategoryDetails = $ccnCourseHandler->ccnGetCategoryDetails($category);
       $ccnSubcategoryCount = $ccnCategoryDetails->subcategoriesCount;
       $ccnCourseCountRender = '';
-      if ($ccnCourseCount > 0) {
-        $ccnCourseCountRender .= '<span class="color-dark pr5">' . $ccnCourseCount . '</span> ' . get_string('courses') . ' ';
+      if($ccnCourseCount > 0) {
+        $ccnCourseCountRender .= '<span class="color-dark pr5">'.$ccnCourseCount . '</span> ' . get_string('courses') . ' ';
       }
-      if ($ccnSubcategoryCount > 0) {
-        if ($ccnCourseCountRender === '') {
-          $ccnCourseCountRender .= '<span class="color-dark pr5">' . $ccnSubcategoryCount . '</span> ' . get_string('categories') . ' ';
+      if($ccnSubcategoryCount > 0) {
+        if($ccnCourseCountRender === '') {
+          $ccnCourseCountRender .= '<span class="color-dark pr5">'.$ccnSubcategoryCount . '</span> ' . get_string('categories'). ' ';
         } else {
-          $ccnCourseCountRender .= '<span class="ccn-text-divider"></span><span class="color-dark pr5">' . $ccnSubcategoryCount . '</span> ' . get_string('categories', 'theme_evagu') . ' ';
+          $ccnCourseCountRender .= '<span class="ccn-text-divider"></span><span class="color-dark pr5">'.$ccnSubcategoryCount . '</span> ' . get_string('categories', 'theme_evagu'). ' ';
         }
       }
       $site = get_site();
       $output = '';
       if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
-        $output .= '<div class="row"><div class="col-md-12 col-lg-12 col-xl-12 shadow_box">';
+        $output .='<div class="row"><div class="col-md-12 col-lg-12 col-xl-12 shadow_box">';
       }
       // if ($coursecat->can_create_course() || $coursecat->has_manage_capability()) {
       //   // Add 'Manage' button if user has permissions to edit this category.
@@ -180,14 +175,14 @@ class course_renderer extends \core_course_renderer
             $output .= '<div class="row courses_list_heading">
     						<div class="col-xl-3 p0">
     							<div class="instructor_search_result style2">
-                  <p class="mt10 fz15">' . $ccnCourseCountRender . '</p>
+                  <p class="mt10 fz15">'.$ccnCourseCountRender.'</p>
     							</div>
     						</div>
     						<div class="col-xl-9 p0">
     							<div class="candidate_revew_select style2 text-right">
     								<ul class="mb0">
-    									<li class="list-inline-item">' . $this->render($select) . '</li>
-    									<li class="list-inline-item">' . $this->course_search_form() . '</li>
+    									<li class="list-inline-item">'. $this->render($select).'</li>
+    									<li class="list-inline-item">'.$this->course_search_form().'</li>
     								</ul>
     							</div>
     						</div>
@@ -196,14 +191,14 @@ class course_renderer extends \core_course_renderer
             $output .= '<div class="row">
     						<div class="col-xl-4">
     							<div class="instructor_search_result style2">
-                  <p class="mt10 fz15">' . $ccnCourseCountRender . '</p>
+                  <p class="mt10 fz15">'.$ccnCourseCountRender.'</p>
     							</div>
     						</div>
     						<div class="col-xl-8">
     							<div class="candidate_revew_select style2 text-right mb25">
     								<ul>
-    									<li class="list-inline-item">' . $this->render($select) . '</li>
-    									<li class="list-inline-item">' . $this->course_search_form() . '</li>
+    									<li class="list-inline-item">'. $this->render($select).'</li>
+    									<li class="list-inline-item">'.$this->course_search_form().'</li>
     								</ul>
     							</div>
     						</div>
@@ -216,13 +211,13 @@ class course_renderer extends \core_course_renderer
             $output .= '<div class="row courses_list_heading">
                 <div class="col-xl-4 p0">
                   <div class="instructor_search_result style2">
-                  <p class="mt10 fz15">' . $ccnCourseCountRender . '</p>
+                  <p class="mt10 fz15">'.$ccnCourseCountRender.'</p>
                   </div>
                 </div>
                 <div class="col-xl-8 p0">
                   <div class="candidate_revew_select style2 text-right">
                     <ul class="mb0">
-                      <li class="list-inline-item">' . $this->course_search_form() . '</li>
+                      <li class="list-inline-item">'.$this->course_search_form().'</li>
                     </ul>
                   </div>
                 </div>
@@ -231,20 +226,20 @@ class course_renderer extends \core_course_renderer
             $output .= '<div class="row">
                 <div class="col-xl-4">
                   <div class="instructor_search_result style2">
-                  <p class="mt10 fz15">' . $ccnCourseCountRender . '</p>
+                  <p class="mt10 fz15">'.$ccnCourseCountRender.'</p>
                   </div>
                 </div>
                 <div class="col-xl-8">
                   <div class="candidate_revew_select style2 text-right mb25">
                     <ul>
-                      <li class="list-inline-item">' . $this->course_search_form() . '</li>
+                      <li class="list-inline-item">'.$this->course_search_form().'</li>
                     </ul>
                   </div>
                 </div>
               </div>
             ';
           }
-        } //End 202003031234
+        }//End 202003031234
       // Print current category description
       $chelper = new coursecat_helper();
       if ($description = $chelper->get_category_formatted_description($coursecat)) {
@@ -252,9 +247,9 @@ class course_renderer extends \core_course_renderer
       }
       // Prepare parameters for courses and categories lists in the tree
       if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
-        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)->set_attributes(array('class' => 'row courses_container category-browse-' . $coursecat->id));
+        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)->set_attributes(array('class' => 'row courses_container category-browse-'.$coursecat->id));
       } else {
-        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)->set_attributes(array('class' => 'row category-browse-' . $coursecat->id));
+        $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)->set_attributes(array('class' => 'row category-browse-'.$coursecat->id));
       }
       $coursedisplayoptions = array();
       $catdisplayoptions = array();
@@ -314,10 +309,8 @@ class course_renderer extends \core_course_renderer
           if ($coursecat->id) {
               $url = new moodle_url('/course/edit.php', array('category' => $coursecat->id, 'returnto' => 'category'));
           } else {
-              $url = new moodle_url(
-            '/course/edit.php',
-                  array('category' => $CFG->defaultrequestcategory, 'returnto' => 'topcat')
-          );
+              $url = new moodle_url('/course/edit.php',
+                  array('category' => $CFG->defaultrequestcategory, 'returnto' => 'topcat'));
           }
           $output .= $this->single_button($url, get_string('addnewcourse'), 'get');
         }
@@ -328,14 +321,13 @@ class course_renderer extends \core_course_renderer
       }
       $output .= '</div><!-- /.ccn_coursecat_action_btns -->';
       if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
-        $output .= '
+        $output .='
             </div>
           </div>';
       }
       return $output;
   }
-  protected function coursecat_category(coursecat_helper $chelper, $coursecat, $depth)
-  {
+  protected function coursecat_category(coursecat_helper $chelper, $coursecat, $depth) {
     global $CFG, $PAGE;
     $categoryname = $coursecat->get_formatted_name();
     $ccn_category_link = new moodle_url('/course/index.php', array('categoryid' => $coursecat->id));
@@ -360,16 +352,16 @@ class course_renderer extends \core_course_renderer
       $xpath = new \DOMXPath($dom);
       $src = $xpath->evaluate("string(//img/@src)");
     }
-    if ($src) {
-      $contentimages .= '<img class="img-whp" src="' . $src . '" alt="' . strip_tags($categoryname) . '">';
+    if ($src){
+      $contentimages .= '<img class="img-whp" src="'.$src.'" alt="'.$categoryname.'">';
     } else {
-      foreach ($children_courses as $child_course) {
+      foreach($children_courses as $child_course) {
         if ($child_course === reset($children_courses)) {
           foreach ($child_course->get_course_overviewfiles() as $file) {
             $isimage = $file->is_valid_image();
-            $url = file_encode_url("$CFG->wwwroot/pluginfile.php", '/' . $file->get_contextid() . '/' . $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename(), !$isimage);
+            $url = file_encode_url("$CFG->wwwroot/pluginfile.php", '/'. $file->get_contextid(). '/'. $file->get_component(). '/'. $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
             if ($isimage) {
-              $contentimages .= '<img class="img-whp" src="' . $url . '" alt="' . strip_tags($coursename) . '">';
+              $contentimages .= '<img class="img-whp" src="'.$url.'" alt="'.$coursename.'">';
             }
           }
         }
@@ -380,25 +372,25 @@ class course_renderer extends \core_course_renderer
         <div class="col-lg-12 p0"><div class="courses_list_content">
          <div class="top_courses list ccnWithFoot">
            <div class="thumb">
-             ' . $contentimages . '
+             '.$contentimages.'
              <div class="overlay">
-               <div class="tag">' . $ccn_items_count . '</div>
-               <a class="tc_preview_course" href="' . $ccn_category_link . '">' . get_string('viewallcourses') . '</a>
+               <div class="tag">'.$ccn_items_count.'</div>
+               <a class="tc_preview_course" href="'.$ccn_category_link.'">'.get_string('viewallcourses').'</a>
              </div>
            </div>
            <div class="details">
              <div class="tc_content">';
-               if (isset($PAGE->theme->settings->coursecat_modified) && ($PAGE->theme->settings->coursecat_modified !== '1')) {
-                $content .= '<p>' . $ccn_cat_updated . '</p>';
+               if(isset($PAGE->theme->settings->coursecat_modified) && ($PAGE->theme->settings->coursecat_modified !== '1')){
+                $content .='<p>'.$ccn_cat_updated.'</p>';
                }
-               $content .= '
-               <a href="' . $ccn_category_link . '"><h5>' . $categoryname . '</h5></a>
-               ' . $ccn_cat_summary . '
+               $content .='
+               <a href="'.$ccn_category_link.'"><h5>'.$categoryname.'</h5></a>
+               '.$ccn_cat_summary.'
              </div>
              <div class="tc_footer">
                <ul class="tc_meta float-left fn-414">
                  <li class="list-inline-item"><i class="flaticon-book"></i></li>
-                 <li class="list-inline-item">' . $ccn_items_count . '</li>
+                 <li class="list-inline-item">'.$ccn_items_count.'</li>
                </ul>
              </div>
            </div>
@@ -408,30 +400,30 @@ class course_renderer extends \core_course_renderer
         $content .= '
           <div class="col-lg-6 col-xl-4">
              <div class="top_courses ccnWithFoot">';
-             if ($contentimages) {
+             if($contentimages){
                $content .= '<div class="thumb">
-                 ' . $contentimages . '
+                 '.$contentimages.'
                  <div class="overlay">
-                   <div class="tag">' . $ccn_items_count . '</div>
-                   <a class="tc_preview_course" href="' . $ccn_category_link . '">' . get_string('viewallcourses') . '</a>
+                   <div class="tag">'.$ccn_items_count.'</div>
+                   <a class="tc_preview_course" href="'.$ccn_category_link.'">'.get_string('viewallcourses').'</a>
                  </div>
                </div>';
              }
-             $content .= '
+             $content .='
                <div class="details">
                          <div class="tc_content">';
-                         if (isset($PAGE->theme->settings->coursecat_modified) && ($PAGE->theme->settings->coursecat_modified !== '1')) {
-                          $content .= '<p>' . $ccn_cat_updated . '</p>';
+                         if(isset($PAGE->theme->settings->coursecat_modified) && ($PAGE->theme->settings->coursecat_modified !== '1')){
+                          $content .='<p>'.$ccn_cat_updated.'</p>';
                          }
-                         $content .= '
-                           <h5><a href="' . $ccn_category_link . '">' . $categoryname . '</a></h5>
-                           ' . $ccn_cat_summary . '
+                         $content .='
+                           <h5><a href="'. $ccn_category_link .'">'. $categoryname .'</a></h5>
+                           '.$ccn_cat_summary.'
                          </div>
                          </div>
                          <div class="tc_footer">
                            <ul class="tc_meta float-left">
                              <li class="list-inline-item"><i class="flaticon-book"></i></li>
-                             <li class="list-inline-item">' . $ccn_items_count . '</li>
+                             <li class="list-inline-item">'.$ccn_items_count.'</li>
                            </ul>
                          </div>
              </div>
@@ -439,8 +431,7 @@ class course_renderer extends \core_course_renderer
          }
       return $content;
     }
-  protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth)
-  {
+  protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth) {
       global $CFG;
       $subcategories = array();
       if (!$chelper->get_categories_display_option('nodisplay')) {
@@ -466,17 +457,11 @@ class course_renderer extends \core_course_renderer
               // the option 'paginationurl was specified, display pagingbar
               $perpage = $chelper->get_categories_display_option('limit', $CFG->coursesperpage);
               $page = $chelper->get_categories_display_option('offset') / $perpage;
-              $pagingbar = $this->paging_bar(
-          $totalcount,
-          $page,
-          $perpage,
-                      $paginationurl->out(false, array('perpage' => $perpage))
-        );
+              $pagingbar = $this->paging_bar($totalcount, $page, $perpage,
+                      $paginationurl->out(false, array('perpage' => $perpage)));
               if ($paginationallowall) {
-                  $pagingbar .= html_writer::tag('div', html_writer::link(
-            $paginationurl->out(false, array('perpage' => 'all')),
-                          get_string('showall', '', $totalcount)
-          ), array('class' => 'paging paging-showall'));
+                  $pagingbar .= html_writer::tag('div', html_writer::link($paginationurl->out(false, array('perpage' => 'all')),
+                          get_string('showall', '', $totalcount)), array('class' => 'paging paging-showall'));
               }
           } else if ($viewmoreurl = $chelper->get_categories_display_option('viewmoreurl')) {
               // the option 'viewmoreurl' was specified, display more link (if it is link to category view page, add category id)
@@ -486,7 +471,7 @@ class course_renderer extends \core_course_renderer
               $viewmoretext = $chelper->get_categories_display_option('viewmoretext', new lang_string('viewmore'));
               $morelink = ' <div class="col-12 paging paging-morelink">
                               <div class="courses_all_btn text-center">
-                                <a class="btn btn-transparent mt-3 mb-3" href="' . $viewmoreurl . '">' . $viewmoretext . '</a>
+                                <a class="btn btn-transparent mt-3 mb-3" href="'.$viewmoreurl.'">'.$viewmoretext.'</a>
                               </div>
                             </div>';
               // $morelink = html_writer::tag('div', html_writer::link($viewmoreurl, $viewmoretext),
@@ -494,10 +479,8 @@ class course_renderer extends \core_course_renderer
           }
       } else if (($totalcount > $CFG->coursesperpage) && $paginationurl && $paginationallowall) {
           // there are more than one page of results and we are in 'view all' mode, suggest to go back to paginated view mode
-          $pagingbar = html_writer::tag('div', html_writer::link(
-        $paginationurl->out(false, array('perpage' => $CFG->coursesperpage)),
-              get_string('showperpage', '', $CFG->coursesperpage)
-      ), array('class' => 'paging paging-showperpage'));
+          $pagingbar = html_writer::tag('div', html_writer::link($paginationurl->out(false, array('perpage' => $CFG->coursesperpage)),
+              get_string('showperpage', '', $CFG->coursesperpage)), array('class' => 'paging paging-showperpage'));
       }
       // display list of subcategories
       // $content = html_writer::start_tag('div', array('class' => ''));
@@ -517,10 +500,7 @@ class course_renderer extends \core_course_renderer
       $content .= '</div>';
       return $content;
   }
-  protected function coursecat_coursebox(coursecat_helper $chelper, $course, $overrideclasses = null)
-  {
-    // print_object($additionalclasses);
-    // print_object('$additionalclasses');
+  protected function coursecat_coursebox(coursecat_helper $chelper, $course, $additionalclasses = '') {
       global $PAGE;
       // if (!isset($this->strings->summary)) {
       //     $this->strings->summary = get_string('summary');
@@ -562,11 +542,10 @@ class course_renderer extends \core_course_renderer
           $ccn_info_box .= html_writer::end_tag('div'); // .enrolmenticons
       }
       $ccn_info_box .= html_writer::end_tag('div'); // .info
-      $content .= $this->coursecat_coursebox_content($chelper, $course, $overrideclasses);
+      $content .= $this->coursecat_coursebox_content($chelper, $course);
       return $content;
   }
-  protected function coursecat_coursebox_content(coursecat_helper $chelper, $course, $overrideclasses = null)
-  {
+  protected function coursecat_coursebox_content(coursecat_helper $chelper, $course) {
       global $CFG, $PAGE, $ccn_info_box;
       // if ($chelper->get_show_courses() < self::COURSECAT_SHOW_COURSES_EXPANDED) {
       //     return '';
@@ -592,133 +571,120 @@ class course_renderer extends \core_course_renderer
               $rolenames = array_map(function ($role) {
                   return $role->displayname;
               }, $coursecontact['roles']);
-              $name = implode(", ", $rolenames) . ': ' .
-                      html_writer::link(
-            new moodle_url(
-              '/user/view.php',
-                              array('id' => $coursecontact['user']->id, 'course' => SITEID)
-            ),
-                          $coursecontact['username']
-          );
-              $ccn_course_contacts .= '<span class="ccn_course_meta_item mr10">' . $name . '</span>';
+              $name = implode(", ", $rolenames).': '.
+                      html_writer::link(new moodle_url('/user/view.php',
+                              array('id' => $coursecontact['user']->id, 'course' => SITEID)),
+                          $coursecontact['username']);
+              $ccn_course_contacts .= '<span class="ccn_course_meta_item mr10">'.$name.'</span>';
           }
       }
       $ccn_course_meta = !empty($ccn_course_contacts) ? $ccn_course_contacts : $category;
       $contenttext = '';
-      if ((
+      if((
         isset($PAGE->theme->settings->coursecat_enrolments)
         && $PAGE->theme->settings->coursecat_enrolments != 1
-      ) || (
+      )||(
         isset($PAGE->theme->settings->coursecat_announcements)
         && $PAGE->theme->settings->coursecat_announcements != 1
-      ) || (
+      )||(
         isset($PAGE->theme->settings->coursecat_prices)
         && $PAGE->theme->settings->coursecat_prices != 1
-      )) {
+      )){
         $topCoursesClass = 'ccnWithFoot';
         $ccnBlockShowBottomBar = 1;
       } else {
         $ccnBlockShowBottomBar = 0;
         $topCoursesClass = '';
       }
-      if (
+      if(
         isset($PAGE->theme->settings->coursecat_prices)
         && $PAGE->theme->settings->coursecat_prices != 1
-      ) {
+      ){
         $ccnBlockShowPrice = 1;
       } else {
         $ccnBlockShowPrice = 0;
       }
       foreach ($course->get_course_overviewfiles() as $file) {
           $isimage = $file->is_valid_image();
-          $url = file_encode_url(
-        "$CFG->wwwroot/pluginfile.php",
-                  '/' . $file->get_contextid() . '/' . $file->get_component() . '/' .
-                  $file->get_filearea() . $file->get_filepath() . $file->get_filename(),
-        !$isimage
-      );
+          $url = file_encode_url("$CFG->wwwroot/pluginfile.php",
+                  '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
+                  $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
           if ($isimage) {
-              $contentimages .= '<img class="img-whp" src="' . $url . '" alt="' . strip_tags($coursename) . '">';
+              $contentimages .= '<img class="img-whp" src="'.$url.'" alt="'.$coursename.'">';
           }
        }
 if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
-      $boxClasses = 'col-lg-12 p0';
-    } else {
-      $boxClasses = 'col-lg-6 col-xl-4';
-    }
-    if ($overrideclasses !== null) $boxClasses = $overrideclasses;
-       if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
-          $contenttext .= '
-							<div class="' . $boxClasses . '"><div class="courses_list_content">
-								<div class="top_courses list ' . $topCoursesClass . '">
+                $contenttext .= '
+							<div class="col-lg-12 p0"><div class="courses_list_content">
+								<div class="top_courses list '.$topCoursesClass.'">
 									<div class="thumb">
-										' . $contentimages . '
+										'.$contentimages.'
 										<div class="overlay">
-                      <div class="tag">' . $ccnCourse->categoryName . '</div>
-											<a class="tc_preview_course" href="' . $coursenamelink . '">' . get_string('preview_course', 'theme_evagu') . '</a>
+                      <div class="tag">'.$ccnCourse->categoryName.'</div>
+											<a class="tc_preview_course" href="'.$coursenamelink.'">'.get_string('preview_course', 'theme_evagu').'</a>
 										</div>
 									</div>
 									<div class="details">
 										<div class="tc_content">
-											<p>' . $ccn_course_meta . '</p>
-											' . $ccnCourse->ccnRender->title . '
-											<p>' . $coursesummary . '</p>';
+											<p>'.$ccn_course_meta.'</p>
+											'.$ccnCourse->ccnRender->title.'
+											<p>'.$coursesummary.'</p>';
                       $contenttext .= $ccnCourse->ccnRender->starRating;
-                      $contenttext .= $ccn_info_box . '
+                      $contenttext .= $ccn_info_box.'
 										</div>';
-                    if ($ccnBlockShowBottomBar == 1) {
-                      $contenttext .= '
+                    if($ccnBlockShowBottomBar == 1){
+                      $contenttext .='
   										<div class="tc_footer">
-                      <ul class="tc_meta float-left fn-414">' . $ccnCourse->ccnRender->enrolmentIcon . $ccnCourse->ccnRender->announcementsIcon . '</ul>';
-                      if ($ccnBlockShowPrice == 1) {
-                        $contenttext .= '<div class="tc_price float-right">' . $ccnCourse->price . '</div>';
+                      <ul class="tc_meta float-left fn-414">'.$ccnCourse->ccnRender->enrolmentIcon . $ccnCourse->ccnRender->announcementsIcon.'</ul>';
+                      if($ccnBlockShowPrice == 1){
+                        $contenttext .= '<div class="tc_price float-right">'.$ccnCourse->price.'</div>';
                       }
-                      $contenttext .= '
+                      $contenttext .='
                       </div>';
                     }
-                    $contenttext .= '
+                    $contenttext .='
 									</div>
 								</div>
 							</div></div>';
        } else {
           $contenttext .= '
-          <div class="' . $boxClasses . '">
-							<div class="top_courses ' . $topCoursesClass . '">';
-              if ($contentimages) {
-                $contenttext .= '
+          <div class="col-lg-6 col-xl-4">
+							<div class="top_courses '.$topCoursesClass.'">';
+              if($contentimages){
+                $contenttext .='
 								<div class="thumb">
-									' . $contentimages . '
+									'.$contentimages.'
 									<div class="overlay">
-                    <div class="tag">' . $ccnCourse->categoryName . '</div>
-										<a class="tc_preview_course" href="' . $coursenamelink . '">' . get_string('preview_course', 'theme_evagu') . '</a>
+                    <div class="tag">'.$ccnCourse->categoryName.'</div>
+										<a class="tc_preview_course" href="'.$coursenamelink.'">'.get_string('preview_course', 'theme_evagu').'</a>
 									</div>
 								</div>';
               }
-              $contenttext .= '
+              $contenttext .='
                 <div class="details">
                           <div class="tc_content">
-                            <p>' . $ccn_course_meta . '</p>
-                            ' . $ccnCourse->ccnRender->title . '
-                            <p>' . $coursesummary . '</p>';
+                            <p>'.$ccn_course_meta.'</p>
+                            '.$ccnCourse->ccnRender->title.'
+                            <p>'. $coursesummary .'</p>';
                             $contenttext .= $ccnCourse->ccnRender->starRating;
-                            $contenttext .= $ccn_info_box . '
+                            $contenttext .= $ccn_info_box.'
                           </div>
                           </div>';
-                          if ($ccnBlockShowBottomBar == 1) {
-                            $contenttext .= '
+                          if($ccnBlockShowBottomBar == 1){
+                            $contenttext .='
         										<div class="tc_footer">
-                            <ul class="tc_meta float-left fn-414">' . $ccnCourse->ccnRender->enrolmentIcon . $ccnCourse->ccnRender->announcementsIcon . '</ul>';
-                            if ($ccnBlockShowPrice == 1) {
-                              $contenttext .= '<div class="tc_price float-right">' . $ccnCourse->price . '</div>';
+                            <ul class="tc_meta float-left fn-414">'.$ccnCourse->ccnRender->enrolmentIcon . $ccnCourse->ccnRender->announcementsIcon.'</ul>';
+                            if($ccnBlockShowPrice == 1){
+                              $contenttext .= '<div class="tc_price float-right">'.$ccnCourse->price.'</div>';
                             }
-                            $contenttext .= '
+                            $contenttext .='
                             </div>';
                           }
                         $contenttext .= '
 							</div>
 						</div>';
       }
-      $content .= $contenttext . $contentfiles;
+      $content .= $contenttext. $contentfiles;
       return $content;
   }
   /**
@@ -733,8 +699,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param int $displayoptions
    * @return void
    */
-  public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array())
-  {
+  public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
       global $USER;
       $output = '';
       $modinfo = get_fast_modinfo($course);
@@ -759,13 +724,8 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
                   // do not display moving mod
                   continue;
               }
-              if ($modulehtml = $this->course_section_cm_list_item(
-          $course,
-                      $completioninfo,
-          $mod,
-          $sectionreturn,
-          $displayoptions
-        )) {
+              if ($modulehtml = $this->course_section_cm_list_item($course,
+                      $completioninfo, $mod, $sectionreturn, $displayoptions)) {
                   $moduleshtml[$modnumber] = $modulehtml;
               }
           }
@@ -775,21 +735,17 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
           foreach ($moduleshtml as $modnumber => $modulehtml) {
               if ($ismoving) {
                   $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
-                  $sectionoutput .= html_writer::tag(
-            'li',
+                  $sectionoutput .= html_writer::tag('li',
                           html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
-                          array('class' => 'movehere')
-          );
+                          array('class' => 'movehere'));
               }
               $sectionoutput .= $modulehtml;
           }
           if ($ismoving) {
               $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
-              $sectionoutput .= html_writer::tag(
-          'li',
+              $sectionoutput .= html_writer::tag('li',
                       html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
-                      array('class' => 'movehere')
-        );
+                      array('class' => 'movehere'));
           }
       }
       // Always output the section module list.
@@ -809,8 +765,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param int $displayoptions
    * @return void
    */
-  public function _ccnActivityNav_course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array())
-  {
+  public function _ccnActivityNav_course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
       global $USER;
       $output = '';
       $modinfo = get_fast_modinfo($course);
@@ -835,13 +790,8 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
                   // do not display moving mod
                   continue;
               }
-              if ($modulehtml = $this->_ccnActivityNav_course_section_cm_list_item(
-          $course,
-                      $completioninfo,
-          $mod,
-          $sectionreturn,
-          $displayoptions
-        )) {
+              if ($modulehtml = $this->_ccnActivityNav_course_section_cm_list_item($course,
+                      $completioninfo, $mod, $sectionreturn, $displayoptions)) {
                   $moduleshtml[$modnumber] = $modulehtml;
               }
           }
@@ -851,21 +801,17 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
           foreach ($moduleshtml as $modnumber => $modulehtml) {
               if ($ismoving) {
                   $movingurl = new moodle_url('/course/mod.php', array('moveto' => $modnumber, 'sesskey' => sesskey()));
-                  $sectionoutput .= html_writer::tag(
-            'li',
+                  $sectionoutput .= html_writer::tag('li',
                           html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
-                          array('class' => 'movehere')
-          );
+                          array('class' => 'movehere'));
               }
               $sectionoutput .= $modulehtml;
           }
           if ($ismoving) {
               $movingurl = new moodle_url('/course/mod.php', array('movetosection' => $section->id, 'sesskey' => sesskey()));
-              $sectionoutput .= html_writer::tag(
-          'li',
+              $sectionoutput .= html_writer::tag('li',
                       html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
-                      array('class' => 'movehere')
-        );
+                      array('class' => 'movehere'));
           }
       }
       // Always output the section module list.
@@ -885,14 +831,13 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param array $displayoptions
    * @return String
    */
-  public function _ccnActivityNav_course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array())
-  {
+  public function _ccnActivityNav_course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
       $ccnUriForCourseFocus = $_SERVER['REQUEST_URI'];
       $output = '';
       if ($modulehtml = $this->_ccnActivityNav_course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
-          $ccnUri = '/mod/' . $mod->modname . '/view.php?id=' . $mod->id;
+          $ccnUri = '/mod/'.$mod->modname.'/view.php?id='.$mod->id;
           $modclasses = 'activity ' . $mod->modname . ' modtype_' . $mod->modname . ' ' . $mod->extraclasses;
-          if (strpos($ccnUriForCourseFocus, $ccnUri) || $ccnUriForCourseFocus == $ccnUri) {
+          if(strpos($ccnUriForCourseFocus, $ccnUri) || $ccnUriForCourseFocus == $ccnUri) {
             $modclasses .= ' active';
           }
           $output .= html_writer::tag('li', $modulehtml, array('class' => $modclasses, 'id' => 'module-' . $mod->id));
@@ -920,8 +865,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param array $displayoptions
    * @return string
    */
-  public function _ccnActivityNav_course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array())
-  {
+  public function _ccnActivityNav_course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
       $output = '';
       // We return empty string (because course module will not be displayed at all)
       // if:
@@ -935,7 +879,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       }
       $indentclasses = 'mod-indent';
       if (!empty($mod->indent)) {
-          $indentclasses .= ' mod-indent-' . $mod->indent;
+          $indentclasses .= ' mod-indent-'.$mod->indent;
           if ($mod->indent > 15) {
               $indentclasses .= ' mod-indent-huge';
           }
@@ -994,9 +938,8 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       $output .= html_writer::end_tag('div');
       return $output;
   }
-  protected function coursecat_courses(coursecat_helper $chelper, $courses, $totalcount = null, $classesListStyle = null, $classesGridStyle = null)
-  {
-      global $CFG, $PAGE;
+  protected function coursecat_courses(coursecat_helper $chelper, $courses, $totalcount = null) {
+      global $CFG;
       if ($totalcount === null) {
           $totalcount = count($courses);
       }
@@ -1021,17 +964,11 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
               // the option paginationurl was specified, display pagingbar
               $perpage = $chelper->get_courses_display_option('limit', $CFG->coursesperpage);
               $page = $chelper->get_courses_display_option('offset') / $perpage;
-              $pagingbar = $this->paging_bar(
-          $totalcount,
-          $page,
-          $perpage,
-                      $paginationurl->out(false, array('perpage' => $perpage))
-        );
+              $pagingbar = $this->paging_bar($totalcount, $page, $perpage,
+                      $paginationurl->out(false, array('perpage' => $perpage)));
               if ($paginationallowall) {
-                  $pagingbar .= html_writer::tag('div', html_writer::link(
-            $paginationurl->out(false, array('perpage' => 'all')),
-                          get_string('showall', '', $totalcount)
-          ), array('class' => 'paging paging-showall'));
+                  $pagingbar .= html_writer::tag('div', html_writer::link($paginationurl->out(false, array('perpage' => 'all')),
+                          get_string('showall', '', $totalcount)), array('class' => 'paging paging-showall'));
               }
           } else if ($viewmoreurl = $chelper->get_courses_display_option('viewmoreurl')) {
               // the option for 'View more' link was specified, display more link
@@ -1040,16 +977,14 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
               //         array('class' => 'paging paging-morelink'));
               $morelink = ' <div class="col-12 paging paging-morelink">
                               <div class="courses_all_btn text-center">
-                                <a class="btn btn-transparent mt-3 mb-3" href="' . $viewmoreurl . '">' . $viewmoretext . '</a>
+                                <a class="btn btn-transparent mt-3 mb-3" href="'.$viewmoreurl.'">'.$viewmoretext.'</a>
                               </div>
                             </div>';
           }
       } else if (($totalcount > $CFG->coursesperpage) && $paginationurl && $paginationallowall) {
           // there are more than one page of results and we are in 'view all' mode, suggest to go back to paginated view mode
-          $pagingbar = html_writer::tag('div', html_writer::link(
-        $paginationurl->out(false, array('perpage' => $CFG->coursesperpage)),
-              get_string('showperpage', '', $CFG->coursesperpage)
-      ), array('class' => 'paging paging-showperpage'));
+          $pagingbar = html_writer::tag('div', html_writer::link($paginationurl->out(false, array('perpage' => $CFG->coursesperpage)),
+              get_string('showperpage', '', $CFG->coursesperpage)), array('class' => 'paging paging-showperpage'));
       }
       // display list of courses
       $attributes = $chelper->get_and_erase_attributes('courses');
@@ -1059,23 +994,18 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       // }
       $coursecount = 0;
       foreach ($courses as $course) {
-          $coursecount++;
-          // $classes = ($coursecount%2) ? 'odd' : 'even';
-          // if ($coursecount == 1) {
-              //     $classes .= ' first';
-          // }
-      // if ($coursecount >= count($courses)) {
-              //     $classes .= ' last';
-// }
-      if ($PAGE->theme->settings->courseliststyle !== '2' && $classesGridStyle !== null) {
-        $classes = ' ' . $classesGridStyle;
-      } elseif ($classesListStyle !== null) {
-        $classes = ' ' . $classesListStyle;
+          $coursecount ++;
+          $classes = ($coursecount%2) ? 'odd' : 'even';
+          if ($coursecount == 1) {
+              $classes .= ' first';
+          }
+          if ($coursecount >= count($courses)) {
+              $classes .= ' last';
           }
           $content .= $this->coursecat_coursebox($chelper, $course, $classes);
       }
       if (!empty($pagingbar)) {
-          $content .= '<div class="col-lg-12 mt30 mb30">' . $pagingbar . '</div>';
+          $content .= '<div class="col-lg-12 mt30 mb30">'.$pagingbar.'</div>';
       }
       if (!empty($morelink)) {
           $content .= $morelink;
@@ -1084,65 +1014,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       return $content;
   }
 /**
-   * Renders html to display search result page
-   *
-   * @param array $searchcriteria may contain elements: search, blocklist, modulelist, tagid
-   * @return string
-   */
-  public function search_courses($searchcriteria)
-  {
-    global $CFG;
-    $content = '';
-    $search = '';
-    $ccnMdlHandler = new ccnMdlHandler();
-    $ccnGetCoreVersion = $ccnMdlHandler->ccnGetCoreVersion();
-    $ccnUserHandler = new \ccnUserHandler();
-    $ccnCurrentUserIsGuestOrAnon = $ccnUserHandler->ccnCurrentUserIsGuestOrAnon();
-    if (!empty($searchcriteria['search'])) {
-      $search = $searchcriteria['search'];
-    }
-    if ((int)$ccnGetCoreVersion <= 311 && $ccnCurrentUserIsGuestOrAnon == FALSE) {
-      $content .= $this->course_search_form($search);
-    }
-    if (!empty($searchcriteria)) {
-      // print search results
-      $displayoptions = array('sort' => array('displayname' => 1));
-      // take the current page and number of results per page from query
-      $perpage = optional_param('perpage', 0, PARAM_RAW);
-      if ($perpage !== 'all') {
-        $displayoptions['limit'] = ((int)$perpage <= 0) ? $CFG->coursesperpage : (int)$perpage;
-        $page = optional_param('page', 0, PARAM_INT);
-        $displayoptions['offset'] = $displayoptions['limit'] * $page;
-      }
-      // options 'paginationurl' and 'paginationallowall' are only used in method coursecat_courses()
-      $displayoptions['paginationurl'] = new moodle_url('/course/search.php', $searchcriteria);
-      $displayoptions['paginationallowall'] = true; // allow adding link 'View all'
-      $class = 'course-search-result row';
-      foreach ($searchcriteria as $key => $value) {
-        if (!empty($value)) {
-          $class .= ' course-search-result-' . $key;
-        }
-      }
-      $chelper = new coursecat_helper();
-      $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED_WITH_CAT)->set_courses_display_options($displayoptions)->set_search_criteria($searchcriteria)->set_attributes(array('class' => $class));
-      $courses = core_course_category::search_courses($searchcriteria, $chelper->get_courses_display_options());
-      $totalcount = core_course_category::search_courses_count($searchcriteria);
-      $courseslist = $this->coursecat_courses($chelper, $courses, $totalcount, $classesList = 'col-lg-12 mb30', $classesGrid = 'col-lg-6 col-xl-4');
-      if (!$totalcount) {
-        if (!empty($searchcriteria['search'])) {
-          $content .= $this->heading(get_string('nocoursesfound', '', $searchcriteria['search']));
-        } else {
-          $content .= $this->heading(get_string('novalidcourses'));
-        }
-      } else {
-        $content .= $this->heading(get_string('searchresults') . ": $totalcount");
-        $content .= $courseslist;
-      }
-    }
-    return $content;
-  }
-  /**
-   * Renders html to print list of courses tagged with particular tag
+      * Renders html to print list of courses tagged with particular tag
    *
    * @param int $tagid id of the tag
    * @param bool $exclusivemode if set to true it means that no other entities tagged with this tag
@@ -1154,8 +1026,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param array $displayoptions
    * @return string empty string if no courses are marked with this tag or rendered list of courses
    */
-  public function tagged_courses($tagid, $exclusivemode = true, $ctx = 0, $rec = true, $displayoptions = null)
-  {
+  public function tagged_courses($tagid, $exclusivemode = true, $ctx = 0, $rec = true, $displayoptions = null) {
       global $CFG;
       if (empty($displayoptions)) {
           $displayoptions = array();
@@ -1165,7 +1036,10 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       $chelper = new coursecat_helper();
       $searchcriteria = array('tagid' => $tagid, 'ctx' => $ctx, 'rec' => $rec);
       $chelper->set_show_courses($showcategories ? self::COURSECAT_SHOW_COURSES_EXPANDED_WITH_CAT :
-                  self::COURSECAT_SHOW_COURSES_EXPANDED)->set_search_criteria($searchcriteria)->set_courses_display_options($displayoptions)->set_attributes(array('class' => ' course-search-result course-search-result-tagid
+                  self::COURSECAT_SHOW_COURSES_EXPANDED)->
+              set_search_criteria($searchcriteria)->
+              set_courses_display_options($displayoptions)->
+              set_attributes(array('class' => ' course-search-result course-search-result-tagid
                                                 row'));
               // (we set the same css class as in search results by tagid)
       if ($totalcount = core_course_category::search_courses_count($searchcriteria)) {
@@ -1181,12 +1055,9 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
                   $coursename = html_writer::link($url, $course->get_formatted_name());
                   $details = '';
                   if ($showcategories && ($cat = core_course_category::get($course->category, IGNORE_MISSING))) {
-                      $details = get_string('category') . ': ' .
-                              html_writer::link(
-                new moodle_url('/course/index.php', array('categoryid' => $cat->id)),
-                                      $cat->get_formatted_name(),
-                array('class' => $cat->visible ? '' : 'dimmed')
-              );
+                      $details = get_string('category').': '.
+                              html_writer::link(new moodle_url('/course/index.php', array('categoryid' => $cat->id)),
+                                      $cat->get_formatted_name(), array('class' => $cat->visible ? '' : 'dimmed'));
                   }
                   $tagfeed->add($imgwithlink, $coursename, $details);
               }
@@ -1200,16 +1071,15 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    *
    * @return string
    */
-  public function frontpage_available_courses()
-  {
+  public function frontpage_available_courses() {
       global $CFG, $PAGE;
       $chelper = new coursecat_helper();
-      $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->set_courses_display_options(array(
+      $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_EXPANDED)->
+              set_courses_display_options(array(
                   'recursive' => true,
                   'limit' => $CFG->frontpagecourselimit,
                   'viewmoreurl' => new moodle_url('/course/index.php'),
-                  'viewmoretext' => new lang_string('fulllistofcourses')
-      ));
+                  'viewmoretext' => new lang_string('fulllistofcourses')));
       // $chelper->set_attributes(array('class' => ' frontpage-course-list-all
       //                                             row '));
       if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->courseliststyle == 2)) {
@@ -1234,8 +1104,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    *
    * @return string
    */
-  public function frontpage_my_courses()
-  {
+  public function frontpage_my_courses() {
       global $USER, $CFG, $DB, $PAGE;
       if (!isloggedin() or isguestuser()) {
           return '';
@@ -1244,7 +1113,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
       $courses  = enrol_get_my_courses('summary, summaryformat');
       $rhosts   = array();
       $rcourses = array();
-      if (!empty($CFG->mnet_dispatcher_mode) && $CFG->mnet_dispatcher_mode === 'strict') {
+      if (!empty($CFG->mnet_dispatcher_mode) && $CFG->mnet_dispatcher_mode==='strict') {
           $rcourses = get_my_remotecourses($USER->id);
           $rhosts   = get_my_remotehosts();
       }
@@ -1303,8 +1172,7 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param string $contents Contents of the part
    * @return string
    */
-  protected function frontpage_part($skipdivid, $contentsdivid, $header, $contents)
-  {
+  protected function frontpage_part($skipdivid, $contentsdivid, $header, $contents) {
     global $PAGE;
     if (isset($PAGE->theme->settings->evagu_homepage_core) && ($PAGE->theme->settings->evagu_homepage_core === '1')) {
       return '';
@@ -1312,21 +1180,17 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
     if (strval($contents) === '') {
       return '';
     }
-    $output = html_writer::link(
-      '#' . $skipdivid,
+    $output = html_writer::link('#' . $skipdivid,
         get_string('skipa', 'access', core_text::strtolower(strip_tags($header))),
-        array('class' => 'skip-block skip aabtn')
-    );
+        array('class' => 'skip-block skip aabtn'));
     // Wrap frontpage part in div container.
-    $output .= html_writer::start_tag('div', array(
-      'id' => $contentsdivid,
-                                                    'class' => 'ccnPseudoFrontpageBlock mb60'
-    ));
+    $output .= html_writer::start_tag('div', array( 'id' => $contentsdivid,
+                                                    'class'=> 'ccnPseudoFrontpageBlock mb60'));
     // $output .= $this->heading($header);
     $output .= '<div class="row">
                   <div class="col-lg-6 offset-lg-3">
                     <div class="main-title text-center">
-                      <h3 class="mb0 mt0">' . $header . '</h3>
+                      <h3 class="mb0 mt0">'.$header.'</h3>
                     </div>
                   </div>
                 </div>';
@@ -1360,11 +1224,10 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
    * @param string $value default value to populate the search field
    * @return string
    */
-  public function course_search_form($value = '', $format = 'plain')
-  {
+  public function course_search_form($value = '', $format = 'plain') {
     $ccnMdlHandler = new ccnMdlHandler();
     $ccnGetCoreVersion = $ccnMdlHandler->ccnGetCoreVersion();
-    if ((int)$ccnGetCoreVersion >= 310) {
+    if($ccnGetCoreVersion == '310'){
       $data = [
           'action' => \core_search\manager::get_course_search_url(),
           'btnclass' => 'btn-primary',
@@ -1381,16 +1244,16 @@ if (isset($PAGE->theme->settings->courseliststyle) && ($PAGE->theme->settings->c
           $formid .= $count;
       }
       switch ($format) {
-          case 'navbar':
+          case 'navbar' :
               $formid = 'coursesearchnavbar';
               $inputid = 'navsearchbox';
               $inputsize = 20;
               break;
-          case 'short':
+          case 'short' :
               $inputid = 'shortsearchbox';
               $inputsize = 12;
               break;
-          default:
+          default :
               $inputid = 'coursesearchbox';
               $inputsize = 30;
       }

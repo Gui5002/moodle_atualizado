@@ -489,7 +489,7 @@ ul.form-autocomplete-suggestions>li:empty {
     border: 1px solid #f3a058;
     border-radius: 50px;
     padding: 12px 27px 12px 49px;
-    color: #fbbe31;
+    color: #f3a058;
     font-weight: 400;
     font-size: 15px;
     font-family: "[[setting:primary_font]]", sans-serif;

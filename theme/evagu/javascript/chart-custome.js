@@ -38,14 +38,10 @@ window.onload = function() {
     var c_container = document.querySelector('.c_container');
     var div = document.createElement('div');
     div.classList.add('chart-container');
-
     var canvas = document.createElement('canvas');
     div.appendChild(canvas);
     c_container.appendChild(div);
-
     var ctx = canvas.getContext('2d');
     var config = createConfig();
     new Chart(ctx, config);
 };
-
-

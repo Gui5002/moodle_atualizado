@@ -25,7 +25,6 @@
     frictionX: 0.1,
     frictionY: 0.1
   };
-
   function Parallax(element, options) {
     // DOM Context
     this.element = element;
@@ -118,13 +117,11 @@
     }
     return {top:y, left:x};
   };
-
   Parallax.prototype.camelCase = function(value) {
     return value.replace(/-+(.)?/g, function(match, character){
       return character ? character.toUpperCase() : '';
     });
   };
-
   Parallax.prototype.transformSupport = function(value) {
     var element = document.createElement('div');
     var propertySupport = false;
@@ -161,7 +158,6 @@
     }
     return featureSupport;
   };
-
   Parallax.prototype.ww = null;
   Parallax.prototype.wh = null;
   Parallax.prototype.hw = null;
@@ -174,16 +170,13 @@
   Parallax.prototype.orientationStatus = 0;
   Parallax.prototype.transform2DSupport = Parallax.prototype.transformSupport('2D');
   Parallax.prototype.transform3DSupport = Parallax.prototype.transformSupport('3D');
-
   Parallax.prototype.initialise = function() {
-
     // Configure Context Styles
     if (this.transform3DSupport) this.accelerate(this.element);
     var style = window.getComputedStyle(this.element);
     if (style.getPropertyValue('position') === 'static') {
       this.element.style.position = 'relative';
     }
-
     // Configure Layer Styles
     for (var i = 0, l = this.layers.length; i < l; i++) {
       var layer = this.layers[i];
@@ -194,37 +187,30 @@
       layer.style.width = '100%';
       layer.style.left = 0;
       layer.style.top = 0;
-
       // Cache Layer Depth
       this.depths.push(this.data(layer, 'depth') || 0);
     }
-
     // Setup
     this.updateDimensions();
     this.enable();
     this.queueCalibration(this.calibrationDelay);
   };
-
   Parallax.prototype.updateDimensions = function() {
-
     // Cache Context Dimensions
     this.ox = this.offset(this.element).left;
     this.oy = this.offset(this.element).top;
     this.ow = this.element.offsetWidth;
     this.oh = this.element.offsetHeight;
-
     // Cache Window Dimensions
     this.ww = window.innerWidth;
     this.wh = window.innerHeight;
     this.hw = this.ww / 2;
     this.hh = this.wh / 2;
   };
-
   Parallax.prototype.queueCalibration = function(delay) {
     clearTimeout(this.calibrationTimer);
     this.calibrationTimer = setTimeout(this.onCalibrationTimer, delay);
   };
-
   Parallax.prototype.enable = function() {
     if (!this.enabled) {
       this.enabled = true;
@@ -242,7 +228,6 @@
       this.raf = requestAnimationFrame(this.onAnimationFrame);
     }
   };
-
   Parallax.prototype.disable = function() {
     if (this.enabled) {
       this.enabled = false;
@@ -255,38 +240,31 @@
       cancelAnimationFrame(this.raf);
     }
   };
-
   Parallax.prototype.calibrate = function(x, y) {
     this.calibrateX = x === undefined ? this.calibrateX : x;
     this.calibrateY = y === undefined ? this.calibrateY : y;
   };
-
   Parallax.prototype.invert = function(x, y) {
     this.invertX = x === undefined ? this.invertX : x;
     this.invertY = y === undefined ? this.invertY : y;
   };
-
   Parallax.prototype.friction = function(x, y) {
     this.frictionX = x === undefined ? this.frictionX : x;
     this.frictionY = y === undefined ? this.frictionY : y;
   };
-
   Parallax.prototype.scalar = function(x, y) {
     this.scalarX = x === undefined ? this.scalarX : x;
     this.scalarY = y === undefined ? this.scalarY : y;
   };
-
   Parallax.prototype.limit = function(x, y) {
     this.limitX = x === undefined ? this.limitX : x;
     this.limitY = y === undefined ? this.limitY : y;
   };
-
   Parallax.prototype.clamp = function(value, min, max) {
     value = Math.max(value, min);
     value = Math.min(value, max);
     return value;
   };
-
   Parallax.prototype.css = function(element, property, value) {
     var jsProperty = null;
     for (var i = 0, l = this.vendors.length; i < l; i++) {
@@ -394,7 +372,6 @@
   // Expose Parallax
   window[NAME] = Parallax;
 })(window, document);
-
 /**
  * Request Animation Frame Polyfill.
  * @author Tino Zijdel

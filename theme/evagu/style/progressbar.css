@@ -95,7 +95,6 @@
  *    and Edge, use the transform attribute directly on the SVG element as a
  * .  workaround.
  */
-
 .circle-chart {
   margin-bottom: 35px;
   height: 150px;

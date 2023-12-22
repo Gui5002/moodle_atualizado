@@ -1,10 +1,7 @@
 <?php
-
 require_once($CFG->dirroot . "/blog/renderer.php");
 require_once($CFG->dirroot . "/theme/evagu/ccn/blog_handler/ccn_blog_handler.php");
-
 class theme_evagu_core_blog_renderer extends core_blog_renderer {
-
   /**
    * Renders a blog entry
    *
@@ -12,62 +9,36 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
    * @return string The table HTML
    */
   public function render_blog_entry(blog_entry $entry) {
-
-      global $CFG, $PAGE, $DB;
-
+      global $CFG, $PAGE;
       $ccnBlogHandler = new ccnBlogHandler();
       $ccnGetPostDetails = $ccnBlogHandler->ccnGetPostDetails($entry->id);
-
       $syscontext = context_system::instance();
-
       $stredit = get_string('edit');
       $strdelete = get_string('delete');
-      
-      $testarcategoria = $DB->record_exists('course_categories', array('id' => $entry->category));
-      
-      if($testarcategoria){
-        $categoria = \core_course_category::get($entry->category);
-      }else{
-        $cleanblog = new stdclass;
-        $cleanblog->id = $entry->id;
-        $cleanblog->category = NULL;
-        
-        $DB->update_record('post', $cleanblog);
-        $categoria = array();
-      }
-      
-      // Header.
+            // Header.
       $mainclass = 'ccn_post';
       if ($entry->renderable->unassociatedentry) {
         $mainclass .= 'draft';
       } else {
         $mainclass .= $entry->publishstate;
       }
-
       $titlelink = html_writer::link(new moodle_url('/blog/index.php',
                                                      array('entryid' => $entry->id)),
                                                      format_string($entry->subject));
-
       // Post by.
       $by = new stdClass();
       $fullname = fullname($entry->renderable->user, has_capability('moodle/site:viewfullnames', $syscontext));
       $userurlparams = array('id' => $entry->renderable->user->id, 'course' => $this->page->course->id);
       $by->name = html_writer::link(new moodle_url('/user/view.php', $userurlparams), $fullname);
-
       $by->date = userdate($entry->created);
       // $o .= $this->output->container(get_string('bynameondate', 'forum', $by), 'author');
-
-
-
       $day = userdate($entry->created, '%d', 0);
       $month = userdate($entry->created, '%B', 0);
       $year = userdate($entry->created);
-
       // Adding external blog link.
       if (!empty($entry->renderable->externalblogtext)) {
           // $o .= $this->output->container($entry->renderable->externalblogtext, 'externalblog');
       }
-
       // Determine text for publish state.
       switch ($entry->publishstate) {
           case 'draft':
@@ -82,10 +53,8 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
           default:
               $blogtype = '';
               break;
-
       }
      // $o .= $this->output->container($blogtype, 'audience');
-
       // Attachments.
      /* $attachmentsoutputs = array();
       if ($entry->renderable->attachments) {
@@ -93,8 +62,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
               $o .= $this->render($attachment, false);
           }
       } */
-
-
       // CCN Attachments
       $image = $CFG->wwwroot .'/theme/evagu/images/ccnBgMd.png';
       if ($entry->renderable->attachments) {
@@ -102,9 +69,7 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
           $image = $attachment->url;
         }
       }
-
       // Body.
-
       if (!empty($entry->uniquehash)) {
           // Uniquehash is used as a link to an external blog.
           $url = clean_param($entry->uniquehash, PARAM_URL);
@@ -114,13 +79,10 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
       //        $o .= $this->output->container_end();
           }
       }
-
       // Links to tags.
      // $o .= $this->output->tag_list(core_tag_tag::get_item_tags('core', 'post', $entry->id));
-
       // Add associations.
       if (!empty($CFG->useblogassociations) && !empty($entry->renderable->blogassociations)) {
-
           // First find and show the associated course.
           $assocstr = '';
           $coursesarray = array();
@@ -132,7 +94,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
           if (!empty($coursesarray)) {
               $assocstr .= get_string('associated', 'blog', get_string('course')) . ': ' . implode(', ', $coursesarray);
           }
-
           // Now show mod association.
           $modulesarray = array();
           foreach ($entry->renderable->blogassociations as $assocrec) {
@@ -148,15 +109,12 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
               }
               $assocstr .= implode('<br/>', $modulesarray);
           }
-
           // Adding the asociations to the output.
         //  $o .= $this->output->container($assocstr, 'tags');
       }
-
       if ($entry->renderable->unassociatedentry) {
          // $o .= $this->output->container(get_string('associationunviewable', 'blog'), 'noticebox');
       }
-
       // Commands.
       //$o .= $this->output->container_start('commands');
       if ($entry->renderable->usercanedit) {
@@ -166,18 +124,14 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
         }
         $ccn_commands .= '<a class="btn btn-secondary" href="'.new moodle_url('/blog/edit.php', array('action' => 'delete', 'entryid' => $entry->id)).'">'.$strdelete.'</a>';
       }
-
       $entryurl = new moodle_url('/blog/index.php', array('entryid' => $entry->id));
-
       // Last modification.
       if ($entry->created != $entry->lastmodified) {
           // $o .= $this->output->container(' [ '.get_string('modified').': '.userdate($entry->lastmodified).' ]');
       }
-
       // Comments.
       if (!empty($entry->renderable->comment)) {
         global $DB, $CFG, $PAGE, $USER, $COURSE;
-
         $cmt = new stdClass();
         $cmt->context = context_user::instance($entry->userid);
         $cmt->courseid = $PAGE->course->id;
@@ -192,7 +146,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
         $ccn_comments->set_view_permission(true);
         $ccn_comments->set_fullwidth();
       }
-
       $tags =  $this->output->tag_list(core_tag_tag::get_item_tags('core', 'post', $entry->id));
       if (!empty($blogheaders['filters']['entry'])) {
         $blogheaders = blog_get_headers()['filters']['entry'];
@@ -204,7 +157,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
       $eva_share_vk = 'http://vk.com/share.php?url='. $entryurl;
       $eva_share_em = 'mailto:?&body='. $entryurl;
       $o = '';
-
       $ccnRenderEntryStyle4 = '
         <div class="col-12 col-md-6 col-xl-4 ccn-blog-list-entry">
           <div class="ccn_blog_post_4 blog_post mb30">
@@ -218,7 +170,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
             </div>
           </div>
         </div>';
-
       $ccnRenderEntryStyle5 = '
         <div class="col-md-6 col-lg-4 col-xl-4 ccn-blog-list-entry">
           <div class="ccn_blog_post_5 blog_post_home6 mb30">
@@ -231,7 +182,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
             <div class="details"></div>
           </div>
         </div>';
-
       $ccnRenderEntryStyle6 = '
         <div class="col-md-6 col-lg-6 col-xl-4 ccn-blog-masonry-entry">
           <div class="ccn_blog_post_6 blog_post_home6 style2 mb30">
@@ -248,7 +198,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
             </div>
           </div>
         </div>';
-
       if(isset($_GET['entryid'])){
         // If it's a single blog entry
         $o .= '
@@ -277,17 +226,10 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
 									$o .='
 									<li><span class="flaticon-comment"></span></li>
 									<li><span>'. $entry->renderable->comment->count() .' '.get_string('comments', 'theme_evagu').'</span></li>';
-                }
-                if(!empty($categoria)){
-                  $o .= '
-                  <li><span class="flaticon-student"></span></li>
-                  <li style="margin-right: 20px; margin-left: 8px;"><span>Categoria: '.$categoria->name.'</span></li>';
-                }
+                                }
                 $o .='
 								</ul>
-                ';
-                
-                $o .= '<div class="ccn-blog-post-content-surround">
+                <div class="ccn-blog-post-content-surround">
                   <p>'. format_text($entry->summary) .'</p>
                 </div>
               </div>
@@ -346,15 +288,9 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
                      <li><span class="flaticon-comment"></span></li>
                      <li><span>'. $entry->renderable->comment->count() .' comments</span></li>';
                    }
-                   if(!empty($categoria)){
-                    $o .= '
-                    <li><span class="flaticon-student"></span></li>
-                    <li style="margin-right: 20px; margin-left: 8px;"><span>Categoria: '.$categoria->name.'</span></li>';
-                  }
-                  $o .='
-                  </ul>';
-                  
-                  $o .= '<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,300).'...</p>
+                                     $o .='
+                  </ul>
+                   <p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,300).'...</p>
                  </div></a>
                </div>
              </div>';
@@ -390,19 +326,12 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
                      <li><span class="flaticon-comment"></span></li>
                      <li><span>'. $entry->renderable->comment->count() .' '.get_string('comments', 'theme_evagu').'©</span></li>';
                    }
-                   if(!empty($categoria)){
-                    $o .= '
-                    <li><span class="flaticon-student"></span></li>
-                    <li style="margin-right: 20px; margin-left: 8px;"><span>Categoria: '.$categoria->name.'</span></li>';
-                  }
-                  $o .='
-                  </ul>';
-                  
-                  $o .= '<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,300).'...</p>
+                                     $o .='
+                  </ul>
+								   <p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,300).'...</p>
                  </div>
                </div>
              </div>';
-
        }elseif(isset($PAGE->theme->settings->blogstyle) && ($PAGE->theme->settings->blogstyle == 3)) {
          if(!empty($image)){
          $o .= ' <div class="ccn-blog-list-entry col-xl-5 pr15-xl pr0">
@@ -431,14 +360,9 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
                     <li><span class="flaticon-comment"></span></li>
                     <li><span>'. $entry->renderable->comment->count() .' '.get_string('comments', 'theme_evagu').'</span></li>';
                   }
-                  if(!empty($categoria)){
-                    $o .= '
-                    <li><span class="flaticon-student"></span></li>
-                    <li style="margin-right: 20px; margin-left: 8px;"><span>Categoria: '.$categoria->name.'</span></li>';
-                  }
-                  $o .='
-										</ul>';
-										$o .= '<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,400).'...</p>
+                                    $o .='
+										</ul>
+										<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,400).'...</p>
 									</div>
 								</div>
 							</div>';
@@ -458,14 +382,9 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
                          <li><span class="flaticon-comment"></span></li>
                          <li><span>'. $entry->renderable->comment->count() .' '.get_string('comments', 'theme_evagu').'</span></li>';
                        }
-                       if(!empty($categoria)){
-                        $o .= '
-                        <li><span class="flaticon-student"></span></li>
-                        <li style="margin-right: 20px; margin-left: 8px;"><span>Categoria: '.$categoria->name.'</span></li>';
-                      }
-                      $o .='
-                      </ul>';
-                      $o .= '<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,400).'...</p>
+                                             $o .='
+                      </ul>
+     										<p>'. substr(format_string($entry->summary, $striplinks = true,$options = null),0,400).'...</p>
      									</div>
      								</div>
      							</div>';
@@ -478,11 +397,6 @@ class theme_evagu_core_blog_renderer extends core_blog_renderer {
             $o .= $ccnRenderEntryStyle6;
           }
 }
-
-
       return $o;
   }
-
-
-
 }

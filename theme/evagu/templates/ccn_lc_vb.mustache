@@ -1,13 +1,11 @@
 {{> theme_evagu/head_dashboard }}
-
 <body {{{ bodyattributes }}}>
   {{> theme_evagu/ccn_preloader }}
   {{{ output.standard_top_of_body_html }}}
   <div id="ccn_lc_vb--visualize--container">
     <div id="ccn_lc_vb--visualize">
       <div id="ccn_lc_vb--visualize--inner">
-        <div id="ccn_visualize_container--live-customizer">
-          <div id="ccn_lc_vb--visualize--block-wrapper">
+        <div id="ccn_lc_vb--visualize--actions">
             <h1 id="ccnTitleEl">
               <span class="ccnTitleElTag">
                 <span class="ccn-flaticon-magic-wand"></span>
@@ -19,6 +17,9 @@
               <span class="la la-refresh" id="ccnRefresher"></span>
               <div id="ccnRefresherTextContent">Update</div>
             </div>
+</div>
+        <div id="ccn_visualize_container--live-customizer">
+          <div id="ccn_lc_vb--visualize--block-wrapper">
             <div id="ccn_lc_vb--visualize--block-wrapper--inner">
               {{{ccn_lc_vb}}}
             </div>
@@ -30,7 +31,7 @@
       <div id="ccn_lc_vb--visualize-aside--controller">
         <span class="la la-refresh" id="ccnRefresherAside"></span>
       </div>
-      <div id="ccn_lc_vb--visualize-aside--inner">
+      <div id="ccn_lc_vb--visualize-aside--inner" class="so_content" data-simplebar="init">
         <div class="wrapper">
           <div class="main_content_container">
             {{{ output.full_header }}}
@@ -53,7 +54,6 @@
     </div>
   {{/ccn_lc_vb_repitem}}
 </body>
-
 </html>
 {{#js}}
   M.util.js_pending('theme_boost/loader');

@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Contains class core_tag_renderer
  *
@@ -28,8 +27,6 @@ use html_writer;
 use core_tag_area;
 use moodle_url;
 use core_tag_collection;
-
-
 /**
  * Class core_tag_renderer
  *
@@ -38,7 +35,6 @@ use core_tag_collection;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tag_renderer extends \core_tag_renderer {
-
     /**
      * Renders the tag search page
      *
@@ -48,10 +44,8 @@ class tag_renderer extends \core_tag_renderer {
      */
     public function tag_search_page($query = '', $tagcollid = 0) {
         $rv = $this->output->heading(get_string('searchtags', 'tag'), 2);
-
         $searchbox = $this->search_form($query, $tagcollid);
         $rv .= html_writer::div($searchbox, '', array('id' => 'tag-search-box', 'class' => 'ccnSearchHuge'));
-
         $tagcloud = core_tag_collection::get_tag_cloud($tagcollid, false, 150, 'name', $query);
         $searchresults = '';
         if ($tagcloud->get_count()) {
@@ -61,10 +55,8 @@ class tag_renderer extends \core_tag_renderer {
         } else if (strval($query) !== '') {
             $rv .= '<div class="tag-search-empty">' . get_string('notagsfound', 'tag', s($query)) . '</div>';
         }
-
         return $rv;
     }
-
     /**
      * Renders the tag index page
      *
@@ -83,30 +75,23 @@ class tag_renderer extends \core_tag_renderer {
     public function tag_index_page($tag, $entities, $tagareaid, $exclusivemode, $fromctx, $ctx, $rec, $page) {
         global $CFG;
         $this->page->requires->js_call_amd('core/tag', 'initTagindexPage');
-
         $tagname = $tag->get_display_name();
         $systemcontext = context_system::instance();
-
         if ($tag->flag > 0 && has_capability('moodle/tag:manage', $systemcontext)) {
             $tagname = '<span class="flagged-tag">' . $tagname . '</span>';
         }
-
         $rv = '';
         $rv .= $this->output->heading($tagname, 2);
-
         $rv .= $this->tag_links($tag);
-
         if ($desciption = $tag->get_formatted_description()) {
             $rv .= $this->output->box($desciption, 'generalbox tag-description');
         }
-
         $relatedtagslimit = 10;
         $relatedtags = $tag->get_related_tags();
         $taglist = new \core_tag\output\taglist($relatedtags, get_string('relatedtags', 'tag'),
                 'tag-relatedtags', $relatedtagslimit);
         $rv .= $this->output->render_from_template('theme_evagu/ccn_tag_taglist_large',
                 $taglist->export_for_template($this->output));
-
         // Display quick menu of the item types (if more than one item type found).
         $entitylinks = array();
         foreach ($entities as $entity) {
@@ -115,13 +100,11 @@ class tag_renderer extends \core_tag_renderer {
                         core_tag_area::display_name($entity->component, $entity->itemtype) . '</a></li>';
             }
         }
-
         if (count($entitylinks) > 1) {
             $rv .= '<div class="tag-index-toc mb20"><ul class="inline-list">' . join('', $entitylinks) . '</ul></div>';
         } else if (!$entitylinks) {
             $rv .= '<div class="tag-noresults">' . get_string('noresultsfor', 'tag', $tagname) . '</div>';
         }
-
         // Display entities tagged with the tag.
         $content = '';
         foreach ($entities as $entity) {
@@ -133,13 +116,11 @@ class tag_renderer extends \core_tag_renderer {
               }
             }
         }
-
         if ($exclusivemode) {
             $rv .= $content;
         } else if ($content) {
             $rv .= html_writer::div($content, 'tag-index-items');
         }
-
         // Display back link if we are browsing one tag area.
         if ($tagareaid) {
             $url = $tag->get_view_url(0, $fromctx, $ctx, $rec);
@@ -153,10 +134,8 @@ class tag_renderer extends \core_tag_renderer {
                       </ul>
                     </div>';
         }
-
         return $rv;
     }
-
     /**
      * Prints a box that contains the management links of a tag
      *
@@ -170,7 +149,6 @@ class tag_renderer extends \core_tag_renderer {
         }
         return '';
     }
-
     /**
      * Prints the tag search box
      *
@@ -193,8 +171,6 @@ class tag_renderer extends \core_tag_renderer {
                         </div>
                       </div>
                     </form>';
-
         return $output;
     }
-
 }

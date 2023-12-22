@@ -1,18 +1,13 @@
 <?php
 namespace theme_evagu\output;
-
 use renderer_base;
 use pix_icon;
-
 defined('MOODLE_INTERNAL') || die();
-
 class icon_system_fontawesome extends \core\output\icon_system_fontawesome {
 public function get_core_icon_map() {
     $iconmap = parent::get_core_icon_map();
-
     global $PAGE;
     $settings = $PAGE->theme->settings;
-
     $overrides = Array(
       'core:t/messages' => (($i = $settings->messages_icon_ccn_icon_class) ? $i : 'flaticon-speech-bubble'),
       'core:t/message' => (($i = $settings->messages_icon_ccn_icon_class) ? $i : 'flaticon-speech-bubble'),
@@ -73,10 +68,7 @@ public function get_core_icon_map() {
       // 'core:i/risk_xss' => 'fa-exclamation-triangle text-danger',
       'core:i/warning' => 'ccn-flaticon-warning text-warning',
     );
-
     $merged = array_merge($iconmap, $overrides);
-
     return $merged;
 }
-
 }

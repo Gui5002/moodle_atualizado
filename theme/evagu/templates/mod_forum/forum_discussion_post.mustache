@@ -1,41 +1,32 @@
 {{!
     This file is part of Moodle - http://moodle.org/
-
     Moodle is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     Moodle is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
     @template mod_forum/forum_discussion_post
-
     Template to render a single post from a discussion.
-
     Classes required for JS:
     * none
-
     Data attributes required for JS:
     * none
-
     Example context (json):
     {
     }
 }}
-
 <article id="p{{id}}" class="forum-post-container mb-2" data-post-id="{{id}}" data-region="post" data-target="{{id}}-target" tabindex="0" aria-labelledby="post-header-{{id}}" aria-describedby="post-content-{{id}}">
   <!-- The firstpost and starter classes below aren't used for anything other than to identify the first post in behat -->
   <div class="d-flex border p-2 mb-2 forumpost focus-target {{#unread}}unread{{/unread}} {{#firstpost}}firstpost starter{{/firstpost}}" aria-label='{{#str}} postbyuser, mod_forum, {"post": "{{subject}}", "user": "{{author.fullname}}"} {{/str}}'
     data-post-id="{{id}}" data-content="forum-post">
     {{#isfirstunread}}<a id="unread" aria-hidden="true"></a>{{/isfirstunread}}
-
     <div class="d-flex flex-column w-100 ccn-form-post-core" data-region-content="forum-post-core">
       <header class="mb-2 row d-flex">
         {{^isdeleted}}
@@ -76,7 +67,6 @@
           {{/hasreplycount}}
         </div>
       </header>
-
       <div class="d-flex body-content-container">
         {{^isdeleted}}
           {{#author}}
@@ -98,17 +88,14 @@
             {{/groups}}
           {{/author}}
         {{/isdeleted}}
-
         <div class="no-overflow w-100 content-alignment-container">
           <div id="post-content-{{id}}" class="post-content-container">
             {{{message}}}
           </div>
-
           {{^isdeleted}}
             {{#haswordcount}}
               <p class="font-italic mb-0"><small>{{#str}} numwords, core, {{wordcount}} {{/str}}</small></p>
             {{/haswordcount}}
-
             {{#attachments}}
               {{#isimage}}
                 <div class="attachedimages">
@@ -124,9 +111,7 @@
                 </div>
               {{/isimage}}
             {{/attachments}}
-
             {{{html.taglist}}}
-
             {{#attachments}}
               {{^isimage}}
                 <div>
@@ -144,7 +129,6 @@
                 </div>
               {{/isimage}}
             {{/attachments}}
-
             <div class="ccn-forum-post-actions">
               <div class="ccn-forum-post-actions-footer">
                 {{$footer}}{{/footer}}
@@ -221,14 +205,12 @@
                 {{/readonly}}
                 {{/actions}}
               </div>
-
           {{/isdeleted}}
         </div>
       </div>
     </div>
   </div>
   </div>
-
   <div data-region="replies-container">
     {{$replies}}
     <div>

@@ -1,7 +1,6 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
 include($CFG->dirroot . '/theme/evagu/ccn/ccn_themehandler.php');
-
 if ($ccnDashLayout == 1) {
   array_push($extraclasses, "ccn_context_frontend ccn_pseudoContext__my");
   $bodyclasses = implode(" ",$extraclasses);

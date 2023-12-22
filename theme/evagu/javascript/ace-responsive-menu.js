@@ -4,17 +4,14 @@ Version: 1.0
 Author: Samson.Onna
 Email : samson3d@gmail.com
 ----------------------------------------*/
-
 (function($){
     $.fn.aceResponsiveMenu = function (options) {
-
         //plugin's default options
         var defaults = {
             resizeWidth: '768',
             animationSpeed: 'fast',
             accoridonExpAll: false
         };
-
         //Variables
         var options = $.extend(defaults, options),
             opt = options,
@@ -23,12 +20,10 @@ Email : samson3d@gmail.com
             $expandAll = opt.accoridonExpAll,
             $aceMenu = $(this),
             $menuStyle = $(this).attr('data-menu-style');
-
         // Initilizing
         $aceMenu.find('ul').addClass("sub-menu");
         $aceMenu.find('ul').siblings('a').append('<span class="arrow "></span>');
         if ($menuStyle == 'accordion') { $(this).addClass('collapse'); }
-
         // Window resize on menu breakpoint
         if ($(window).innerWidth() <= $resizeWidth) {
             menuCollapse();
@@ -36,7 +31,6 @@ Email : samson3d@gmail.com
         $(window).resize(function () {
             menuCollapse();
         });
-
         // Menu Toggle
         function menuCollapse() {
             var w = $(window).innerWidth();
@@ -58,13 +52,10 @@ Email : samson3d@gmail.com
                 $aceMenu.find('ul.slide').removeClass('slide').removeAttr('style');
             }
         }
-
         //ToggleBtn Click
         $('#menu-btn').click(function () {
             $aceMenu.slideToggle().toggleClass('hide-menu');
         });
-
-
         // Main function
         return this.each(function () {
             // Function for Horizontal menu on mouseenter
@@ -87,7 +78,6 @@ Email : samson3d@gmail.com
                 return;
             });
             //End of Horizontal menu function
-
             // Function for Vertical/Responsive Menu on mouse click
             $aceMenu.on('click', '> li a', function () {
                 if ($aceMenu.hasClass('collapse') === false) {
@@ -108,7 +98,6 @@ Email : samson3d@gmail.com
                 }
             });
             //End of responsive menu function
-
         });
         //End of Main function
     }

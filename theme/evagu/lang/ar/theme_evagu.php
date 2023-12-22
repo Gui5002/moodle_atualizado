@@ -13,10 +13,8 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
-
 // CCN Theme Constants
 $string['pluginname'] = 'evagu';
 $string['configtitle'] = 'evagu إعدادات';
@@ -149,7 +147,6 @@ $string['config_c_ccn_ib'] = 'محتوى العنصر';
 $string['config_c_ccn_ibt'] = 'زر العنصر';
 $string['config_child_categories'] = 'إظهار الفئات الفرعية';
 $string['config_box_shadow'] = 'ظل الصندوق';
-
 // CCN Plugin Constants: Frontend
 $string['search_string'] = 'ابحث عن البرنامج أو المهارات التي تريد تعلمها';
 $string['updated'] = 'تم التحديث';
@@ -158,8 +155,11 @@ $string['event'] = 'حدث';
 $string['rated_by'] ='{$a} تقييم الطالب';
 $string['rate_course'] ='تقديم التقييم';
 $string['number_of_courses'] ='أكثر {$a} دورة/دورات';
+$string['number_of_subcategories'] ='أكثر {$a} دورة/دورات';
+$string['categories'] = 'فئات';
 $string['hidden'] ='مخفي';
 $string['back_to_course'] ='العودة للدورة';
+$string['back_to_site'] ='العودة إلى الموقع';
 $string['course_navigation'] ='التنقل في الدورة';
 $string['rating_success'] ='اكتمل التقييم!';
 // CCN Dashboard Constants
@@ -312,6 +312,8 @@ $string['custom_css'] = 'Custom CSS';
 $string['custom_css_desc'] = 'Your custom CSS, loaded only on the front-end.';
 $string['custom_css_dashboard'] = 'Custom CSS (Dashboard)';
 $string['custom_css_dashboard_desc'] = 'Your custom CSS, loaded only on the dashboard.';
+$string['custom_css_h5p'] = 'Custom CSS (H5P)';
+$string['custom_css_h5p_desc'] = 'Your custom CSS, loaded only within H5P activities.';
 $string['custom_js'] = 'Custom JavaScript';
 $string['custom_js_desc'] = 'Your custom JavaScript, loaded only on the front-end.';
 $string['custom_js_dashboard'] = 'Custom JavaScript (Dashboard)';
@@ -394,6 +396,8 @@ $string['header_main_menu_desc'] = 'Visibility of the main navigation menu links
 $string['header_login_desc'] = 'Settings for the login functionality in the header.';
 $string['back_to_top'] = 'Back to Top';
 $string['back_to_top_desc'] = 'Show or hide the back-to-top button on the frontend.';
+$string['language_menu'] = 'Language menu';
+$string['language_menu_desc'] = 'Settings for the language menu.';
 $string['blog_post_author'] = 'Blog post author';
 $string['blog_post_author_desc'] = 'Show or hide the author name on blog posts. This setting controls the blog listing page, individual blog posts, and all [eva] blocks.';
 $string['blog_post_date'] = 'Blog post date';
@@ -455,7 +459,7 @@ $string['course_content_enroled_only'] = 'Course Content access';
 $string['course_content_enroled_only_desc'] = '(Topics format only) - Choose whether to display course content to all users, or only those enroled in the course. This is helpful you want to allow guest access to course pages, but hide the list of course content, topics, sections, and activity names from unenroled users.';
 $string['social_target'] = 'Social URL window target';
 $string['social_target_desc'] = 'Determine whether social URLs should open on the same page or in a new window.';
-$string['coursecat_modified'] = 'Ultima atualização';
+$string['coursecat_modified'] = 'Last updated';
 $string['coursecat_modified_desc'] = 'Show the date that the course/category was last updated.';
 $string['coursecat_enrolments'] = 'Course enrolments';
 $string['coursecat_enrolments_desc'] = 'Show the number of students enroled in a course.';
@@ -490,7 +494,15 @@ $string['dashboard_layout'] = 'Dashboard layout';
 $string['dashboard_layout_desc'] = 'The layout that should be used for dashboard pages.';
 $string['login_layout'] = 'Login page layout';
 $string['login_layout_desc'] = 'The layout that is used for login and registration pages.';
+$string['evagu_homepage'] = 'Frontpage';
+$string['evagu_homepage_desc'] = 'Settings for the frontpage layout';
+$string['evagu_homepage_core'] = 'Frontpage sections';
+$string['evagu_homepage_core_desc'] = 'Display Moodle core sections on the frontpage?';
 $string['layout_settings'] = 'Layout';
+$string['evagu_focus'] = 'evagu Focus';
+$string['evagu_focus_desc'] = 'Settings for evagu Focus layouts.';
+$string['evagu_focus_sidebar'] = 'Display navigation sidebar?';
+$string['evagu_focus_sidebar_desc'] = 'Choose whether to display the activity sidebar in evagu Focus layouts.';
 $string['course_enrolment_payment'] = 'Course enrolment payment';
 $string['course_enrolment_payment_desc'] = 'Settings for course enrolment preferences. Do all courses require payment, or are some free? This setting dictates how course enrolment will work and be displayed.';
 $string['dashboard_tablet_1'] = 'Dashboard tablet 1';
@@ -554,10 +566,8 @@ $string['quiz_layout'] = 'Quiz layout';
 $string['quiz_layout_desc'] = 'The layout of the quiz activity.';
 $string['logo_url'] = 'Logo URL';
 $string['logo_url_desc'] = 'Override the logo URL in all evagu headers and footers.';
-
 // CCN Fixes
 $string['allexcepthidden'] = 'الكل ماعدا المخفي';
-
 // Theme evagu
 $string['studentsiamteaching'] = 'طلاب أُدرس لهم';
 $string['coursesiamteaching'] = 'دورات أقوم بتدريبها';

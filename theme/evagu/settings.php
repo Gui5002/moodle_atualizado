@@ -16,10 +16,6 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 $ccnFontList = include($CFG->dirroot . '/theme/evagu/ccn/font_handler/ccn_font_select.php');
-require_once($CFG->dirroot . '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
-$ccnMdlHandler = new ccnMdlHandler();
-$ccnMdlVersion = $ccnMdlHandler->ccnGetCoreVersion();
-$ccnMdlVersion = (int)$ccnMdlVersion;
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
 if ($ADMIN->fulltree) {
@@ -125,12 +121,6 @@ if ($ADMIN->fulltree) {
   $title = get_string('headerlogo3', 'theme_evagu');
   $description = get_string('headerlogo3_desc', 'theme_evagu');
   $setting = new admin_setting_configstoredfile($name, $title, $description, 'headerlogo3');
-$setting->set_updatedcallback('theme_reset_all_caches');
-  $page->add($setting);
-  $name = 'theme_evagu/headerlogo4';
-  $title = get_string('headerlogo4', 'theme_evagu');
-  $description = get_string('headerlogo4_desc', 'theme_evagu');
-  $setting = new admin_setting_configstoredfile($name, $title, $description, 'headerlogo4');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
   // Header logo mobile
@@ -235,20 +225,6 @@ $setting->set_updatedcallback('theme_reset_all_caches');
   );
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
-if ($ccnMdlVersion >= 400) {
-    $setting = new admin_setting_configselect(
-      'theme_evagu/disable_primary_nav',
-      get_string('disable_primary_nav', 'theme_evagu'),
-      get_string('disable_primary_nav_desc', 'theme_evagu'),
-      '0',
-      array(
-        '0' => 'Enable primary navigation',
-        '1' => 'Disable primary navigation'
-      )
-    );
-    $setting->set_updatedcallback('theme_reset_all_caches');
-    $page->add($setting);
-  }
   // Header type
   $setting = new admin_setting_configselect(
     'theme_evagu/headertype',
@@ -421,7 +397,7 @@ if ($ccnMdlVersion >= 400) {
   // Footer settings
   $page->add(new admin_setting_heading('theme_evagu/footer_settings', get_string('footer_settings', 'theme_evagu'), NULL));
   // Footer copyright
-  $setting = new admin_setting_configtext('theme_evagu/eva_copyright', get_string('eva_copyright', 'theme_evagu'), get_string('eva_copyright_desc', 'theme_evagu'), 'Copyright © 2021 EVA AGU Moodle Theme by RCN. All Rights Reserved.', PARAM_NOTAGS, 50);
+  $setting = new admin_setting_configtext('theme_evagu/eva_copyright', get_string('eva_copyright', 'theme_evagu'), get_string('eva_copyright_desc', 'theme_evagu'), 'Copyright © 2020 evagu Moodle Theme by eva. All Rights Reserved.', PARAM_NOTAGS, 50);
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
   // Footer style
@@ -697,7 +673,6 @@ if ($ccnMdlVersion >= 400) {
   $page->add($setting);
   // Topics format settings
   $page->add(new admin_setting_heading('theme_evagu/course_settings_topics_format', get_string('course_settings_topics_format', 'theme_evagu'), NULL));
-if ($ccnMdlVersion < 400) {
   // Collapsible settings
   $setting = new admin_setting_configselect(
     'theme_evagu/topics_format_collapsible',
@@ -712,7 +687,6 @@ if ($ccnMdlVersion < 400) {
     )
   );
   $page->add($setting);
-}
   // Activity module settings
   $page->add(new admin_setting_heading('theme_evagu/course_settings_activities', get_string('course_settings_activities', 'theme_evagu'), NULL));
   // Quiz layout
@@ -992,7 +966,7 @@ if ($ccnMdlVersion < 400) {
   // Title: Footer Style 2
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_2', get_string('color_settings_footer_style_2', 'theme_evagu'), NULL));
   // Footer Style 2: Footer Top
-  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_2_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f8f8f8');
+  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_2_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f9fafc');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
   // Footer Style 2: Footer Bottom
@@ -1002,7 +976,7 @@ if ($ccnMdlVersion < 400) {
   // Title: Footer Style 3
   $page->add(new admin_setting_heading('theme_evagu/color_settings_footer_style_3', get_string('color_settings_footer_style_3', 'theme_evagu'), NULL));
   // Footer Style 3: Footer Top
-  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f8f8f8');
+  $setting = new admin_setting_configcolourpicker('theme_evagu/color_footer_style_3_top', get_string('color_footer_color_top', 'theme_evagu'), get_string('color_footer_color_top_desc', 'theme_evagu'), '#f9fafc');
   $setting->set_updatedcallback('theme_reset_all_caches');
   $page->add($setting);
   // Footer Style 3: Footer Middle

@@ -33,203 +33,195 @@ if(!empty($THEME->settings->quiz_layout) && $THEME->settings->quiz_layout == '1'
   $ccnInCourseRegions = array('side-pre', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'fullwidth-top');
 }
 $THEME->layouts = [
-    // Most backwards compatible layout without the blocks - this is the layout used by default.
-    'base' => array(
-        'file' => 'columns2.php',
-        'regions' => array(),
-    ),
-    // Standard layout with blocks, this is recommended for most pages with general information.
-    'standard' => array(
-        'file' => 'columns2.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    // Main course page.
-    'course' => array(
-        'file' => 'ccn_course.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('langmenu' => true),
-    ),
-    'coursecategory' => array(
-        'file' => 'columns2.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    // Part of course, typical for modules - default page layout if $cm specified in require_login().
-    'incourse' => array(
-        'file' => 'ccn_incourse.php',
-        'regions' => $ccnInCourseRegions,
-        'defaultregion' => 'side-pre',
-    ),
-    // The site home page.
-    'frontpage' => array(
-        'file' => 'columns2.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true),
-    ),
-    // Server administration scripts.
-    'admin' => array(
-        'file' => $ccnAdminLayout,
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-'mycourses' => array(
-        'file' => 'ccn_my.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true),
-    ),
+  // Most backwards compatible layout without the blocks - this is the layout used by default.
+  'base' => array(
+    'file' => 'columns2.php',
+    'regions' => array(),
+  ),
+  // Standard layout with blocks, this is recommended for most pages with general information.
+  'standard' => array(
+    'file' => 'columns2.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+  ),
+  // Main course page.
+  'course' => array(
+    'file' => 'ccn_course.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+    'options' => array('langmenu' => true),
+  ),
+  'coursecategory' => array(
+    'file' => 'columns2.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+  ),
+  // Part of course, typical for modules - default page layout if $cm specified in require_login().
+  'incourse' => array(
+    'file' => 'ccn_incourse.php',
+    'regions' => $ccnInCourseRegions,
+    'defaultregion' => 'side-pre',
+  ),
+  // The site home page.
+  'frontpage' => array(
+    'file' => 'columns2.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+    'options' => array('nonavbar' => true),
+  ),
+  // Server administration scripts.
+  'admin' => array(
+    'file' => $ccnAdminLayout,
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+  ),
     // My dashboard page.
-    'mydashboard' => array(
-        'file' => 'ccn_my.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-        'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
-    ),
-    // My public page.
-    'mypublic' => array(
-        'file' => 'ccn_user_profile.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    'login' => array(
-        'file' => 'login.php',
-        'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
-        'options' => array('langmenu' => true),
-        'defaultregion' => 'below-content',
-    ),
-    // Pages that appear in pop-up windows - no navigation, no blocks, no header.
-    'popup' => array(
-        'file' => 'ccn_minimal.php',
-        'regions' => array(),
-        // 'options' => array('nofooter' => true, 'nonavbar' => true),
-    ),
-    // No blocks and minimal footer - used for legacy frame layouts only!
-    'frametop' => array(
-        'file' => 'ccn_minimal.php',
-        'regions' => array(),
-        'options' => array('nofooter' => true, 'nocoursefooter' => true),
-    ),
-    // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
-    'embedded' => array(
-        'file' => 'embedded.php',
-        'regions' => array()
-    ),
-    // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
-    // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
-    // Please be extremely careful if you are modifying this layout.
-    'maintenance' => array(
-        'file' => 'ccn_maintenance.php',
-        'regions' => array(),
-    ),
-    // Should display the content and basic headers only.
-    'print' => array(
-        'file' => 'ccn_minimal.php',
-        'regions' => array(),
-        'options' => array('nofooter' => true, 'nonavbar' => false),
-    ),
-    // The pagelayout used when a redirection is occuring.
-    'redirect' => array(
-        'file' => 'embedded.php',
-        'regions' => array(),
-    ),
-    // The pagelayout used for reports.
-    'report' => array(
-        'file' => 'ccn_dashboard.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre',
-    ),
-    // The pagelayout used for safebrowser and securewindow.
-    'secure' => array(
-        'file' => 'ccn_minimal.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre'
-    ),
+  'mydashboard' => array(
+    'file' => 'ccn_my.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+    'options' => array('nonavbar' => true, 'langmenu' => true, 'nocontextheader' => true),
+  ),
+  // My public page.
+  'mypublic' => array(
+    'file' => 'ccn_user_profile.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'defaultregion' => 'side-pre',
+  ),
+  'login' => array(
+    'file' => 'login.php',
+    'regions' => array('fullwidth-top', 'fullwidth-bottom', 'above-content', 'below-content', 'left', 'side-pre'),
+    'options' => array('langmenu' => true),
+    'defaultregion' => 'below-content',
+  ),
+  // Pages that appear in pop-up windows - no navigation, no blocks, no header.
+  'popup' => array(
+    'file' => 'ccn_minimal.php',
+    'regions' => array(),
+    // 'options' => array('nofooter' => true, 'nonavbar' => true),
+  ),
+  // No blocks and minimal footer - used for legacy frame layouts only!
+  'frametop' => array(
+    'file' => 'ccn_minimal.php',
+    'regions' => array(),
+    'options' => array('nofooter' => true, 'nocoursefooter' => true),
+  ),
+  // Embeded pages, like iframe/object embeded in moodleform - it needs as much space as possible.
+  'embedded' => array(
+    'file' => 'embedded.php',
+    'regions' => array()
+  ),
+  // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
+  // This must not have any blocks, links, or API calls that would lead to database or cache interaction.
+  // Please be extremely careful if you are modifying this layout.
+  'maintenance' => array(
+    'file' => 'ccn_maintenance.php',
+    'regions' => array(),
+  ),
+  // Should display the content and basic headers only.
+  'print' => array(
+    'file' => 'ccn_minimal.php',
+    'regions' => array(),
+    'options' => array('nofooter' => true, 'nonavbar' => false),
+  ),
+  // The pagelayout used when a redirection is occuring.
+  'redirect' => array(
+    'file' => 'embedded.php',
+    'regions' => array(),
+  ),
+  // The pagelayout used for reports.
+  'report' => array(
+    'file' => 'ccn_dashboard.php',
+    'regions' => array('side-pre'),
+    'defaultregion' => 'side-pre',
+  ),
+  // The pagelayout used for safebrowser and securewindow.
+  'secure' => array(
+    'file' => 'ccn_minimal.php',
+    'regions' => array('side-pre'),
+    'defaultregion' => 'side-pre'
+  ),
 ];
-$ccnSheetsReset = [];
-$ccnSheetsTheme = [];
-if((int)$ccnMdlVersion < 400) {
-  $ccnSheetsTheme[] = 'bootstrap.min';
-}
-$ccnSheetsTheme[] = 'jquery-ui.min';
-$ccnSheetsTheme[] = 'font-awesome.min';
-$ccnSheetsTheme[] = 'font-awesome-animation.min';
-$ccnSheetsTheme[] = 'line-awesome.min';
-$ccnSheetsTheme[] = 'nouislider.min';
-$ccnSheetsTheme[] = 'menu';
-$ccnSheetsTheme[] = 'ace-responsive-menu';
-$ccnSheetsTheme[] = 'megadropdown';
-$ccnSheetsTheme[] = 'bootstrap-select.min';
-$ccnSheetsTheme[] = 'simplebar.min';
-$ccnSheetsTheme[] = 'progressbar';
-$ccnSheetsTheme[] = 'ccn-flaticon';
-$ccnSheetsTheme[] = 'flaticon';
-$ccnSheetsTheme[] = 'animate';
-$ccnSheetsTheme[] = 'slider';
-$ccnSheetsTheme[] = 'swiper-bundle.min';
-$ccnSheetsTheme[] = 'magnific-popup';
-$ccnSheetsTheme[] = 'timecounter';
-$ccnSheetsTheme[] = 'jquery.fancybox.min';
-$ccnSheetsTheme[] = 'spectrum';
-$ccnSheetsTheme[] = 'eva';
-$ccnSheetsTheme[] = 'dashbord_navitaion';
-$ccnSheetsTheme[] = 'eva-mdl';
-$ccnSheetsTheme[] = 'eva-dashboard';
-$ccnSheetsTheme[] = 'responsive';
-$ccnSheetsAppend = [];
+$ccnSheetsReset = array();
+$ccnSheetsTheme = array(
+  'bootstrap.min',
+  'jquery-ui.min',
+  'font-awesome.min',
+  'font-awesome-animation.min',
+  'line-awesome.min',
+  'nouislider.min',
+  'menu',
+  'ace-responsive-menu',
+  'megadropdown',
+  'bootstrap-select.min',
+  'simplebar.min',
+  'progressbar',
+  'ccn-flaticon',
+  'flaticon',
+  'animate',
+  'slider',
+  'magnific-popup',
+  'timecounter',
+  'jquery.fancybox.min',
+  'spectrum',
+  'eva',
+  'dashbord_navitaion',
+  'eva-mdl',
+  'eva-dashboard',
+  'responsive'
+);
+$ccnSheetsAppend = array();
 $ccnSheetsReset[] = 'eva-mdl-reset';
-if($ccnMdlVersion == '37') {
+if ($ccnMdlVersion == '37') {
   $ccnSheetsReset[] = 'eva.mdl.reset.37';
   $ccnSheetsAppend[] = 'eva.mdl.37';
 }
-if($ccnMdlVersion == '38') {
+if ($ccnMdlVersion == '38') {
   $ccnSheetsReset[] = 'eva.mdl.reset.38';
   $ccnSheetsAppend[] = 'eva.mdl.38';
 }
-if($ccnMdlVersion == '39') {
+if ($ccnMdlVersion == '39') {
   $ccnSheetsReset[] = 'eva.mdl.reset.39';
   $ccnSheetsAppend[] = 'eva.mdl.39';
 }
-if($ccnMdlVersion == '310') {
+if ($ccnMdlVersion == '310') {
   $ccnSheetsReset[] = 'eva.mdl.reset.310';
   $ccnSheetsAppend[] = 'eva.mdl.310';
 }
-if($ccnMdlVersion == '311') {
+if ($ccnMdlVersion == '311') {
   $ccnSheetsReset[] = 'eva.mdl.reset.311';
   $ccnSheetsAppend[] = 'eva.mdl.311';
 }
-if(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 2 ){
+if (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 2) {
   $ccnSheetsAppend[] = 'eva.header.2';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 3 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 3) {
   $ccnSheetsAppend[] = 'eva.header.3';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 4 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 4) {
   $ccnSheetsAppend[] = 'eva.header.4';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 5 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 5) {
   $ccnSheetsAppend[] = 'eva.header.5';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 6 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 6) {
   $ccnSheetsAppend[] = 'eva.header.6';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 7 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 7) {
   $ccnSheetsAppend[] = 'eva.header.7';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 8 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 8) {
   $ccnSheetsAppend[] = 'eva.header.8';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 9 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 9) {
   $ccnSheetsAppend[] = 'eva.header.9';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 10 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 10) {
   $ccnSheetsAppend[] = 'eva.header.10';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 11 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 11) {
   $ccnSheetsAppend[] = 'eva.header.11';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 12 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 12) {
   $ccnSheetsAppend[] = 'eva.header.12';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 13 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 13) {
   $ccnSheetsAppend[] = 'eva.header.13';
-} elseif(!empty($THEME->settings->headertype) && $THEME->settings->headertype == 14 ){
+} elseif (!empty($THEME->settings->headertype) && $THEME->settings->headertype == 14) {
   $ccnSheetsAppend[] = 'eva.header.14';
 } else {
   $ccnSheetsAppend[] = 'eva.header.1';
 }
-if(!empty($THEME->settings->footertype) && $THEME->settings->footertype == 9 ){
+if (!empty($THEME->settings->footertype) && $THEME->settings->footertype == 9) {
   $ccnSheetsAppend[] = 'eva.footer.9';
 }
 $ccnSheetsAppend[] = 'custom';
@@ -276,7 +268,7 @@ $THEME->javascripts = array(
   'wow.min',
   'progressbar',
   'slider',
-'swiper-bundle.min',
+  'swiper-bundle.min',
   'timepicker',
   'lozad.min',
   'spectrum',
@@ -288,6 +280,3 @@ $THEME->javascripts = array(
 );
 $THEME->iconsystem = '\\theme_evagu\\output\\icon_system_fontawesome';
 $THEME->csspostprocess = 'theme_evagu_process_css';
-$THEME->activityheaderconfig = [
-    'notitle' => true
-];

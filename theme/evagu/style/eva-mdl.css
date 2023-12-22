@@ -374,7 +374,7 @@ body.ccn_context_dashboard {
 }
 .btn-primary, .btn-secondary, .page-context-header .btn {
     font-size: 10px;
-    font-family: '[[setting:secondary_font]]';
+    font-family: '[[setting:primary_font]]', sans-serif;
     color: #fff;
     line-height: 1;
     padding: 10px 20px;
@@ -389,10 +389,9 @@ body.ccn_context_dashboard {
     -o-transition: all .3s ease;
     transition: all .3s ease;
 }
-.dashboard_main_content .btn-primary, .dashboard_main_content .btn-secondary, 
-.dashboard_main_content .btn:not(.btn-link), 
-.ccn_context_frontend .primary-navigation .moremenu 
-.ccn-activate-more-dropdown>a.dropdown-toggle, .modal:not(.sign_up_modal) .btn-primary,
+.dashboard_main_content .btn-primary, .dashboard_main_content .btn-secondary,
+.dashboard_main_content .btn:not(.btn-link),
+.modal:not(.sign_up_modal) .btn-primary,
 .modal:not(.sign_up_modal) .btn-secondary,
 .modal:not(.sign_up_modal) .btn:not(.btn-link),
 /* Additional button-type selectors that we want to apply btn-secondary to: */
@@ -401,7 +400,7 @@ body.ccn_context_dashboard {
 .format-remuiformat .course-content .cards .wdm-card-section .card-section-rightnav .btn,
 .message_container .iu_heading .candidate_revew_search_box .btn {
     font-size: 15px;
-    font-family: '[[setting:primary_font]]';
+    font-family: '[[setting:primary_font]]', sans-serif;
     color: #fff;
     line-height: 1;
     padding: 10px 10px;
@@ -430,12 +429,10 @@ body.ccn_context_dashboard {
 .modal:not(.sign_up_modal) .btn-secondary:hover, .modal:not(.sign_up_modal) .btn:not(.btn-link):hover,
 .btn-secondary:hover, .btn-primary:hover, .page-context-header .btn:hover,
 /* Additional button-type selectors that we want to apply btn-secondary to: */
-.ccn_context_frontend .primary-navigation .moremenu .ccn-activate-more-dropdown>a.dropdown-toggle:hover,
 .ccn-forum-discussion-tools .btn.btn-link.dropdown-toggle:hover,
 .format-remuiformat .course-content .cards .wdm-card-section .card-section-leftnav .btn:hover,
 .format-remuiformat .course-content .cards .wdm-card-section .card-section-rightnav .btn:hover,
-.message_container .iu_heading .candidate_revew_search_box .btn:hover,
-.primary-navigation .moremenu.navigation .ccn-activate-more-dropdown>.btn:focus {
+.message_container .iu_heading .candidate_revew_search_box .btn:hover {
     background-color: transparent;
     border-color: #6c6d77;
     color: #050505;
@@ -443,9 +440,6 @@ body.ccn_context_dashboard {
     -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0);
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0);
     text-decoration: none;
-}
-.dashboard_main_content .btn.btn-thm.white:not(.btn-link):hover {
-    background-color: transparent !important;
 }
 .dashboard_main_content .btn-primary:hover,
 .modal:not(.sign_up_modal) .btn-primary:hover,
@@ -571,6 +565,9 @@ body.ccn_context_dashboard {
 }
 .ccn-msg-del-icon span {
     background-color: transparent !important;
+}
+.path-course.format-weeks .course-content ul.weeks>li.section:first-child {
+    margin-top: 0;
 }
 .my_course_content .ccn-pagination {
     padding: 30px 40px;
@@ -920,7 +917,6 @@ body.ccn_context_dashboard {
     width: 90px;
     font-size: 16px;
     float: left;
-    line-height: 1;
 }
 .ccn_mc_progress {
     max-width: 300px;
@@ -2017,6 +2013,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 }
 .que .content {
     margin: 0 0 0 22.5em;
+    text-align: left;
 }
 .que .formulation {
     margin: 0;
@@ -2243,7 +2240,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .panel-title .accordion-toggle,
 .ccn_context_focus .dashboard_navigationbar .panel-title .accordion-toggle {
     display: block;
-    font-family: '[[setting:primary_font]]';
+    font-family: '[[setting:primary_font]]', sans-serif;
     color: #000;
     font-weight: 600;
     font-size: 16px;
@@ -2292,7 +2289,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     color: #fff;
     border-color: #fff;
     position: relative;
-    font-family: '[[setting:primary_font]]';
+    font-family: '[[setting:primary_font]]', sans-serif;
     z-index: 1;
 }
 .ccn_context_focus .btn-primary.ccn-btn-backtocourse:hover {
@@ -3570,20 +3567,4 @@ a.ccnLcEl--i:hover {
     color: rgb(0, 195, 255);
     border-color: inherit;
     background-color: inherit;
-}
-a[data-key="eva_customizer"] .ccn--ico {
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    display: inline-block !important;
-    height: 23px !important;
-    width: 15px !important;
-    background-size: contain !important;
-    position: relative !important;
-    top: 6px !important;
-}
-.input-group>.atto_link_urlentry+.input-group-append>.btn {
-    min-height: 0 !important;
-    height: 100%;
-    line-height: 0;
-    border-width: 1px;
 }

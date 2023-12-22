@@ -1,5 +1,4 @@
 var MY_MAPTYPE_ID = 'style_KINESB';
-
 function initialize() {
   var featureOpts = [
     {
@@ -111,7 +110,6 @@ function initialize() {
   var styledMapOptions = {
     name: 'style_KINESB'
   };
-
 var image = 'images/resource/mapmarker.png';
   var marker = new google.maps.Marker({
       position: Kine,
@@ -120,9 +118,7 @@ animation: google.maps.Animation.DROP,
       title: 'B4318, Gumfreston SA70 8RA, United Kingdom',
 icon: image
   });
-
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
-
 }
 google.maps.event.addDomListener(window, 'load', initialize);

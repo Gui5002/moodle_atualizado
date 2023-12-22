@@ -11,9 +11,7 @@ $templatecontext = [
   'pageheading' => format_text($pageheading, FORMAT_HTML, array('filter' => true)),
   'sidepreblocks' => $blockshtml,
   'ccn_login' => $_ccnlogin,
-  //====linha adicionado para tela de RECUPERAR SENHA
-  'ccn_forgot' => $_ccnforgot,
-  // 'ccn_registration' => $_ccnregistration,
+    // 'ccn_registration' => $_ccnregistration,
   'ccn_activitynav' => $_ccnCourseSectionNav,
   'ccn_course_url' => $ccnCourseUrl,
   'ccn_dashboard_url' => $CFG->wwwroot . '/my',
@@ -40,8 +38,7 @@ $templatecontext = [
   'headerlogo1' => $headerlogo1,
   'headerlogo2' => $headerlogo2,
   'headerlogo3' => $headerlogo3,
-  'headerlogo4' => $headerlogo4,
-  'headerlogo_mobile' => $headerlogo_mobile,
+    'headerlogo_mobile' => $headerlogo_mobile,
   'footerlogo1' => $footerlogo1,
   'heading_bg' => $heading_bg,
   'favicon' => $favicon,
@@ -265,25 +262,7 @@ $templatecontext = [
   'if_breadcrumb_trail' => get_config('theme_evagu', 'breadcrumb_trail') != 1,
   'evagu_focus_sidebar' => !empty(get_config('theme_evagu', 'evagu_focus_sidebar')) && get_config('theme_evagu', 'evagu_focus_sidebar') === '1' ? false : true,
   'lang_menu_icons' => !empty(get_config('theme_evagu', 'language_menu')) && get_config('theme_evagu', 'language_menu') === '1' ? false : true,
-  'is_4' => (int)$ccnMdlVersion >= 400 ? true : false
-];
-if((int)$ccnMdlVersion >= 400) {
-  $templatecontext['primarymoremenu'] = $primarymenu['moremenu'];
-  $templatecontext['secondarymoremenu'] = $secondarynavigation ? : false;
-  $templatecontext['eithermoremenu'] = !empty($primarymenu['moremenu']) || $secondarynavigation ? true : false;
-  $templatecontext['mobileprimarynav'] = $primarymenu['mobileprimarynav'];
-  $templatecontext['headercontent'] = $headercontent;
-  $templatecontext['overflow'] = $overflow;
-  $templatecontext['addblockbutton'] = $addblockbutton;
-  // 'primarymoremenu' => $primarymenu['moremenu'],
-  // 'secondarymoremenu' => $secondarynavigation ? : false,
-  // 'eithermoremenu' => !empty($primarymenu['moremenu']) || $secondarynavigation ? true : false,
-  // 'mobileprimarynav' => $primarymenu['mobileprimarynav'],
-  // 'headercontent' => $headercontent,
-  // 'overflow' => $overflow,
-  // 'addblockbutton' => $addblockbutton,
-}
-// var_dump($primarymenu['moremenu']);
+  ];
 $PAGE->requires->jquery();
 $ccnLcVbCollection = array(
   "eva_about_1",
@@ -363,7 +342,7 @@ $PAGE->requires->js_init_call('ccnControl', array($ccnControlBlockListUri, $ccnC
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-if ($PAGE->pagetype == "admin-setting-themesettingevagu") {
+if($PAGE->pagetype == "admin-setting-themesettingevagu") {
   $PAGE->requires->css('/theme/evagu/style/eva.editor.theme.css');
   $PAGE->requires->js('/theme/evagu/javascript/eva.editor.theme.js', true);
 }
