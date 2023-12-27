@@ -59,7 +59,7 @@ if($rs){
 $txt .= '<div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
                     <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug" name="tab_sug" class="table table-hover table-bordered">
-                        <thead style="background: #01101f; color: #fff;">
+                        <thead style="background: #185287; color: #fff;">
                             <tr>
                                 <th style="width: 9%">Exame</th>
                                 <th style="width: 9%">Escala nota</th>

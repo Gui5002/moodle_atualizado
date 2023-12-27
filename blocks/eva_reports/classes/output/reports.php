@@ -272,7 +272,7 @@ class reports implements renderable, templatable {
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
                         <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug2" name="tab_sug2" class="table table-hover table-bordered">
-                            <thead style="background: #01101f; color: #fff;">
+                            <thead style="background: #185287; color: #fff;">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Curso</th>
@@ -367,7 +367,7 @@ class reports implements renderable, templatable {
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
                         <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug3" name="tab_sug3" class="table table-hover table-bordered">
-                            <thead style="background: #01101f; color: #fff;">
+                            <thead style="background: #185287; color: #fff;">
                                 <tr>
                                     <th class="col-sm-12 col-md-2">Nome</th>
                                     <th>E-mail</th>

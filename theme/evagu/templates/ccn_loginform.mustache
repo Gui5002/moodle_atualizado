@@ -19,18 +19,18 @@
 <p class="p-acesso">Acesse com sua conta da Rede AGU.</p>
 <div class="heading btn-login">
     {{#signup_is_enabled}}
-    <p class="register">É Usuário PGFN ou PBC: <a class="tdu btn-fpswd" href="{{{ config.wwwroot }}}/login/signup.php"
-            style="color: #70A2D0">{{#str}} register, theme_evagu {{/str}}!</a>
-    </p>
+        <p class="register">É Usuário PGFN ou PBC: <a class="tdu btn-fpswd"
+                href="{{{ config.wwwroot }}}/login/signup.php" style="color: #70A2D0">{{#str}} register, theme_evagu
+                {{/str}}!</a></p>
     {{/signup_is_enabled}}
 </div>
 {{{ ccn_login }}}
 
 {{#js}}
-$('#id_login').click(function(){
-$(this).attr('hidden', true)
-$('.aguarde').removeAttr('hidden')
-});
+    $('#id_login').click(function(){
+    $(this).attr('hidden', true)
+    $('.aguarde').removeAttr('hidden')
+    });
 {{/js}}
 
 <!--<script>-->

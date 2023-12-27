@@ -46,10 +46,10 @@ class block_eva_ts_view extends block_base {
         require_once($CFG->libdir . '/filelib.php');
 
         $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/blocks/eva_ts_view/css/style.css'));
-        $PAGE->requires->css(new \moodle_url('https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/cr-1.5.4/date-1.1.0/fc-3.3.3/fh-3.1.9/kt-2.6.2/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.4/sb-1.1.0/sp-1.3.0/sl-1.3.3/datatables.min.css'));
+        $PAGE->requires->css(new \moodle_url('https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.css'));
         $PAGE->requires->js(new \moodle_url('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js'), true);
         $PAGE->requires->js(new \moodle_url('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js'), true);
-        $PAGE->requires->js(new \moodle_url('https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/cr-1.5.4/date-1.1.0/fc-3.3.3/fh-3.1.9/kt-2.6.2/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.4/sb-1.1.0/sp-1.3.0/sl-1.3.3/datatables.min.js'), true);
+        $PAGE->requires->js(new \moodle_url('https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js'), true);
 
         if ($this->content !== NULL) {
             return $this->content;
@@ -256,7 +256,7 @@ class block_eva_ts_view extends block_base {
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
                 <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug" name="tab_sug" class="table table-hover table-bordered">
-                    <thead style="background: #01101f; color: #fff;">
+                    <thead style="background: #185287; color: #fff;">
                         <tr>
                             <th style="width: 9%">Usuário</th>
                             <th style="width: 9%">Órgão</th>
