@@ -31,32 +31,41 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 playerVars.start = return_currenttime;
             }
 
-            var player = new YT.Player(elementId, {
-                suggestedQuality : 'large',
-                videoId          : videoid,
-                width            : '100%',
-                playerVars       : playerVars,
-                events           : {
-                    'onReady'       : function(event) {
+            if (YT && YT.Player) {
+                var player = new YT.Player(elementId, {
+                    suggestedQuality : 'large',
+                    videoId          : videoid,
+                    width            : '100%',
+                    playerVars       : playerVars,
+                    events           : {
+                        'onReady'       : function(event) {
 
-                        if (playersize == 1) {
-                            progress._internal_resize(16, 9);
-                        } else if (playersize == 2) {
-                            progress._internal_resize(4, 3);
-                        } else if (playersize.indexOf("x")) {
-                            var sizes = playersize.split("x");
-                            progress._internal_resize(sizes[0], sizes[1]);
+                            if (playersize == 1) {
+                                progress._internal_resize(16, 9);
+                            } else if (playersize == 2) {
+                                progress._internal_resize(4, 3);
+                            } else if (playersize.indexOf("x")) {
+                                var sizes = playersize.split("x");
+                                progress._internal_resize(sizes[0], sizes[1]);
+                            }
+
+                            progress._internal_max_height();
+                            document.addEventListener("setCurrentTime", function(event) {
+                                player.seekTo(event.detail.goCurrentTime);
+                            });
+                        },
+                        'onStateChange' : function(event) {
                         }
-
-                        progress._internal_max_height();
-                        document.addEventListener("setCurrentTime", function(event) {
-                            player.seekTo(event.detail.goCurrentTime);
-                        });
-                    },
-                    'onStateChange' : function(event) {
                     }
-                }
-            });
+                });
+            } else {
+                var html =
+                        '<div class="alert alert-danger">' +
+                        'Error loading the JavaScript at https://www.youtube.com/iframe_api. ' +
+                        'Please check for any Security Policy restrictions.' +
+                        '</div>';
+                $("#supervideo_area_embed").html(html);
+            }
 
             setInterval(function() {
                 if (player && player.getCurrentTime != undefined) {
@@ -65,9 +74,19 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 150);
         },
 
-        resource_audio : function(view_id, return_currenttime, elementId, autoplay, showcontrols) {
+        resource_audio : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
 
             progress._internal_view_id = view_id;
+
+            var embedparameters = "";
+            if (showcontrols) embedparameters += "controls ";
+            if (autoplay) embedparameters += "autoplay ";
+
+            var embed =
+                    "<audio " + embedparameters + " crossorigin playsinline >" +
+                    "    <source src='" + fullurl + "' type='audio/mp3'>" +
+                    "</audio>";
+            $("#" + elementId).html(embed);
 
             var config = {
                 controls :
@@ -81,8 +100,9 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 autoplay : autoplay ? true : false,
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
+                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
             };
-            var player = new PlayerRender("#" + elementId, config);
+            var player = new PlayerRender("#" + elementId + " audio", config);
             player.on("ready", function() {
                 if (return_currenttime) {
                     player.currentTime = parseInt(return_currenttime);
@@ -105,9 +125,20 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 200);
         },
 
-        resource_video : function(view_id, return_currenttime, elementId, playersize, autoplay, showcontrols) {
+        resource_video : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
 
             progress._internal_view_id = view_id;
+
+            var embedparameters = "";
+            if (showcontrols) embedparameters += "controls ";
+            if (autoplay) embedparameters += "autoplay ";
+
+            var embed =
+                    "<video " + embedparameters + " crossorigin playsinline>" +
+                    "    <source src='" + fullurl + "' type='audio/mp4'>" +
+                    "</video>";
+            console.log(embed);
+            $("#" + elementId).html(embed);
 
             var config = {
                 controls :
@@ -119,11 +150,12 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                     ],
                 tooltips : {controls : showcontrols, seek : showcontrols},
                 settings : ['speed', 'loop'],
-                autoplay : autoplay,
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
+                // autoplay : autoplay ? 1 : 0,
+                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
             };
-            var player = new PlayerRender("#" + elementId, config);
+            var player = new PlayerRender("#" + elementId + " video", config);
 
             player.on("ready", function() {
                 if (return_currenttime) {
@@ -138,7 +170,6 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 }
                 progress._internal_max_height();
             });
-
 
             var video = document.getElementById(elementId);
             video.addEventListener("loadedmetadata", function(event) {
@@ -167,9 +198,6 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
 
             document.addEventListener("setCurrentTime", function(event) {
                 player.setCurrentTime(event.detail.goCurrentTime);
-            });
-
-            player.on('ended', function() {
             });
 
             Promise.all([player.getVideoWidth(), player.getVideoHeight()]).then(function(dimensions) {
@@ -242,7 +270,6 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
 
                 _resizePage();
             }, 500);
-
 
             return element;
 
