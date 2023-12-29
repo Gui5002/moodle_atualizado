@@ -1960,9 +1960,9 @@ textarea.form-control {
     }
     .form-inline .custom-control {
         -ms-flex-align: center;
+        justify-content: center;
         align-items: center;
-        -ms-flex-pack: center;
-        justify-content: center
+        -ms-flex-pack: center;        
     }
     .form-inline .custom-control-label {
         margin-bottom: 0
@@ -2904,7 +2904,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .custom-control {
     position: relative;
     display: block;
-    min-height: 1.5rem;
+    min-height: 1.4rem;
     padding-left: 1.5rem
 }
 .custom-control-inline {

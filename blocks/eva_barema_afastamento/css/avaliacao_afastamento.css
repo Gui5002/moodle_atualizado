@@ -201,7 +201,7 @@
 
 .bitem table thead tr, table tfoot tr{
     text-align: center;
-    background-color: #01101f;
+    background-color: [[setting:color_primary]];
     color: #fff0f0;
 }
 .bitem table tfoot tr td{

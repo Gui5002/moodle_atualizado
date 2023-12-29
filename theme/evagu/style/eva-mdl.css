@@ -415,7 +415,7 @@ body.ccn_context_dashboard {
     text-decoration: none;
 }
 .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
-    background-color: #011b35;
+    background-color: [[setting:color_primary]];
     border: 2px solid #02203d;
     color: #fff;
 }
@@ -522,9 +522,9 @@ body.ccn_context_dashboard {
     border-color: #ddd;
 }
 .badge, .badge-pill {
-    padding: 3px 8px;
+    padding: 3px 9px;
     color: #fff;
-    background-color: #c3590d!important;
+    background-color: #0eb5db!important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
     border-radius: 19px;
     font-weight: 800;

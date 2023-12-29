@@ -6377,12 +6377,10 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
 .login_form {
     padding: 40px 40px 0;
 }
-.sign_up_form .divide,
-.login_form .divide {
+.sign_up_form .divide, .login_form .divide {
     position: relative;
 }
-.sign_up_form .divide .lf_divider,
-.login_form .divide .lf_divider {
+.sign_up_form .divide .lf_divider, .login_form .divide .lf_divider {
     background-color: #f9fafc;
     height: 20px;
     left: 0;
@@ -6394,15 +6392,12 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     top: -10px;
     width: 62px;
 }
-.sign_up_form.inner_page,
-.login_form.inner_page {
-    /*padding: 0 80px 0;*/
+.sign_up_form.inner_page, .login_form.inner_page {
     border-bottom-left-radius: 10px;
-    /*box-shadow: 0 2px 12px rgb(0 0 0 / 12%);*/
+    border-radius: 15px;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 12%);      
 }
-.our-log.login-bg,
-.our-log.style4,
-.our-log.style3 {
+.our-log.login-bg, .our-log.style4, .our-log.style3 {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -6461,7 +6456,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     margin-bottom: 5px;
 }
 .login_form .heading {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 .login_form .heading h3 {
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -8243,7 +8238,7 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
 }
 .header_user_notif li .dropdown .notification_icon {
     border-radius: 50%;
-    background-color: #01101f;
+    background-color: [[setting:color_primary]];
     display: block;
     height: 43px;
     line-height: 40px;
@@ -9821,7 +9816,8 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
     width: 100% !important;
 }
 .text-thm {
-    color: [[setting:color_primary]] !important;
+    color: #00adff!important;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .text-thm2 {
     color: #00d664 !important;
@@ -10194,12 +10190,10 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
     color: #000 !important;
 }
 /* 3776 */
-.block_eva_contact_form .btn-thm:hover,
-.block_eva_contact_form .btn-thm:focus,
-.block_eva_contact_form .btn-thm:active {
-    background-color: [[setting:color_primary]] !important;
-    border-color: [[setting:color_primary]] !important;
-    color: #ffffff;
+.block_eva_contact_form .btn-thm:hover, .block_eva_contact_form .btn-thm:focus, .block_eva_contact_form .btn-thm:active {
+    background-color:[[setting:color_primary]]!important;
+    border-color:[[setting:color_primary]]!important;
+    color: #ffffff!important;
 }
 /* End */
 .btn-thm2 {

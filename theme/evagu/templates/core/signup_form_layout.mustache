@@ -9,7 +9,8 @@
 }}
 <div class="heading">
     <h3 class="text-center">{{#str}}newaccount{{/str}}</h3>
-    <p class="text-center">{{#str}}have_an_account, theme_evagu{{/str}} <a class="text-thm" href="index.php">{{#str}}login, theme_evagu{{/str}}</a></p>
+    <p class="text-center">{{#str}}have_an_account, theme_evagu{{/str}} <a class="text-thm"
+            href="index.php">{{#str}}login, theme_evagu{{/str}}</a></p>
     <p class="text-center">{{#str}}central_agu, theme_evagu{{/str}}</p>
 </div>
 {{{formhtml}}}
@@ -17,38 +18,47 @@
     var newDiv = '';
     newDiv += '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv" class="col-12">';
     var newDiv2 = '';
-    newDiv2 += '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv2" class="col-12">';
+    newDiv2 +=
+        '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv2" class="col-12">';
     var newDiv3 = '';
-    newDiv3 += '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv3" class="col-12">';
+    newDiv3 +=
+        '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv3" class="col-12">';
     var newDiv4 = '';
-    newDiv4 += '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv4" class="col-12">';
+    newDiv4 +=
+        '<div class="container-fluid"><div class="container"><div class="row"><div id="novaDiv4" class="col-12">';
     var newDiv5 = '';
     newDiv5 += '' +
-            '<div class="container-fluid">' +
-                '<div class="container">' +
-                    '<div class="row hidden">' +
-                        '<div id="novaDiv5" class="col-12">' +
-                            '<div class="collapsible-actions">' +
-                                '<a href="#" class="collapseexpand collapse-all" role="button">Contrair tudo</a>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-            '</div>';
-    $(document).ready(function(){
+'<div class="container-fluid">' +
+        '<div class="container">' +
+        '<div class="row hidden">' +
+        '<div id="novaDiv5" class="col-12">' +
+        '<div class="collapsible-actions">' +
+        '<a href="#" class="collapseexpand collapse-all" role="button">Contrair tudo</a>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    $(document).ready(function() {
         $("#id_createuserandpass").find(".fitem").css({
-            'margin-left':'0px',
-            'width':'100%'
+            'margin-left': '0px',
+            'width': '100%'
         });
         $("#id_supplyinfo").find(".fitem").css({
-            'margin-left':'0px',
-            'width':'100%'
+            'margin-left': '0px',
+            'width': '100%'
         });
         $("#ccn-main-region div").removeClass('container');
         $("form").find('.fdescription').remove();
-        $("#id_createuserandpass").css({'margin-left':'0px'});
-        $("#id_supplyinfo").css({'margin-left':'0px'});
-        $("#fitem_id_message").append('<div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">&nbsp;</div><div class="col-md-9 form-inline align-items-start felement mt-3"><div class="fdescription required">Este formulário contém campos obrigatórios marcados com <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" role="img" aria-label="Campo obrigatório"></i>.</div></div>');
+        $("#id_createuserandpass").css({
+            'margin-left': '0px'
+        });
+        $("#id_supplyinfo").css({
+            'margin-left': '0px'
+        });
+        $("#fitem_id_message").append(
+            '<div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">&nbsp;</div><div class="col-md-9 form-inline align-items-start felement mt-3"><div class="fdescription required">Este formulário contém campos obrigatórios marcados com <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" role="img" aria-label="Campo obrigatório"></i>.</div></div>'
+        );
         var conteudo = $("#id_createuserandpass").find(".fcontainer").children().detach();
         $("#id_createuserandpass").find(".fcontainer").prepend(newDiv);
         conteudo.prependTo("#novaDiv");
