@@ -39,7 +39,6 @@ iframe {
     width: 100%;
 }
 a {
-    color: [[setting:color_primary]];
     text-decoration: none;
     -webkit-font-smoothing: antialiased;
 }
@@ -128,7 +127,7 @@ h6 a,
 .h4 a,
 .h5 a,
 .h6 a {
-    font-weight: 400;
+    font-weight: 600;
 }
 h1,
 h2,
@@ -6375,7 +6374,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     background-color: #f9fafc;
 }
 .login_form {
-    padding: 40px 40px 0;
+    padding: 40px 40px 40px;
 }
 .sign_up_form .divide, .login_form .divide {
     position: relative;
@@ -16765,6 +16764,9 @@ ul.nav {
 /* Owl Fixes: Header4/Slider2 Large */
 .ccn_header_style_4 .block_eva_slider_2 .home2-slider .banner-style-one .slide {
     padding: 200px 0 160px;
+}
+.logo-esagu {
+    text-align: center;
 }
 .logo-eva {
     text-align: center;
