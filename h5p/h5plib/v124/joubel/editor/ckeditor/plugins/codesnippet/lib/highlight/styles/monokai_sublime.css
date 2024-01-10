@@ -51,7 +51,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
 .hljs-strong,
 .hljs-strongemphasis {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .hljs-emphasis,

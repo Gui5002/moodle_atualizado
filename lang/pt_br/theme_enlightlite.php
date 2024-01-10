@@ -121,7 +121,7 @@ $string['footerb2_status'] = 'Opção de exibição do Bloco de Rodapé 2';
 $string['footerb3_status'] = 'Opção de exibição do Bloco de Rodapé 3';
 $string['footerb4_status'] = 'Opção de exibição do Bloco de Rodapé 4';
 $string['footerblink'] = 'Link do Bloco de Rodapé';
-$string['footerblink1default'] = '<div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et lobortis diam.&nbsp;</p><p>Duis tellus enim, vestibulum eget varius id, vulputate et mi. Nullam feugiat, diam quis interdum varius</p></div><a href="#"><span style="color: #fff; font-weight: bold; border-bottom: 1px solid #fff">Start Learning Now</span></a>';
+$string['footerblink1default'] = '<div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et lobortis diam.&nbsp;</p><p>Duis tellus enim, vestibulum eget varius id, vulputate et mi. Nullam feugiat, diam quis interdum varius</p></div><a href="#"><span style="color: #fff; font-weight: 600; border-bottom: 1px solid #fff">Start Learning Now</span></a>';
 $string['footerblink2default'] = 'Futuros estudantes|http://www.example.com/
 Estudantes internacionais |http://www.example.com/
 Pesquisadores|http://www.example.com/';

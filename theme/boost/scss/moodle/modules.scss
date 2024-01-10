@@ -127,7 +127,7 @@ select {
     // Style for the currently selected subscription mode.
     .activesetting {
         color: $body-color;
-        font-weight: bold;
+        font-weight: 600;
     }
 }
 
@@ -188,7 +188,7 @@ select {
 }
 
 .forumpost .subject {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 // Override hardcoded forum modules styling

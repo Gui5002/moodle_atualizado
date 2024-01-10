@@ -1286,7 +1286,7 @@
     .our-dashbord:before {
         width: 48%;
     }
-    .login_form, .login_form.inner_page, .footer_contact_widget, .footer_company_widget, .main_blog_post_content, .footer_program_widget, .footer_support_widget {
+    .login_form, .lf-modal-login, .modal-dialog, .login_form.inner_page, .footer_contact_widget, .footer_company_widget, .main_blog_post_content, .footer_program_widget, .footer_support_widget {
         margin-bottom: 20px;
         padding: 20px 20px 20px !important;
         border-bottom-left-radius: 10px;
@@ -1369,7 +1369,7 @@
     }
     .home1-mainslider .banner-style-one .banner-title {
         font-size: 40px;
-        font-weight: bold;
+        font-weight: 600;
     }
     .home1-mainslider .banner-style-one p {
         padding: 0 93px;

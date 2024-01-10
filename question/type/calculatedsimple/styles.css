@@ -19,7 +19,7 @@ body#page-question-type-calculatedsimple div[id^=fgroup_id_][id*=answeroptions_]
 }
 
 body#page-question-type-calculatedsimple div[id^=fgroup_id_][id*=answeroptions_] .fgrouplabel label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 body#page-question-type-calculatedsimple div[id^=fgroup_id_][id*=answeroptions_] label[for^='id_answer_'],

@@ -72,7 +72,7 @@ $string['detail_help'] = '<div class = "indent">
 <p>(O Módulo Mindmap foi originalmente desenvolvido por <a href="http://ekpenso.com"> ekpenso.com</a>. Ele é então modificado por <a href="http://www.cite .hku.hk">CITE</a>.)</p>
 </div>';
 $string['editable'] = 'Editável';
-$string['editingbyuser'] = 'Este mapa mental de grupo está/ estava sendo editado por <span style="font-weight: bold;">{$a}</span> nesta hora e, portanto, está bloqueado.';
+$string['editingbyuser'] = 'Este mapa mental de grupo está/ estava sendo editado por <span style="font-weight: 600;">{$a}</span> nesta hora e, portanto, está bloqueado.';
 $string['errorcannotunlockadvmindmap'] = 'Não é possível desbloquear mapa mental, a instância está incorreto.';
 $string['errorcannotviewgroupmindmap'] = 'Você não tem permissão para ver mapa mental de outros grupos.';
 $string['errorcannotviewusermindmap'] = 'Você não tem permissão para ver mapa mental de outros usuários.';

@@ -54,7 +54,7 @@ class cssparser {
       $this->Add("BLOCKQUOTE", "");
       $this->Add("BODY", "");
       $this->Add("BR", "");
-      $this->Add("B", "font-weight: bold;");
+      $this->Add("B", "font-weight: 600;");
       $this->Add("CAPTION", "");
       $this->Add("CENTER", "");
       $this->Add("CITE", "");

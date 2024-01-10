@@ -104,7 +104,7 @@
  */
 .path-grade-report-grader .gradeparent .range .header,
 .path-grade-report-grader .gradeparent .avg .header {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /**
@@ -151,7 +151,7 @@
 }
 
 .path-grade-report-grader .gradeparent .excludedfloater {
-    font-weight: bold;
+    font-weight: 600;
     color: red;
     font-size: 9px;
     float: left;

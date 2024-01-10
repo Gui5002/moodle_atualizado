@@ -69,35 +69,35 @@ if($rs){
                     $txt .= '
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Solicitante</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Solicitante</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['no_user'] !== "") ? $arr['no_user'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Data da solicitação</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Data da solicitação</span><br>
                             <span style="font-size: 1.3em;">'. (($dataSugg !== "") ? $dataSugg : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Órgão de direção superior</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Órgão de direção superior</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['no_organ'] !== "") ? $arr['no_organ'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Tema do treinamento</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Tema do treinamento</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['ds_theme'] !== "") ? $arr['ds_theme'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Articulação com área prioritária para treinamento da AGU - eixo jurídico</span><br>';
+                            <span style="font-weight: 600; font-size: 1.5em;">Articulação com área prioritária para treinamento da AGU - eixo jurídico</span><br>';
                             if($arr['slc_priority_area_legal'] !== ""){
                                 $ej = explode(",", $row['slc_priority_area_legal']);
                     
@@ -126,7 +126,7 @@ if($rs){
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Articulação com área prioritária para capacitação da AGU - eixo técnico-jurídico de gestão</span><br>';
+                            <span style="font-weight: 600; font-size: 1.5em;">Articulação com área prioritária para capacitação da AGU - eixo técnico-jurídico de gestão</span><br>';
                             if($row['slc_technical_legal'] !== ""){
                                 $et = explode(",", $row['slc_technical_legal']);
                     
@@ -157,28 +157,28 @@ if($rs){
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Necessidade de desenvolvimento a ser atendida com a capacitação solicitada</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Necessidade de desenvolvimento a ser atendida com a capacitação solicitada</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['ds_development_need'] !== "") ? $arr['ds_development_need'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Público-alvo</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Público-alvo</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['ds_target_audience'] !== "") ? $arr['ds_target_audience'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Número de participantes</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Número de participantes</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['nu_participants'] !== "") ? $arr['nu_participants'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Solicitante</span><br>';
+                            <span style="font-weight: 600; font-size: 1.5em;">Solicitante</span><br>';
                             if($arr['ds_transversality'] !== ""){
                                 if($arr['ds_transversality'] == 1){
                                     $txt .= '<span style="font-size: 1.3em;">Apenas para este órgão / unidade</span>';
@@ -191,14 +191,14 @@ if($rs){
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Carga horária</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Carga horária</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['ds_workload'] !== "") ? $arr['ds_workload'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Modalidade</span><br>';
+                            <span style="font-weight: 600; font-size: 1.5em;">Modalidade</span><br>';
                             if($row['slc_modality'] !== ""){
                                 $mo = explode(",", $row['slc_modality']);
                                 for($z=0;$z<count($mo);$z++){
@@ -226,14 +226,14 @@ if($rs){
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Instituição / Instrutor</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Instituição / Instrutor</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['no_institution_instructor'] !== "") ? $arr['no_institution_instructor'] : "-") .'</span>
                             <br/><br/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span style="font-weight: bold; font-size: 1.5em;">Valor estimado</span><br>
+                            <span style="font-weight: 600; font-size: 1.5em;">Valor estimado</span><br>
                             <span style="font-size: 1.3em;">'. (($arr['nu_estimated_value'] !== "") ? "R$ ".$arr['nu_estimated_value'] : "-") .'</span>
                             <br/><br/>
                         </div>

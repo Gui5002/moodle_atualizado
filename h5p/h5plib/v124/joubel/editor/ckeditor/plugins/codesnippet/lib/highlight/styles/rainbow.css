@@ -80,7 +80,7 @@ Style with support for rainbow parens
 .hljs-rules .hljs-property,
 .django .hljs-tag .hljs-keyword,
 .clojure .hljs-title .hljs-built_in {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .hljs-attribute,

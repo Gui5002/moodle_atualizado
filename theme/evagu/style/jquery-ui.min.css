@@ -318,7 +318,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 .ui-datepicker th {
   padding: .7em .3em;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   border: 0
 }
 .ui-datepicker td {
@@ -550,7 +550,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 .ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup {
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1.5;
   padding: 2px 0.4em;
   margin: 0.5em 0 0 0;

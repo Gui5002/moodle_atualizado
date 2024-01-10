@@ -208,7 +208,7 @@ global $CFG, $DB, $USER;
                     txt += '<div class="row">';
                     txt += '<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">';
                     txt += '<div style="text-align: center;">';
-                    txt += '<span style="font-weight: bold; font-size: 1.2em;">';
+                    txt += '<span style="font-weight: 600; font-size: 1.2em;">';
                     txt += msg;
                     txt += '</span>';
                     txt += '</div>';

@@ -24,7 +24,7 @@ version: 2.9.0
 /* Give the titlebar some color and padding */
 .yui-skin-sam .yui-toolbar-container .yui-toolbar-titlebar h2 {
     color: #000000;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0;
     padding: 0.3em 1em;
     font-size: 100%;

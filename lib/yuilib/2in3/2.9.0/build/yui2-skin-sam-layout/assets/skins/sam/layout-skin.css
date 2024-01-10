@@ -116,7 +116,7 @@ version: 2.9.0
 }
 /* Style the text in the header */
 .yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-hd h2 {
-    font-weight: bold;
+    font-weight: 600;
     color: #fff;
     padding: 3px;
     margin: 0;

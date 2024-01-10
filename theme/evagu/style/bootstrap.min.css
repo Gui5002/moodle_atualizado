@@ -186,9 +186,10 @@ button:focus {
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit
+    font-family: "[[setting:primary_font]]", sans-serif;
+    font-size: 10px;
+    line-height: 1rem;
+    margin-top: 10px;
 }
 button, input {
     overflow: visible
@@ -4578,7 +4579,8 @@ a.close.disabled {
     position: relative;
     width: auto;
     margin: .5rem;
-    pointer-events: none
+    pointer-events: none;
+    width: 500px;
 }
 .modal.fade .modal-dialog {
     transition: -webkit-transform .3s ease-out;
@@ -4690,8 +4692,8 @@ a.close.disabled {
 }
 @media (min-width:576px) {
     .modal-dialog {
-        max-width: 500px;
-        margin: 1.75rem auto
+        max-width: 400px;
+        margin: 1.0rem auto
     }
     .modal-dialog-centered {
         min-height: calc(100% - (1.75rem * 2))

@@ -10,7 +10,7 @@ body#page-question-type-match div[id^=fitem_id_][id*=subquestions_] {
 }
 
 body#page-question-type-match div[id^=fitem_id_][id*=subquestions_] .fitemtitle {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 body#page-question-type-match div[id^=fitem_id_][id*=subanswers_] {

@@ -33,7 +33,7 @@ body#page-question-type-calculatedmulti div[id^=fgroup_id_][id*=answeroptions_] 
 
 body#page-question-type-calculated div[id^=fgroup_id_][id*=answeroptions_] .fgrouplabel label,
 body#page-question-type-calculatedmulti div[id^=fgroup_id_][id*=answeroptions_] .fgrouplabel label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 body#page-question-type-calculated div[id^=fgroup_id_][id*=answeroptions_] label[for^='id_answer_'],

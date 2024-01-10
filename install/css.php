@@ -67,7 +67,7 @@ textarea, .uneditable-input {
 }
 
 #installdiv dt {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 #installdiv dd {

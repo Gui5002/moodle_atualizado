@@ -1,7 +1,7 @@
 /* tool_profiling styles */
 
 .path-admin-tool-profiling .profilingruntable .label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-admin-tool-profiling .profiling_worse {
@@ -18,7 +18,7 @@
 
 .path-admin-tool-profiling .profiling_important,
 .path-admin-tool-profiling .flexible .referencerun {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-admin-tool-profiling .flexible {

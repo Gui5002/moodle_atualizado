@@ -56,7 +56,7 @@ version: 2.9.0
 .yui-skin-sam .yui-pg-current-page {
     background-color: transparent;
     border: none;
-    font-weight: bold;
+    font-weight: 600;
     padding: 3px 6px;
 }
 .yui-skin-sam .yui-pg-page {

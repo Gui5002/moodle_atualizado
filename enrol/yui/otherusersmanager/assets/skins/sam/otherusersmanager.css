@@ -90,7 +90,7 @@ Structure of the other user role assignment panel
     padding: 5px;
     border-bottom: 1px solid #bbb;
     font-size: 7pt;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .other-user-manager-panel .oump-search-results .oump-user {

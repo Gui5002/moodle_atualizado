@@ -43,7 +43,7 @@ class css_text_has_contrast_test extends all_checks {
     <title>OAC Testfile - Check #6 - Positive</title>
     </head>
     <body>
-    <p style="color:#333333; background-color:#000000; font-weight: bold;">This is not contrasty enough.</p>
+    <p style="color:#333333; background-color:#000000; font-weight: 600;">This is not contrasty enough.</p>
     </body>
     </html>
 EOD;

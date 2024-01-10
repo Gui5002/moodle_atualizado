@@ -11,7 +11,7 @@ p {
 }
 
 th {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 a:link,
@@ -29,7 +29,7 @@ h3.main,
 h4.main,
 h5.main,
 h6.main {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 h1#header {

@@ -43,7 +43,7 @@
 	border: 1px solid #dddddd;
 	background: #e9e9e9;
 	color: #333333;
-	font-weight: bold;
+	font-weight: 600;
 }
 .ui-widget-header a {
 	color: #333333;
@@ -166,7 +166,7 @@ a.ui-button:active,
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
 .ui-widget-header .ui-priority-primary {
-	font-weight: bold;
+	font-weight: 600;
 }
 .ui-priority-secondary,
 .ui-widget-content .ui-priority-secondary,

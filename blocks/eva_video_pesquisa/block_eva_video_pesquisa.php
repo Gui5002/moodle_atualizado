@@ -84,7 +84,7 @@ class block_eva_video_pesquisa extends block_base {
 //            $text .='
 //                        </div>
 //                        <div>
-//                            <h4 style="color: #0067da !important;font-weight: bold;margin: 10px 0px 0px 0px !important;">'.format_text($data->$slide_title, FORMAT_HTML, array('filter' => true)).'</h4>
+//                            <h4 style="color: #0067da !important;font-weight: 600;margin: 10px 0px 0px 0px !important;">'.format_text($data->$slide_title, FORMAT_HTML, array('filter' => true)).'</h4>
 //                            <h4 style="color: #7c8b94 !important;margin: 0px auto !important;">'.format_text($data->$slide_subtitle, FORMAT_HTML, array('filter' => true)).'</h4>';
 //                            if($PAGE->theme->settings->blog_post_date != 1){
 //                                $text .='<h4 style="color: #7c8b94 !important;margin: 0px auto !important;">'.userdate($data->$slide_date, '%d %B', 0).'</h4>';
@@ -155,7 +155,7 @@ class block_eva_video_pesquisa extends block_base {
                                     <img class="img-fluid w100" style="height: 200px" src="'.$src.'" alt="">
                                 </div>
                                 <div>
-                                    <h4 style="color: #0067da !important;font-weight: bold;margin: 10px 0px 0px 0px !important;">'.$h4.'</h4>
+                                    <h4 style="color: #0067da !important;font-weight: 600;margin: 10px 0px 0px 0px !important;">'.$h4.'</h4>
                                     <h4 style="color: #7c8b94 !important;margin: 0px auto !important;">'.$h5.'</h4>';
 //                                    if($PAGE->theme->settings->blog_post_date != 1){
 //                                        $text .='<h4 style="color: #7c8b94 !important;margin: 0px auto !important;">'.userdate($data->$slide_date, '%d/%m/%Y', 0).'</h4>';

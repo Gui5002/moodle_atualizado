@@ -102,7 +102,7 @@
 
 .gradingform_rubric .criterion .description {
     min-width: 150px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_rubric .criterion .levels table {
@@ -191,7 +191,7 @@
     background: #fff url([[pix:t/add]]) no-repeat 7px 8px;
     display: block;
     color: #555;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
 }
 
@@ -209,7 +209,7 @@
 }
 
 .gradingform_rubric .options .optionsheading {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.1em;
     padding-bottom: 5px;
 }
@@ -224,7 +224,7 @@
 
 .gradingform_rubric .options .option .value {
     margin-left: 5px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_rubric .criterion .levels.error {
@@ -253,7 +253,7 @@
 
 .gradingform_rubric-error {
     color: red;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* special classes for elements created by rubriceditor.js */

@@ -14,7 +14,7 @@
 
 .gradingform_guide-error {
     color: red;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_guide_editform .status {
@@ -69,11 +69,11 @@
 }
 
 .gradingform_guide .criterion .description .criterionname {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_guide .criterion label {
-    font-weight: bold;
+    font-weight: 600;
     padding-right: 5px;
 }
 
@@ -83,7 +83,7 @@
 }
 
 .gradingform_guide .plainvalue.editname {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* Make invisible the buttons 'Move up' for the first criterion and 'Move down' for
@@ -129,7 +129,7 @@
     background: transparent url([[pix:t/add]]) no-repeat;
     display: block;
     color: #555;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .gradingform_guide .options .optionsheading {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.1em;
     padding-bottom: 5px;
 }
@@ -159,7 +159,7 @@
 
 .gradingform_guide .options .option .value {
     margin-left: 5px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_guide .criterion .description.error {
@@ -193,7 +193,7 @@
 }
 
 .gradingform_guide .commentheader {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.1em;
     padding-bottom: 5px;
 }
@@ -203,7 +203,7 @@
 }
 
 .jsenabled .gradingform_guide .criterionshortname {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .gradingform_guide table {

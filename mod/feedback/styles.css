@@ -1,6 +1,6 @@
 /* styles using by feedback */
 .path-mod-feedback span.feedback_info {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-feedback div.feedback_is_dependent {
@@ -71,7 +71,7 @@
 /* Responses list */
 .path-mod-feedback #showentrytable td.cell.completed_timemodified,
 .path-mod-feedback #showentryanontable td.cell.random_response {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-feedback #showentrytable td.cell.userpic,

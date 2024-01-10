@@ -199,7 +199,7 @@ body#page-question-type-ddmarker div[id^=fitem_id_][id*=hint_] {
 }
 
 body#page-question-type-ddmarker div[id^=fitem_id_][id*=hint_] .fitemtitle {
-    font-weight: bold;
+    font-weight: 600;
 }
 /* Middle */
 body#page-question-type-ddmarker div[id^=fitem_id_][id*=hintoptions_],

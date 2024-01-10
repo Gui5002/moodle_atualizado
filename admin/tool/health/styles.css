@@ -45,7 +45,7 @@
 }
 
 .path-admin-tool-health dl.healthissues dt {
-    font-weight: bold;
+    font-weight: 600;
     border-bottom: 0;
     padding-bottom: 0.5em;
 }

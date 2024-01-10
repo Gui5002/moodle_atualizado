@@ -3,7 +3,7 @@
 }
 
 .path-mod-workshop .collapsibleregioncaption {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 120%;
 }
 
@@ -425,7 +425,7 @@
 }
 
 .path-mod-workshop .assessment-full .header .title {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-workshop .assessment-full .header .title,
@@ -530,7 +530,7 @@
 
 .path-mod-workshop .grading-report ins {
     color: green;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: underline;
 }
 
@@ -548,7 +548,7 @@
 }
 
 .path-mod-workshop .grading-report tr.published td.submission a {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-workshop .grading-report .assessmentdetails {
@@ -557,7 +557,7 @@
 
 .path-mod-workshop .grading-report .receivedgrade span.grade,
 .path-mod-workshop .grading-report .givengrade span.gradinggrade {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-workshop .grading-report .submissiongrade.cell,
@@ -599,7 +599,7 @@
 }
 
 .path-mod-workshop #workshop-viewlet-yourgrades .finalgrades .grade .gradevalue {
-    font-weight: bold;
+    font-weight: 600;
     font-size: x-large;
     margin: 10px;
 }

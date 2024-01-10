@@ -95,7 +95,7 @@ http://yuilibrary.com/license/
     color: #000;
     display: inline;
     float: left;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 13px;
     height: 24px;
     line-height: 24px;
@@ -145,7 +145,7 @@ http://yuilibrary.com/license/
 .yui3-skin-sam .yui3-console-entry-meta .yui3-console-entry-src {
     color: #000;
     font-style: italic;
-    font-weight: bold;
+    font-weight: 600;
     float: right;
     margin: 2px 5px 0 0;
 }

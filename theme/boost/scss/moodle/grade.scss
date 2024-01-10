@@ -143,7 +143,7 @@
             margin-top: 5px;
             margin-right: 28px;
             font-style: italic;
-            font-weight: bold;
+            font-weight: 600;
             color: #{theme-color-level('success', 2)};
 
             input {
@@ -320,7 +320,7 @@
     .category .column-range,
     .categoryitem,
     .courseitem {
-        font-weight: bold;
+        font-weight: 600;
     }
 
     .emptyrow {

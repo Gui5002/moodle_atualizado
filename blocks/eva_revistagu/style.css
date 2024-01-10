@@ -242,7 +242,7 @@ a.u-button-style.u-text-palette-2-base[class*="u-border-"] {
     .btnText {
         color: #000000 !important;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 600;
         text-align: center;
     }
     .u-layout-row>.u-size-28-xl {

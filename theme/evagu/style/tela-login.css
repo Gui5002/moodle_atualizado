@@ -31,24 +31,23 @@
     color: #b9b9b9;
     font-weight: 600;
     margin-top: 12px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .lf-modal-login .p-acesso {
     /*Area de acesso à membros da AGU*/
     text-align: center;
     font-size: 18px;
     color: #2973b8;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .lf-modal-login .fc-campo {
     height: 40px;
-    border: 1px solid #2973b8;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    border: 1px solid #2973b8;    
 }
 .lf-modal-login .tdu {
     font-size: 15px;
     color: #2973b8;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .lf-modal-login button {
     border-radius: 4px;
@@ -66,12 +65,12 @@
 p.register {
     font-size: 14px;
     margin-top: 10px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .register>a {
     font-size: 14px;
     margin-left: 6px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .btn-login {
     width: 100%;
@@ -89,13 +88,13 @@ p.register {
 .custom-control-label {
     font-size: 15px;
     color: #2973b8;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 #img-login {
     text-align: center;
 }
 #img-login p {
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-size: 20px;
     color: #7c7e80;
     font-weight: 600;
@@ -128,12 +127,12 @@ p.register {
 p.infoForgot {
     font: menu;
     font-size: 13px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .recuperar-senha {
     font-size: 25px;
     font-weight: 600;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .formcenter .btcenter {
     margin-left: 8%;

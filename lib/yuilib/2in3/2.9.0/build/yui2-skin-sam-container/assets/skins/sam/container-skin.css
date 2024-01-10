@@ -60,7 +60,7 @@ version: 2.9.0
     font-size: 93%;  /* 12px */
     line-height: 2;  /* ~24px */
     *line-height: 1.9; /* For IE */
-    font-weight: bold;
+    font-weight: 600;
     color: #000;
     background: url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x 0 -200px;
 }

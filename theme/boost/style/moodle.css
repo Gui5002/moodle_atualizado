@@ -9897,7 +9897,7 @@ button.close:focus:hover,
   color: #008196; }
 
 .fitem.advanced .text-info {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .reportlink {
   text-align: right; }
@@ -9988,7 +9988,7 @@ a.autolink.glossary:hover {
 .errorbox .title,
 .pagingbar .title,
 .pagingbar .thispage {
-  font-weight: bold; }
+  font-weight: 600; }
 
 img.userpicture {
   margin-right: 0.5rem; }
@@ -10014,7 +10014,7 @@ img.activityicon {
   vertical-align: middle; }
 
 .headermain {
-  font-weight: bold; }
+  font-weight: 600; }
 
 #maincontent {
   display: block;
@@ -10288,7 +10288,7 @@ table.mod_index {
   text-align: right; }
 
 .completion-expired .completion-expected {
-  font-weight: bold; }
+  font-weight: 600; }
 
 /**
 * Tags
@@ -10312,7 +10312,7 @@ img.user-image {
   padding: 3px 0 10px 0;
   margin: 0;
   font-size: 1.1em;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 20px;
   color: #999;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -10791,7 +10791,7 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
   border: 0; }
 
 .moodle-dialogue-exception .moodle-exception-param label {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .moodle-dialogue-exception .param-stacktrace label {
   background-color: #eee;
@@ -11140,7 +11140,7 @@ body#page-lib-editor-tinymce-plugins-moodlemedia-preview {
   right: -1px;
   padding: 3px 7px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
   background-color: whitesmoke;
   border: 1px solid #ddd;
   color: #9da0a4; }
@@ -12127,7 +12127,7 @@ input[disabled] {
   white-space: nowrap; }
 
 .path-admin .incompatibleblockstable td.c0 {
-  font-weight: bold; }
+  font-weight: 600; }
 
 #page-admin-course-category .addcategory {
   padding: 10px; }
@@ -12253,7 +12253,7 @@ input[disabled] {
 
 .path-admin .roleassigntable #existingcell p > label:first-child,
 .path-admin .roleassigntable #potentialcell p > label:first-child {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .path-admin .roleassigntable #buttonscell {
   width: 16%; }
@@ -13537,7 +13537,7 @@ body:not(.editing) .sitetopic ul.section {
   margin-bottom: -0.5em; }
 
 .course-content .single-section .section-navigation .title {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 108%;
   clear: both; }
 
@@ -14060,7 +14060,7 @@ span.editinstructions {
   #course-category-listings .detail-pair > * {
     display: inline-block; }
   #course-category-listings .detail-pair .pair-key {
-    font-weight: bold;
+    font-weight: 600;
     vertical-align: top; }
     #course-category-listings .detail-pair .pair-key span {
       margin-right: 1rem;
@@ -15085,13 +15085,13 @@ a.ygtvspacer:hover {
   display: inline-block; }
 
 .filemanager .fp-mainfile .fp-filename {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .filemanager.fp-select.fp-folder .fp-file-download {
   display: none; }
 
 .fm-operation {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .filemanager.fp-select .fp-original.fp-unknown,
 .filemanager.fp-select .fp-original .fp-originloading {
@@ -15793,7 +15793,7 @@ body.path-question-type {
 
 .que span.qno {
   font-size: 1.5em;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .que .info > div {
   font-size: 0.8em;
@@ -15941,7 +15941,7 @@ body.path-question-type {
   margin: 0; }
 
 .que .history .current {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .que .questioncorrectnessicon {
   vertical-align: text-bottom; }
@@ -16276,13 +16276,13 @@ body.path-question-type .mform fieldset.hidden {
 
 .userinfobox .username {
   padding-bottom: 20px;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .userinfobox td.label {
   text-align: right;
   white-space: nowrap;
   vertical-align: top;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .group-edit {
   position: absolute;
@@ -16334,7 +16334,7 @@ body.path-question-type .mform fieldset.hidden {
   font-size: 0.8em; }
 
 #userselector_options .collapsibleregioncaption {
-  font-weight: bold; }
+  font-weight: 600; }
 
 #userselector_options p {
   margin: 0.2em 0;
@@ -16559,7 +16559,7 @@ input#id_externalurl {
   padding-top: 5px; }
 
 .no-fitem .fstaticlabel {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .form-item .form-setting .defaultsnext > input {
   display: inline-block; }
@@ -16926,7 +16926,7 @@ select {
 
 .path-mod-forum .activesetting {
   color: #1d2125;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .discussion-settings-container .custom-select {
   width: 100%; }
@@ -16963,7 +16963,7 @@ select {
   margin-left: 0; }
 
 .forumpost .subject {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .forumsearch input[type=text] {
   margin-bottom: 0; }
@@ -18003,7 +18003,7 @@ div#dock {
     .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax #chat-messages .chat-message.course-theme {
       background-color: #fff; }
       .yui-skin-sam .yui-layout.path-mod-chat-gui_ajax #chat-messages .chat-message.course-theme .user {
-        font-weight: bold; }
+        font-weight: 600; }
 
 /* reports.less */
 #page-report-participation-index .participationselectform div label {
@@ -18042,7 +18042,7 @@ div#dock {
 .path-backup {
   /* Bold section labels */ }
   .path-backup .section_level {
-    font-weight: bold; }
+    font-weight: 600; }
   .path-backup .section_level .activity_level {
     font-weight: normal; }
   .path-backup .proceedbutton {
@@ -18111,7 +18111,7 @@ div#dock {
 
 .path-backup .notification.dependencies_enforced {
   color: #ca3120;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .path-backup .backup_progress {
   margin-top: 1rem;
@@ -18119,7 +18119,7 @@ div#dock {
   .path-backup .backup_progress .backup_stage {
     color: #6a737b; }
     .path-backup .backup_progress .backup_stage.backup_stage_current {
-      font-weight: bold;
+      font-weight: 600;
       color: inherit; }
 
 .path-backup .backup_progress span.backup_stage.backup_stage_complete {
@@ -18198,7 +18198,7 @@ div#dock {
 
 table caption {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 42px;
   text-align: left;
   caption-side: top; }
@@ -18475,7 +18475,7 @@ p.arrow_button {
     margin-top: 5px;
     margin-right: 28px;
     font-style: italic;
-    font-weight: bold;
+    font-weight: 600;
     color: #2d662a; }
     .gradingform_rubric .criterion .score input {
       margin-bottom: 0; }
@@ -18588,7 +18588,7 @@ p.arrow_button {
 .path-grade-edit-tree .setup-grades .category .column-range,
 .path-grade-edit-tree .setup-grades .categoryitem,
 .path-grade-edit-tree .setup-grades .courseitem {
-  font-weight: bold; }
+  font-weight: 600; }
 
 .path-grade-edit-tree .setup-grades .emptyrow {
   display: none; }
@@ -18960,11 +18960,11 @@ body.behat-site [data-region="message-drawer"] {
 
 .phpinfo .e {
   background-color: #ccf;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .phpinfo .h {
   background-color: #99c;
-  font-weight: bold; }
+  font-weight: 600; }
 
 body > .debuggingmessage {
   margin-top: 50px; }

@@ -140,7 +140,7 @@
 .hljs-request,
 .hljs-at_rule .hljs-keyword,
 .hljs-status {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .coffeescript .javascript,

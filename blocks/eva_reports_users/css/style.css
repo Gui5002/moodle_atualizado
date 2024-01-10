@@ -33,7 +33,9 @@
     box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.42);
 }
 .fGray {
-    color: rgb(102, 153, 153);
+    color: rgb(5, 180, 247);
+    font-size: 18px;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .fWhite {
     color: rgb(255, 255, 255);
@@ -210,7 +212,7 @@ div.dataTables_wrapper div.dataTables_info {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-top: 0px!important;
+    margin-top: 0px;
 }
 #loader {
     border: 12px solid #f3f3f3;

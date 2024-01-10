@@ -705,7 +705,7 @@ http://yuilibrary.com/license/
 .yui3-skin-night .yui3-calendar-header-label {
     margin: 0;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
     width: 100%;
 }
@@ -732,7 +732,7 @@ http://yuilibrary.com/license/
 
 .yui3-skin-night .yui3-calendar-weekday {
     color: #4F4F4F;
-	font-weight: bold;
+	font-weight: 600;
 	text-align: center;
 }
 
@@ -741,7 +741,7 @@ http://yuilibrary.com/license/
 }
 
 .yui3-skin-night .yui3-calendar-day {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .yui3-skin-night .yui3-calendar-day-selected {
@@ -1292,7 +1292,7 @@ http://yuilibrary.com/license/
     -moz-border-radius-topright: 7px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    font-weight: bold;
+    font-weight: 600;
     color: white;
     background-color: #555658;
 	background: -moz-linear-gradient(
@@ -1440,7 +1440,7 @@ http://yuilibrary.com/license/
     border-bottom: 1px solid #303030;
     padding: 15px 20px 16px;
     font-size: 100%;
-    font-weight: bold;
+    font-weight: 600;
     background-color:#151515;
 	cursor:pointer;
 }
