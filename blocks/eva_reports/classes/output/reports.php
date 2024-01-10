@@ -222,7 +222,7 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Categoria</label>
                                 <select id="filterCategory2" name="filterCategory2" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $categoria1 = $DB->get_records_sql('SELECT DISTINCT upper(trim(nome_categoria)) as categoria FROM vw_courses_per_user GROUP BY categoria ORDER BY categoria ASC');
+                $categoria1 = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as categoria FROM mdl_course_categories WHERE `parent` = 0 ORDER BY categoria ASC');
                 $arrCategoria = json_decode(json_encode($categoria1,JSON_UNESCAPED_UNICODE),true);
 
                 foreach($arrCategoria as $row){
@@ -248,12 +248,13 @@ class reports implements renderable, templatable {
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-3">
-                                <label style="font-size: 0.625em !important;">Matrícula</label>
-                                <div class="input-group" id="matricula_div2">
-                                    <input type="date" class="input-sm form-control" name="matriculaStart2" id="matriculaStart2" style="max-height: 27px;">
-                                    <span class="input-group-addon">até</span>
-                                    <input type="date" class="input-sm form-control" name="matriculaEnd2" id="matriculaEnd2" style="max-height: 27px;">
-                                </div>
+                                <label style="font-size: 0.625em !important;">Status</label>
+                                <select id="filterStatus2" name="filterStatus2" class="form-control">
+                                    <option value="">Selecione uma opção</option>
+                                    <option value="Concluído">CONCLUÍDO</option>
+                                    <option value="N/I">NÃO INICIADO</option>
+                                    <option value="N/C">NÃO CONCLUÍDO</option>
+                                </select>
                             </div>
                        </div>
                             ';
@@ -263,6 +264,14 @@ class reports implements renderable, templatable {
                 $text .= '
                             
                         <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Matrícula</label>
+                                <div class="input-group" id="matricula_div2">
+                                    <input type="date" class="input-sm form-control" name="matriculaStart2" id="matriculaStart2" style="max-height: 27px;">
+                                    <span class="input-group-addon">até</span>
+                                    <input type="date" class="input-sm form-control" name="matriculaEnd2" id="matriculaEnd2" style="max-height: 27px;">
+                                </div>
+                            </div>
                             <div class="col-sm-12 col-md-3 mt-4">
                                 <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnLimparFiltro2" name="btnLimparFiltro2" value="Limpar">
                             </div>
@@ -275,12 +284,16 @@ class reports implements renderable, templatable {
                             <thead style="background: #185287; color: #fff;">
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Curso</th>
+                                    <th>Exercício</th>
+                                    <th>Cargo</th>
                                     <th>Categoria</th>
+                                    <th>Subcategoria</th>
+                                    <th>Curso</th>
                                     <th>Matrícula</th>
-                                    <th style="text-align: center;">Carga Horaria</th>
-                                    <th style="text-align: center;">Concluido</th>
-                                    <th style="text-align: center;">Progresso <br>(%)</th>
+                                    <th>Carga Horaria</th>
+                                    <th>Concluido</th>
+                                    <th>Progresso <br>(%)</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

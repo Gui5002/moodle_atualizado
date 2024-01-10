@@ -71,8 +71,22 @@ if($idReport == 1){
             $array = array();
 
             $row['matricula'] = date('d/m/Y', strtotime($row['data_matricula']));
-            $row['progresso'] = $row['progresso'].'%';
+            $row['progresso'] = $row['progresso'];
             $row['atv'] = $row['completas']." de ".$row['total'];
+
+            if(!empty($row['tcategoria'])){
+                $row['categoria'] = $row['tcategoria'];
+                $row['subcategoria'] = $row['scategoria'].'/'.$row['pcategoria'];
+            } elseif (!empty($row['scategoria'])){
+                $row['categoria'] = $row['scategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            } elseif ($row['scategoria'] == null){
+                $row['categoria'] = $row['pcategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            }
+
+            $valores = explode(" ", $row['carga_horaria']);
+            $row['carga'] = $valores[0].":".$valores[2].":00";
 
             foreach ($row as $k => $v) {
                 $array[$k] = $v;

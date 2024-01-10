@@ -70,9 +70,13 @@ class tabela_reports
                     id,
                     user_id,
                     nome_completo,
+                    sigla_exercicio,
+                    cargo,
                     course_id,
                     nome_curso,
-                    nome_categoria,
+                    UPPER(`pcategoria`) as pcategoria,
+                    UPPER(`scategoria`) as scategoria,
+                    UPPER(`tcategoria`) as tcategoria,
                     carga_horaria,
                     completas,
                     total,
@@ -87,7 +91,12 @@ class tabela_reports
                                     LIMIT 1
                                 ),
                                 'Não registrado!'
-                            ) AS data_matricula
+                            ) AS data_matricula,
+                    CASE
+                        WHEN `progresso` = 100 THEN 'Concluído'
+                        WHEN `progresso` = 0 THEN 'N/I'
+                        ELSE 'N/C'
+                    END AS `status`
                 FROM vw_courses_per_user AS vw $filtro2";
 
         $rs = $DB->get_records_sql($sql);

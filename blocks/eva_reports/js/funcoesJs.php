@@ -168,11 +168,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             let filterCategory2 = $("#filterCategory2").val();
             let filterCursos2 = $("#filterCursos2").val();
             let filterUsers2 = $("#filterUsers2").val();
+            let filterStatus2 = $("#filterStatus2").val();
             let matricula2 = $("#matricula2").val();
 
             $("#filterCategory2").select2({theme: "classic"});
             $("#filterCursos2").select2({theme: "classic"});
             $("#filterUsers2").select2({theme: "classic"});
+            $("#filterStatus2").select2({theme: "classic"});
 
             var myTable = $("#tab_sug2").DataTable({
                 "dom": 'Bfrtip',
@@ -181,19 +183,28 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 "deferRender": true,
                 "searching": true,
                 "ajax": {
-                    "url" : "<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php",
+                    "url": "<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php",
                     "dataSrc": "",
                     "data": {
                         "id": idReport
                     }
                 },
                 "aaSorting": [
-                    [1, 'asc']
+                    [5, 'asc']
                 ],
                 "columnDefs": [
                     {
-                        targets: [5,6],
+                        targets: [6,7,8,9],
                         className: 'dt-center'
+                    },
+                    {
+                        "targets": [4],
+                        "visible": false,
+                        "searchable": true
+                    },
+                    {
+                        "targets": [1, 2],
+                        "className": 'col-md-1'
                     }
                 ],
                 "language": {
@@ -210,34 +221,45 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                             return '<a href="/user/profile.php?id=' + (row.user_id ? row.user_id : '') + '">' + data + '</a>';
                         }
                     },
+                    { "data": "sigla_exercicio" },
+                    { "data": "cargo" },
+                    { "data": "categoria" },
+                    { "data": "subcategoria" },
                     {
                         "data": "nome_curso",
                         "render": function (data, type, row) {
                             return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
                         }
                     },
-                    { "data": "nome_categoria" },
                     { "data": "matricula" },
-                    { "data": "carga_horaria" },
+                    { "data": "carga" },
                     { "data": "atv" },
-                    { "data": "progresso" }
+                    { "data": "progresso" },
+                    { "data": "status" }
                 ]
             });
 
 
+
             $("#filterCategory2").on('change',function(){
                 var filterCategory2 = this.value;
-                myTable.column(2).search(filterCategory2, true, false).draw();
+                myTable.column(3).search(filterCategory2, true, false).draw();
+
             });
 
             $("#filterCursos2").on('change',function(){
                 var filterCursos2 = this.value;
-                myTable.column(1).search(filterCursos2, true, false).draw();
+                myTable.column(5).search(filterCursos2, true, false).draw();
             });
 
             $("#filterUsers2").on('change',function(){
                 var filterUsers2 = this.value;
                 myTable.column(0).search(filterUsers2, true, false).draw();
+            });
+
+            $("#filterStatus2").on('change',function(){
+                var filterStatus2 = this.value;
+                myTable.column(10).search(filterStatus2, true, false).draw();
             });
 
             $("#matriculaStart2").on('change', function () {
@@ -329,12 +351,15 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 $("#filterCursos2").val('');
                 $('#select2-filterUsers2-container').text('Selecione uma opção');
                 $("#filterUsers2").val('');
+                $('#select2-filterStatus2-container').text('Selecione uma opção');
+                $("#filterStatus2").val('');
                 $("#matriculaStart2").val('');
                 $("#matriculaEnd2").val('');
 
                 myTable.column(0).search('').draw();
-                myTable.column(1).search('').draw();
-                myTable.column(2).search('').draw();
+                myTable.column(3).search('').draw();
+                myTable.column(5).search('').draw();
+                myTable.column(10).search('').draw();
 
                 if (matriculaStart2 || matriculaEnd2) {
                     hasData = true;
