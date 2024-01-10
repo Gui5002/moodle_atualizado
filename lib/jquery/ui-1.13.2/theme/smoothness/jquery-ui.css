@@ -375,7 +375,7 @@ button.ui-button::-moz-focus-inner {
 .ui-datepicker th {
 	padding: .7em .3em;
 	text-align: center;
-	font-weight: bold;
+	font-weight: 600;
 	border: 0;
 }
 .ui-datepicker td {
@@ -694,7 +694,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup {
 	font-size: 1em;
-	font-weight: bold;
+	font-weight: 600;
 	line-height: 1.5;
 	padding: 2px 0.4em;
 	margin: 0.5em 0 0 0;
@@ -911,7 +911,7 @@ body .ui-tooltip {
 	border: 1px solid #aaaaaa;
 	background: #cccccc url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") 50% 50% repeat-x;
 	color: #222222;
-	font-weight: bold;
+	font-weight: 600;
 }
 .ui-widget-header a {
 	color: #222222;
@@ -1034,7 +1034,7 @@ a.ui-button:active,
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
 .ui-widget-header .ui-priority-primary {
-	font-weight: bold;
+	font-weight: 600;
 }
 .ui-priority-secondary,
 .ui-widget-content .ui-priority-secondary,

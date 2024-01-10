@@ -80,7 +80,7 @@ echo $OUTPUT->box_start('generalbox');
 $registration = new moodle_url('/mod/lti/registration.php',
     array('id' => $id, 'sesskey' => sesskey()));
 
-echo "<p id=\"id_warning\" style=\"display: none; color: red; font-weight: bold; margin-top: 1em; padding-top: 1em;\">\n";
+echo "<p id=\"id_warning\" style=\"display: none; color: red; font-weight: 600; margin-top: 1em; padding-top: 1em;\">\n";
 echo get_string('register_warning', 'lti');
 echo "\n</p>\n";
 

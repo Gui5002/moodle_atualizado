@@ -23,7 +23,7 @@
   padding: 1em;
   background-color: #EEE;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .h5p-admin-table.libraries th:last-child,
@@ -107,7 +107,7 @@
   display: inline-block;
   min-width: 150px;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 600;
   padding: 0.2em;
 }
 
@@ -246,7 +246,7 @@ button.h5p-admin.disabled:hover {
 .h5p-spinner {
   padding: 0 0.5em;
   font-size: 1.5em;
-  font-weight: bold;
+  font-weight: 600;
 }
 #h5p-admin-container .h5p-admin-center {
   text-align: center;
@@ -344,7 +344,7 @@ button.h5p-admin.disabled:hover {
 }
 .h5p-data-view .h5p-facet-tag > span:before {
   content: "×";
-  font-weight: bold;
+  font-weight: 600;
 }
 .h5p-data-view .h5p-facet-tag > span:hover,
 .h5p-data-view .h5p-facet-tag > span:focus {

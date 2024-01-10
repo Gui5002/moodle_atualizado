@@ -189,7 +189,7 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
 
 .yui3-normalized b,
 .yui3-normalized strong {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .yui3-normalized blockquote {

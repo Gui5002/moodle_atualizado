@@ -815,7 +815,7 @@ class reports_users implements renderable, templatable {
                                     <h4 style="margin: 0 auto;">HISTÓRICO POR ALUNO</h4>
                                 </div>
                                 <div class="row">
-                                    <h5 style="margin: 0 auto;font-weight: bold;">DADOS PESSOAIS</h5>
+                                    <h5 style="margin: 0 auto;font-weight: 600;">DADOS PESSOAIS</h5>
                                 </div>
                             </div>
                         </div>
@@ -823,7 +823,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">INSCRIÇÃO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">INSCRIÇÃO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtInscricao">--</span>
@@ -831,7 +831,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">NOME:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">NOME:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtNome">--</span>
@@ -839,7 +839,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">CARGO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">CARGO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtCargo">--</span>
@@ -849,7 +849,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">LOTAÇÃO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">LOTAÇÃO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtLotacao">--</span>
@@ -857,7 +857,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">CERTIFICADO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">CERTIFICADO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtCertificado">--</span>
@@ -865,7 +865,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">DATA EMISSÃO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">DATA EMISSÃO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtEmissao">--</span>
@@ -876,7 +876,7 @@ class reports_users implements renderable, templatable {
                         <div class="row" style="margin-left: 4px; margin-right: -2px; background: #bfbfbf;">
                             <div class="col-md-12 ml-1 mr-1" style="padding: 15px;">
                                 <div class="row">
-                                    <h4 style="margin: 0 auto;font-weight: bold;">DADOS DO CURSO</h4>
+                                    <h4 style="margin: 0 auto;font-weight: 600;">DADOS DO CURSO</h4>
                                 </div>
                             </div>
                         </div>
@@ -884,7 +884,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">CATEGORIA:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">CATEGORIA:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtCategoria">--</span>
@@ -892,7 +892,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">CURSO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">CURSO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtCurso">--</span>
@@ -900,7 +900,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">STATUS:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">STATUS:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtStatus">--</span>
@@ -910,7 +910,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">SUB-CATEGORIA:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">SUB-CATEGORIA:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtSubCategoria">--</span>
@@ -918,7 +918,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 0.625em;">CARGA HORÁRIA:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 0.625em;">CARGA HORÁRIA:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 0.625em;" id="txtCargaHoraria">--</span>
@@ -996,7 +996,7 @@ class reports_users implements renderable, templatable {
                                     <h3 style="margin: 0 auto;">HISTÓRICO POR CURSO EVAGU</h3>
                                 </div>
                                 <div class="row">
-                                    <h5 style="margin: 0 auto;font-weight: bold;">DADOS PESSOAIS</h5>
+                                    <h5 style="margin: 0 auto;font-weight: 600;">DADOS PESSOAIS</h5>
                                 </div>
                             </div>
                         </div>
@@ -1004,7 +1004,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 1em;">ID:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 1em;">ID:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 1em;" id="txtId6">--</span>
@@ -1012,7 +1012,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 1em;">NOME:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 1em;">NOME:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 1em;" id="txtNome6">--</span>
@@ -1020,7 +1020,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 1em;">CARGO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 1em;">CARGO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 1em;" id="txtCargo6">--</span>
@@ -1030,7 +1030,7 @@ class reports_users implements renderable, templatable {
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 1em;">LOTAÇÃO:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 1em;">LOTAÇÃO:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 1em;" id="txtLotacao6">--</span>
@@ -1038,7 +1038,7 @@ class reports_users implements renderable, templatable {
                                 </div>
                                 <div class="row" style="margin: 10px;">
                                     <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 1em;">CPF:&nbsp;</span>
+                                        <span style="font-weight: 600; font-size: 1em;">CPF:&nbsp;</span>
                                     </div>
                                     <div class="col-md-8">
                                         <span style="font-size: 1em;" id="txtCpf6">--</span>
@@ -1049,7 +1049,7 @@ class reports_users implements renderable, templatable {
                         <div class="row" style="margin-left: 4px; margin-right: -2px; background: #bfbfbf;">
                             <div class="col-md-12 ml-1 mr-1" style="padding: 15px;">
                                 <div class="row">
-                                    <h4 style="margin: 0 auto;font-weight: bold;">CURSOS INSCRITO</h4>
+                                    <h4 style="margin: 0 auto;font-weight: 600;">CURSOS INSCRITO</h4>
                                 </div>
                             </div>
                         </div>

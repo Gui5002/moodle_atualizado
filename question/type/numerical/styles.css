@@ -25,7 +25,7 @@ body#page-question-type-numerical div[id^=fgroup_id_][id*=answeroptions_] {
 }
 
 body#page-question-type-numerical div[id^=fgroup_id_][id*=answeroptions_] .fgrouplabel label {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 body.path-question-type div#fgroup_id_penaltygrp label[for^=id_unitpenalty],

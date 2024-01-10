@@ -559,7 +559,7 @@ body:after {
 }
 .lb-data .lb-caption {
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 1em;
 }
 .lb-data .lb-number {

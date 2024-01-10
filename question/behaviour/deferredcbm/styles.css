@@ -1,22 +1,22 @@
 .qbehaviour_deferredcbm_slightlyunderconfident,
 .qbehaviour_deferredcbm_slightlyoverconfident {
-    font-weight: bold;
+    font-weight: 600;
     color: #600;
 }
 
 .qbehaviour_deferredcbm_underconfident,
 .qbehaviour_deferredcbm_overconfident {
-    font-weight: bold;
+    font-weight: 600;
     color: #c00;
 }
 
 .qbehaviour_deferredcbm_judgementok {
-    font-weight: bold;
+    font-weight: 600;
     color: #080;
 }
 
 .qbehaviour_deferredcbm_actual_percentage {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .qbehaviour_deferredcbm_summary_heading {

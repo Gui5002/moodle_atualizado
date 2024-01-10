@@ -34,7 +34,7 @@ li[aria-expanded=true]:not(.item) {
 
 .title {
     font-size: large;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .block {

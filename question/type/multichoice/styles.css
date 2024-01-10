@@ -34,7 +34,7 @@ body#page-question-type-multichoice div[id^=fitem_id_][id*=answer_] {
 }
 
 body#page-question-type-multichoice div[id^=fitem_id_][id*=answer_] .fitemtitle {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 body#page-question-type-multichoice div[id^=fitem_id_] .fitemtitle {

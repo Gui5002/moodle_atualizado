@@ -127,7 +127,7 @@
   color: #292;
 }
 .cm-header, .cm-strong {
-  font-weight: bold;
+  font-weight: 600;
 }
 .cm-em {
   font-style: italic;

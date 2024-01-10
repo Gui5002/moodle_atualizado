@@ -126,7 +126,7 @@ Author: pumbur <pumbur@pumbur.net>
 .apache .hljs-tag,
 .parser3 .hljs-title
 {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .coffeescript .javascript,

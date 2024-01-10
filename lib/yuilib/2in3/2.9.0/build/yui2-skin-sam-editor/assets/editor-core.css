@@ -73,7 +73,7 @@ version: 2.9.0
 }
 /* Toolbar's titlebar styles */
 .yui-toolbar-container .yui-toolbar-titlebar h2 {
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: 0;
     border: none;
     color: #000;
@@ -268,7 +268,7 @@ version: 2.9.0
 }
 /* Setup some padding around the h3 */
 .yui-editor-panel .hd h3 {
-    font-weight: bold;
+    font-weight: 600;
     padding: 0.25em 0pt 0.25em 0.25em;
     margin: 0;
 }

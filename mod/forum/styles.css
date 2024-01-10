@@ -225,7 +225,7 @@
 /** Styles for search.php */
 #page-mod-forum-search .introcontent {
     padding: 15px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .path-mod-forum span.unread a:first-child {
@@ -349,7 +349,7 @@ span.unread {
 .hr-sect {
     display: flex;
     flex-basis: 100%;
-    font-weight: bold;
+    font-weight: 600;
     align-items: center;
     margin: 8px 0;
 }

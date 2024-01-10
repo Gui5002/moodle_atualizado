@@ -43,7 +43,7 @@ final class t3lib_utility_Debug {
 	const DEBUG_TABLE_TEMPLATE = '
 	<table class="typo3-debug" border="0" cellpadding="0" cellspacing="0" bgcolor="white" style="border:0px; margin-top:3px; margin-bottom:3px;">
 		<tr>
-			<td style="background-color:#bbbbbb; font-family: verdana,arial; font-weight: bold; font-size: 10px;">%s</td>
+			<td style="background-color:#bbbbbb; font-family: verdana,arial; font-weight: 600; font-size: 10px;">%s</td>
 		</tr>
 		<tr>
 			<td>
@@ -253,7 +253,7 @@ final class t3lib_utility_Debug {
 
 					// Header:
 				$tRows[] = '<tr><td colspan="' . count($headerColumns) .
-						   '" style="background-color:#bbbbbb; font-family: verdana,arial; font-weight: bold; font-size: 10px;"><strong>' .
+						   '" style="background-color:#bbbbbb; font-family: verdana,arial; font-weight: 600; font-size: 10px;"><strong>' .
 						   htmlspecialchars($header) . '</strong></td></tr>';
 				$tCells = array();
 				foreach ($headerColumns as $key) {

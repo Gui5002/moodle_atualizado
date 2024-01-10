@@ -244,7 +244,7 @@ body.ccn_context_dashboard {
     height: 100%;
     line-height: 47px;
     font-size: 14px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     padding: 0 20px;
     cursor: pointer;
 }
@@ -299,7 +299,7 @@ body.ccn_context_dashboard {
 .ccn-drops a {
     display: block;
     font-size: 14px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     padding: 0 20px;
     cursor: pointer;
     color: #212529;
@@ -374,7 +374,7 @@ body.ccn_context_dashboard {
 }
 .btn-primary, .btn-secondary, .page-context-header .btn {
     font-size: 10px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     color: #fff;
     line-height: 1;
     padding: 10px 20px;
@@ -395,7 +395,7 @@ body.ccn_context_dashboard {
 .ccn-forum-discussion-tools .btn.btn-link.dropdown-toggle, .format-remuiformat .course-content .cards .wdm-card-section .card-section-leftnav .btn,
 .format-remuiformat .course-content .cards .wdm-card-section .card-section-rightnav .btn, .message_container .iu_heading .candidate_revew_search_box .btn {
     font-size: 12px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     color: #fff;
     line-height: 1;
     padding: 10px 10px;
@@ -528,7 +528,7 @@ body.ccn_context_dashboard {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
     border-radius: 19px;
     font-weight: 800;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-size: 12px;
 }
 .hidden {
@@ -819,7 +819,7 @@ body.ccn_context_dashboard {
     text-decoration: none;
 }
 .discussion-list {
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .discussion-list tbody .author {
     font-size: 13px;
@@ -1024,11 +1024,11 @@ table {
     vertical-align: middle !important;
     line-height: 1.2;
 }
-.generaltable thead th,
-.generaltable thead th a {
+.generaltable thead th, .generaltable thead th a {
     color: #000;
     background: #e1e6ef;
     font-weight: 600;
+    font-size: 10px;
 }
 @media (min-width:992px) {
     .generaltable>thead>tr>th:first-child {
@@ -1234,7 +1234,7 @@ div[class*="block_eva_slider"] .ccnBlockControls {
     float: right;
     padding: 2px 0 0 10px;
     color: #fff;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 900;
     display: block;
     font-size: 15px;
@@ -1253,11 +1253,11 @@ div[class*="block_eva_slider"] .ccnBlockControls {
     box-shadow: 0 3px 30px rgba(0, 0, 0, .2);
     border: 0;
     transform: none !important;
-    background: #edeff785;
+    background: #edeff7;
 }
 @media (max-height: 940px) {
-    #ccnSettingsMenuContainer #ccnSettingsMenu .dropdown-menu.show,
-    #ccnSettingsMenuContainer #region-main-settings-menu .dropdown-menu.show {
+#ccnSettingsMenuContainer #ccnSettingsMenu .dropdown-menu.show,
+#ccnSettingsMenuContainer #region-main-settings-menu .dropdown-menu.show {
         max-height: calc(100vh - 150px);
         overflow: auto;
     }
@@ -1309,7 +1309,7 @@ div[class*="block_eva_slider"] .ccnBlockControls {
 }
 #page-enrol-index #card-element {
     font-size: 14px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     padding: 14px 20px;
     border-style: solid;
     border-width: 1px;
@@ -1341,7 +1341,7 @@ div[class*="block_eva_slider"] .ccnBlockControls {
 /* End Stripe*/
 #page-enrol-index input[type="text"] {
     font-size: 14px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     padding: 0 20px;
     border-style: solid;
     border-width: 1px;
@@ -1417,7 +1417,7 @@ div[class*="block_eva_slider"] .ccnBlockControls {
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 22px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     background: rgb(37 60 81);
     color: #fff;
     padding: 6px 10px;
@@ -1426,8 +1426,8 @@ div[class*="block_eva_slider"] .ccnBlockControls {
 #page-enrol-index .ccn-enrol-cta-box>div>p:first-of-type {
     font-size: 24px;
     color: #0a0a0a;
-    font-family: '[[setting:primary_font]]', sans-serif;
-    font-weight: bold;
+    font-family: "[[setting:primary_font]]", sans-serif;
+    font-weight: 600;
     margin: 0 0 20px;
     border-bottom: 1px solid #edeff7;
     padding: 0 0 20px;
@@ -1489,9 +1489,11 @@ body.pagelayout-maintenance .actions .singlebutton,
     margin-bottom: 20px!important;
 }
 .dashbord .generaltable th, .dashbord .generaltable td {
-    padding: 20px 15px !important;
+    padding: 15px 15px!important;
     font-weight: 400;
     color: #4b4a4a;
+    font-size: 13px;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .dashbord .ccn_fav_icon {
     float: left;
@@ -1577,7 +1579,7 @@ body.pagelayout-maintenance .actions .singlebutton,
 .drawer .message-app .ccn-msg-contacts {
     color: #212529;
     background: #f9fafc;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     height: 48px;
     line-height: 48px;
     border: 1px solid #ddd;
@@ -1622,8 +1624,8 @@ body.pagelayout-maintenance .actions .singlebutton,
     top: 0px;
     right: -3px;
     box-shadow: 0 2px 1px rgba(0, 0, 0, .2);
-    font-weight: bold;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-weight: 600;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .message_container .section.expanded {
     margin-bottom: 5px;
@@ -1790,14 +1792,14 @@ border: 0;
     display: table !important;
     width: auto !important;
     font-weight: 700 !important;
-    font-family: '[[setting:primary_font]]', sans-serif !important;
+    font-family: "[[setting:primary_font]]", sans-serif !important;
     font-size: 16px !important;
     text-transform: uppercase !important;
     line-height: 1.6 !important;
     border: 0 !important;
 }
 #quiz-time-left {
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-size: 25px;
     vertical-align: middle;
     padding-left: 8px;
@@ -2020,7 +2022,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .que .qtext {
     margin-bottom: 1.5em;
     margin: 0 0 25px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .que .qtext,
 .que .qtext p {
@@ -2054,23 +2056,23 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccnDashBlHd {
     border-bottom: 1px solid #eee;
     padding: 20px;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 600 !important;
 }
 .ccnDashBlHd h4 {
     margin: 0;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccnDashBlCt {
     padding: 20px 30px;
     font-size: 1rem;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus header h4 {
     max-width: 600px;
     overflow: hidden;
     color: #fff;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -2125,7 +2127,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .dashboard_navigationbar .details .cc_tab .panel-body .cs_list li a {
     /* padding-bottom: 0;
   padding-left: 20px; */
-    font-family: '[[setting:primary_font]]';
+    font-family: "[[setting:primary_font]]";
     color: #7f7f7f;
     font-size: 15px;
     line-height: 1;
@@ -2157,7 +2159,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>.inplaceeditable>div,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .activityinstance>.inplaceeditable>div {
     display: table-cell;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     color: #000000;
     font-size: 16px;
     line-height: 1;
@@ -2220,7 +2222,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     margin: 5px 20px 0 20px;
     font-size: 15px;
     color: rgb(99, 100, 100);
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .badge,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .badge {
@@ -2234,7 +2236,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .panel-title .accordion-toggle,
 .ccn_context_focus .dashboard_navigationbar .panel-title .accordion-toggle {
     display: block;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     color: #000;
     font-weight: 600;
     font-size: 15px;
@@ -2283,7 +2285,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     color: #fff;
     border-color: #fff;
     position: relative;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     z-index: 1;
 }
 .ccn_context_focus .btn-primary.ccn-btn-backtocourse:hover {
@@ -2587,13 +2589,13 @@ body.ccnDarkMode.ccn_context_dashboard,
 .ccnDarkMode.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .contentafterlink,
 .ccnDarkMode.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section_availability {
     color: #fff;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccnDarkMode.ccn_context_dashboard .color-dark,
 .ccnDarkMode.ccn_context_dashboard .color-black2,
 .ccnDarkMode.ccn_context_dashboard .text-thm {
     color: #fff !important;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 /* Secondary text & Hover Text MUTED */
 .ccnDarkMode.ccn_context_dashboard .table,
@@ -2628,7 +2630,7 @@ body.ccnDarkMode.ccn_context_dashboard,
 /* Hover text HIGHLIGHT */
 .ccnDarkMode.ccn_context_dashboard a:hover {
     color: #ffe9c0;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccnDarkMode.ccn_context_dashboard .btn:hover {
     color: rgb(28 66 113);
@@ -3244,7 +3246,7 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
     box-shadow: 0 9px 10px rgba(0, 0, 0, .04), 0 1px 0px rgba(0, 0, 0, .01);
 }
 .ccn-control-visualize-block-title {
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 700;
     color: #0a0a0a;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
@@ -3253,7 +3255,7 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
 .ccn-control-visualize-block-title-tag {
     text-transform: uppercase;
     font-size: 10px;
-    font-weight: bold;
+    font-weight: 600;
     letter-spacing: 0px;
     color: #7c8092ab;
 }
@@ -3332,17 +3334,17 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
   top: 0;
 } */
 @media (min-width: 768px) {
-    #ccn-visualize-search-blocks {
+#ccn-visualize-search-blocks {
         max-width: 400px;
-        position: absolute;
+        /*position: absolute;*/
         top: -60px;
         z-index: 9999;
         right: 60px;
         width: 400px;
-    }
-    #ccn-visualize-search-blocks input {
+}
+#ccn-visualize-search-blocks input {
         border-color: #fff;
-    }
+}
 }
 #ccn-visualize-preview-container {
     position: fixed;
@@ -3427,11 +3429,11 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
     min-width: 200px;
     display: inline-block;
     color: #fff;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 16px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     transition: all .2s ease;
     position: relative;
     top: 0
@@ -3494,7 +3496,7 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
     padding: 15px 18px;
     line-height: 1;
     text-transform: uppercase;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 600;
     font-size: 11px;
     box-shadow: 0 2px 1px rgba(0, 0, 0, .1), inset 0 0 0px 1px rgba(0, 0, 0, .07);
@@ -3515,7 +3517,7 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
     padding: 6px 0;
     line-height: 1;
     text-transform: uppercase;
-    font-family: '[[setting:primary_font]]', sans-serif;
+    font-family: "[[setting:primary_font]]", sans-serif;
     font-weight: 800;
     font-size: 10px;
     box-shadow: 0 2px 1px rgba(0, 0, 0, .1), inset 0 0 0px 1px rgba(0, 0, 0, .07);

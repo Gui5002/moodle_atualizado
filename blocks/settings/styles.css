@@ -31,7 +31,7 @@
 }
 
 .block_settings .block_tree .active_tree_node {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .block_settings .block_tree [aria-expanded="true"] {

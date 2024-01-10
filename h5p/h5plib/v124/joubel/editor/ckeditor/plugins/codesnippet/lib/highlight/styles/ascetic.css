@@ -46,5 +46,5 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .tex .hljs-command,
 .hljs-request,
 .hljs-status {
-  font-weight: bold;
+  font-weight: 600;
 }

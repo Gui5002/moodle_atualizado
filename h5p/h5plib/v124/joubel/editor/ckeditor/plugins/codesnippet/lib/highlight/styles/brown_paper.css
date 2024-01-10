@@ -91,7 +91,7 @@ Brown Paper style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
 .bash .hljs-variable,
 .apache .hljs-tag,
 .tex .hljs-command {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .coffeescript .javascript,

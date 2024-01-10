@@ -107,7 +107,7 @@ XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
 
 .hljs-value .hljs-important {
   color: #ff7700;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .hljs-rules .hljs-keyword {
@@ -134,7 +134,7 @@ XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
 .diff .hljs-header,
 .hljs-chunk {
   color: #808080;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .diff .hljs-change {
@@ -150,7 +150,7 @@ XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
 }
 
 .hljs-comment .hljs-yardoctag {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .method .hljs-id {

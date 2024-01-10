@@ -33,7 +33,7 @@ http://yuilibrary.com/license/
 .yui3-skin-sam .yui3-calendar-header-label {
     margin: 0;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
     width: 100%;
 }
@@ -60,7 +60,7 @@ http://yuilibrary.com/license/
 }
 
 .yui3-skin-sam .yui3-calendar-weekday {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .yui3-skin-sam .yui3-calendar-prevmonth-day, .yui3-skin-sam .yui3-calendar-nextmonth-day {
@@ -68,7 +68,7 @@ http://yuilibrary.com/license/
 }
 
 .yui3-skin-sam .yui3-calendar-day {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .yui3-skin-sam .yui3-calendar-day-selected {

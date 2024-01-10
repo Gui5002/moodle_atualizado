@@ -68,12 +68,12 @@ as follows:
 
 /* Due to our reset we have to recover the styles of some elements. */
 .cke_dialog strong {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* The dialog title. */
 .cke_dialog_title {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 13px;
     cursor: move;
     position: relative;
@@ -269,7 +269,7 @@ a.cke_dialog_tab_disabled
 .cke_hc .cke_dialog_close_button span {
     display: inline;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     position: relative;
     top: 3px;
 }
@@ -738,7 +738,7 @@ tendency that these will be moved to the plugins code in the future.
         margin-bottom: 3px;
         cursor: default;
         &.cke_required {
-            font-weight: bold;
+            font-weight: 600;
         }
     }
 }

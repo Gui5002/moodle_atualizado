@@ -60,7 +60,7 @@ echo $OUTPUT->header();
     position: absolute;
     left: 50%;
     top: 4px;
-    font-weight: bold;
+    font-weight: 600;
     text-shadow: 1px 1px 0 #fff;
   }
 </style>

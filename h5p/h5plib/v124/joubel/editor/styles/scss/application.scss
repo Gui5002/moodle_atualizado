@@ -289,7 +289,7 @@ a {
         padding: 0.5em 0.75em;
         border-top: 1px solid #ccc;
         border-right: 1px solid #ccc;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 15px;
         color: #666;
         background: #f5f5f5;
@@ -472,7 +472,7 @@ a {
 
       .h5p-or-vertical-word {
         color: #999;
-        font-weight: bold;
+        font-weight: 600;
         font-size: 18px;
         padding: 3px;
         background: #fff;
@@ -568,7 +568,7 @@ a {
       border: 1px solid #d0d0d1;
       border-radius: 0.25em;
       color: #222222;
-      font-weight: bold;
+      font-weight: 600;
       line-height: normal;
 
       &:hover {
@@ -975,7 +975,7 @@ a {
   }
 
   .important-description-title {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.2em;
     vertical-align: bottom;
   }
@@ -1001,7 +1001,7 @@ a {
 
     .important-description-example-title {
       padding: 15px;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .important-description-example-text {
@@ -1169,7 +1169,7 @@ a {
   line-height: normal;
 
   font-style: italic;
-  font-weight: bold;
+  font-weight: 600;
 
   &:before {
     font-family: $icon-font-family;
@@ -1209,7 +1209,7 @@ a {
     color: #363b42;
     background-color: #fff;
     padding: 10px;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 0.875em;
 
     &:before {
@@ -1277,7 +1277,7 @@ a {
     display: block;
   }
   .first {
-    font-weight: bold;
+    font-weight: 600;
   }
   a {
     text-decoration: underline;

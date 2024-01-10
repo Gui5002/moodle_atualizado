@@ -797,7 +797,7 @@ var local_o365_coursesync_all_set_feature = function(state) {
         echo html_writer::tag('h5', get_string('courses'));
         echo html_writer::table($table);
         echo html_writer::tag('p', get_string('acp_coursesynccustom_savemessage', 'local_o365'),
-            ['id' => 'acp_coursesynccustom_savemessage', 'style' => 'display: none; font-weight: bold; color: red']);
+            ['id' => 'acp_coursesynccustom_savemessage', 'style' => 'display: none; font-weight: 600; color: red']);
         echo html_writer::tag('button', get_string('savechanges'),
             ['class' => 'buttonsbar', 'onclick' => 'local_o365_coursesync_save()']);
 

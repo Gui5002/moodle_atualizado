@@ -31,7 +31,7 @@
 }
 
 #page-admin-tool-behat-index .steprequiredfields {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1em;
     margin-top: 1em;
 }

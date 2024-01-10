@@ -295,7 +295,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<input type="hidden" id="pageid" name="pageid" value="'. $this->config->pageid .'">';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name1.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name1.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -314,7 +314,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name2.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name2.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text2 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -329,7 +329,7 @@ class block_eva_training_suggestion extends block_base {
 
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name3.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name3.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text3 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -365,7 +365,7 @@ class block_eva_training_suggestion extends block_base {
 
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name4.':&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name4.':&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text4 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -404,7 +404,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/><hr/><br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name5.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name5.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text5 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -416,7 +416,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name6.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name6.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text6 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -426,7 +426,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name7.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name7.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text7 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -436,7 +436,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name8.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name8.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text8 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -450,7 +450,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name9.'<i style="color: red;"> * </i>:&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name9.'<i style="color: red;"> * </i>:&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text9 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -463,7 +463,7 @@ class block_eva_training_suggestion extends block_base {
 
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name10.':&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name10.':&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text10 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -496,7 +496,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/><hr/><br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name11.':&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name11.':&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text11 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';
@@ -506,7 +506,7 @@ class block_eva_training_suggestion extends block_base {
                         $text .= '<br/>';
                         $text .= '<div class="row">';
                             $text .= '<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">';
-                                $text .= '<span class="fontSize2" style="font-weight: bold;">'.$this->content->name12.':&nbsp;</span>';
+                                $text .= '<span class="fontSize2" style="font-weight: 600;">'.$this->content->name12.':&nbsp;</span>';
                                 $text .= '<i class="fa fa-exclamation-circle" style="float: right; color: #000066" title="'. $this->content->alt_text12 .'"></i>';
                             $text .= '</div>';
                             $text .= '<div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">';

@@ -21,5 +21,5 @@
 
 /* Custom types show bold */
 .path-admin-tool-filetypes .generaltable .nonstandard {
-    font-weight: bold;
+    font-weight: 600;
 }

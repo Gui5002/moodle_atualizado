@@ -99,7 +99,7 @@ pre{
 .tex .hljs-command,
 .hljs-request,
 .hljs-status {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .coffeescript .javascript,

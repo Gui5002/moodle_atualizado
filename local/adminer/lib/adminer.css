@@ -239,7 +239,7 @@ html>/**/body #content h3#indexes,
 html>/**/body #content h3#foreign-keys,
 html>/**/body #content h3#triggers {
 	font-size: 1em;
-	font-weight: bold;
+	font-weight: 600;
 }
 /* Create table */
 html>/**/body #content a[href$="&create="] {
@@ -384,7 +384,7 @@ html>/**/body #content p a[href*="&edit="] {
 	padding-top: 5px;
 	position:fixed;
 	z-index: 10;
-	font-weight: bold;
+	font-weight: 600;
 }
 #breadcrumb > a[href] {
 	font-weight: normal;

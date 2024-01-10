@@ -333,10 +333,10 @@ class PEAR_Exception extends Exception
                . 'on line <b>' . $cause['line'] . '</b>'
                . "</td></tr>\n";
         }
-        $html .= '<tr><td colspan="3" style="background-color: #aaaaaa; text-align: center; font-weight: bold;">Exception trace</td></tr>' . "\n"
-               . '<tr><td style="text-align: center; background: #cccccc; width:20px; font-weight: bold;">#</td>'
-               . '<td style="text-align: center; background: #cccccc; font-weight: bold;">Function</td>'
-               . '<td style="text-align: center; background: #cccccc; font-weight: bold;">Location</td></tr>' . "\n";
+        $html .= '<tr><td colspan="3" style="background-color: #aaaaaa; text-align: center; font-weight: 600;">Exception trace</td></tr>' . "\n"
+               . '<tr><td style="text-align: center; background: #cccccc; width:20px; font-weight: 600;">#</td>'
+               . '<td style="text-align: center; background: #cccccc; font-weight: 600;">Function</td>'
+               . '<td style="text-align: center; background: #cccccc; font-weight: 600;">Location</td></tr>' . "\n";
 
         foreach ($trace as $k => $v) {
             $html .= '<tr><td style="text-align: center;">' . $k . '</td>'

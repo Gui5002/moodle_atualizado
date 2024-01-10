@@ -6,7 +6,7 @@
 }
 
 #page-mod-questionnaire-questions .qcontainer .qnums {
-    font-weight: bold;
+    font-weight: 600;
     float: left;
     color: gray;
 }
@@ -55,7 +55,7 @@ div.qoptcontainer div.ftextarea textarea.qopts {
 
 .response span.selected,
 .generalboxcontent span.selected {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 td.selected {
@@ -65,7 +65,7 @@ td.selected {
 
 #page-mod-questionnaire-myreport div.respdate {
     font-size: 0.8em;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 6px;
     padding-top: 6px;
     border-bottom: 1px dashed gray;
@@ -314,7 +314,7 @@ td.selected {
     width: auto;
     padding: 7px;
     background: #eee;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .qn-info h2.qn-number {

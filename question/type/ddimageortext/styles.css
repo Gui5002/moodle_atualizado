@@ -178,7 +178,7 @@ body#page-question-type-ddimageortext div[id^=fgroup_id_][id*=drags_] {
 }
 
 body#page-question-type-ddimageortext div[id^=fgroup_id_][id*=drags_] .fgrouplabel label {
-    font-weight: bold;
+    font-weight: 600;
 }
 /* Middle */
 body#page-question-type-ddimageortext div[id^=fitem_id_][id*=dragitem_] {
