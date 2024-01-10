@@ -1,5 +1,4 @@
 /*========= ALTERAÇAO DO STYLE 1 - TELA DE CADASTRO DE USUARIO===========*/
-
 /*.login_form .inner_page {*/
 /*    border-style: solid;*/
 /*    border-width: 1px;*/
@@ -7,73 +6,58 @@
 /*    border-radius: 8px;*/
 /*    background-color: rgb(255, 255, 255);*/
 /*}*/
-
 .sign_up_form.inner_page {
-    /*.login_form.inner_page {*/
-    padding: 0 80px 0;
+    padding: 0 40px 0;
     border-bottom-left-radius: 10px;
     box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
 }
-
 .fcontainer.clearfix {
     color: #000;
     padding: 15px 0px;
     border-top: 2px solid #aac3e84f;
 }
-
 .pb-0,
 .py-0 {
     padding-bottom: 0 !important;
     align-self: center;
 }
-
 .mform .form-inline .custom-select {
     width: 100%;
     border-radius: 8px;
     height: 40px;
     margin: 0px 20px 0px 0px;
 }
-
 .fcontainer .fitem {
     width: 30%;
     margin-left: 39.3%;
 }
-
-@media (max-width: 767.98px) {
+@media only screen and (max-width:767.98px) {
     .mform {
         width: 100%;
         padding-right: 0px;
         padding-left: 0px;
     }
-    .login_form {
-        color: #6f7074;
-        height: 40px;
-        margin: 0px 10px 0px 10px;
-    }
-    .login_form .word-break,
-    .form-control-static {
-        margin-left: 10px;
+    .login_form .word-break, .form-control-static {
+        margin-left: 0px;
     }
     .fcontainer .fitem {
         width: unset;
         margin-left: unset;
     }
 }
-
-@media only screen and (max-width: 2640px) {
-    .login_form {
+@media only screen and (max-width:2640px) {
+    /*.login_form {
         margin-bottom: 30px;
         padding: 0 !important;
         border-bottom-left-radius: 10px;
-        /*box-shadow: 0 2px 12px rgb(0 0 0 / 12%);*/
+        /*box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
         box-shadow: none;
-    }
+    }*/
 }
-
 #page-login-signup .login_form.inner_page .mform input {
     width: 100%;
 }
-.logo-eva {
+.logo-esagu {
 text-align:center;
 }
 legend.ftoggler {
@@ -92,7 +76,6 @@ legend.ftoggler {
     font-weight: 600;
 }
 .heading p {
-    margin-bottom: 40px;
     color: black;
     font-weight: 600;
 }
@@ -103,7 +86,6 @@ legend.ftoggler {
     /*margin-left: -90%;*/
     font-weight: 500;
 }
-
 /*---Alinamento dos Bootes---*/
 .flex-wrap {
     margin-left: 21%;
@@ -114,45 +96,3 @@ legend.ftoggler {
 .icon {
     margin-right: -0.5rem;
 }
-
-
-/*.hr_ftoggle1, .hr_ftoggle2 {*/
-
-
-/*    border: 1px solid #b4bfd0;*/
-
-
-/*    width: 35%;*/
-
-
-/*    height: 0.1px;*/
-
-
-/*    background-color: #b4bfd0;*/
-
-
-/*    position: absolute;*/
-
-
-/*    margin-left: 32.5%;*/
-
-
-/*}*/
-
-
-/*.hr_ftoggle1 {*/
-
-
-/*    margin-top: 3%;*/
-
-
-/*}*/
-
-
-/*.hr_ftoggle2 {*/
-
-
-/*    margin-top: 24.9%;*/
-
-
-/*}*/

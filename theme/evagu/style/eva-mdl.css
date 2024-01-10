@@ -415,7 +415,7 @@ body.ccn_context_dashboard {
     text-decoration: none;
 }
 .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
-    background-color: #011b35;
+    background-color: [[setting:color_primary]];
     border: 2px solid #02203d;
     color: #fff;
 }
@@ -522,9 +522,9 @@ body.ccn_context_dashboard {
     border-color: #ddd;
 }
 .badge, .badge-pill {
-    padding: 3px 8px;
+    padding: 3px 9px;
     color: #fff;
-    background-color: #c3590d!important;
+    background-color: #0eb5db!important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
     border-radius: 19px;
     font-weight: 800;
@@ -1357,12 +1357,13 @@ div[class*="block_eva_slider"] .ccnBlockControls {
 }
 #page-enrol-index .ccn-enrol-cta-box {
     border-radius: 5px;
-    background-color: #f9fafc;
-    margin: 60px 0 !important;
+    background-color: #f0f4fd;
+    margin: 30px 0 !important;
     padding: 30px !important;
     width: 100% !important;
     box-shadow: none !important;
     float: none !important;
+    box-shadow: 0 6px 6px 0 rgb(0 0 10 / 15%)!important;
 }
 #page-enrol-index .ccn-enrol-cta-box p {
     text-align: center !important;
@@ -2216,10 +2217,9 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .availabilityinfo,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .contentafterlink,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section_availability {
-    margin: 5px 0 0 20px;
-    font-size: 10px;
-    color: rgb(172, 99, 4);
-    font-weight: 600;
+    margin: 5px 20px 0 20px;
+    font-size: 15px;
+    color: rgb(99, 100, 100);
     font-family: '[[setting:primary_font]]', sans-serif;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .badge,
@@ -3291,16 +3291,16 @@ body.ccn_context_dashboard.ccnDarkMode.ccn_context_dashboard,
     padding-top: 20px;
 }
 .modal:not(.sign_up_modal) .modal-dialog .modal-header {
-    background-image: -moz-linear-gradient(0deg, [[setting: color_gradient_end]] 0%, [[setting: color_gradient_start]] 100%) !important;
-    background-image: -webkit-linear-gradient(0deg, [[setting: color_gradient_end]] 0%, [[setting: color_gradient_start]] 100%) !important;
-    background-image: -ms-linear-gradient(0deg, [[setting: color_gradient_end]] 0%, [[setting: color_gradient_start]] 100%) !important;
+    background-image: -moz-linear-gradient(0deg, [[setting:color_gradient_end]] 0%, [[setting:color_gradient_start]] 100%);
+    background-image: -webkit-linear-gradient(0deg, [[setting:color_gradient_end]] 0%, [[setting:color_gradient_start]] 100%);
+    background-image: -ms-linear-gradient(0deg, [[setting:color_gradient_end]] 0%, [[setting:color_gradient_start]] 100%);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
     position: sticky;
     left: 0;
     right: 0;
     z-index: 9999;
     padding: 22px 25px;
-}
+  }
 .modal:not(.sign_up_modal) .modal-dialog .modal-header .modal-title {
     color: #fff;
     text-transform: uppercase;
