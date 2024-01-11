@@ -210,6 +210,9 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
                 },
+                "oLanguage": {
+                    "sEmptyTable": "Carregando..."
+            },
                 "buttons": [
                     { extend: 'excel', className: 'excelButton' },
                     { extend: 'csv', className: 'csvButton' }
@@ -283,9 +286,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
 
-                        myTable.rows().remove().draw();
-                        myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
-                        myTable.rows.add(obj).draw();
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
                     },
                     error: function () {
                         myTable.rows().remove().draw();
@@ -293,6 +300,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         myTable.rows().remove().draw();
                     },
                     complete: function () {
+
                         matriculaEnd2.prop('disabled', false);
                     }
                 });
@@ -322,9 +330,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
 
-                        myTable.rows().remove().draw();
-                        myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
-                        myTable.rows.add(obj).draw();
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
                     },
                     error: function () {
                         myTable.rows().remove().draw();
@@ -379,9 +391,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         success: function(response) {
                             var obj = jQuery.parseJSON(response);
 
+                            if (obj.length === 0) {
+                                myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
                                 myTable.rows().remove().draw();
-                                myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                            } else {
+                                myTable.rows().remove().draw();
                                 myTable.rows.add(obj).draw();
+                            }
 
 
                         },
@@ -506,9 +522,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
 
-                        myTable.rows().remove().draw();
-                        myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
-                        myTable.rows.add(obj).draw();
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
                     },
                     error: function () {
                         myTable.rows().remove().draw();
@@ -545,9 +565,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
 
-                        myTable.rows().remove().draw();
-                        myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
-                        myTable.rows.add(obj).draw();
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
                     },
                     error: function () {
                         myTable.rows().remove().draw();
@@ -606,9 +630,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         success: function(response) {
                             var obj = jQuery.parseJSON(response);
 
-                            myTable.rows().remove().draw();
-                            myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
-                            myTable.rows.add(obj).draw();
+                            if (obj.length === 0) {
+                                myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                                myTable.rows().remove().draw();
+                            } else {
+                                myTable.rows().remove().draw();
+                                myTable.rows.add(obj).draw();
+                            }
                         },
                         error: function () {
                             myTable.rows().remove().draw();
