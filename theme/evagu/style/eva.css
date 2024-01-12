@@ -9,6 +9,10 @@
 html {
     font-size: 100%;
 }
+.fp-filename {
+    padding-right: 10px;
+    color: #00adff;
+}
 body {
     background-attachment: fixed;
     background-color: #ffffff;
@@ -191,10 +195,10 @@ address {
 .yui3-skin-sam .yui3-panel .yui3-widget-hd {
     padding: 8px 28px 8px 8px;
     min-height: 13px;
-   _height: 13px;
-    color: #fff!important;
-    background: -moz-linear-gradient(0% 100% 90deg,#2e577f 7%, #437eb7 50%, #2e577f 100%)!important;
-    background: -webkit-gradient(linear,left bottom,left top,from(#2e577f),color-stop(.07,#274660),color-stop(.5,#437eb7),to(#2d557c))!important;
+    _height: 13px;
+    color: #fff !important;
+    background: -moz-linear-gradient(0% 100% 90deg, #2e577f 7%, #437eb7 50%, #2e577f 100%) !important;
+    background: -webkit-gradient(linear, left bottom, left top, from(#2e577f), color-stop(.07, #274660), color-stop(.5, #437eb7), to(#2d557c)) !important;
 }
 .form-autocomplete-selection [data-active-selection=true] {
     padding: 0.5em !important;
@@ -3049,10 +3053,25 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 .ccn_course_content.topics .details .activity img.activityicon {
     vertical-align: middle;
 }
-.details .cc_tab .panel-body .cs_list li a span {
+.details {
     padding-right: 4px;
-    color: #000;
     font-weight: 500;
+    color: #b43f3f;
+}
+.cc_tab {
+    padding-right: 4px;
+    font-weight: 500;
+    color: #2ddd27;
+}
+.panel-body {
+    padding-right: 4px;
+    font-weight: 500;
+    color: #11b0c5;
+}
+.cs_list li a span {
+    padding-right: 4px;
+    font-weight: 500;
+    color: #979797;
 }
 .details .cc_tab .panel-body .cs_list li a span.cs_preiew {
     float: right;
@@ -8167,7 +8186,7 @@ body:not(.ccn_context_dashboard) .ui_kit_select_search button.btn:focus {
     background-color: #fff;
 }
 .dashbord_nav_list li.active a, .dashbord_nav_list li a.active {
-    color: #00fff3!important;
+    color: #00fff3 !important;
 }
 .dashbord_nav_list li.active:before {
     bottom: 0;
@@ -8440,7 +8459,7 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
   padding: 15px 0 0;
 } */
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a, .header_user_notif li.user_setting .dropdown-menu .user_setting_content .no-action {
-    background: #fff!important;
+    background: #fff !important;
     border-bottom: 1px solid #dedede;
     color: #0a0a0a;
     font-size: 16px;
@@ -8461,7 +8480,7 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
 }
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a:hover, .header_user_notif li.user_setting .dropdown-menu .user_setting_content .no-action:hover {
     color: [[setting: color_accent_2]];
-    padding-left:12px;
+    padding-left: 12px;
 }
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a.active,
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a.active span,

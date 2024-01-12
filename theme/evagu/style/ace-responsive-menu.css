@@ -10,12 +10,10 @@ a {
   color: #0d638f;
   text-shadow: none;
 }
-
 ul {
   margin: 0px;
   padding: 0px;
 }
-
 .ace-responsive-menu {
   list-style: none;
   margin: 0;
@@ -23,15 +21,12 @@ ul {
   background: #262626;
   width: 100%;
 }
-
 .ace-responsive-menu li {
   list-style: none;
 }
-
 .ace-responsive-menu li ul {
   display: none;
 }
-
 .ace-responsive-menu>li {
   display: block;
   margin: 0;
@@ -39,15 +34,12 @@ ul {
   border: 0px;
   float: left;
 }
-
 .ace-responsive-menu li a {
   color: #c0c0c0;
 }
-
 .ace-responsive-menu>li>a.active span {
   color: #ffffff
 }
-
 .ace-responsive-menu>li>a {
   display: block;
   position: relative;
@@ -64,29 +56,23 @@ ul {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-
 .ace-responsive-menu li a i {
   padding-right: 5px;
 }
-
 .ace-responsive-menu>li>a i {
   font-size: 16px;
   text-shadow: none;
 }
-
 .ace-responsive-menu li ul.sub-menu li a i {
   padding-right: 10px;
 }
-
 .ace-responsive-menu li.menu-active>a {
   /*background: #272727 !important;*/
   color: #fff;
 }
-
 .ace-responsive-menu li .menu-active {
   position: relative;
 }
-
 .ace-responsive-menu>li>a>.arrow:before {
   margin-left: 8px;
   display: inline;
@@ -99,11 +85,9 @@ ul {
   width: 10px;
   display: inline-block;
 }
-
 .ace-responsive-menu li ul.sub-menu li>a>.arrow:before {
   content: "\f105" !important;
 }
-
 .ace-responsive-menu>li>ul.sub-menu {
   display: none;
   list-style: none;
@@ -111,15 +95,12 @@ ul {
   margin: 0;
   position: absolute;
 }
-
 .ace-responsive-menu li ul.sub-menu {
   background: #333;
 }
-
 .ace-responsive-menu li ul.sub-menu>li {
   width: 185px;
 }
-
 .ace-responsive-menu li ul.sub-menu li a {
   display: block;
   margin: 0px 0px;
@@ -129,11 +110,9 @@ ul {
   font-weight: normal;
   background: none;
 }
-
 .ace-responsive-menu>li>ul.sub-menu>li {
   position: relative;
 }
-
 .ace-responsive-menu>li>ul.sub-menu>li ul.sub-menu {
   position: absolute;
   left: 185px;
@@ -141,7 +120,6 @@ ul {
   display: none;
   list-style: none;
 }
-
 .ace-responsive-menu>li>ul.sub-menu>li ul.sub-menu>li ul.sub-menu {
   position: absolute;
   left: 185px;
@@ -149,7 +127,6 @@ ul {
   display: none;
   list-style: none;
 }
-
 .ace-responsive-menu>li>ul.sub-menu li>a>.arrow:before {
   float: right;
   margin-top: 1px;
@@ -162,7 +139,6 @@ ul {
   font-weight: 300;
   text-shadow: none;
 }
-
 /* Menu Toggle Btn
 ----------------------------------------*/
 .menu-toggle {
@@ -171,11 +147,9 @@ ul {
   width: 100%;
   background: #333;
 }
-
 .menu-toggle:focus {
   outline: none;
 }
-
 .menu-toggle h3 {
   float: left;
   color: #FFF;
@@ -183,7 +157,6 @@ ul {
   font-weight: 600;
   font-size: 16px;
 }
-
 .menu-toggle .icon-bar {
   display: block !important;
   width: 18px;
@@ -197,11 +170,9 @@ ul {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   margin: 3px;
 }
-
 .menu-toggle .icon-bar:hover {
   background-color: #F5F5F5 !important;
 }
-
 .menu-toggle #menu-btn {
   float: right;
   background: #202020;
@@ -211,21 +182,17 @@ ul {
   cursor: pointer;
   margin: 10px;
 }
-
 .menu-toggle #menu-btn:focus {
   outline: none;
 }
-
 .hide-menu {
   display: none;
 }
-
 /* Accordion Menu Styles
 ----------------------------------------*/
 ul[data-menu-style="accordion"] {
   width: 250px;
 }
-
 ul[data-menu-style="accordion"]>li {
   display: block;
   margin: 0;
@@ -233,7 +200,6 @@ ul[data-menu-style="accordion"]>li {
   border: 0px;
   float: none !important;
 }
-
 /*
 ul[data-menu-style="accordion"] > li:first-child {
   border-top: 2px solid #FD5025;
@@ -241,55 +207,43 @@ ul[data-menu-style="accordion"] > li:first-child {
 ul[data-menu-style="accordion"] li ul.sub-menu>li {
   width: 100%;
 }
-
 ul[data-menu-style="accordion"]>li>a>.arrow:before {
   float: right;
   content: "\f105";
 }
-
 ul[data-menu-style="accordion"] li.menu-active>a>.arrow:before {
   content: "\f107" !important;
 }
-
 ul[data-menu-style="accordion"]>li>ul.sub-menu {
   position: static;
 }
-
 ul[data-menu-style="accordion"]>li>a i {
   padding-right: 10px;
   color: #FF5737;
 }
-
 ul[data-menu-style="accordion"]>li>ul.sub-menu>li ul.sub-menu {
   position: static;
 }
-
 ul[data-menu-style="accordion"]>li>ul.sub-menu>li ul.sub-menu>li ul.sub-menu {
   position: static;
 }
-
 ul[data-menu-style="accordion"]>li {
   border-bottom: 1px solid #242424;
 }
-
 ul[data-menu-style="accordion"] li a:hover {
   background: #272727 !important;
 }
-
 ul[data-menu-style="accordion"] ul.sub-menu li.menu-active>a>.arrow:before {
   content: "\f107" !important;
 }
-
 /* Vertical Menu Styles
 ----------------------------------------*/
 ul[data-menu-style="vertical"] {
   width: 200px;
 }
-
 ul[data-menu-style="vertical"]>li {
   float: none;
 }
-
 /*
 ul[data-menu-style="vertical"] > li:first-child {
   border-top: 2px solid #FD5025;
@@ -297,48 +251,39 @@ ul[data-menu-style="vertical"] > li:first-child {
 ul[data-menu-style="vertical"] li ul.sub-menu>li {
   width: 100%;
 }
-
 ul[data-menu-style="vertical"]>li>a>.arrow:before {
   float: right;
   content: "\f105";
 }
-
 ul[data-menu-style="vertical"]>li.menu-active {
   position: relative;
 }
-
 ul[data-menu-style="vertical"]>li>ul.sub-menu {
   position: absolute;
   left: 200px;
   top: 0px;
   width: 200px;
 }
-
 ul[data-menu-style="vertical"]>li>a i {
   padding-right: 10px;
   color: #FF5737;
 }
-
 ul[data-menu-style="vertical"]>li>ul.sub-menu>li ul.sub-menu {
   position: absolute;
   width: 200px;
   left: 200px;
 }
-
 ul[data-menu-style="vertical"]>li>ul.sub-menu>li ul.sub-menu>li ul.sub-menu {
   position: absolute;
   width: 200px;
   left: 200px;
 }
-
 ul[data-menu-style="vertical"]>li {
   border-bottom: 1px solid #242424;
 }
-
 ul[data-menu-style="vertical"] li a:hover {
   background: #272727 !important;
 }
-
 /* Responsive Menu Styles
 ----------------------------------------*/
 /*Note: change the max-width asper your requirment and change the same in aceResponsiveMenu({resizeWidth: "768" }) function*/
@@ -347,78 +292,61 @@ ul[data-menu-style="vertical"] li a:hover {
     width: 96%;
     padding: 2%;
   }
-
   ul[data-menu-style="vertical"], ul[data-menu-style="accordion"],
   ul[data-menu-style="vertical"] li ul.sub-menu {
     width: 100% !important;
   }
-
   .ace-responsive-menu {
     float: left;
     width: 100%;
   }
-
   .ace-responsive-menu>li {
     border-bottom: 1px solid #242424;
     float: none;
   }
-
   .ace-responsive-menu li a:hover {
     background: #272727 !important;
   }
-
   .ace-responsive-menu>li>a i {
     padding-right: 10px;
   }
-
   .ace-responsive-menu>li>a>.arrow:before {
     float: right;
     content: "\f105";
   }
-
   li.menu-active>a>.arrow:before {
     content: "\f107" !important;
   }
-
   .ace-responsive-menu li ul.sub-menu>li {
     width: 100%;
   }
-
   .ace-responsive-menu li ul.sub-menu li ul.sub-menu li a {
     padding-left: 30px;
   }
-
   .ace-responsive-menu li ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
     padding-left: 50px;
   }
-
   .ace-responsive-menu>li>ul.sub-menu {
     position: static;
   }
-
   .ace-responsive-menu>li>ul.sub-menu>li ul.sub-menu {
     position: static;
   }
-
   .ace-responsive-menu>li>ul.sub-menu>li ul.sub-menu>li ul.sub-menu {
     position: static;
   }
-
   .ace-responsive-menu li ul.sub-menu li.menu-active>a>.arrow:before {
     content: "\f107" !important;
   }
 }
-
 .options {
   width: 200px;
   float: left;
   margin-top: 30px;
 }
-
 .options h3 {
   font-size: 20px;
 }
-
 .options a {
   padding: 12px 0;
   text-align: center;
@@ -429,7 +357,6 @@ ul[data-menu-style="vertical"] li a:hover {
   color: #FFF;
   text-decoration: none;
 }
-
 a.backLink {
   float: right;
   margin-bottom: 10px;

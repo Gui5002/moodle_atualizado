@@ -18,7 +18,7 @@ defined('MOODLE_INTERNAL') || die();
 // CCN Theme Constants
 $string['pluginname'] = 'evagu';
 $string['configtitle'] = 'evagu إعدادات';
-$string['choosereadme'] = 'evagu Premium Moodle Theme, Created by RCN.';
+$string['choosereadme'] = 'evagu Moodle Theme, Created by RCN.';
 $string['ccn_settings_menu'] = 'خيارات';
 $string['ccn_page_settings_menu'] = 'إعدادات الصفحة';
 // CCN Plugin Constants: Backend
