@@ -1686,6 +1686,17 @@ border: 0;
 } */
 /* MDL DEFAULT BLOCKS */
 /* MDL-67140 */
+.moodlebutton {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px 3px 3px 1.5em;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    background: url(search.png) .2em .3em no-repeat;
+}
+.moodlebutton:hover {
+    background: #ccc;
+}
 #page-my-index .moodle-dialogue-base.moodle-dialogue-exception {
     display: none !important;
     visibility: hidden !important;
@@ -1864,7 +1875,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     display: none;
 }
 .editing .section .activity:hover, .editing .section .activity.action-menu-shown {
-    background-color: transparent;
+    background-color: #edeff74d;
 }
 /* .path-grade-report-grader .gradeparent {
   overflow: scroll !important;
@@ -2069,11 +2080,11 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus header h4 {
-    max-width: 600px;
+    max-width: 650px;
     overflow: hidden;
     color: #fff;
     font-family: "[[setting:primary_font]]", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-top: 31px;
@@ -2081,12 +2092,12 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 }
 .ccn_context_focus .dashboard_sidebar {
     width: 400px;
-    margin-top: 88px;
-    padding-top: calc(150px - 88px);
-    height: calc(100vh - 88px);
+    margin-top: 80px;
+    padding-top: calc(150px - 80px);
+    height: calc(100vh - 80px);
 }
 .ccn_context_focus .dashboard_sidebar:before {
-    top: -88px;
+    top: -80px;
 }
 /* @media (min-width: 1200px) { */
 .ccn_context_focus .dashboard_main_content:not(.no-sidebar) {
@@ -2121,13 +2132,14 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     padding: 0;
     margin: 0;
     font-size: 15px;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .cs_list li a,
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .cs_list .no-action,
 .ccn_context_focus .dashboard_navigationbar .details .cc_tab .panel-body .cs_list li a {
     /* padding-bottom: 0;
   padding-left: 20px; */
-    font-family: "[[setting:primary_font]]";
+  font-family: "[[setting:primary_font]]", sans-serif;
     color: #7f7f7f;
     font-size: 15px;
     line-height: 1;
@@ -2137,8 +2149,9 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     padding: 13px 20px;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .cs_list li a span {
-    font-size: inherit !important;
+    font-size: 15px!important;
     margin-right: 0 !important;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .mod-indent-outer,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .mod-indent-outer {
@@ -2149,6 +2162,8 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     width: 100%;
     padding-right: 45px;
     padding-left: 10px;
+    background: #2e6292;
+    color: #000000!important;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>div,
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>a,
@@ -2161,17 +2176,19 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     display: table-cell;
     font-family: "[[setting:primary_font]]", sans-serif;
     color: #000000;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1;
     text-indent: 0;
-    padding: 20px 20px 20px 45px;
+    padding: 20px 5px 20px 40px;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .quickeditlink,
 .ccn_context_focus .dashboard_navigationbar .quickeditlink {
     padding: 0;
     display: inline-block;
 }
-.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance .instancename,
+.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance .instancename{
+    color:#ffffff;
+}
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .activityinstance .instancename {
     font-size: 15px !important;
 }
@@ -2213,7 +2230,11 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     height: 13px;
     width: 13px;
 }
-.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .availabilityinfo,
+.ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .availabilityinfo{
+    color: #fff;
+    font-family: "[[setting:primary_font]]", sans-serif;
+    font-size: 15px;
+}
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .contentafterlink,
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section_availability,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .availabilityinfo,
@@ -2229,15 +2250,16 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     font-size: 10px;
     padding: 2px 5px;
     vertical-align: top;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .cs_list li:hover a {
-    color:  rgb(0 149 255);
+    color:  rgb(0 229 255);
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
-.ccn_context_focus .ccn_dashbord_nav_list .panel-title .accordion-toggle,
-.ccn_context_focus .dashboard_navigationbar .panel-title .accordion-toggle {
+.ccn_context_focus .ccn_dashbord_nav_list .panel-title .accordion-toggle, .ccn_context_focus .dashboard_navigationbar .panel-title .accordion-toggle {
     display: block;
     font-family: "[[setting:primary_font]]", sans-serif;
-    color: #000;
+    color: #fff!important;
     font-weight: 600;
     font-size: 15px;
 }
@@ -2257,7 +2279,8 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .panel-title .accordion-toggle:before,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .panel-title a:before {
     font-family: 'FontAwesome';
-    color: #0a0a0a;
+    color: #b9c5c5;
+    font-size: 17px;
     content: "\f107";
     float: right;
     font-weight: lighter;

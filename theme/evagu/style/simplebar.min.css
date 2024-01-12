@@ -18,7 +18,7 @@
   max-height: inherit;
 }
 .simplebar-mask {
-  background: #fff;
+  background: #0c3551;
   direction: inherit;
   position: absolute;
   overflow: hidden;
@@ -43,7 +43,7 @@
   right: 0;
   padding: 0;
   margin: 0;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch; 
 }
 .simplebar-content {
   direction: inherit;
@@ -55,7 +55,7 @@
   visibility: visible;
   overflow: scroll;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100%;  
 }
 .simplebar-placeholder {
   max-height: 100%;

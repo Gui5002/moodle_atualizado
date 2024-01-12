@@ -30,10 +30,8 @@
             border-bottom-left-radius: 10px;
             box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
         }
-     }
-
-
-    /* For iPhone X, iPhone Xs, iPhone 11 Pro, iPhone 12 Mini, and iPhone 13 Mini 1080×2340 pixels at 476ppi */
+}
+ /* For iPhone X, iPhone Xs, iPhone 11 Pro, iPhone 12 Mini, and iPhone 13 Mini 1080×2340 pixels at 476ppi */
 @media only screen 
 and (width: 375px) 
 and (height: 812px) 
@@ -1563,6 +1561,294 @@ and (-webkit-device-pixel-ratio: 3) { }
         display: none;
     }
 }
+@media only screen and (max-width:844px) {
+    /* ExTra Class Start*/
+    .breadcrumb_widgets {
+        margin-top: 10px;
+    }
+    .mt30-smd {
+        margin-top: 30px;
+    }
+    .mb50-smd {
+        margin-bottom: 50px;
+    }
+    .mt50-smd {
+        margin-top: 50px;
+    }
+    .mb35-smd {
+        margin-bottom: 35px;
+    }
+    .tal-smd {
+        text-align: left;
+    }
+    .tac-smd {
+        text-align: center !important;
+    }
+    .fn-smd {
+        float: none !important;
+    }
+    .dn-smd {
+        display: none !important;
+    }
+    .dv-smd {
+        display: inherit !important;
+    }
+    .db-991 {
+        display: block !important;
+    }
+    .prpl0-md {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .prpl5-sm {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+    .mt10-smd {
+        margin-top: 10px !important;
+    }
+    /* ExTra Class End*/
+    /* Home responsibe style Start*/
+    /* home slider end */
+    .blog_post.one .thumb .post_title {
+        font-size: 48px;
+    }
+    .icon_box_hiw .icon.middle:before {
+        display: none;
+    }
+    .icon_box_hiw .icon.middle:after {
+        display: none;
+    }
+    .our-dashbord:before {
+        width: 48%;
+    }
+    .modal-dialog {
+        width:450px;
+    }
+    .modal-content, .login_form, .lf-modal-login, .login_form.inner_page, .footer_contact_widget, .footer_company_widget, .main_blog_post_content, .footer_program_widget, .footer_support_widget {
+        margin-bottom: 20px;
+        padding: 20px 20px 20px !important;
+        border-bottom-left-radius: 10px;
+        box-shadow: 0 2px 12px rgb(0 0 0 / 12%);        
+    }
+    .footer_social_widget ul {
+        text-align: center;
+    }
+    .home5_mt {
+        margin-top: 0;
+    }
+    .content_details {
+        top: 0;
+    }
+    .sign_up_form button, .login_form button {
+        margin-bottom: 40px !important;
+    }
+    .sign_up_form button.btn2, .login_form button.btn2 {
+        margin-bottom: 0 !important;
+    }
+    .home-content {
+        margin: 150px 0 80px;
+    }
+    .home-content.home7 {
+        margin: 350px 0 80px;
+    }
+    .home_icon_box {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .funfact_one {
+        margin-bottom: 30px;
+    }
+    #our-partners {
+        padding-bottom: 30px;
+    }
+    .our_partner {
+        margin: 30px;
+        text-align: center;
+    }
+    .app_grid .apple_btn {
+        margin-bottom: 15px;
+    }
+    .blog_post_home2.home3 {
+        margin-bottom: 30px;
+    }
+    .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper #mk-fullscreen-searchform #mk-fullscreen-search-input,
+    .mk-fullscreen-search-overlay #mk-fullscreen-search-wrapper2 #mk-fullscreen-searchform2 #mk-fullscreen-search-input2 {
+        max-width: 500px;
+    }
+    .blog_post_home6_media_objects {
+        margin-bottom: 30px;
+    }
+    .home7_row {
+        margin-top: 60px;
+    }
+    .testimonial_item.home2 .details {
+        padding: 30px;
+    }
+    .blog_post_home4.home8 {
+        margin-bottom: 30px;
+    }
+    .logo-widget.home8 {
+        margin-left: 180px;
+    }
+    .footer_one.home8::after {
+        bottom: 150px;
+    }
+    .testimonial_slider_home2 .testimonial_item.home2 .details .icon,
+    .ccn_testimonial_slider_home2 .testimonial_item.home2 .details .icon {
+        top: -5px;
+    }
+    .about_program {
+        margin-bottom: 30px;
+        padding-right: 0;
+        text-align: center;
+    }
+    .banner-style-two .banner-title {
+        font-size: 30px;
+    }
+    .home1-mainslider .banner-style-one .banner-title {
+        font-size: 40px;
+        font-weight: 600;
+    }
+    .home1-mainslider .banner-style-one p {
+        padding: 0 93px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        max-width: none;
+    }
+    .home1-mainslider .main-banner-wrapper .carousel-btn-block {
+        top: 49%;
+    }
+    .home-content {
+        margin: 100px 0 80px;
+    }
+    .home_iconbox_container {
+        margin-top: -390px;
+    }
+    .main-banner-wrapper.home7 .carousel-btn-block .carousel-btn.left-btn {
+        left: 0;
+    }
+    .main-banner-wrapper.home7 .carousel-btn-block .carousel-btn.right-btn {
+        right: 0;
+    }
+    .logo-widget.error_paged {
+        padding-left: 30px;
+    }
+    .mbp_pagination ul.page_navigation {
+        margin-bottom: 30px;
+    }
+    .shop_order_box .order_list_raw ul li {
+        margin-right: 45px;
+    }
+    .order_sidebar_widget {
+        margin-top: 30px;
+    }
+    .cart_page_form tbody.table_body th .cart_list li {
+        padding-right: 9px;
+    }
+    .cart_page_form .table_body td, .cart_page_form .table_body th {
+        padding: 30px 35px;
+    }
+    .single_product_grid, .instructor_personal_infor {
+        margin-bottom: 30px;
+    }
+    .courses_single_container .cs_row_one .cs_instructor .cs_instrct_list,
+    .courses_single_container .cs_row_one .cs_instructor .cs_watch_list,
+    .cs_row_one.csv2 .cs_instructor .cs_watch_list {
+        float: none !important;
+    }
+    .cs_row_one.csv2 .cs_instructor .cs_watch_list {
+        display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 10px !important;
+    }
+    .courses_single_container .cs_row_one .cs_instructor .cs_instrct_list,
+    .courses_single_container .cs_row_one .cs_instructor .cs_watch_list li {
+        margin-bottom: 20px !important;
+    }
+    .ff_one {
+        padding: 30px;
+    }
+    .home1-mainslider .home-content {
+        padding-top: 0;
+    }
+    .mouse_scroll .icon {
+        top: -65px;
+    }
+    .mouse_scroll:before {
+        bottom: 20px;
+    }
+    .mouse_scroll:after {
+        bottom: 0px;
+    }
+    .row_home4 {
+        margin: 0 !important;
+    }
+    .block_eva_hero_3 .row_home4 {
+        margin: 80px 0 !important;
+    }
+    .home_icon_box.home4 .icon span {
+        float: none !important;
+    }
+    .home_icon_box.home4 .icon {
+        color: #2441e7;
+    }
+    .home_icon_box.home4 p {
+        color: #6f7074;
+    }
+    .our-dashbord.dashbord:before {
+        display: none;
+    }
+    .home-content.home10 .home-text {
+        position: relative;
+    }
+    .home-content.home10 {
+        margin-bottom: 0;
+    }
+    .home-content.home10.style2 {
+        margin-top: 0;
+    }
+    .home-content.home10 .home-text h2 {
+        font-size: 36px;
+    }
+    .home-content.style2.home10 .home-text {
+        padding-top: 10px;
+        z-index: 0;
+    }
+    .home-three.home10-style .home-text {
+        padding: 50px 0 10px;
+    }
+    .home10_slider.owl-carousel .item img {
+        max-height: 500px;
+        max-width: 60%;
+    }
+    .home-three.home10-style .home-text {
+        z-index: 9;
+    }
+    .home-three.home10-style {
+        height: 860px;
+    }
+    .block_eva_hero_4 .home_content.home5 {
+        padding: 70px 0;
+    }
+    .block_eva_hero_4 h2 {
+        font-size: 45px;
+    }
+    .block_eva_hero_4 .home-text.home5 .discounts_para {
+        margin-bottom: 0;
+    }
+    .block_eva_hero_4 .home_content.home5.style2 {
+        padding-top: 100px;
+    }
+    .block_eva_hero_4 .home1-advnc-search.home5 {
+        padding: 0;
+    }
+    .block_eva_hero_4 .top_courses_iconbox {
+        display: none;
+    }
+}
+
 @media only screen and (max-width:910px) {
     .main-banner-wrapper .carousel-btn-block.home9 {
         display: none;

@@ -36,7 +36,8 @@
 }
 .fa-fw {
     width: 1.28571429em;
-    text-align: center
+    text-align: center;
+    color: #c0bebe;
 }
 .fa-ul {
     padding-left: 0;

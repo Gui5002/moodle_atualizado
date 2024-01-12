@@ -221,9 +221,9 @@ width: 100%;
     right: 0;
     width: 30vw;
     margin: 0;
-    background: rgba(255, 255, 255, .1);
+    background: rgb(25 44 65 / 51%);
     padding: 10px 5px;
-    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-top: 1px solid rgb(25 44 65 / 51%);
     height: 90px;
 }
 #ccn_lc_vb--visualize--block-wrapper {
@@ -255,8 +255,7 @@ box-shadow: 0 0 50px rgb(0 0 0 / 10%), 0 20px 20px rgb(0 0 0 / 10%);
     max-width: 100%;
     flex: 100%;
 }
-#ccn_lc_vb--visualize-aside .btn-primary,
-#ccn_lc_vb--visualize-aside .btn-secondary {
+#ccn_lc_vb--visualize-aside .btn-primary, #ccn_lc_vb--visualize-aside .btn-secondary {
     border: 1px solid #fff;
     border-radius: 50px;
     padding: 12px 27px;
@@ -272,10 +271,12 @@ box-shadow: 0 0 50px rgb(0 0 0 / 10%), 0 20px 20px rgb(0 0 0 / 10%);
     height: auto;
     line-height: 1.4;
     margin: 0 5px;
+    margin-bottom: 15px;
 }
 #ccn_lc_vb--visualize-aside #id_submitbutton {
     background: rgb(23, 33, 44);
     border-color: rgb(23, 33, 44);
+    margin-bottom: 15px;
 }
 #ccn_lc_vb--visualize-aside .btn-primary:hover,
 #ccn_lc_vb--visualize-aside .btn-secondary:hover {
@@ -622,8 +623,9 @@ body.ccnRefreshActionExecuting #ccnRefresherAside {
   }
   #ccn_lc_vb--visualize-aside .mform .felement>input, #ccn_lc_vb--visualize-aside .mform .felement>textarea, #ccn_lc_vb--visualize-aside .mform .felement>select, #ccn_lc_vb--visualize-aside .mform .felement[data-fieldtype="autocomplete"] .form-control, #ccn_lc_vb--visualize-aside .ui_kit_select_search .btn.dropdown-toggle {
     padding: 0 15px;
-    font-size: 14px;
+    font-size: 13px;
     min-height: 47px;
+    font-family: "[[setting:primary_font]]", sans-serif;
   }
   #ccn_lc_vb--visualize-aside .mform .fcontainer .col-md-9 {
     margin-top: 5px;
