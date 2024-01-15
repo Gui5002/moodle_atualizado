@@ -119,8 +119,15 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     {
                         targets: [4,5,6,9],
                         className: 'dt-center'
+                    },
+                    {
+                        targets: [7, 8, 9],
+                        orderable: false
                     }
-                ]
+                ],
+                "createdRow": function (row, data, index) {
+                    $(row).find('td').css('font-family', 'Raleway, sans-serif');
+                }
             });
 
             $("#filterCategory").on('change',function(){
@@ -239,7 +246,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     { "data": "atv" },
                     { "data": "progresso" },
                     { "data": "status" }
-                ]
+                ],
+                "createdRow": function (row, data, index) {
+                    $(row).find('td').css('font-family', 'Raleway, sans-serif');
+                }
             });
 
 
@@ -478,7 +488,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     },
                     { "data": "matricula" },
                     { "data": "status" }
-                ]
+                ],
+                "createdRow": function (row, data, index) {
+                    $(row).find('td').css('font-family', 'Raleway, sans-serif');
+                }
             });
 
 
@@ -593,8 +606,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 var matriculaEnd3 = $("#matriculaEnd3").val();
                 var hasData = false;
 
-
-
                 $("#filterUsers3").val('');
                 $('#select2-filterUsers3-container').text('Selecione uma opção');
                 $("#filterCargo3").val('');
@@ -648,6 +659,238 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             });
 
 
+        } else if(idReport == '4'){
+            let filterCategory4 = $("#filterCategory4").val();
+            let filterSubCategory4 = $("#filterSubCategory4").val();
+            let filterCursos4 = $("#filterCursos4").val();
+            let filterStatus4 = $("#filterStatus4").val();
+
+            $("#filterCategory4").select2({theme: "classic"});
+            $("#filterSubCategory4").select2({theme: "classic"});
+            $("#filterCursos4").select2({theme: "classic"});
+            $("#filterStatus4").select2({theme: "classic"});
+
+            $('.demo-3').datepicker({
+                format:'dd/mm/yyyy',
+                language:'pt-BR'
+            });
+
+            var myTable = $("#tab_sug4").DataTable({
+                "dom": 'Bfrtip',
+                "fixedHeader": false,
+                "responsive": true,
+                "deferRender": true,
+                "searching": true,
+                "oSearch": {"bSmart": false},
+                "ajax": {
+                    "url" : "<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php",
+                    "dataSrc": "",
+                    "data": {
+                        "id": idReport
+                    }
+                },
+                "aaSorting": [
+                    [0, 'asc']
+                ],
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+                },
+                "oLanguage": {
+                    "sEmptyTable": "Carregando..."
+                },
+                "buttons": [
+                    { extend: 'excel', className: 'excelButton' },
+                    { extend: 'csv', className: 'csvButton' }
+                ],
+                "columns": [
+                    {
+                        "data": "nome_curso",
+                        "render": function (data, type, row) {
+                            return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
+                        }
+                    },
+                    { "data": "criacao" },
+                    { "data": "categoria" },
+                    { "data": "subcategoria" },
+                    { "data": "carga" },
+                    { "data": "inscritos" },
+                    { "data": "concluintes" },
+                    { "data": "naoconcluidos" },
+                    { "data": "naoiniciados" },
+                ]
+                ,
+                "columnDefs": [
+                    {
+                        targets: [1,4,5,6,7,8],
+                        className: 'dt-center'
+                    },
+                    {
+                        targets: [1],
+                        orderable: false
+                    }
+                ],
+                "createdRow": function (row, data, index) {
+                    $(row).find('td').css('font-family', 'Raleway, sans-serif');
+                }
+            });
+
+            $("#filterCategory4").on('change',function(){
+                var filterCategory4 = this.value;
+                myTable.column(2).search(filterCategory4, true, false).draw();
+            });
+
+            $("#filterSubCategory4").on('change',function(){
+                var filterSubCategory4 = this.value;
+                myTable.column(3).search(filterSubCategory4, true, false).draw();
+            });
+
+            $("#filterCursos4").on('change',function(){
+                var filterCursos4 = this.value;
+                myTable.column(0).search(filterCursos4, true, false).draw();
+            });
+
+            $("#filterStatus4").on('change',function(){
+                var filterStatus4 = this.value;
+                myTable.column(9).search(filterStatus4, true, false).draw();
+            });
+
+            $("#criacaoStart4").on('change', function () {
+                var criacaoStart4 = $("#criacaoStart4").val();
+                var criacaoEnd4 = $("#criacaoEnd4");
+
+                criacaoEnd4.prop('disabled', true);
+
+                myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                myTable.rows().remove().draw();
+
+                $.ajax({
+                    url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {
+                        "id": idReport,
+                        "criacaoStart4": criacaoStart4,
+                        "criacaoEnd4": criacaoEnd4.val(),
+                    },
+                    success: function (response) {
+                        var obj = jQuery.parseJSON(response);
+
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
+                    },
+                    error: function () {
+                        myTable.rows().remove().draw();
+                        myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                        myTable.rows().remove().draw();
+                    },
+                    complete: function () {
+                        criacaoEnd4.prop('disabled', false);
+                    }
+                });
+            });
+
+
+
+
+            $("#criacaoEnd4").on('change', function () {
+                var criacaoStart4 = $("#criacaoStart4");
+                var criacaoEnd4 = $("#criacaoEnd4").val();
+
+                criacaoStart4.prop('disabled', true);
+
+                myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                myTable.rows().remove().draw();
+
+                $.ajax({
+                    url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {
+                        "id": idReport,
+                        "criacaoStart4": criacaoStart4.val(),
+                        "criacaoEnd4": criacaoEnd4,
+                    },
+                    success: function (response) {
+                        var obj = jQuery.parseJSON(response);
+
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
+                    },
+                    error: function () {
+                        myTable.rows().remove().draw();
+                        myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                        myTable.rows().remove().draw();
+                    },
+                    complete: function () {
+                        criacaoStart4.prop('disabled', false);
+                    }
+                });
+            });
+
+
+            $("#btnLimparFiltro4").on('click',function(){
+                var criacaoStart4 = $("#criacaoStart4").val();
+                var criacaoEnd4 = $("#criacaoEnd4").val();
+                var hasData = false;
+
+                $("#filterCursos4").val('');
+                $('#select2-filterCursos4-container').text('Selecione uma opção');
+                $("#filterCategory4").val('');
+                $('#select2-filterCategory4-container').text('Selecione uma opção');
+                $("#filterSubCategory4").val('');
+                $('#select2-filterSubCategory4-container').text('Selecione uma opção');
+                $("#filterStatus4").val('');
+                $('#select2-filterStatus4-container').text('Selecione uma opção');
+                $("#criacaoStart4").val('');
+                $("#criacaoEnd4").val('');
+
+                if (criacaoStart4 || criacaoEnd4) {
+                    hasData = true;
+                }
+
+                myTable.column(0).search('').draw();
+                myTable.column(2).search('').draw();
+                myTable.column(3).search('').draw();
+
+                if (hasData) {
+                    myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                    myTable.rows().remove().draw();
+                    $.ajax({
+                        url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                        type: 'GET',
+                        dataType: 'text',
+                        data: {
+                            "id": idReport
+                        },
+                        success: function(response) {
+                            var obj = jQuery.parseJSON(response);
+
+                            if (obj.length === 0) {
+                                myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                                myTable.rows().remove().draw();
+                            } else {
+                                myTable.rows().remove().draw();
+                                myTable.rows.add(obj).draw();
+                            }
+                        },
+                        error: function () {
+                            myTable.rows().remove().draw();
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        }
+                    });
+                }
+            });
         }
 
         $("#arrowLabel").on('click',function(){

@@ -397,6 +397,100 @@ class reports implements renderable, templatable {
                     </div>
                 </div>
                 ';
+            } else if($id == 4){
+                $text .= '
+                <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
+                <div id="modalDiv"></div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <label id="arrowLabel" name="arrowLabel" class="em15 fGray negrito" style="cursor: pointer;">Filtro&nbsp<i id="arrow" name="arrow" class="fa fa-angle-down"></i></label>
+                    </div>
+                </div>
+                <div class="card sombreamento" style="display: block;" id="cardFiltros" name="cardFiltros">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Nome do curso</label>
+                                <select id="filterCursos4" name="filterCursos4" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+                $arrCursos = json_decode(json_encode($allCourse,JSON_UNESCAPED_UNICODE),true);
+
+                foreach($arrCursos as $row){
+                    $text .= '<option value="'.$row['curso'].'">'.$row['curso'].'</option>';
+                }
+
+                $text .= '
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Categoria do curso</label>
+                                <select id="filterCategory4" name="filterCategory4" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+                $arrCategoria = json_decode(json_encode($categoria,JSON_UNESCAPED_UNICODE),true);
+
+                foreach($arrCategoria as $row){
+                    $text .= '<option value="'.$row['categoria'].'">'.$row['categoria'].'</option>';
+                }
+
+                $text .= '
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Sub-categoria do curso</label>
+                                <select id="filterSubCategory4" name="filterSubCategory4" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+                $arrSubcategoria = json_decode(json_encode($subcategoria,JSON_UNESCAPED_UNICODE),true);
+
+                foreach($arrSubcategoria as $row){
+                    $text .= '<option value="'.$row['subcategoria'].'">'.$row['subcategoria'].'</option>';
+                }
+
+                $text .= '
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Status do curso</label>
+                                <select id="filterStatus4" name="filterStatus4" class="form-control">
+                                    <option value="">Selecione uma opção</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Data de criação</label>
+                                <div class="input-group" id="criacao_div4">
+                                    <input type="date" class="input-sm form-control" name="criacaoStart4" id="criacaoStart4" style="max-height: 27px;">
+                                    <span class="input-group-addon">até</span>
+                                    <input type="date" class="input-sm form-control" name="criacaoEnd4" id="criacaoEnd4" style="max-height: 27px;">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3 mt-4">
+                                <input type="button" style="width: 100%;" class="btn" id="btnLimparFiltro4" name="btnLimparFiltro4" value="Limpar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
+                        <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug4" name="tab_sug4" class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nome Curso</th>
+                                    <th>Data Criação</th>
+                                    <th>Categoria</th>
+                                    <th>Subcategoria</th>
+                                    <th>Carga Horária</th>
+                                    <th>Inscritos</th>
+                                    <th>Concluintes</th>
+                                    <th>Não Concluintes</th>
+                                    <th>Não Iniciados</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                ';
             }
         }
 

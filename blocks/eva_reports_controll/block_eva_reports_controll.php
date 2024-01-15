@@ -40,6 +40,8 @@ class block_eva_reports_controll extends block_base {
         $text .= '<br/>';
         $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=3"><i class="fa fa-user"></i>&nbsp;Cursos por usuário</a>';
         $text .= '<br/>';
+        $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=4"><i class="fa fa-info-circle"></i>&nbsp;Consolidado por Cursos</a>';
+        $text .= '<br/>';
 
         $this->content = new stdClass;
         $this->content->footer = '';

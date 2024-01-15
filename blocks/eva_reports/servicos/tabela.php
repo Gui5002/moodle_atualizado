@@ -105,8 +105,8 @@ if($idReport == 1){
 //================================RELATORIO 3 - USUARIOS GERAL- ========================================
 
 }else if($idReport == 3) {
-    $relatorio4 = new tabela_reports();
-    $rs = $relatorio4->get_curso_usuario();
+    $relatorio3 = new tabela_reports();
+    $rs = $relatorio3->get_curso_usuario();
     $array = array();
 
     if ($rs) {
@@ -140,5 +140,48 @@ if($idReport == 1){
         $arr = array(); // Inicializa o array vazio
         echo json_encode($arr, JSON_UNESCAPED_UNICODE);
     }
+    //================================RELATORIO 4 - USUARIOS GERAL- ========================================
+} else if($idReport == 4){
+
+    $relatorio4 = new tabela_reports();
+    $rs = $relatorio4->get_consolidado_cursos();
+
+    $array = array();
+    $dataAtual = new DateTime();
+
+    if($rs){
+        $resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
+
+        foreach($resultSet as $row){
+
+            $row['criacao'] = date('d/m/Y', strtotime($row['criacao']));
+
+            if(!empty($row['tcategoria'])){
+                $row['categoria'] = $row['tcategoria'];
+                $row['subcategoria'] = $row['scategoria'].'/'.$row['pcategoria'];
+            } elseif (!empty($row['scategoria'])){
+                $row['categoria'] = $row['scategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            } else {
+                $row['categoria'] = $row['pcategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            }
+
+            $valores = explode(" ", $row['carga_horaria']);
+            $row['carga'] = $valores[0].":".$valores[2].":00";
+
+            foreach($row as $k => $v){
+                $array[$k] = $v;
+            }
+
+            $arr[] = $array;
+        }
+
+        echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+    }else{
+        $arr = '';
+        echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+    }
+
 }
 

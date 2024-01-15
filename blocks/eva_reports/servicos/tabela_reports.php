@@ -115,9 +115,9 @@ class tabela_reports
         if(empty($end)){
             $end = $nowDate;
         }
-        $filtro4 = 'WHERE 1 = 1';
+        $filtro3 = 'WHERE 1 = 1';
 
-            $filtro4 .= " 
+            $filtro3 .= " 
                 AND COALESCE(
                     (
                         SELECT FROM_UNIXTIME(ue.timecreated) AS data_inscricao
@@ -154,8 +154,50 @@ class tabela_reports
                         ),
                         'Não registrado!'
                     ) AS data_matricula
-                FROM vw_courses_per_user AS vw $filtro4";
+                FROM vw_courses_per_user AS vw $filtro3";
 
+
+
+        $rs = $DB->get_records_sql($sql);
+
+        return $rs;
+    }
+
+    public function get_consolidado_cursos()
+    {
+        global $DB;
+
+        $nowDate = new DateTime();
+        $nowDate = $nowDate->format('Y-m-d');
+
+        $start = isset($_REQUEST['criacaoStart4']) ? $_REQUEST['criacaoStart4'] : "1969-12-31";
+        $end   = isset($_REQUEST['criacaoEnd4'])   ? $_REQUEST['criacaoEnd4']   : $nowDate;
+        if(empty($end)){
+            $end = $nowDate;
+        }
+        $filtro4 = 'WHERE 1 = 1';
+
+        $filtro4 .= " 
+                AND `data_criacao` BETWEEN '$start' AND '$end'
+            ";
+
+
+        $sql = "SELECT 
+                    `id`,
+                    course_id,
+                    UPPER(`nome_curso`) as nome_curso,
+                    UPPER(`pcategoria`) as pcategoria,
+                    UPPER(`scategoria`) as scategoria,
+                    UPPER(`tcategoria`) as tcategoria,
+                    `carga_horaria`,
+                    `inscritos`,
+                    `concluintes`,
+                    `naoconcluidos`,
+                    `naoiniciados`,
+                    `data_criacao` as `criacao`
+                FROM
+                    vw_courses_and_categories
+                $filtro4";
 
 
         $rs = $DB->get_records_sql($sql);
