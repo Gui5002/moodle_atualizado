@@ -81,10 +81,6 @@ p.register {
     position: absolute;
     width: 50%;
 }
-.mc-login {
-    width: 82%;
-    border-radius: 20px;
-}
 .custom-control-label {
     font-size: 15px;
     color: #2973b8;

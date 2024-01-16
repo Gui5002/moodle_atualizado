@@ -3056,7 +3056,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 .details {
     padding-right: 4px;
     font-weight: 500;
-    color: #b43f3f;
+    color: #313030;
 }
 .cc_tab {
     padding-right: 4px;
@@ -6412,9 +6412,6 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
 .our-log {
     background-color: #f9fafc;
 }
-.login_form {
-    padding: 20px 20px 20px;
-}
 .sign_up_form .divide, .login_form .divide {
     position: relative;
 }
@@ -6430,11 +6427,11 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     top: -10px;
     width: 62px;
 }
-.sign_up_form.inner_page, .login_form.inner_page {
+/*.sign_up_form.inner_page, .login_form.inner_page {
     border-bottom-left-radius: 10px;
     border-radius: 15px;
     box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
-}
+}*/
 .our-log.login-bg, .our-log.style4, .our-log.style3 {
     min-height: 100vh;
     display: flex;
@@ -6489,9 +6486,10 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     top: 4px;
 }
 .login_form.inner_page .heading h3 {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 5px;
+    padding: 15px 0 0 0;
 }
 .login_form .heading {
     margin-bottom: 30px;

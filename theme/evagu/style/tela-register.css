@@ -6,8 +6,8 @@
 /*    border-radius: 8px;*/
 /*    background-color: rgb(255, 255, 255);*/
 /*}*/
-.sign_up_form.inner_page {
-    padding: 0 40px 0;
+/*.sign_up_form.inner_page {
+  padding: 0 40px 0;
     border-bottom-left-radius: 10px;
     box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
 }
@@ -53,7 +53,7 @@
         /*box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
         box-shadow: none;
     }*/
-}
+}/*
 #page-login-signup .login_form.inner_page .mform input {
     width: 100%;
 }
@@ -61,16 +61,16 @@
 text-align:center;
 }
 legend.ftoggler {
-    /*margin-left: 34%;*/
+    /*margin-left: 34%;*//*
     font-weight: 650;
-}
+}/*
 .ftoggler a {
     color: black;
 }
 .collapsible-actions {
     /*margin-left: 60%;*/
     /*text-align: unset;*/
-}
+}/*
 .collapsible-actions a {
     color: #749ad0;
     font-weight: 600;
@@ -83,10 +83,10 @@ legend.ftoggler {
     color: #5280BA;
 }
 .col-form-label label {
-    /*margin-left: -90%;*/
-    font-weight: 500;
+    /*margin-left: -90%;
+    font-weight: 500;/*
 }
-/*---Alinamento dos Bootes---*/
+/*---Alinamento dos Bootes---*//*
 .flex-wrap {
     margin-left: 21%;
 }

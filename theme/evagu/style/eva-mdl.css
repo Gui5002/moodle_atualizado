@@ -528,7 +528,7 @@ body.ccn_context_dashboard {
     border-color: #ddd;
 }
 .badge, .badge-pill {
-    padding: 3px 9px;
+    padding: 5px 10px;
     color: #fff;
     background-color: #0eb5db!important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .1);
@@ -2169,8 +2169,8 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     width: 100%;
     padding-right: 45px;
     padding-left: 10px;
-    background: #2e6292;
-    color: #000000!important;
+    background:#101a21;
+    color: #ffffff!important;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>div,
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>a,

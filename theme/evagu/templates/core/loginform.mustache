@@ -88,7 +88,6 @@ Example context (json):
 "maintenance": "For full access to this site, you need to login in as an admin."
 }
 }}
-<div class="sign_up-container">
   {{#cansignup}}
     <div class="sr-only">
       <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
@@ -137,8 +136,7 @@ Example context (json):
           {{#username}}checked="checked" {{/username}} />
         <label class="custom-control-label" for="rememberusername1">{{#str}} rememberusername, admin {{/str}}</label>
       {{/rememberusername}}
-      <a class="tdu btn-fpswd float-right" href="{{forgotpasswordurl}}">{{#str}} forgot_password, theme_evagu
-        {{/str}}</a>
+      <a class="tdu btn-fpswd float-right" href="{{forgotpasswordurl}}">{{#str}} forgot_password, theme_evagu {{/str}}</a>
     </div>
     <button type="submit" class="btn btn-log btn-block btn-thm2" id="loginbtn">{{#str}}login{{/str}}</button>
   </form>
