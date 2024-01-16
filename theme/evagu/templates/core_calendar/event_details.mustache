@@ -50,45 +50,53 @@
   <p>{{{.}}}</p>
 {{/description}}
 <ul class="mb0">
-  <li>
+  <li class="lowmargin">
+     <a href="{{urlext}}" style="font-weight: bold;color:blue;"><i class="fa fa-link"></i>&nbsp;URL do evento</a>
+  </li>
+  {{#categoryid}}
+  <li class="lowmargin">
+    <span class="fa fa-bars">&nbsp;Categoria: {{category.name}}</span> 
+  </li>
+  {{/categoryid}}
+  <li class="lowmargin">
     <span class="flaticon-appointment"></span> {{{formattedtime}}}
   </li>
   {{#normalisedeventtypetext}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> {{normalisedeventtypetext}}
     </li>
   {{/normalisedeventtypetext}}
   {{#location}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-placeholder"></span> {{{.}}}
     </li>
   {{/location}}
   {{#isactionevent}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> <a href="{{course.viewurl}}">{{{course.fullname}}}</a>
     </li>
   {{/isactionevent}}
   {{#iscategoryevent}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> {{{category.nestedname}}}
     </li>
   {{/iscategoryevent}}
   {{#iscourseevent}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> <a href="{{url}}">{{{course.fullname}}}</a>
     </li>
   {{/iscourseevent}}
   {{#groupname}}
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> <a href="{{url}}">{{{course.fullname}}}</a>
     </li>
-    <li>
+    <li class="lowmargin">
       <span class="flaticon-clock"></span> {{{groupname}}}
     </li>
   {{/groupname}}
   {{#subscription}}
     {{#displayeventsource}}
-      <li>
+      <li class="lowmargin">
         <span class="flaticon-clock"></span>
         {{#subscriptionurl}}
           <a href="{{subscriptionurl}}">{{#str}}subscriptionsource, core_calendar, {{{subscriptionname}}}{{/str}}</a>

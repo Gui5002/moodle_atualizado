@@ -13574,10 +13574,9 @@ body>.wrapper {
     max-width: none;
 }
 @media (min-width: 576px) {
-    .mform>.form-group {
+    .mform > .form-group {
         margin-left: 1.5rem;
-        margin-top: 10px;
-    }
+        margin-top: 10px;}
 }
 @media (min-width: 767px) {
     .ccn-blog-featured-thumb img {

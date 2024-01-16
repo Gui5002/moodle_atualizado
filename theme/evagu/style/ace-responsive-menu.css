@@ -50,7 +50,7 @@ ul {
   font-size: 16px;
   font-weight: 400;
   color: #979797;
-  font-family: "[[setting:primary_font]]", sans-serif;
+  font-family: '[[setting:primary_font]]', sans-serif;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
