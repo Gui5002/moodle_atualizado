@@ -7014,7 +7014,7 @@ a.close.disabled {
     width: 1rem;
     margin-left: -.5rem;
     content: "";
-    border-bottom: 1px solid #f7f7f7
+    border-bottom: 1px solid #f8f8f8
 }
 
 .bs-popover-auto[x-placement^=left],
@@ -7048,7 +7048,7 @@ a.close.disabled {
     padding: .5rem .75rem;
     margin-bottom: 0;
     font-size: 1rem;
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
     border-bottom: 1px solid #ebebeb;
     border-top-left-radius: calc(.3rem - 1px);
     border-top-right-radius: calc(.3rem - 1px)

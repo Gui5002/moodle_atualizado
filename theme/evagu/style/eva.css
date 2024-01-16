@@ -2922,11 +2922,12 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 .cs_row_two .cs_overview {
     border-style: solid;
     border-width: 2px;
-    border-color: rgb(237, 239, 247);
+    border-color: rgb(243, 243, 243);
     border-radius: 5px;
-    background-color: rgba(42, 53, 59, 0);
+    background-color: rgb(255, 255, 255);
     margin-bottom: 30px;
     padding: 30px;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
 }
 .cs_row_two.csv2 .cs_overview,
 .cs_row_three.csv2 .course_content,
@@ -2997,7 +2998,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     border-width: 2px;
     border-color: rgb(237, 239, 247);
     border-radius: 5px;
-    background-color: rgba(42, 53, 59, 0);
+    background-color: rgb(255, 255, 255);
     margin-bottom: 30px;
     position: relative;
     padding: 30px;
@@ -6710,7 +6711,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     font-family: "[[setting:primary_font]]", sans-serif;
     color: rgb(59, 59, 59);
     line-height: 1.333;
-    background: rgb(245, 245, 246);
+    background: rgb(228 239 248);
 }
 .faq_according .panel-heading .panel-title a {
     padding: 15px 25px;
@@ -7223,21 +7224,21 @@ body:not(.ccn_context_dashboard) .ui_kit_select_search button.btn:focus {
     border-radius: 22.5px;
     height: 40px;
     line-height: 20px;
-    width: 104px;
+    width: 110px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-/* .mbp_pagination ul.page_navigation li.page-item:first-child .page-link:hover {
-  border: 2px solid #eeeeee;
-  background-color: #eeeeee;
+.mbp_pagination ul.page_navigation li.page-item:first-child .page-link:hover {
+  border: 2px solid #00adff;
+  background-color: #14b05f;
   border-radius: 22.5px;
   color: #4f4f4f;
   height: 45px;
   line-height: 25px;
   width: 104px;
-} */
+}
 .mbp_pagination ul.page_navigation li.ccn-page-item-prev .page-link:hover,
 .mbp_pagination ul.page_navigation li.ccn-page-item-first .page-link:hover,
 .mbp_pagination ul.page_navigation li.ccn-page-item-last .page-link:hover,
@@ -7373,9 +7374,9 @@ body:not(.ccn_context_dashboard) .ui_kit_select_search button.btn:focus {
     color: rgb(255, 255, 255);
 }
 .blog_grid_post .details h3 {
-    font-size: 18px;
+    font-size: 15px;
     font-family: "[[setting:primary_font]]", sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     color: #0a0a0a;
     line-height: 1.2;
     margin-bottom: 15px;
@@ -7687,7 +7688,7 @@ body:not(.ccn_context_dashboard) .ui_kit_select_search button.btn:focus {
     margin-bottom: 30px;
     padding: 30px;
     text-align: center;
-    background-color: rgb(237, 239, 247);
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
 }
 .instructor_pricing_widget.csv2 {
@@ -8032,7 +8033,7 @@ body:not(.ccn_context_dashboard) .ui_kit_select_search button.btn:focus {
 }
 /*== Dashbord details Page ==*/
 .our-dashbord {
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
     margin-top: 150px;
     position: relative;
 }
@@ -10089,7 +10090,7 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
     color: #f6f6f6;
 }
 .color-whitef7 {
-    color: #f7f7f7;
+    color: #f8f8f8;
 }
 .color-whitef8 {
     color: #f8f8f8;
@@ -10122,7 +10123,7 @@ body:not(.ccn_context_focus) .dashbord_nav_list li a i.icon {
     background-color: #f6f6f6;
 }
 .bgc-f7 {
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
 }
 .bgc-f8 {
     background-color: #f8f8f8;
@@ -12978,7 +12979,7 @@ body.translated {
     border: none;
 }
 .card-header {
-    background-color: #e1e6ef;
+    background-color: rgb(228 239 248);
     border-bottom: 0px !important;
     margin-bottom: 5px !important;
     border-radius: 5px !important;
@@ -13618,6 +13619,7 @@ body>.wrapper {
 #ccn-main-region {
     padding-top: 60px;
     padding-bottom: 30px;
+    background: #f8f8f8;
 }
 .message_container:not(.message_container_drawer) .user_heading {
     height: 108px;
@@ -15004,7 +15006,7 @@ ul.list_requiremetn {
   box-shadow: 0px 0px 50px 0px rgba(19, 19, 28, 0.12); */
 }
 .why_chose_us .icon {
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
     border-radius: 50%;
     height: 130px;
     line-height: 130px;
@@ -15044,7 +15046,7 @@ ul.list_requiremetn {
     overflow: hidden;
 }
 .why_chose_us.style2 .icon {
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
 }
 .why_chose_us.style2:before {
     background-color: transparent;

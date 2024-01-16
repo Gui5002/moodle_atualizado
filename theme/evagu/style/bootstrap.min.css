@@ -4914,7 +4914,7 @@ a.close.disabled {
     width: 1rem;
     margin-left: -.5rem;
     content: "";
-    border-bottom: 1px solid #f7f7f7
+    border-bottom: 1px solid #f8f8f8
 }
 .bs-popover-auto[x-placement^=left], .bs-popover-left {
     margin-right: .5rem
@@ -4941,7 +4941,7 @@ a.close.disabled {
     margin-bottom: 0;
     font-size: 1rem;
     color: inherit;
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
     border-bottom: 1px solid #ebebeb;
     border-top-left-radius: calc(.3rem - 1px);
     border-top-right-radius: calc(.3rem - 1px)

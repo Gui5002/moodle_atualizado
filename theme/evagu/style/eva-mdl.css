@@ -404,7 +404,7 @@ body.ccn_context_dashboard {
     margin-bottom: 5px;
     border-width: 2px;
     background-color: #2973b8;
-    border-color: #426b8f;
+    border-color: #2973b8;
     border-radius: 5px;
     -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3);
@@ -1823,7 +1823,7 @@ border: 0;
     margin: 11px 0;
 }
 body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.pagelayout-mydashboard {
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
 }
 .pagelayout-maintenance header.header-nav.menu_style_home_one.dashbord_pages {
     padding-bottom: 15px;
