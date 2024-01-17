@@ -1,35 +1,8 @@
 
-@media only screen and (min-width: 320px) {
-    .felement .d-md-inline-block, .form-autocomplete-multiple {
-        width: 95% !important;
-    }
-    .bitem .custom-select {
-        width: 95%!important;
-    }
-    .bitem .barema_id, .bitem .resp_default {
-        width: 95%!important;
-    }
-
-    #fitem_id_dist .felement {
-        display: none;
-    }
-    #fitem_id_dist .form-control-static {
-        padding: 10px;
-        border: 1px solid #959595;
-        background-color: #91A7C7;
-        width: 95%;
-        color: white;
-        font-weight: 600;
-        border-radius: 5px;
-    }
-
-
-}
 @media screen and (max-width: 790px) {
     .felement .d-md-inline-block, .form-autocomplete-multiple {
         width: 95% !important;
     }
-
     .ccnDashBlCt {
         padding: 0;
         font-size: 1rem;
@@ -39,29 +12,15 @@
     }
 }
 
-
 @media only screen and (min-width: 1200px) {
     .felement .d-md-inline-block, .form-autocomplete-multiple {
-        width: 95% !important;
+        width: 50% !important;
     }
     .bitem .custom-select {
         width: 50%!important;
     }
     .bitem .barema_id, .bitem .resp_default {
         width: 95%!important;
-    }
-
-    #fitem_id_dist .felement {
-        display: none;
-    }
-    #fitem_id_dist .form-control-static {
-        padding: 10px;
-        border: 1px solid #959595;
-        background-color: #91A7C7;
-        width: 95%;
-        color: white;
-        font-weight: 600;
-        border-radius: 5px;
     }
 
 

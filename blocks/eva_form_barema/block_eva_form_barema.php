@@ -2,24 +2,18 @@
 
 require_once($CFG->dirroot. '/theme/evagu/ccn/block_handler/ccn_block_handler.php');
 
-require_once('classes/output/criar_pos_atribuicao.php');
-require_once('classes/output/criar_modelo_pos.php');
+require_once('classes/output/criar_barema.php');
 require_once('classes/output/customize_conf.php');
 require_once('classes/output/avaliacao_config_view.php');
 require_once('classes/output/avaliacao_config_pdf.php');
 require_once('classes/output/avaliador_config_view.php');
-require_once('classes/output/avaliador_lista.php');
+require_once('classes/output/avaliador_config_lista.php');
 require_once('classes/output/barema_config_lista.php');
 require_once('classes/output/relatorio_barema_config_pdf.php');
 require_once('classes/output/relatorio_barema_config_xls.php');
-require_once('classes/output/gerenciar_alunos.php');
-require_once('classes/output/admin_alunos.php');
-require_once('classes/output/admin_curso.php');
-require_once('classes/output/alunos.php');
 require_once('classes/privacy/pos_contact.php');
 //require_once($CFG->dirroot . '/local/contact/classes/local_contact.php');
 require_once ('models/criar_barema.php');
-require_once ('models/prazos.php');
 //require('../../vendor/autoload.php');
 use Dompdf\Dompdf;
 
@@ -68,9 +62,6 @@ class block_eva_form_barema extends block_base {
         }
 
         $id = $_GET['id'];
-        $gerenciar_alunos = $_GET['avaliador'];
-        $qt_alunos = $_GET['qt_aluno_por_avaliador'];
-
 
         $arraypath = explode('/', $PAGE->docspath);
 
@@ -79,38 +70,19 @@ class block_eva_form_barema extends block_base {
             $fildsbarema[$key] = $value;
         }
 
-        $fildsinputs = [];
-        $modelo = new \stdClass();
-        foreach ($_POST as $key => $value) {
-            $fildsinputs[$key] = $value;
-            $modelo->$key = $value;
-        }
-
-        if ($arraypath[2] === 'criar_modelo') {
-            if ( $_GET['modelo'] == "novo"){
-                if ($modelo->submitbutton == "Cadastrar") {
-                    criar_modelo_pos($modelo);
-                }
-            }
-        }
-
 
         //=========Aqui evita que novas instancia do block "eva_form_barema" faça alteraçao na table "mdl_eva_barema"================
-        if ($arraypath[2] === 'create') {
-//            $configdata = $DB->get_record('eva_barema', array('id'=>1));
-//            if (!hash_equals($configdata->hash_barema, $this->instance->configdata)) {
-//                //=========Chama a função de inserção de Modelo Barema==================
-//                block_instance_barema($this->instance);
-//            }
-
-//            $sql = "TRUNCATE TABLE 'carrinho'";
-//            $DB->
+        if ($arraypath[2] === 'barema') {
+            $configdata = $DB->get_record('eva_barema', array('id'=>1));
+            if (!hash_equals($configdata->hash_barema, $this->instance->configdata)) {
+                //=========Chama a função de inserção de Modelo Barema==================
+                block_instance_barema($this->instance);
+            }
 
 
-
-            $novobarema = new \block_eva_form_barema\output\criar_pos_atribuicao($CFG->wwwroot . '/blocks/eva_form_barema/create.php?id='.$id, null, 'post');
-            $returnurlbarema = new moodle_url('/blocks/eva_form_barema/create.php?id='.$id);
-            cadastrar_atribuicao($novobarema, $returnurlbarema, $fildsbarema);
+            $novobarema = new \block_eva_form_barema\output\criar_barema($CFG->wwwroot . '/blocks/eva_form_barema/barema.php?id='.$id, null, 'post');
+            $returnurlbarema = new moodle_url('/blocks/eva_form_barema/barema.php?id='.$id);
+            models_barema($novobarema, $returnurlbarema, $fildsbarema);
         }
 
 
@@ -122,9 +94,7 @@ class block_eva_form_barema extends block_base {
 //            var_dump($idexiste->status);die();
 //            }
 
-//            $returnurl = new moodle_url($CFG->wwwroot . '/blocks/eva_form_barema/barema_avaliacao.php?barema_id='.$_GET['barema_id'].'&avaliador_id='.$_GET['avaliador_id'].'&curso_id='.$_GET['curso_id'].'&quiz_id='.$_GET['quiz_id'].'&aluno_id='.$_GET['aluno_id']);
-            $returnurl = new moodle_url($CFG->wwwroot . '/blocks/eva_form_barema/gerencia.php?qt_aluno_por_avaliador='.$_GET['tb_id_avaliador']);
-
+            $returnurl = new moodle_url($CFG->wwwroot . '/blocks/eva_form_barema/barema_avaliacao.php?barema_id='.$_GET['barema_id'].'&avaliador_id='.$_GET['avaliador_id'].'&curso_id='.$_GET['curso_id'].'&quiz_id='.$_GET['quiz_id']);
 
             if ($barema_id = $_GET['barema_id']) {
                 $barema = $DB->get_record('eva_barema', array('id'=>$barema_id));
@@ -133,19 +103,16 @@ class block_eva_form_barema extends block_base {
                     redirect($returnurl);
                 }
             }
-
             controller_barema_avaliacao($returnurl, $fildsbarema);
         }
 
         $customize_config = new \block_eva_form_barema\output\customize_conf($this->config, $this->context);
 
-        $avaliador_config_lista = new \block_eva_form_barema\output\avaliador_lista($this->config, $this->context);
+        $avaliador_config_lista = new \block_eva_form_barema\output\avaliador_config_lista($this->config, $this->context);
 
         $avaliacao_config_view = new \block_eva_form_barema\output\avaliacao_config_view($this->config, $this->context);
 
         $avaliador_config_view = new \block_eva_form_barema\output\avaliador_config_view($this->config, $this->context);
-
-        $novo_modelo = new \block_eva_form_barema\output\criar_modelo_pos($this->config, $this->context);
 
         $form_avaliador = new \block_eva_form_barema\output\form_barema($this->config, $this->context);
 
@@ -153,34 +120,13 @@ class block_eva_form_barema extends block_base {
 
         $this->content          = new stdClass;
 
-
-        if ($arraypath[2] === 'create') {
+        if ($arraypath[2] === 'barema') {
             $this->content->text = $renderer->render($novobarema);
-        }else if ($arraypath[2] === 'criar_modelo') {
-            $this->content->text = $renderer->render($novo_modelo);
         }else if ($arraypath[2] === 'barema_avaliacao') {
             $this->content->text  = $renderer->render($form_avaliador);
-        }else if ($arraypath[2] === 'gerencia') {
-            if ($_GET['qt_aluno_por_avaliador']){
-                $alunos = new \block_eva_form_barema\output\alunos($this->config, $this->context);
-                $this->content->text  = $renderer->render($alunos);
-            }elseif ($_GET['avaliador']){
-                $avaliacao = new \block_eva_form_barema\output\gerenciar_alunos($this->config, $this->context);
-                $this->content->text  = $renderer->render($avaliacao);
-            }elseif ($_GET['admin'] == 'alunos'){
-                $avaliacao = new \block_eva_form_barema\output\admin_alunos($this->config, $this->context);
-                $this->content->text  = $renderer->render($avaliacao);
-            }elseif ($_GET['admin'] == 'curso'){
-                $avaliacao = new \block_eva_form_barema\output\admin_curso($this->config, $this->context);
-                $this->content->text  = $renderer->render($avaliacao);
-            }elseif ( $_GET['admin'] == 'avaliacao_pendente'){
-                $returnurl = new moodle_url('/blocks/eva_form_barema/gerencia.php?admin=curso');
-                emails_pendente_avaliacao_pos($returnurl, $fildsinputs);
-            }
         }else if ($arraypath[2] === 'barema_lista') {
             $barema_config_lista = new \block_eva_form_barema\output\barema_config_lista($this->config, $this->context);
             $this->content->text = $renderer->render($barema_config_lista);
-
             if ( $_GET['attemp'] == 'view'){
                 require_once '../../dompdf/autoload.inc.php';
                 $avaliacao_config_pdf = new \block_eva_form_barema\output\avaliacao_config_pdf($this->config, $this->context);
@@ -199,7 +145,6 @@ class block_eva_form_barema extends block_base {
                 $relatorio_barema_config_pdf = new \block_eva_form_barema\output\relatorio_barema_config_pdf($this->config, $this->context);
 
                 $relatorio =  $renderer->render($relatorio_barema_config_pdf);
-
 
                 $dompdf = new Dompdf(["enable_remote", true]);
                 $dompdf->loadHtml($relatorio);

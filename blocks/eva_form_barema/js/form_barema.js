@@ -19,7 +19,6 @@ let alunos = [];
     alunos = await res.json()
 })()
 
-
 const searchAlunos = alunoText => {
     let matches = alunos.filter(aluno => {
         const regex = new RegExp(`^${alunoText}`, 'gi')
@@ -42,6 +41,47 @@ function outputHTML (matches) {
         alunoList.innerHTML = '';
     }
 }
+function aluno_lista(aluno) {
+    $("#id_aluno").val(aluno)
+    alunoList.innerHTML = '';
+    $.ajax({
+        url: wwwroot + '/blocks/eva_form_barema/completar.php',
+        data: 'acao=pesquisar&valor=' + aluno,
+        success: function (resp) {
+            var aluno = JSON.parse(resp);
+            $('#id_estudante').val(aluno.id);
+
+
+            var nome_inexistente = $('#id_aluno').val();
+            var idestudante = $('#id_estudante').val();
+            var idbarema = $('#idbarema').val();
+
+            $.ajax({
+                url: wwwroot+'/blocks/eva_form_barema/completar.php',
+                data: 'acao=buscaperguntaresposta&idbarema='+idbarema+'&idavaliador='+avaliadorid+'&id_curso='+cursoid+'&id_quiz='+quizid+'&idestudante='+idestudante+'&nome_naoexiste='+nome_inexistente,
+                dataType: 'json',
+                success: function ( resposta ) {
+                    console.log(resposta)
+                    if (resposta.question) {
+                        $('.boxes').css("overflow-y", "scroll");
+                        $('.atividades').html('<div class="alert alert-secondary" role="alert">'+resposta.question+'</div>');
+                        $('.respostacorreta').html('<div class="alert fz14 ml-6" role="alert" style="background-color: rgba(229,229,229,0.61)">' +
+                            '<b>Resposta Ideal:</b></br><p>'+resposta.responsecorreta+'</p> </div>');
+                        $('.enviados').css("overflow-y", "scroll");
+                        $('.enviados').html('<div class="alert alert-success" role="alert">'+resposta.response+'</div>');
+                    }
+                    if (resposta.status){
+                        $('.atividades').html('<div class="alert alert-warning" role="alert"><strong>Esse Aluno já foi avaliado!</strong></div>');
+                    }
+                    if (resposta.error){
+                        $('.atividades').html('<div class="alert alert-warning" role="alert"><strong>Aluno não encontrado!</strong></div>');
+                    }
+                }
+            });
+        }
+    });
+}
+idaluno.addEventListener('input', () => searchAlunos(idaluno.value));
 
 //========================LIMPA CAMPO======================================
 
@@ -177,18 +217,18 @@ function validate_block_eva_form() {
     var frm = document.getElementById('mform1')
     var first_focus = false;
 
-    // ret = validate_block_eva_form_barema_output_form_barema(frm.elements['aluno']) && ret;
+    ret = validate_block_eva_form_barema_output_form_barema(frm.elements['aluno']) && ret;
 
-    // if (!ret && !first_focus) {
-    //     first_focus = true;
-    //     Y.use('moodle-core-event', function () {
-    //         Y.Global.fire(M.core.globalEvents.FORM_ERROR, {
-    //             formid: 'mform1',
-    //             elementid: 'id_error_aluno'
-    //         });
-    //         $("#id_aluno").focus();
-    //     });
-    // }
+    if (!ret && !first_focus) {
+        first_focus = true;
+        Y.use('moodle-core-event', function () {
+            Y.Global.fire(M.core.globalEvents.FORM_ERROR, {
+                formid: 'mform1',
+                elementid: 'id_error_aluno'
+            });
+            $("#id_aluno").focus();
+        });
+    }
 
     return ret;
 }
@@ -220,52 +260,25 @@ function validate_block_eva_form_barema_output_form_barema(element) {
         return true;
     }
 }
-
-$(function (){
-    var toastTrigger = document.getElementById('id_submitbutton')
-    // var toastLiveExample = document.getElementById('id_submitbutton')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            alert('testeeeee')
-            let qtd = $("#id_qtd").html();
-            let radiobutton = [];
-            radiobutton[1] = $("input[name='nt_faixa_1']:checked").val();
-            radiobutton[2] = $("input[name='nt_faixa_2']:checked").val();
-            radiobutton[3] = $("input[name='nt_faixa_3']:checked").val();
-            radiobutton[4] = $("input[name='nt_faixa_4']:checked").val();
-            radiobutton[5] = $("input[name='nt_faixa_5']:checked").val();
-
-            for (var i=1; i <= qtd; i++) {
-
-                var error = verificacamposvazio(radiobutton[i], i);
-
-                if (error > 0) {
-                    return false;
-                }
-                // if (i == qtd) {
-                //     var toast = new bootstrap.Toast(toastLiveExample)
-                //     toast.show()
-                // }
-            }
-            function verificacamposvazio(radiobutton, i) {
-                let error = 0;
-
-                if (radiobutton == undefined){
-                    error += 1;
-                    $(".nt_faixa_"+i).addClass('is-invalid');
-                    return error;
-                }else{
-                    $(".nt_faixa_"+i).removeClass('is-invalid');
-                }
-            }
-
-        });
-    }
-
+document.getElementById('id_aluno').addEventListener('blur', function (ev) {
+    // valida_nome_aluno(ev.target);
+    validate_block_eva_form_barema_output_form_barema(ev.target);
+});
+document.getElementById('id_aluno').addEventListener('change', function (ev) {
+    // valida_nome_aluno(ev.target);
+    validate_block_eva_form_barema_output_form_barema(ev.target);
 });
 
-
-
+// function faixa_pontos(val) {
+//     var faixa = $("#id_f1"+id).val();
+//     alert(val);
+//     for (var i = 0; i<=30; i++){
+//         if (faixa == i){
+//             $("#id_nota"+id).html(faixa);
+//             soma_nota_final();
+//         }
+//     }
+// }
 
 $("input[name=nt_faixa_1]").on('change', function() {
     var faixa = $(this).val();
@@ -318,40 +331,16 @@ $("input[name=nt_faixa_5]").on('change', function() {
 
 function soma_nota_final(){
     var idtotal = $("#id_qtd").html();
-
     var fx = 0;
     var soma = 0;
-    var ch = 1;
-    let radiobutton = [];
-    console.log(idtotal)
     for (var i = 1; i <= idtotal; i++) {
         fx = $('#id_nota'+i).html();
         soma = parseInt(soma) + parseInt(fx);
-        radiobutton[i] = $("input[name=nt_faixa_"+i+"]:checked").val();
-        if (radiobutton[i]){
-            if (ch == idtotal){
-                $(".btn-none").removeClass("d-none");
-            }
-            ch++
-        }
     }
-    var percent = $("#id_desconto").html();
-    if (percent){
-        var perc = menos_porcentos(soma, percent);
-        soma = perc;
-    }
+
     $("#id_nota_final").html(soma);
     $("#nota_final").val(soma);
+
 }
-
-function menos_porcentos(soma, percent) {
-
-    var perc = percent / 100;
-    var res_perc = perc * soma;
-    var resultado = soma + (res_perc);
-    var arredonda = Math.round(resultado)
-
-    return arredonda;
-}
-
+// .parent().find("input[name=faixa1]:checked").change();
 

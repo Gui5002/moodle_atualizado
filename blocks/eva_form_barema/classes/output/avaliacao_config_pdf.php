@@ -109,7 +109,7 @@ class avaliacao_config_pdf implements renderable, templatable {
         $data->aluno = $dataview->aluno;
         $data->curso = $dataview->curso;
         $data->atividade = $dataview->atividade;
-        $data->datatime = date('d/m/Y', strtotime($dataview->data));
+        $data->datatime = $dataview->data;
         $data->notaAvaliador = $nota->nt_avaliador;
         $data->barema = $barema;
         $data->hidden = $hidden;

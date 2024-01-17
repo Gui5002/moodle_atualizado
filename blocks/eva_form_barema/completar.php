@@ -2,7 +2,7 @@
 require_once ('../../config.php');
 require_once ('lib.php');
 
-global $DB, $USER;
+global $DB;
 
 $acao = ($_POST['acao'] ? $_POST['acao'] : $_GET['acao']);
 
@@ -13,21 +13,21 @@ switch ($acao) {
 
         $sqljoin = "SELECT * FROM mdl_quiz_attempts WHERE quiz = '{$quizid}' AND state = 'finished'";
         $existe = $DB->record_exists_sql($sqljoin);
-//
-        $users = [];
+
         if ($existe){
             $quiz = $DB->get_records_sql($sqljoin);
             $i = 0;
             foreach ($quiz as $key=>$quizes){
                 $nome_aluno = $DB->get_record_sql("SELECT fullname from vw_autocomplete_user where id = '{$quizes->userid}' ORDER BY fullname");
-                $users[] = $nome_aluno->fullname;
+                $users[$i] = ucwords(strtolower($nome_aluno->fullname));
                 $i++;
             }
             echo json_encode($users);
         }else{
             echo json_encode($existe);
         }
-    break;
+
+        break;
 
     case 'pesquisar':
         $valor = $_GET['valor'];
@@ -168,9 +168,8 @@ switch ($acao) {
 
 case 'buscaperguntaresposta':
 
-//    $idbarema = trim($_GET['idbarema']);
-//    $idavaliador = trim($_GET['idavaliador']);
-
+    $idbarema = trim($_GET['idbarema']);
+    $idavaliador = trim($_GET['idavaliador']);
     $idcurse = trim($_GET['id_curso']);
     $idquiz = trim($_GET['id_quiz']);
     $idestudante = trim($_GET['idestudante']);
@@ -190,12 +189,12 @@ case 'buscaperguntaresposta':
                $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
                 //======== Verificar se o avaliador logado e a atividade autal é o mesmo que avaliou o aluno e se o status esta true====
                 //===O aluno so pode ser avaliador uma vez nesse curso e atividade !!!==========
-
+               
                $repetir_avaliacao = $DB->get_record('eva_barema_avaliacao', array('tb_avaliador_id'=>$tb_avaliador->id, 'aluno_tb_user_id'=>$idexiste->aluno_tb_user_id));
                if ($tb_avaliador->tb_curso_id == $idcurse && $tb_avaliador->tb_atividade_id == $idquiz && ($repetir_avaliacao->flag == 1)) {
                    //=== esse aluno pode ser avaliado denovo caso a flag for = 1 =======
                     $podeavaliar = true;
-
+                   
                }else if ($tb_avaliador->tb_curso_id == $idcurse && $tb_avaliador->tb_atividade_id == $idquiz) {
                    //===esse aluna ja foi avaliador com esses parametros de coruso e de quiz ===
                    $podeavaliar = false;
@@ -270,7 +269,7 @@ case 'buscaperguntaresposta':
         }
         echo json_encode($option);
 
-    break;
+        break;
     case 'adicionarvaliador':
 
         $avaliadorid = $_GET['avaliadorid'];
@@ -286,7 +285,7 @@ case 'buscaperguntaresposta':
 
         echo json_encode($avaliador);
 
-    break;
+        break;
 
     case 'editavaliadores':
 
@@ -308,116 +307,10 @@ case 'buscaperguntaresposta':
 
         echo json_encode($bi);
 
-    break;
-
-    case 'quantosalunos': //==========Pega a quantidade de alnos e faz a distribuição para os avaliadores ====================
-
-        $array_avaliadorid = explode(',', $_GET['avaliadores']);
-        $quizid = $_GET['quizid'];
-//        $quizid = 22;
-
-        $excluiu = $DB->delete_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-
-//        $quiz = $DB->count_records('quiz_attempts', array('quiz'=>$quizid, 'state'=>'finished'), '', 'userid');
-        $quiz = $DB->count_records('quiz_attempts', array('quiz'=>$quizid), '', 'userid');
-
-        $result = intdiv($quiz, count($array_avaliadorid));
-        $resto = ($quiz % count($array_avaliadorid));
-
-        for ($x=1; $x<=count($array_avaliadorid); $x++){
-            $inteiros[]['qt_avaliando'] = $result;
-        }
-
-        if ($resto > 0){
-            foreach ($inteiros as $int){
-                if ($resto > 0){
-                    $users[]['qt_avaliando'] = $int['qt_avaliando'] + 1;
-                }else{
-                    $users[]['qt_avaliando'] = $int['qt_avaliando'];
-                }
-                $resto--;
-            }
-        }else{
-            $users = $inteiros;
-        }
-
-        foreach ($array_avaliadorid as $key=>$avaliador){
-            $nome_aluno = $DB->get_record_sql("SELECT fullname from vw_autocomplete_user where id = '{$avaliador}' ORDER BY fullname");
-            $users[$key]['avaliador_id'] = $avaliador;
-            $users[$key]['avaliador'] = ucwords(strtolower($nome_aluno->fullname));
-            $users[$key]['total'] = $quiz;
-            $i++;
-        }
-
-        echo json_encode($users);
-    break;
-
-    case 'adicionardistribuicao':
-
-        $iduser = explode(',', $_GET['userid']);
-        $qtavaliados = explode(',', $_GET['qtavaliados']);
-        for ($i=0; $i<count($iduser); $i++){
-            $arrays[$i]['iduser'] = $iduser[$i];
-        }
-        for ($i=0; $i<count($qtavaliados); $i++){
-            $arrays[$i]['qtd'] = $qtavaliados[$i];
-        }
-
-        foreach ($arrays as $key=>$ar){
-            $dadoDistribuicao[] = array(
-                'usuario_id' => $USER->id,
-                'avaliador_id' => $ar['iduser'],
-                'qt_alunos' => $ar['qtd'],
-            );
-
-        }
-
-        $excluiu = $DB->delete_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-        $DB->insert_records('eva_barema_distribuicao', $dadoDistribuicao);
-        $user_existe = $DB->record_exists('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-        if ($user_existe){
-            $user_existe = true;
-        }else{
-            $user_existe = false;
-        }
-
-        echo json_encode($user_existe);
-    break;
-
-    case 'deletetabeladistribuicao':
-
-        $excluiu = false;
-
-        $user_existe = $DB->record_exists('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-        if ($user_existe){
-            $excluiu = $DB->delete_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-        }
-
-        echo json_encode($excluiu);
-    break;
-
-    case 'buscardistribuicao':
-
-//        $teste = "esse é um teste";
-
-        $distribuicoes = $DB->get_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
-//
-        $ids=1;
-        $id=1;
-        $busca = array();
-        foreach ($distribuicoes as $key=>$dist){
-            $avaliador = $DB->get_record_sql("SELECT fullname from vw_autocomplete_user where id = '{$dist->avaliador_id}'");
-            $busca[$id]["ava"] = strtoupper($avaliador->fullname); // .' - '. $dist->avaliador_id; // $avaliador . ' - ' . $dist->qt_avaliados;
-            $busca[$id]["avaid"] = $dist->qt_alunos; // $avaliador . ' - ' . $dist->qt_avaliados;
-            $busca["length"] = $ids++; $id++;
-        }
-
-        echo json_encode($busca);
-
-    break;
+        break;
 
     default:
-        echo 'Nao encontrou';
+        echo 'Selecione um nome';
 }
 
 
