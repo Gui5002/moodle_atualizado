@@ -5,31 +5,28 @@
 // Remember also to comment or delete the lines restricting access
 // to administrators only (see below)
 
-    require('../../config.php');
-    global $DB, $PAGE, $USER, $CFG;
+require('../../config.php');
+global $DB, $PAGE, $USER, $CFG;
 
-    $baremaid      = optional_param('baremaid', 0, PARAM_INT); // Course Module ID
-//    $novo       = optional_param('novo', 0, PARAM_INT);  // Page instance ID
-//
-//    if ($baremaid) {
-//        if (!$br = $DB->get_record('eva_barema_avaliacao', array('id'=>$baremaid))) {
-//            print_error('invalidcoursemodule');
-//        }
-//
-//    }
-//    $returnurl = optional_param('returnurl', '/blocks/eva_form_barema/avaliadores.php?baremaid='. $db->id, PARAM_LOCALURL);
-//    $returnurl = new moodle_url($returnurl);
+if (!isloggedin()) {
+    require_login();
+}
 
-    $PAGE->set_url('/blocks/eva_form_barema/avaliadores.php?baremaid='. $baremaid);
-    $syscontext = context_system::instance();
-    require_capability('moodle/site:config', $syscontext);
+$exist = $DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'posgraduacao'=>1));
+if (!$exist) {
+    print_error('nopermissiontoshow');
+}
 
-    $title = "EVAGU: Barema";
-    $PAGE->set_pagelayout('admin');
+$PAGE->set_url('/blocks/eva_form_barema/avaliadores.php');
+$syscontext = context_system::instance();
+//    require_capability('moodle/site:config', $syscontext);
 
-    $PAGE->set_context($syscontext);
-    $PAGE->navbar->add($title);
-    $PAGE->set_title($title);
-    $PAGE->set_heading($title);
-    echo $OUTPUT->header();
-    echo $OUTPUT->footer();
+$title = "EVAGU: Barema de Pos Graduação - Cadastro de Avaliadores";
+$PAGE->set_pagelayout('admin');
+
+$PAGE->set_context($syscontext);
+$PAGE->navbar->add($title);
+$PAGE->set_title($title);
+$PAGE->set_heading($title);
+echo $OUTPUT->header();
+echo $OUTPUT->footer();

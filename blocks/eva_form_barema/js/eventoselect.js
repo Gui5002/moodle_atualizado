@@ -38,7 +38,7 @@ $(function (){
                 data: 'acao=buscarsubcategoria&id_subcategoria='+idcategoria,
                 success: function ( resposta ) {
                     var dados = JSON.parse(resposta);
-                    // console.log(dados[1].nome )
+                    console.log(dados )
                     var options = '';
                     $('#id_tb_subcategoria_id').html(options);
                     if (dados) {
@@ -52,8 +52,8 @@ $(function (){
                         }
                         if (dados[i].optlabel) {
                             options += '<optgroup label="'+ dados[i].optlabel.nome +'">';
-                                for (var x = 0; x < dados.options.length; x++) {
-                                    options += '<option value="'+ dados.options[x].id +'">' + dados.options[x].nome + '</option>'
+                                for (var x = 0; x < dados[i].options.length; x++) {
+                                    options += '<option value="'+ dados[i].options[x].id +'">' + dados[i].options[x].nome + '</option>'
                                 }
                             options += '</optgroup>';
                         }

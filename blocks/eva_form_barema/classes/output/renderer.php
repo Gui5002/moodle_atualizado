@@ -15,8 +15,14 @@ class renderer extends plugin_renderer_base {
         return $returncustomconf;
     }
 
-    public function render_criar_barema(criar_barema $criar_barema) {
-        $returnoform = $this->render_from_template('block_eva_form_barema/criar_barema', $criar_barema->export_for_template($this));
+    public function render_criar_modelo_pos(criar_modelo_pos $criar_modelo_pos) {
+        $criarmodelobolsa = $this->render_from_template('block_eva_form_barema/criar_modelo_pos', $criar_modelo_pos->export_for_template($this));
+
+        return $criarmodelobolsa;
+    }
+
+    public function render_criar_pos_atribuicao(criar_pos_atribuicao $criar_pos_atribuicao) {
+        $returnoform = $this->render_from_template('block_eva_form_barema/criar_pos_atribuicao', $criar_pos_atribuicao->export_for_template($this));
         return $returnoform;
     }
 
@@ -55,8 +61,8 @@ class renderer extends plugin_renderer_base {
         return $returnrelariobaremaxls;
     }
 
-    public function render_avaliador_config_lista(avaliador_config_lista $avaliador_conf) {
-        $returnbaremaconf = $this->render_from_template('block_eva_form_barema/avaliador_barema_lista', $avaliador_conf->export_for_template($this));
+    public function render_avaliador_config_lista(avaliador_lista $avaliador_conf) {
+        $returnbaremaconf = $this->render_from_template('block_eva_form_barema/avaliador_lista', $avaliador_conf->export_for_template($this));
 
         return $returnbaremaconf;
     }
@@ -67,10 +73,37 @@ class renderer extends plugin_renderer_base {
         return $returnbaremalista;
     }
 
-//    public function render_avaliador_config_edit(avaliador_config_edit $avaliador_config_edit) {
-//        $returnavaconfigedit = $this->render_from_template('block_eva_form_barema/avaliador_modals_edit', $avaliador_config_edit->export_for_template($this));
-//        return $returnavaconfigedit;
-//    }
+
+    public function render_gerenciar_alunos(gerenciar_alunos $gerenciar_alunos) {
+        $gerenciaralunos = $this->render_from_template('block_eva_form_barema/gerenciar_alunos', $gerenciar_alunos->export_for_template($this));
+
+        return $gerenciaralunos;
+    }
+
+    public function render_alunos(alunos $alunos) {
+        $alunos = $this->render_from_template('block_eva_form_barema/alunos', $alunos->export_for_template($this));
+
+        return $alunos;
+    }
+
+    public function render_admin_avaliadores(admin_avaliadores $admin_avaliadores) {
+        $adminavaliadres = $this->render_from_template('block_eva_form_barema/admin_avaliadores', $admin_avaliadores->export_for_template($this));
+
+        return $adminavaliadres;
+    }
+
+    public function render_admin_curso(admin_curso $admin_curso) {
+        $admincurso = $this->render_from_template('block_eva_form_barema/admin_curso', $admin_curso->export_for_template($this));
+
+        return $admincurso;
+    }
+
+    public function render_admin_alunos(admin_alunos $admin_alunos) {
+        $adminalunos = $this->render_from_template('block_eva_form_barema/admin_alunos', $admin_alunos->export_for_template($this));
+
+        return $adminalunos;
+    }
+
 
     public function render_avaliador_form_edit(avaliador_form_edit $avaliador_form_edit) {
         $returnavaformedit = $this->render_from_template('block_eva_form_barema/avaliador_modals_edit', $avaliador_form_edit->export_for_template($this));

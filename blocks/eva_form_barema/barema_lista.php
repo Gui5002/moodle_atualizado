@@ -15,7 +15,7 @@ if (!isloggedin()) {
 $PAGE->set_url('/blocks/eva_form_barema/barema_lista.php');
 $syscontext = context_system::instance();
 
-$title = "EVAGU: Barema";
+$title = "EVAGU: Barema - Relatórios";
 $PAGE->set_pagelayout('admin');
 
 $PAGE->set_context($syscontext);

@@ -25,7 +25,7 @@ class barema_config_lista implements renderable, templatable {
     private function filter_busca( ) {
         global $USER, $PAGE, $CFG, $FULLME, $DB;
 
-        if (!$DB->get_field('eva_barema_permissao', 'user_id', array('user_id'=>$USER->id, 'posgraduacao'=>1))) {
+        if (!$DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'posgraduacao'=>1))) {
             if (!$avaliadorid = $DB->get_field('eva_barema_avaliador', 'avaliador_tb_user_id', array('avaliador_tb_user_id'=>$USER->id))) {
                 $alunoid = $USER->id;
             }
@@ -37,6 +37,8 @@ class barema_config_lista implements renderable, templatable {
         $atividade = filter_input(INPUT_GET, 'ativiadade', FILTER_SANITIZE_STRING);
         $avaliador = $avaliadorid ? fullname($USER) : filter_input(INPUT_GET, 'avaliador', FILTER_SANITIZE_STRING);
         $aluno = $alunoid ? fullname($USER) : filter_input(INPUT_GET, 'aluno', FILTER_SANITIZE_STRING);
+
+
 
 
         //FILTRO DE STATUS
@@ -61,7 +63,6 @@ class barema_config_lista implements renderable, templatable {
     }
 
     private function pagination_relatorio (){
-//        var_dump($_GET);die();
 
         //INPÚT GET
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -90,9 +91,6 @@ class barema_config_lista implements renderable, templatable {
 
         global $DB, $USER;
 
-
-
-
         $data = new \stdClass();
 
         if(!empty($this->config->title)){$data->title = $this->config->title;}
@@ -105,9 +103,7 @@ class barema_config_lista implements renderable, templatable {
 
         $caderno = $this->pagination_relatorio();
 
-
-
-
+//        var_dump($caderno);die();
         //buscando os dados no banco
         $sql = "SELECT SQL_CALC_FOUND_ROWS `id`, barema, curso, atividade, avaliador, aluno, `data` 
                 FROM vw_relatorio_barema {$where} LIMIT {$caderno->start}, {$caderno->perPage}";
@@ -172,27 +168,6 @@ class barema_config_lista implements renderable, templatable {
         }
         $ultima     = $selects ? $selects.'&page='.$quantidade_pg.'&per_page='.$caderno->perPage : '?page='. $quantidade_pg .'&per_page='.$caderno->perPage;
 
-
-//        $i =0;
-//        for ($x = 1; $x <= $quantidade_pg; $x++) {
-//            $link = $selects ? $selects.'&page='.$x.'&per_page='.$caderno->perPage : '?page='.$x.'&per_page='.$caderno->perPage;
-//            $href[$i]['link_atual'] = $link;
-//            $href[$i]['pages'] = $x;
-//            if ($caderno->page === $x){
-//                $selected = 'active';
-//                $href[$i]['select'] = $selected;
-//                $ultima = $selects ? $selects.'&page='.($x + 1).'&per_page='.$caderno->perPage : '?page='.($x + 1).'&per_page='.$caderno->perPage;
-//                $filtro = $selects ? $selects.'&page='.$x.'&per_page='.$caderno->perPage : '?page='.$x.'&per_page='.$caderno->perPage;
-//                if ($x > 1) {
-//                    $primeiro = $selects ? $selects.'&page='.($x - 1).'&per_page='.$caderno->perPage : '?page='.($x - 1).'&per_page='.$caderno->perPage;
-//                    $selected = 'active';
-//                    $href[$i]['select'] = $selected;
-//                    $ultima = $selects ? $selects.'&page='.($x + 1).'&per_page='.$caderno->perPage : '?page='.($x + 1).'&per_page='.$caderno->perPage;
-//                }
-//            }
-//            $i++;
-//        }
-
         if (!$DB->get_field('eva_barema_permissao', 'user_id', array('user_id'=>$USER->id))) {
             if (!$DB->get_field('eva_barema_avaliador', 'avaliador_tb_user_id', array('avaliador_tb_user_id'=>$USER->id))) {
                 $hidden = 'hidden';
@@ -212,7 +187,7 @@ class barema_config_lista implements renderable, templatable {
                 $array[$i]['atividade'] = $relatorio->atividade;
                 $array[$i]['avaliador'] = ucwords(strtolower($relatorio->avaliador));
                 $array[$i]['aluno'] = ucwords(strtolower($relatorio->aluno));
-                $array[$i]['data_avaliacao'] = date('d/m/Y H:i:d', strtotime($relatorio->data)) ;
+                $array[$i]['data_avaliacao'] = date('d/m/Y', strtotime($relatorio->data)) ;
                 $i++;
             }
         }

@@ -158,7 +158,7 @@ class relatorio_barema_config_xls implements renderable, templatable {
                 $array[$i]['atividade'] = $relatorio->atividade;
                 $array[$i]['avaliador'] = ucwords(strtolower($relatorio->avaliador));
                 $array[$i]['aluno'] = ucwords(strtolower($relatorio->aluno));
-                $array[$i]['data_avaliacao'] = date('d/m/Y H:i:d', strtotime($relatorio->data));
+                $array[$i]['data_avaliacao'] = date('d/m/Y', strtotime($relatorio->data));
                 $array[$i]['nota'] = $relatorio->nt_avaliador;
                 $i++;
             }

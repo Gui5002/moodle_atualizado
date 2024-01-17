@@ -2,7 +2,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Modelo Barema';
+$string['pluginname'] = 'Modelo Barema Pós Graduação';
 $string['formbaremapg'] = 'Formulario do Barema';
 $string['formbaremapgbody'] = 'Conteudo para o bloco do Contato Pos Graduação<br>';
 $string['formlibpgconteudo'] = '<p>Este é o arquivo em Portugues para o seu bloco. Se você não é um falante de da lingua portuguesa, você pode substituir (pt_br) pelo seu código de idioma apropriado</p><br>';

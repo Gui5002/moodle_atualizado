@@ -3,180 +3,193 @@
 <link rel="stylesheet" href="/blocks/eva_form_barema/css/form_avaliar_barema.css">
 
 
-{{> block_eva_form_barema/customize_config}}
-<form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_form_barema/barema_avaliacao.php?barema_id={{id_barema}}&avaliador_id={{id_avaliador}}&curso_id={{id_curso}}&quiz_id={{id_quiz}}" method="post"
-accept-charset="utf-8" id="mform1" class="mform" data-boost-form-errors-enhanced="1">
-<input type="hidden" name="avaliador_tb_user_id" value="{{id_avaliador}}">
-<input type="hidden" id="idbarema" name="tb_barema_id" value="{{id_barema}}">
-<input type="hidden" id="id_wwwroot" value="{{{ config.wwwroot }}}">
+    {{> block_eva_form_barema/customize_config}}
+<form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_form_barema/barema_avaliacao.php?barema_id={{id_barema}}&avaliador_id={{id_avaliador}}&curso_id={{id_curso}}&quiz_id={{id_quiz}}&aluno_id={{id_aluno}}&tb_id_avaliador={{id_tb_avaliador}}" method="post"
+    accept-charset="utf-8" id="mform1" class="{{esconderavaliacao}}" data-boost-form-errors-enhanced="1">
+    <input type="hidden" name="avaliador_tb_user_id" value="{{id_avaliador}}">
+    <input type="hidden" id="idbarema" name="tb_barema_id" value="{{id_barema}}">
+    <input type="hidden" id="id_wwwroot" value="{{{ config.wwwroot }}}">
+    <input type="hidden" name="percent" value="{{percent}}">
 
-<fieldset class="clearfix collapsible " id="id_recursosrandpass">
-    <div class="bg_btoggle">
-        <legend class="btoggler">
-            <a href="javascript:void(0)" class="fheader" id="id_recursos_pass" role="button" aria-controls="id_recursosrandpass" aria-expanded="true">{{#str}}recursosrandpass, block_eva_form_barema{{/str}}</a>
-        </legend>
-    </div>
+        <!--========================================== VISUALIZAÇÃO DA ATIVIDADE OU RECURSO ================================================ -->
 
-    <!--========================================== VISUALIZAÇÃO DA ATIVIDADE OU RECURSO ================================================ -->
+<!--        <div class="card border w-100">-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">{{alunos}}</h5>-->
+<!--                <p class="card-text">Curso : {{curso}}</p>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="fcontainer clearfix bg_area">
 
-    <div class="fcontainer clearfix bg_area">
+            <div id="bitem_id_aluno" class="form-group row bitem ">
+                <div class="col-md-9 form-inline align-items-start felement px-0">
+                    <input type="hidden" class="form-control aluno_id "
+                           name="aluno"
+                           data-avaliador_id="{{id_avaliador}}"
+                           data-curso_id="{{id_curso}}"
+                           data-quiz_id="{{id_quiz}}"
+                           placeholder="Buscar aluno inscrito"
+                           value="" aria-invalid="false">
+                    <div id="alunos_list" class="position-absolute z-index-1 lista"></div>
 
-        <div id="bitem_id_aluno" class="form-group row bitem ">
-            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                <label class="d-inline word-break " for="id_aluno">{{#str}}aluno, block_eva_form_barema{{/str}}</label>
+<!--                    <div class="form-control-feedback invalid-feedback" id="id_error_aluno"> - {{#str}}missingaluno, block_eva_form_barema{{/str}}</div>-->
+                </div>
+            </div>
 
-                <div class="form-label-addon d-flex align-items-center align-self-start">
-                    <div class="text-danger" title="Necessários">
-                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
-                           aria-label="Necessários"></i>
+            <input type="hidden" id="id_estudante" name="aluno_tb_user_id" value="{{id_aluno}}">
+            <input type="hidden" id="id_tb_avaliador" name="tb_avaliador_id" value="{{id_tb_avaliador}}">
+
+            <div class="avaliacao">
+                <img src="{{config.wwwroot}}/user/pix.php/2/f1.jpg" alt="Escola Vitual da Agu"/>
+                <div class="avaliacao-content">
+                    <div class="avaliacao-content-header">
+                        <strong>Escola Vitual da Agu </strong>
+                        <span>eva@agu.gov.br</span>
                     </div>
+                    <sapn><strong>Curso:</strong> {{curso}}</sapn>
+
+                    <span>{{{resposta_question}}}</span>
+                    <span>{{{resp_correta}}}</span>
                 </div>
             </div>
-            <div class="col-md-9 form-inline align-items-start felement px-0">
-                <input type="text" class="form-control aluno_id "
-                       name="aluno"
-                       id="id_aluno"
-                       data-avaliador_id="{{id_avaliador}}"
-                       data-curso_id="{{id_curso}}"
-                       data-quiz_id="{{id_quiz}}"
-                       placeholder="Buscar aluno inscrito"
-                       value="" aria-invalid="false">
-                <div id="alunos_list" class="position-absolute z-index-1 lista"></div>
 
-                <div class="form-control-feedback invalid-feedback" id="id_error_aluno"> - {{#str}}missingaluno, block_eva_form_barema{{/str}}</div>
+            <div class="avaliacao" style="margin-left: 6rem ">
+                <img src="{{config.wwwroot}}/blocks/eva_form_barema/imgens/png/profile.png" alt="Professor"/>
+                <div class="avaliacao-content">
+                    <div class="avaliacao-content-header">
+                        <strong>{{alunos}}</strong>
+                        <span>{{email}}</span>
+                    </div>
+                    <sapn><strong>Curso:</strong> {{curso}}</sapn>
+                    <span>{{{resp_resposta}}}</span>
+                </div>
             </div>
+
         </div>
+<!--    </fieldset>-->
 
-        <input type="hidden" id="id_estudante" name="aluno_tb_user_id" value="">
+<!--    <fieldset class="clearfix collapsible " id="id_analiserandpass">-->
+<!--        <div class="bg_btoggle">-->
+<!--            <legend class="btoggler">-->
+<!--                <a href="javascript:void(0)" class="fheader" id="id_analise_pass" role="button" aria-controls="id_analiserandpass" aria-expanded="true">{{#str}}analiserandpass, block_eva_form_barema{{/str}}</a>-->
+<!--            </legend>-->
+<!--        </div>-->
 
-        <div id="bitem_id_recursos" class="form-group row bitem  ">
-            <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement">
-                <div class="alert alert-secondary alertavaliacao" role="alert" >
-                    <b>Perguntas das atividades ou recursos</b>
-                </div>
-            </div>
-            <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement">
-                <div class="boxes">
-                    <div class="atividades"></div>
-                    <div class="respostacorreta"></div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="bitem_id_envio" class="form-group row bitem  ">
-            <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement">
-                <div class="alert alert-secondary alertavaliacao" role="alert" >
-                    <b>Respostas do aluno</b>
-                </div>
-            </div>
-            <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement">
-                <div class="boxes enviados">
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-</fieldset>
-
-<fieldset class="clearfix collapsible " id="id_analiserandpass">
-    <div class="bg_btoggle">
-        <legend class="btoggler">
-            <a href="javascript:void(0)" class="fheader" id="id_analise_pass" role="button" aria-controls="id_analiserandpass" aria-expanded="true">{{#str}}analiserandpass, block_eva_form_barema{{/str}}</a>
-        </legend>
-    </div>
-
-    <div class="fcontainer clearfix bg_area">
-        <div id="bitem_id_envio" class="form-group row bitem  ">
-            <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0 felement" style="overflow-x:auto;">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th style="width: 460px">CRITÉRIO</th>
-                        <th style="width: 135px">NOTA_MAXIMA</th>
-                        <th>FAIXA</th>
-                        <th>NOTA</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {{#barema}}
+        <div class="fcontainer clearfix bg_area">
+                <div class="col-md-12">
+<!--                    <table class="table table-bordered table-responsive-sm table-hover rtable">-->
+                    <table class="table table-bordered table-sm table-striped table-responsive-sm table-hover rtable">
+                        <thead class="tableprimary">
                         <tr>
-                            <td>{{id}}</td>
-                            <td>{{criterio}}</td>
-                            <td>{{nota_maxima}}</td>
-                            <td style="padding-right: 30px;">
-                                <ul class="unlist">
-                                    <li>
-                                        <label {{hidden_baixa}} for="id_f1{{id}}">{{label_baixa}}</label>
-                                        <input {{hidden_baixa}} class="custom-radio" type="radio" id="id_f1{{id}}" name="nt_faixa_{{id}}" value="{{valor_baixa}}">
-                                    </li>
-                                    <li>
-                                        <label {{hidden_media1}} for="id_f2{{id}}">{{label_media1}}</label>
-                                        <input {{hidden_media1}} class="custom-radio" type="radio" id="id_f2{{id}}" name="nt_faixa_{{id}}" value="{{valor_media1}}">
-                                    </li>
-                                    <li>
-                                        <label {{hidden_media2}} for="id_f3{{id}}">{{label_media2}}</label>
-                                        <input {{hidden_media2}} class="custom-radio" type="radio" id="id_f3{{id}}" name="nt_faixa_{{id}}" value="{{valor_media2}}">
-                                    </li>
-                                    <li>
-                                        <label {{hidden_media3}} for="id_f4{{id}}">{{label_media3}}</label>
-                                        <input {{hidden_media3}} class="custom-radio" type="radio" id="id_f4{{id}}" name="nt_faixa_{{id}}" value="{{valor_media3}}">
-                                    </li>
-                                    <li>
-                                        <label {{hidden_alta}} for="id_f5{{id}}">{{label_alta}}</label>
-                                        <input {{hidden_alta}} class="custom-radio" type="radio" id="id_f5{{id}}" name="nt_faixa_{{id}}" value="{{valor_alta}}">
-                                    </li>
-                                </ul>
-                            </td>
-                            <td class="text-center" id="id_nota{{id}}" style="font-size: 19px;">0</td>
+                            <th class="text-center" style="width: 3%">Id</th>
+                            <th>Critério</th>
+                            <th style="width: 20%">Nota Maxima</th>
+                            <th style="width: 18rem">Faixa</th>
+                            <th class="text-center" style="width: 5%">Nota</th>
                         </tr>
-                    {{/barema}}
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="4" >NOTA FINAL</td>
-                        <td id="id_nota_final" style="font-size: 19px;"></td>
+                        </thead>
+                        <tbody>
 
-                    </tr>
-                    </tfoot>
-                </table>
-                <id>
-                    <input type="hidden" id="nota_final" name="nt_avaliador">
-                    <div class="hidden" id="id_qtd">{{qtd}}</div>
-                </id>
-            </div>
+                        {{#barema}}
+                            <tr>
+                                <td data-title="#" class="text-center">{{id}}</td>
+                                <td data-title="Critério">{{criterio}}</td>
+                                <td data-title="Nota_Maxima">{{nota_maxima}}</td>
+                                <td data-title="Faixa">
+                                    <ul class="unlist">
+                                        <li>
+                                            <label {{hidden_baixa}} for="id_f1{{id}}">{{label_baixa}}</label>
+                                            <input {{hidden_baixa}} class="custom-radio" type="radio" id="id_f1{{id}}" name="nt_faixa_{{id}}" value="{{valor_baixa}}">
+                                        </li>
+                                        <li>
+                                            <label {{hidden_media1}} for="id_f2{{id}}">{{label_media1}}</label>
+                                            <input {{hidden_media1}} class="custom-radio" type="radio" id="id_f2{{id}}" name="nt_faixa_{{id}}" value="{{valor_media1}}">
+                                        </li>
+                                        <li>
+                                            <label {{hidden_media2}} for="id_f3{{id}}">{{label_media2}}</label>
+                                            <input {{hidden_media2}} class="custom-radio" type="radio" id="id_f3{{id}}" name="nt_faixa_{{id}}" value="{{valor_media2}}">
+                                        </li>
+                                        <li>
+                                            <label {{hidden_media3}} for="id_f4{{id}}">{{label_media3}}</label>
+                                            <input {{hidden_media3}} class="custom-radio" type="radio" id="id_f4{{id}}" name="nt_faixa_{{id}}" value="{{valor_media3}}">
+                                        </li>
+                                        <li>
+                                            <label {{hidden_alta}} for="id_f5{{id}}">{{label_alta}}</label>
+                                            <input {{hidden_alta}} class="custom-radio" type="radio" id="id_f5{{id}}" name="nt_faixa_{{id}}" value="{{valor_alta}}">
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td data-title="Nota" class="text-center" id="id_nota{{id}}" style="font-size: 19px;">0</td>
+                            </tr>
+                        {{/barema}}
+                        </tbody>
+                        <tfoot>
+                        <tr class="{{display}}">
+                            <td colspan="4" class="fw500 text-right text-danger">Aluno(a) respondeu fora do prazo a nota será reduzida em 10% ! </td>
+                            <td hidden id="id_desconto" class="fw600 text-center" style="font-size: 19px;">{{percent}}</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="fw600 text-right">NOTA FINAL</td>
+                            <td id="id_nota_final" class="fw600 text-center" style="font-size: 19px;"></td>
+
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <id>
+                        <input type="hidden" id="nota_final" name="nt_avaliador">
+                        <div class="hidden" id="id_qtd">{{items}}</div>
+                    </id>
+                </div>
         </div>
-    </div>
-</fieldset>
 
-<div id="fgroup_id_buttonar" class="form-group row  bitem">
-    <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-        <div class="form-label-addon d-flex align-items-center align-self-start"></div>
-    </div>
-    <div class="col-md-9 form-inline align-items-start felement">
-        <div class="d-flex flex-wrap align-items-center">
-            <div class="form-group  bitem  ">
-                <input type="submit" class="btn btn-primary " name="submitbutton" id="id_submitbutton" value="{{#str}}submitbarema, block_eva_form_barema{{/str}}">
-                <div class="form-control-feedback invalid-feedback" id="id_error_submitbutton"></div>
-            </div>
+<!--    <div id="fgroup_id_buttonar" class="form-group row  bitem">-->
+<!--        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">-->
+<!--            <div class="form-label-addon d-flex align-items-center align-self-start"></div>-->
+<!--        </div>-->
+<!--        <div class="col-md-9 form-inline align-items-start felement">-->
 
-            <div class="form-group  bitem   btn-cancel">
+<!--        </div>-->
+<!--    </div>-->
+    <div class="fcontainer row text-center">
+        <div class="col-md-12">
+            <div class="form-group  bitem">
+                <input type="submit" class="btn btn-primary btn-none d-none" name="submitbutton" id="id_submitbutton" value="{{#str}}submitbarema, block_eva_form_barema{{/str}}">
                 <input type="submit" class="btn btn-secondary " name="cancelbutton" id="id_cancel" value="{{#str}}cancelatbarema, block_eva_form_barema{{/str}}" data-skip-validation="1" data-cancel="1"
                        onclick="skipClientValidation = true; return true;">
-                <div class="form-control-feedback invalid-feedback" id="id_error_cancel"></div>
+            </div>
+            <div class="fdescription required">
+                Este formulário contém campos obrigatórios marcados com
+                <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" aria-label="Campo obrigatório">
+                </i>.
             </div>
         </div>
     </div>
-</div>
-<div class="fdescription required">
-    Este formulário contém campos obrigatórios marcados com
-    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" aria-label="Campo obrigatório">
-    </i>.
-</div>
 </form>
+<!--<div class="{{alertaavaliacao}}">-->
+<!--    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">-->
+<!--        <symbol id="check-circle-fill" viewBox="0 0 16 16">-->
+<!--            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>-->
+<!--        </symbol>-->
+<!--        <symbol id="info-fill" viewBox="0 0 16 16">-->
+<!--            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>-->
+<!--        </symbol>-->
+<!--        <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">-->
+<!--            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>-->
+<!--        </symbol>-->
+<!--    </svg>-->
+<!--    <div class="alert alert-warning d-flex align-items-center text-center" role="alert" style="width: 68%;-->
+<!--        margin: 0 auto; height: 85px;">-->
+<!--        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:" style="width: 45px;-->
+<!--        margin: 0px 22px 0px 30px;">-->
+<!--            <use xlink:href="#exclamation-triangle-fill"/></svg>-->
+<!--        <div>-->
+<!--            Voce nao tem mais avaliações para esse Barema...!-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 <script src="/blocks/eva_form_barema/js/jquery-ui-custom/jquery-ui.js"></script>
 <script src="/blocks/eva_form_barema/js/form_barema.js"></script>
 
