@@ -2126,11 +2126,11 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .activityinstance,
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .mod-indent-outer,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .mod-indent-outer {
-    min-height: 57px;
+    min-height: 50px;
     display: table;
     width: 100%;
     max-width: none;
-    padding: 0;
+    padding: 1px 0px 0px 3px;
     margin: 0;
     font-size: 15px;
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -2151,9 +2151,9 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .cs_list li a span {
     font-size: 15px!important;
-    margin-right: 0 !important;
     font-family: "[[setting:primary_font]]", sans-serif;
     color: #fff;
+    line-height: 1.1rem;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .mod-indent-outer,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .mod-indent-outer {
@@ -2164,7 +2164,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     width: 100%;
     padding-right: 45px;
     padding-left: 10px;
-    background:#101a21;
+    background-image: -webkit-linear-gradient(175deg,#000000 0%,#0c3652 100%);
     color: #ffffff!important;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>div,
@@ -2181,7 +2181,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     font-size: 15px;
     line-height: 1;
     text-indent: 0;
-    padding: 20px 5px 20px 40px;
+    padding: 20px 0px 20px 40px;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .quickeditlink,
 .ccn_context_focus .dashboard_navigationbar .quickeditlink {
@@ -2262,7 +2262,6 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     display: block;
     font-family: "[[setting:primary_font]]", sans-serif;
     color: #fff!important;
-    font-weight: 600;
     font-size: 15px;
 }
 .ccn_context_focus .dashboard_navigationbar .panel-title .accordion-toggle {

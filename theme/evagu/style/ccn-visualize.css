@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
 body.ccn_context_visualize {
-    background: #969ab3;
-    background-image: -moz-linear-gradient(-45deg, #000000 100%, #969ab3 0%);
-    background-image: -webkit-linear-gradient(-45deg, #000000 100%, #969ab3 0%);
-    background-image: -ms-linear-gradient(-45deg, #000000 100%, #969ab3 0%);
+    background: #0c3551;
 }
 .bootstrap-select .dropdown-menu * {
     color: #0b0b0b;
@@ -221,9 +218,9 @@ width: 100%;
     right: 0;
     width: 30vw;
     margin: 0;
-    background: rgb(25 44 65 / 51%);
+    background: #0c3551;
     padding: 10px 5px;
-    border-top: 1px solid rgb(25 44 65 / 51%);
+    border-top: 1px solid #000;
     height: 90px;
 }
 #ccn_lc_vb--visualize--block-wrapper {

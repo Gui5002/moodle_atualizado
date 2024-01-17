@@ -131,7 +131,6 @@ h6 a,
 .h4 a,
 .h5 a,
 .h6 a {
-    font-weight: 600;
     color: #000;
 }
 h1,
@@ -1600,6 +1599,15 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     width: 129px;
     z-index: 9;
 }
+.icon {
+    font-size: 20px!important;
+    width: 16px!important;
+    height: 16px!important;
+    margin: 0!important;
+    padding: 0!important;
+    box-sizing: content-box!important;
+    margin-right: 0.5rem!important;
+}
 .mouse_scroll .icon {
     background-color: #ffffff;
     border-radius: 50%;
@@ -3057,7 +3065,7 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 .details {
     padding-right: 4px;
     font-weight: 500;
-    color: #313030;
+    color: #1f1e1e;
 }
 .cc_tab {
     padding-right: 4px;
@@ -3067,12 +3075,12 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
 .panel-body {
     padding-right: 4px;
     font-weight: 500;
-    color: #11b0c5;
+    color: #0ad9f5;
 }
 .cs_list li a span {
     padding-right: 4px;
     font-weight: 500;
-    color: #979797;
+    color: #4e4e4e;
 }
 .details .cc_tab .panel-body .cs_list li a span.cs_preiew {
     float: right;
