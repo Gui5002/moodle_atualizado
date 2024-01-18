@@ -681,7 +681,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 "responsive": true,
                 "deferRender": true,
                 "searching": true,
-                "oSearch": {"bSmart": false},
+                "oSearch": {"bSmart": true},
                 "ajax": {
                     "url" : "<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php",
                     "dataSrc": "",
@@ -891,7 +891,68 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     });
                 }
             });
+        }else if (idReport == '5') {
+            $("#filterCursos5").select2({ theme: "classic" });
+            $("#filterCategorias5").select2({ theme: "classic" });
+
+            function fetchData() {
+                $.ajax({
+                    url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        "id": idReport
+                    },
+                    success: function (data) {
+                        populateSelect(data);
+                    },
+                    error: function (error) {
+                        console.error('Erro ao obter dados:', error);
+                    }
+                });
+            }
+
+            function populateSelect(data) {
+                var select = $('#filterCursos5');
+                select.empty();
+
+                select.append('<option value=""><input type="checkbox">Selecione uma opção</option>');
+
+                data.forEach(function (curso) {
+                    var checkbox = $('<input>', {
+                        type: 'checkbox',
+                        class: 'curso-checkbox',
+                        value: curso.nome_curso
+                    });
+                    var option = $('<option>', {
+                        value: curso.nome_curso,
+                        text: curso.nome_curso
+                    }).data('inscritos', curso.inscritos)
+                        .data('concluintes', curso.concluintes)
+                        .data('naoconcluidos', curso.naoconcluidos)
+                        .data('naoiniciados', curso.naoiniciados);
+
+                    select.append(checkbox).append(option);
+                });
+
+            }
+
+            fetchData();
+
+            $('#filterCursos5').on('select2:select', function (e) {
+                var selectedOption = $(e.params.data.element);
+                var inscritos = selectedOption.data('inscritos');
+                var concluintes = selectedOption.data('concluintes');
+                var naoconcluidos = selectedOption.data('naoconcluidos');
+                var naoiniciados = selectedOption.data('naoiniciados');
+
+                console.log('Inscrições: ' + inscritos);
+                console.log('Concluintes: ' + concluintes);
+                console.log('Não Concluídos: ' + naoconcluidos);
+                console.log('Não Iniciados: ' + naoiniciados);
+            });
         }
+
 
         $("#arrowLabel").on('click',function(){
             if($("#arrow").hasClass('fa-angle-down') === true){

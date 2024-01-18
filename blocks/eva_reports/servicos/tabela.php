@@ -183,5 +183,61 @@ if($idReport == 1){
         echo json_encode($arr,JSON_UNESCAPED_UNICODE);
     }
 
+} else if($idReport == 5){
+
+    $relatorio4 = new tabela_reports();
+    $rs = $relatorio4->get_consolidado_eva();
+
+    $array = array();
+    $cargaMinutoss = 0;
+    $cargaHoras = 0;
+    $cargaTotal = 0;
+    $dataAtual = new DateTime();
+
+    if($rs){
+        $resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
+
+        foreach($resultSet as $row){
+
+            $valores = explode(" ", $row['carga_horaria']);
+            $row['carga'] = $valores[0].":".$valores[2].":00";
+
+            foreach($row as $k => $v){
+                $array[$k] = $v;
+            }
+
+            $arr[] = $array;
+        }
+
+        echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+    }else{
+        $arr = '';
+        echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+    }
+
+    /*if($rs){
+        $resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
+
+        foreach($resultSet as $row){
+
+            $valores = explode(" ", $row['carga_horaria']);
+            $cargaMinutos += $valores[2];
+            $cargaHoras += $valores[0];
+
+        }
+
+        $horasMinutos = INT($cargaMinutos / 60);
+        $porcminutos =  ($cargaMinutos / 60) - $horasMinutos;
+        $minutos = 60 * $porcminutos;
+        $horas = $cargaHoras + $horasMinutos;
+
+        $carga = $horas.':'.$minutos.':00';
+
+        echo json_encode($carga,JSON_UNESCAPED_UNICODE);
+    }else{
+        $carga = '';
+        echo json_encode($carga,JSON_UNESCAPED_UNICODE);
+    }*/
+
 }
 

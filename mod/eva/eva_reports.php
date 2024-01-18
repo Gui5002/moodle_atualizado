@@ -29,11 +29,11 @@ if($id == 1){
 }else if($id == 3){
     $subtitle = " - Usuários geral";
 }else if($id == 4){
-    $subtitle = " - Cursos por usuário";
+    $subtitle = " - Consolidado por curso";
 }else if($id == 5){
-    $subtitle = " - Histórico por aluno";
+    $subtitle = " - Consolidado EVA";
 }else if($id == 6){
-    $subtitle = " - Histórico por curso";
+    $subtitle = " - EVA";
 }
 
 $title = "Relatórios";

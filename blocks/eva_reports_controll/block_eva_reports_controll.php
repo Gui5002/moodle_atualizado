@@ -34,13 +34,15 @@ class block_eva_reports_controll extends block_base {
         }
 
         $text = '';
+        $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=4"><i class="fa fa-info-circle"></i>&nbsp;Consolidado por Cursos</a>';
+        $text .= '<br/>';
+        $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=5"><i class="fa fa-info-circle"></i>&nbsp;Consolidado EVA</a>';
+        $text .= '<br/>';
         $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=1"><i class="fa fa-copy"></i>&nbsp;Cursos e categorias</a>';
         $text .= '<br/>';
         $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=2"><i class="fa fa-bookmark"></i>&nbsp;Resultados por curso</a>';
         $text .= '<br/>';
         $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=3"><i class="fa fa-user"></i>&nbsp;Cursos por usuário</a>';
-        $text .= '<br/>';
-        $text .= '<a href="'. $CFG->wwwroot .'/mod/eva/eva_reports.php?id=4"><i class="fa fa-info-circle"></i>&nbsp;Consolidado por Cursos</a>';
         $text .= '<br/>';
 
         $this->content = new stdClass;

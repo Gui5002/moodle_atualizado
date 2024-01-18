@@ -9,7 +9,8 @@ use renderable;
 use renderer_base;
 use templatable;
 
-class reports implements renderable, templatable {
+class reports implements renderable, templatable
+{
     /**
      * Export this data so it can be used as the context for a mustache template.
      *
@@ -17,8 +18,9 @@ class reports implements renderable, templatable {
      * @return stdClass
      */
 
-    public function export_for_template(renderer_base $output) {
-        global $CFG,$PAGE,$DB;
+    public function export_for_template(renderer_base $output)
+    {
+        global $CFG, $PAGE, $DB;
 
         require_once($CFG->libdir . '/filelib.php');
 
@@ -31,6 +33,8 @@ class reports implements renderable, templatable {
         $categoria = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as categoria FROM mdl_course_categories WHERE `parent` = 0 ORDER BY categoria ASC');
         $subcategoria = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as subcategoria FROM mdl_course_categories WHERE `parent` > 0 ORDER BY subcategoria ASC');
         $allCourse = $DB->get_records_sql('SELECT DISTINCT upper(trim(fullname)) as curso, id  FROM mdl_course ORDER BY curso ASC');
+        $cursosConsolidados = $DB->get_record_sql('SELECT (SELECT COUNT(*) FROM mdl_user) AS quantidade_usuarios, (SELECT COUNT(*) FROM mdl_course WHERE `category` > 0) AS quantidade_cursos');
+
         $sql_users = "select
                         mu.id,
                         upper(concat(trim(mu.firstname),' ',trim(mu.lastname))) as nome
@@ -95,14 +99,14 @@ class reports implements renderable, templatable {
         $text = '';
         $text .= '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />';
 
-        if(empty($id) and is_null($id)){
+        if (empty($id) and is_null($id)) {
             $text = '
             <div class="alert alert-warning" role="alert">
                   Nenhum código de relatório foi encontrado.
             </div>
             ';
-        }else{
-            if($id == 1){
+        } else {
+            if ($id == 1) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
                 <div id="modalDiv"></div>
@@ -118,10 +122,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Nome do curso</label>
                                 <select id="filterCursos" name="filterCursos" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCursos = json_decode(json_encode($allCourse,JSON_UNESCAPED_UNICODE),true);
+                $arrCursos = json_decode(json_encode($allCourse, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCursos as $row){
-                    $text .= '<option value="'.$row['curso'].'">'.$row['curso'].'</option>';
+                foreach ($arrCursos as $row) {
+                    $text .= '<option value="' . $row['curso'] . '">' . $row['curso'] . '</option>';
                 }
 
                 $text .= '
@@ -131,10 +135,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Categoria do curso</label>
                                 <select id="filterCategory" name="filterCategory" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCategoria = json_decode(json_encode($categoria,JSON_UNESCAPED_UNICODE),true);
+                $arrCategoria = json_decode(json_encode($categoria, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCategoria as $row){
-                    $text .= '<option value="'.$row['categoria'].'">'.$row['categoria'].'</option>';
+                foreach ($arrCategoria as $row) {
+                    $text .= '<option value="' . $row['categoria'] . '">' . $row['categoria'] . '</option>';
                 }
 
                 $text .= '
@@ -144,11 +148,11 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Sub-categoria do curso</label>
                                 <select id="filterSubCategory" name="filterSubCategory" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrSubcategoria = json_decode(json_encode($subcategoria,JSON_UNESCAPED_UNICODE),true);
+                $arrSubcategoria = json_decode(json_encode($subcategoria, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrSubcategoria as $row){
-                     $text .= '<option value="'.$row['subcategoria'].'">'.$row['subcategoria'].'</option>';
-                 }
+                foreach ($arrSubcategoria as $row) {
+                    $text .= '<option value="' . $row['subcategoria'] . '">' . $row['subcategoria'] . '</option>';
+                }
 
                 $text .= '
                                 </select>
@@ -193,7 +197,7 @@ class reports implements renderable, templatable {
                     </div>
                 </div>
                 ';
-            }else if($id == 2){
+            } else if ($id == 2) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
                 <div id="modalDiv"></div>
@@ -209,10 +213,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Usuários</label>
                                 <select id="filterUsers2" name="filterUsers2" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrUsers = json_decode(json_encode($usuarios,JSON_UNESCAPED_UNICODE),true);
+                $arrUsers = json_decode(json_encode($usuarios, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrUsers as $row){
-                    $text .= '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+                foreach ($arrUsers as $row) {
+                    $text .= '<option value="' . $row['nome'] . '">' . $row['nome'] . '</option>';
                 }
 
                 $text .= '
@@ -223,10 +227,10 @@ class reports implements renderable, templatable {
                                 <select id="filterCategory2" name="filterCategory2" class="form-control">
                                     <option value="">Selecione uma opção</option>';
                 $categoria1 = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as categoria FROM mdl_course_categories WHERE `parent` = 0 ORDER BY categoria ASC');
-                $arrCategoria = json_decode(json_encode($categoria1,JSON_UNESCAPED_UNICODE),true);
+                $arrCategoria = json_decode(json_encode($categoria1, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCategoria as $row){
-                    $text .= '<option value="'.$row['categoria'].'">'.$row['categoria'].'</option>';
+                foreach ($arrCategoria as $row) {
+                    $text .= '<option value="' . $row['categoria'] . '">' . $row['categoria'] . '</option>';
                 }
 
                 $text .= '
@@ -238,10 +242,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Cursos</label>
                                 <select id="filterCursos2" name="filterCursos2" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCursos = json_decode(json_encode($allCourse,JSON_UNESCAPED_UNICODE),true);
+                $arrCursos = json_decode(json_encode($allCourse, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCursos as $row){
-                    $text .= '<option value="'.$row['curso'].'">'.$row['curso'].'</option>';
+                foreach ($arrCursos as $row) {
+                    $text .= '<option value="' . $row['curso'] . '">' . $row['curso'] . '</option>';
                 }
 
                 $text .= '
@@ -301,7 +305,7 @@ class reports implements renderable, templatable {
                     </div>
                 </div>
                 ';
-            }else if($id == 3){
+            } else if ($id == 3) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
                 <div id="modalDiv"></div>
@@ -317,10 +321,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Usuários</label>
                                 <select id="filterUsers3" name="filterUsers3" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrUsers = json_decode(json_encode($usuarios,JSON_UNESCAPED_UNICODE),true);
+                $arrUsers = json_decode(json_encode($usuarios, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrUsers as $row){
-                    $text .= '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+                foreach ($arrUsers as $row) {
+                    $text .= '<option value="' . $row['nome'] . '">' . $row['nome'] . '</option>';
                 }
 
                 $text .= '
@@ -330,10 +334,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Cargo</label>
                                 <select id="filterCargo3" name="filterCargo3" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCargos = json_decode(json_encode($cargos,JSON_UNESCAPED_UNICODE),true);
+                $arrCargos = json_decode(json_encode($cargos, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCargos as $row){
-                    $text .= '<option value="'.$row['cargo'].'">'.$row['cargo'].'</option>';
+                foreach ($arrCargos as $row) {
+                    $text .= '<option value="' . $row['cargo'] . '">' . $row['cargo'] . '</option>';
                 }
 
                 $text .= '
@@ -343,10 +347,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Cursos</label>
                                 <select id="filterCursos3" name="filterCursos3" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCursos = json_decode(json_encode($allCourse,JSON_UNESCAPED_UNICODE),true);
+                $arrCursos = json_decode(json_encode($allCourse, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCursos as $row){
-                    $text .= '<option value="'.$row['curso'].'">'.$row['curso'].'</option>';
+                foreach ($arrCursos as $row) {
+                    $text .= '<option value="' . $row['curso'] . '">' . $row['curso'] . '</option>';
                 }
 
                 $text .= '
@@ -397,7 +401,7 @@ class reports implements renderable, templatable {
                     </div>
                 </div>
                 ';
-            } else if($id == 4){
+            } else if ($id == 4) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
                 <div id="modalDiv"></div>
@@ -413,10 +417,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Nome do curso</label>
                                 <select id="filterCursos4" name="filterCursos4" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCursos = json_decode(json_encode($allCourse,JSON_UNESCAPED_UNICODE),true);
+                $arrCursos = json_decode(json_encode($allCourse, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCursos as $row){
-                    $text .= '<option value="'.$row['curso'].'">'.$row['curso'].'</option>';
+                foreach ($arrCursos as $row) {
+                    $text .= '<option value="' . $row['curso'] . '">' . $row['curso'] . '</option>';
                 }
 
                 $text .= '
@@ -426,10 +430,10 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Categoria do curso</label>
                                 <select id="filterCategory4" name="filterCategory4" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrCategoria = json_decode(json_encode($categoria,JSON_UNESCAPED_UNICODE),true);
+                $arrCategoria = json_decode(json_encode($categoria, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrCategoria as $row){
-                    $text .= '<option value="'.$row['categoria'].'">'.$row['categoria'].'</option>';
+                foreach ($arrCategoria as $row) {
+                    $text .= '<option value="' . $row['categoria'] . '">' . $row['categoria'] . '</option>';
                 }
 
                 $text .= '
@@ -439,23 +443,15 @@ class reports implements renderable, templatable {
                                 <label style="font-size: 0.625em !important;">Sub-categoria do curso</label>
                                 <select id="filterSubCategory4" name="filterSubCategory4" class="form-control">
                                     <option value="">Selecione uma opção</option>';
-                $arrSubcategoria = json_decode(json_encode($subcategoria,JSON_UNESCAPED_UNICODE),true);
+                $arrSubcategoria = json_decode(json_encode($subcategoria, JSON_UNESCAPED_UNICODE), true);
 
-                foreach($arrSubcategoria as $row){
-                    $text .= '<option value="'.$row['subcategoria'].'">'.$row['subcategoria'].'</option>';
+                foreach ($arrSubcategoria as $row) {
+                    $text .= '<option value="' . $row['subcategoria'] . '">' . $row['subcategoria'] . '</option>';
                 }
 
                 $text .= '
                                 </select>
                             </div>
-                            <div class="col-sm-12 col-md-3">
-                                <label style="font-size: 0.625em !important;">Status do curso</label>
-                                <select id="filterStatus4" name="filterStatus4" class="form-control">
-                                    <option value="">Selecione uma opção</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-12 col-md-3">
                                 <label style="font-size: 0.625em !important;">Data de criação</label>
                                 <div class="input-group" id="criacao_div4">
@@ -464,6 +460,8 @@ class reports implements renderable, templatable {
                                     <input type="date" class="input-sm form-control" name="criacaoEnd4" id="criacaoEnd4" style="max-height: 27px;">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12 col-md-3 mt-4">
                                 <input type="button" style="width: 100%;" class="btn" id="btnLimparFiltro4" name="btnLimparFiltro4" value="Limpar">
                             </div>
@@ -491,6 +489,102 @@ class reports implements renderable, templatable {
                     </div>
                 </div>
                 ';
+            } else if ($id == 5) {
+                $text .= '
+                <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
+                <div class="card sombreamento">
+                    <div class="card-body">
+                        
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-sm-12 col-md-12 text-center">
+                                    <div class="p-2 border bg-light bold">EVA - Escola Virtual da AGU</div>
+                             </div>
+                        </div>
+                        <div class="row m-1">
+                            <div class="col-sm-12 col-md-12">
+                                <h4 class="bold">DADOS EVA</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Usuarios registrados:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;">';
+                $text .= $cursosConsolidados->quantidade_usuarios;
+                $text .= '</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Cursos, açoes e capacitações:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;">';
+                $text .= $cursosConsolidados->quantidade_cursos;
+                $text .= '</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Carga horária total na EVA:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;" id="cargaHoraria"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row m-1">
+                            <div class="col-md-12">
+                                <h4 class="bold">DADOS DOS CURSOS</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Inscrições:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;"></span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Concluintes:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Não Concluidos:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;"></span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; font-size: 12px;">Não Iniciados:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span style="font-size: 12px;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                ';
             }
         }
 
@@ -498,6 +592,4 @@ class reports implements renderable, templatable {
 
         return $data;
     }
-
 }
-

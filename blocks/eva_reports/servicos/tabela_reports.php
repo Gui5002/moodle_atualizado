@@ -180,8 +180,6 @@ class tabela_reports
         $filtro4 .= " 
                 AND `data_criacao` BETWEEN '$start' AND '$end'
             ";
-
-
         $sql = "SELECT 
                     `id`,
                     course_id,
@@ -198,10 +196,26 @@ class tabela_reports
                 FROM
                     vw_courses_and_categories
                 $filtro4";
-
-
         $rs = $DB->get_records_sql($sql);
+        return $rs;
+    }
+    public function get_consolidado_eva()
+    {
+        global $DB;
 
+
+        $sql = "SELECT 
+                    `id`,
+                    course_id,
+                    UPPER(`nome_curso`) as nome_curso,
+                    `carga_horaria`,
+                    `inscritos`,
+                    `concluintes`,
+                    `naoconcluidos`,
+                    `naoiniciados`
+                FROM
+                    vw_courses_and_categories";
+        $rs = $DB->get_records_sql($sql);
         return $rs;
     }
 
