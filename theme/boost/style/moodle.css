@@ -5982,15 +5982,16 @@ input[type="button"].btn-block {
   font-weight: 700; }
 
 .alert-dismissible {
-  padding-right: 3.90625rem; }
-  .alert-dismissible .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    padding: 0.75rem 1.25rem;
-    color: inherit; }
-
+  padding-right: 3.90625rem;
+}
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0.75rem 1.25rem;
+  color: inherit; 
+}
 .alert-primary {
   color: #083863;
   background-color: #cfe2f2;

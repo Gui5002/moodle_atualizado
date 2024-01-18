@@ -26,6 +26,15 @@
         max-width: 90%;
         margin-left: 0px;
     }
+    .alert-dismissible .close {
+        top: 10px;
+    }
+    .breadcrumb_widgets .title {
+        margin-top: 10px;
+    }
+    section {
+       padding: 20px 20px 10px 20px;
+    }
 }
 /* For iPhone 12 Pro Max, iPhone 13 Pro Max, and iPhone 14 Plus 1284×2778 pixels at 458ppi */
 @media only screen and (max-width:926px) {

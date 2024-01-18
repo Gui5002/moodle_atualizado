@@ -2127,6 +2127,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .mod-indent-outer,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .section .activity .mod-indent-outer {
     min-height: 50px;
+    background: transparent;
     display: table;
     width: 100%;
     max-width: none;

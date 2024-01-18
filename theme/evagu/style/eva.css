@@ -217,7 +217,7 @@ address {
 .form-control {
     font-size: 15px;
     font-family: "[[setting:primary_font]]", sans-serif;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 .ff-ubuntu {
     font-family: "[[setting:primary_font]]", sans-serif;
@@ -6514,7 +6514,7 @@ ul.mc_parent_list ul.mc_child_list:hover .pricing_btn {
     color: #6f7074;
     border-radius: 5px;
     color: #6f7074;
-    height: 45px;
+    height: 40px;
     margin-bottom: 20px;
 }
 .login_form .form-control:focus {
@@ -12993,9 +12993,6 @@ body.translated {
     position: absolute;
     right: 20px;
     top: 22px;
-}
-.alert-dismissible .close {
-    top: 10px;
 }
 .dropdown-item.active, .dropdown-item:active {
     background-color: [[setting:color_primary]];
