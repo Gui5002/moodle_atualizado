@@ -2884,6 +2884,12 @@ header.header-nav.menu_style_home_one.stricky-fixed .sign_up_btn li.list_s {
     overflow: hidden;
     position: relative;
 }
+.mediaplugin, .mediaplugin video {
+    /* Make videos as wide as possible without being wider than their containers */
+    width: 100%;
+    max-width: 100%;
+    background: #000!important;
+}
 .cs_ins_container .courses_big_thumb .iframe_video {
     border-radius: 5px;
     min-height: 540px;
