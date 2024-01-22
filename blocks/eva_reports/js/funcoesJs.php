@@ -51,6 +51,186 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         });
     }
 
+    function gerarPDF() {
+        var cardBodyElement = document.querySelector('#print');
+        var tituloPDFElement = document.querySelector('#tituloPDF');
+        var evaTituloElement = document.querySelector('#evaTitulo');
+        var usuariosPDFElement = document.querySelector('#usuariosPDF');
+        var cursosPDFElement = document.querySelector('#cursosPDF');
+        var cargaPDFElement = document.querySelector('#cargaPDF');
+        var cursosTituloElement = document.querySelector('#cursosTitulo');
+        var cursosElement = document.querySelector('#cursos');
+        var cargaCursosElement = document.querySelector('#carga');
+        var categoriasElement = document.querySelector('#categorias');
+        var categoriasItens = categoriasElement.querySelectorAll('li');
+        var categoriasConteudo = "";
+        categoriasItens.forEach(function (item) {
+            categoriasConteudo += item.innerText + "\n";
+        });
+        var inscricoesElement = document.querySelector('#inscricoes');
+        var concluintesElement = document.querySelector('#concluintes');
+        var naoConcluidosElement = document.querySelector('#naoConcluidos');
+        var naoIniciadoElement = document.querySelector('#naoIniciados');
+
+        if (!cardBodyElement || !tituloPDFElement || !evaTituloElement || !usuariosPDFElement ||
+            !cursosPDFElement || !cargaPDFElement || !cursosTituloElement || !cursosElement ||
+            !cargaCursosElement || !categoriasElement || !inscricoesElement || !concluintesElement ||
+            !naoConcluidosElement || !naoIniciadoElement) {
+            console.error("Um ou mais elementos não foram encontrados no DOM.");
+            return;
+        }
+        var tituloPDF = tituloPDFElement.innerText;
+        var evaTitulo = evaTituloElement.innerText;
+        var usuariosInfo = {
+            text: [
+                { text: 'Usuários registrados: ', bold: true, fontSize: 10 },
+                { text: usuariosPDFElement.innerText }
+            ],
+            style: 'info'
+        };
+
+        var cursosInfo = {
+            text: [
+                { text: 'Cursos, ações e capacitações: ', bold: true, fontSize: 10 },
+                { text: cursosPDFElement.innerText }
+            ],
+            style: 'info'
+        };
+
+        var cargaInfo = {
+            text: [
+                { text: 'Carga horária total na EVA: ', bold: true, fontSize: 10},
+                { text: cargaPDFElement.innerText }
+            ],
+            style: 'info'
+        };
+        var cursosTitulo = cursosTituloElement.innerText;
+        var cursosConteudo = [
+            {
+                text: [
+                    { text: 'Cursos: ', bold: true, fontSize: 10 },
+                    { text: cursosElement.innerText }
+                ],
+                style: 'info'
+            },
+            {
+                text: [
+                    { text: 'Inscrições: ', bold: true, fontSize: 10 },
+                    { text: inscricoesElement.innerText}
+                ],
+                style: 'info'
+            },
+            {
+                text: [
+                    { text: 'Concluintes: ', bold: true, fontSize: 10 },
+                    { text: concluintesElement.innerText }
+                ],
+                style: 'info'
+            },
+            {
+                text: [
+                    { text: 'Não Concluído: ', bold: true, fontSize: 10 },
+                    { text: naoConcluidosElement.innerText }
+                ],
+                style: 'info'
+            },
+            {
+                text: [
+                    { text: 'Não Iniciado: ', bold: true, fontSize: 10 },
+                    { text: naoIniciadoElement.innerText }
+                ],
+                style: 'info'
+            }
+        ];
+
+        var segundaColunaConteudo = [
+            {
+                text: [
+                    { text: 'Carga horária: ', bold: true, fontSize: 10 },
+                    { text: cargaCursosElement.innerText }
+                ],
+                style: 'info'
+            },
+            {
+                text: [
+                    { text: 'Categorias Selecionadas: \n', bold: true, fontSize: 10 },
+                    { text: categoriasConteudo }
+                ],
+                style: 'info'
+            }
+
+        ];
+        var docDefinition = {
+            content: [
+                {
+                    text: tituloPDF,
+                    style: 'titulo'
+                },
+                {
+                    canvas: [{ type: 'line', x1: 0, y1: 5, x2: 600, y2: 5, lineWidth: 1 }]
+                },
+                {
+                    text: evaTitulo,
+                    style: 'subtitulo'
+                },
+                {
+                    text: usuariosInfo,
+                    style: 'info'
+                },
+                {
+                    text: cursosInfo,
+                    style: 'info'
+                },
+                {
+                    text: cargaInfo,
+                    style: 'info'
+                },
+                {
+                    canvas: [{ type: 'line', x1: 0, y1: 5, x2: 600, y2: 5, lineWidth: 1 }]
+                },
+                {
+                    text: cursosTitulo,
+                    style: 'subtitulo'
+                },
+                {
+                    columns: [
+                        {
+                            width: '50%',
+                            stack: cursosConteudo,
+                        },
+                        {
+                            width: '50%',
+                            stack: segundaColunaConteudo,
+                        }
+                    ]
+                },
+                {
+                    canvas: [{ type: 'line', x1: 0, y1: 5, x2: 600, y2: 5, lineWidth: 1 }]
+                }
+            ],
+            pageMargins: [0, 0, 0, 0],
+            styles: {
+                titulo: {
+                    fontSize: 16,
+                    alignment: 'center',
+                    bold: true,
+                    margin: [0, 20, 0, 10]
+                },
+                subtitulo: {
+                    fontSize: 12,
+                    bold: true,
+                    margin: [10, 10, 0, 10]
+                },
+                info: {
+                    fontSize: 9,
+                    margin: [10, 5, 0, 5],
+                }
+            }
+        };
+
+        pdfMake.createPdf(docDefinition).download('consolidado-eva.pdf');
+    }
+
     $(document).ready(function(){
         let idReport = $("#idReport").val();
 
@@ -106,7 +286,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                             return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
                         }
                     },
-                    { "data": "carga_horaria" },
+                    { "data": "carga" },
                     { "data": "inscritos" },
                     { "data": "concluintes" },
                     { "data": "total_certificados" },
@@ -117,11 +297,11 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 ,
                 "columnDefs": [
                     {
-                        targets: [4,5,6,9],
+                        targets: [3,4,5,6,7,8,9],
                         className: 'dt-center'
                     },
                     {
-                        targets: [7, 8, 9],
+                        targets: [7, 8],
                         orderable: false
                     }
                 ],
@@ -212,6 +392,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     {
                         "targets": [1, 2],
                         "className": 'col-md-1'
+                    },
+                    {
+                        targets: [6],
+                        orderable: false
                     }
                 ],
                 "language": {
@@ -463,6 +647,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     {
                         targets: [6,7],
                         className: 'dt-center'
+                    },
+                    {
+                        targets: [6],
+                        orderable: false
                     }
                 ],
                 "buttons": [
@@ -892,9 +1080,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 }
             });
         }else if (idReport == '5') {
-            $("#filterCursos5").select2({ theme: "classic" });
-            $("#filterCategorias5").select2({ theme: "classic" });
-
             function fetchData() {
                 $.ajax({
                     url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
@@ -904,7 +1089,8 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         "id": idReport
                     },
                     success: function (data) {
-                        populateSelect(data);
+                        populateTable(data);
+                        $('input[type="checkbox"]').prop('checked', true).css('opacity', '1');
                     },
                     error: function (error) {
                         console.error('Erro ao obter dados:', error);
@@ -912,47 +1098,136 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 });
             }
 
-            function populateSelect(data) {
-                var select = $('#filterCursos5');
-                select.empty();
+            $('input[type="checkbox"]').on('change', function () {
+                if ($(this).attr('id') === 'marcarTodos') {
+                    var isChecked = $(this).prop('checked');
+                    $('input[type="checkbox"]').prop('checked', isChecked);
+                }
+                calcular();
+            });
 
-                select.append('<option value=""><input type="checkbox">Selecione uma opção</option>');
+            function calcular() {
+                var checkedCheckboxes = $('input[type="checkbox"]:checked');
 
-                data.forEach(function (curso) {
-                    var checkbox = $('<input>', {
-                        type: 'checkbox',
-                        class: 'curso-checkbox',
-                        value: curso.nome_curso
-                    });
-                    var option = $('<option>', {
-                        value: curso.nome_curso,
-                        text: curso.nome_curso
-                    }).data('inscritos', curso.inscritos)
-                        .data('concluintes', curso.concluintes)
-                        .data('naoconcluidos', curso.naoconcluidos)
-                        .data('naoiniciados', curso.naoiniciados);
+                var checkedValues = [];
 
-                    select.append(checkbox).append(option);
+                checkedCheckboxes.each(function () {
+                    var value = $(this).val();
+                    if (value !== 'on') {
+                        checkedValues.push(value);
+                    }
                 });
 
+                var uniqueCheckedValues = Array.from(new Set(checkedValues.filter(Boolean)));
+                var listaCategorias = '<ul>';
+                uniqueCheckedValues.forEach(function (value) {
+                    listaCategorias += '<li>' + value + '</li>';
+                });
+                listaCategorias += '</ul>';
+
+                $('#categorias').html(listaCategorias);
+
+                var quantidadeRegistros = 0;
+                var totalColuna2 = 0;
+                var totalColuna3 = 0;
+                var totalColuna4 = 0;
+                var totalColuna5 = 0;
+                var totalColuna6 = 0;
+                var totalColuna7 = 0;
+
+                $('#filterCursos5 table tr:gt(0)').each(function () {
+                    var categoria = $(this).find('td:eq(7)').text();
+                    var valorColuna2 = parseFloat($(this).find('td:eq(1)').text());
+                    var valorColuna3 = parseFloat($(this).find('td:eq(2)').text());
+                    var valorColuna4 = parseFloat($(this).find('td:eq(3)').text());
+                    var valorColuna5 = parseFloat($(this).find('td:eq(4)').text());
+                    var valorColuna6 = parseFloat($(this).find('td:eq(5)').text());
+                    var valorColuna7 = parseFloat($(this).find('td:eq(6)').text());
+
+                    if (uniqueCheckedValues.includes(categoria)) {
+                        quantidadeRegistros++;
+
+                        totalColuna2 += valorColuna2;
+                        totalColuna3 += valorColuna3;
+                        totalColuna4 += valorColuna4;
+                        totalColuna5 += valorColuna5;
+                        totalColuna6 += valorColuna6;
+                        totalColuna7 += valorColuna7;
+                    }
+                });
+
+                if (totalColuna3 > 59) {
+                    var calculoHoras = totalColuna3 / 60;
+                    var parteInteira = Math.floor(calculoHoras);
+                    var parteDecimal = (calculoHoras % 1);
+
+                    totalColuna2 += parteInteira;
+                    totalColuna3 = Math.round(parteDecimal * 60);
+                }
+
+                if ($('input[type="checkbox"]:visible').length > 0) {
+                    $('#cursos').text(quantidadeRegistros);
+                    $('#carga').text(totalColuna2 + ' hrs ' + totalColuna3 + ' min');
+                    $('#inscricoes').text(totalColuna4);
+                    $('#concluintes').text(totalColuna5);
+                    $('#naoConcluidos').text(totalColuna6);
+                    $('#naoIniciados').text(totalColuna7);
+                } else {
+                    $('#cursos').text('Selecione uma ou mais categorias');
+                    $('#carga').text('...');
+                    $('#inscricoes').text('...');
+                    $('#concluintes').text('...');
+                    $('#naoConcluidos').text('...');
+                    $('#naoIniciados').text('...');
+                    $('#categorias').empty();
+                }
             }
 
-            fetchData();
 
-            $('#filterCursos5').on('select2:select', function (e) {
-                var selectedOption = $(e.params.data.element);
-                var inscritos = selectedOption.data('inscritos');
-                var concluintes = selectedOption.data('concluintes');
-                var naoconcluidos = selectedOption.data('naoconcluidos');
-                var naoiniciados = selectedOption.data('naoiniciados');
 
-                console.log('Inscrições: ' + inscritos);
-                console.log('Concluintes: ' + concluintes);
-                console.log('Não Concluídos: ' + naoconcluidos);
-                console.log('Não Iniciados: ' + naoiniciados);
-            });
+            function populateTable(data) {
+                $('#filterCursos5').empty();
+
+                var table = $('<table>').addClass('table');
+
+                var headerRow = $('<tr>');
+                headerRow.append($('<th>').text('Nome do Curso'));
+                headerRow.append($('<th>').text('Hora'));
+                headerRow.append($('<th>').text('Minutos'));
+                headerRow.append($('<th>').text('Inscritos'));
+                headerRow.append($('<th>').text('Concluintes'));
+                headerRow.append($('<th>').text('Não Concluídos'));
+                headerRow.append($('<th>').text('Não Iniciados'));
+                headerRow.append($('<th>').text('Categoria'));
+
+                table.append(headerRow);
+
+                $.each(data, function (index, item) {
+                    var row = $('<tr>');
+                    row.append($('<td>').text(item.nome_curso));
+                    row.append($('<td>').text(item.horas));
+                    row.append($('<td>').text(item.minutos));
+                    row.append($('<td>').text(item.inscritos));
+                    row.append($('<td>').text(item.concluintes));
+                    row.append($('<td>').text(item.naoconcluidos));
+                    row.append($('<td>').text(item.naoiniciados));
+                    row.append($('<td>').text(item.categoria));
+
+                    table.append(row);
+                });
+
+                $('#filterCursos5').append(table);
+
+                if ($('input[type="checkbox"]:visible').length > 0) {
+                    setTimeout(function () {
+                        $('input[type="checkbox"]').css('display', '');
+                        calcular();
+                    }, 500);
+                }
+
+            }
+            fetchData()
         }
-
 
         $("#arrowLabel").on('click',function(){
             if($("#arrow").hasClass('fa-angle-down') === true){

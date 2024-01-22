@@ -51,34 +51,6 @@ class reports implements renderable, templatable
                     order by 
                         upper(concat(trim(mu.firstname),' ',trim(mu.lastname))) asc";
         $usuarios = $DB->get_records_sql($sql_users);
-        $sql_user_all = "select
-                            mu.id,
-                            upper(concat(trim(mu.firstname),' ',trim(mu.lastname))) as nome
-                        from
-                            mdl_user mu
-                        where
-                            mu.id > 2 
-                        group by 
-                            upper(concat(trim(mu.firstname),' ',trim(mu.lastname)))
-                        order by
-                            upper(concat(trim(mu.firstname),' ',trim(mu.lastname))) asc";
-        $usuariosAll = $DB->get_records_sql($sql_user_all);
-        $sql_lotacao = "select
-                            upper(trim(mu.lotacao)) as lotacao 
-                        from
-                            mdl_user mu
-                        join mdl_user_enrolments mue on
-                            mue.userid = mu.id
-                        join mdl_enrol me on
-                            me.id = mue.enrolid
-                        where 
-                            mu.lotacao is not null and mu.lotacao <> ''
-                            and mu.id > 2
-                        group by
-                            upper(trim(mu.lotacao))
-                        order by
-                            upper(trim(mu.lotacao)) asc";
-        $lotacao = $DB->get_records_sql($sql_lotacao);
         $sql_cargo = "select
                         upper(trim(mu.ds_cargo)) as cargo 
                     from
@@ -95,6 +67,13 @@ class reports implements renderable, templatable
                     order by
                         upper(trim(mu.ds_cargo)) asc";
         $cargos = $DB->get_records_sql($sql_cargo);
+        $sql_carga = "SELECT
+                        CONCAT(CONVERT(SUM(CONVERT(SUBSTRING_INDEX(SUBSTRING_INDEX(COALESCE(w.workload, '08 hrs 00 min'), ' ', 1), ' ', -1),UNSIGNED INTEGER)),UNSIGNED INTEGER) 
+                        + FLOOR(SUM(CONVERT(SUBSTRING_INDEX(SUBSTRING_INDEX(COALESCE(w.workload, '08 hrs 00 min'), ' ', -2), ' ', 1),UNSIGNED INTEGER)) / 60),' hrs e ',
+                        LPAD(SUM(CONVERT(SUBSTRING_INDEX(SUBSTRING_INDEX(COALESCE(w.workload, '08 hrs 00 min'), ' ', -2), ' ', 1),UNSIGNED INTEGER)) % 60,2,'0'),' min') AS resultado
+                        FROM mdl_course c LEFT JOIN mdl_eva_course_workload w ON c.id = w.courseid WHERE c.id > 1;
+                    ";
+        $cargaHoraria = $DB->get_record_sql($sql_carga);
 
         $text = '';
         $text .= '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />';
@@ -117,8 +96,8 @@ class reports implements renderable, templatable
                 </div>
                 <div class="card sombreamento" style="display: block;" id="cardFiltros" name="cardFiltros">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-3">
+                        <div class="row" >
+                            <div class="col-sm-12 col-md-3" >
                                 <label style="font-size: 0.625em !important;">Nome do curso</label>
                                 <select id="filterCursos" name="filterCursos" class="form-control">
                                     <option value="">Selecione uma opção</option>';
@@ -492,98 +471,160 @@ class reports implements renderable, templatable
             } else if ($id == 5) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
+               <button class="btn" onclick="gerarPDF()">PDF</button>
                 <div class="card sombreamento">
                     <div class="card-body">
-                        
+                        <div class="row">
+                        <div class="col-md-9 print" id="print">
                         <div class="row" style="margin-top: 5px;">
                             <div class="col-sm-12 col-md-12 text-center">
-                                    <div class="p-2 border bg-light bold">EVA - Escola Virtual da AGU</div>
+                                    <div class="p-2 border bg-light bold" id="tituloPDF">EVA - Escola Virtual da AGU</div>
                              </div>
                         </div>
                         <div class="row m-1">
-                            <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-12" id="evaTitulo">
                                 <h4 class="bold">DADOS EVA</h4>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-12">
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <span style="font-weight: bold; font-size: 12px;">Usuarios registrados:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-10" id="usuariosPDF">
                                         <span style="font-size: 12px;">';
                 $text .= $cursosConsolidados->quantidade_usuarios;
                 $text .= '</span>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <span style="font-weight: bold; font-size: 12px;">Cursos, açoes e capacitações:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-10" id="cursosPDF">
                                         <span style="font-size: 12px;">';
                 $text .= $cursosConsolidados->quantidade_cursos;
                 $text .= '</span>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <span style="font-weight: bold; font-size: 12px;">Carga horária total na EVA:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <span style="font-size: 12px;" id="cargaHoraria"></span>
+                                    <div class="col-md-10" id="cargaPDF">
+                                        <span style="font-size: 12px;" id="cargaHoraria">'. $cargaHoraria->resultado .'</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row m-1">
-                            <div class="col-md-12">
+                            <div class="col-md-12" id="cursosTitulo">
                                 <h4 class="bold">DADOS DOS CURSOS</h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 12px;">Inscrições:&nbsp;</span>
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Cursos:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <span style="font-size: 12px;"></span>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="cursos">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 12px;">Concluintes:&nbsp;</span>
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Carga horária:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <span style="font-size: 12px;"></span>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="carga">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px; display: none" id="categoriasPdf">
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Categorias selecionadas:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="categorias">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
-                                        <span style="font-weight: bold; font-size: 12px;">Não Concluidos:&nbsp;</span>
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Inscrições:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <span style="font-size: 12px;"></span>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="inscricoes">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
                                     </div>
                                 </div>
                                 <div class="row" style="margin: 10px;">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Concluintes:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="concluintes">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-3">
+                                        <span style="font-weight: bold; font-size: 12px;">Não Concluidos:&nbsp;</span>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="naoConcluidos">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 10px;">
+                                    <div class="col-md-3">
                                         <span style="font-weight: bold; font-size: 12px;">Não Iniciados:&nbsp;</span>
                                     </div>
-                                    <div class="col-md-8">
-                                        <span style="font-size: 12px;"></span>
+                                    <div class="col-md-9">
+                                        <span style="font-size: 12px;" id="naoIniciados">Calculando<img width="15px" src="'.$CFG->wwwroot.'/blocks/eva_reports/img/load.gif"></span>
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                         <hr>
+                        </div>
+                            <div id="listaCategorias" class="col-md-3" style="border-left: 1px solid darkgray;">
+                                <ul class="list-group list-group-flush col-md-12" style="border-left: 1px">
+                                      <li class="list-group-item text-center" style="border-top: 1px solid #000; border-bottom: 2px solid #000">
+                                          Categorias
+                                      </li>
+                                      <li class="list-group-item list-group-item-action" style="font-size: 10px; border: 1px solid darkgray; border-left: 0px; border-right: 0px;">
+                                          
+                                              <input id="marcarTodos" type="checkbox" style="opacity: 1;"> TODOS/NENHUM
+                                          
+                                      </li>
+                                      
+                                      ';
+                $arrCategoria = json_decode(json_encode($categoria, JSON_UNESCAPED_UNICODE), true);
+
+                foreach ($arrCategoria as $row) {
+                    $text .= '<li class="list-group-item list-group-item-action" style="font-size: 15px; border: 1px solid darkgray; border-left: 0px; border-right: 0px;">
+                                  <div class="row">
+                                      <div class="col-md-2" style="text-align: right;"><input type="checkbox" style="margin-top: 3px;opacity: 0;" value="' . $row['categoria'] . '"></div>
+                                      <div class="col-md-10" style="margin-left: -15px"> ' . $row['categoria'] . '</div>
+                                  </div>
+                              </li>';
+                }
+
+                $text .= '
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="col-md-12">
+                      <div id="filterCursos5" style="display: none">
+                            <!-- aqui possui uma tabela oculta com as informações para calcular os cursos -->
+                      </div>
+                 </div>
+                
                 ';
             }
         }

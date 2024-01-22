@@ -42,6 +42,9 @@ if($idReport == 1){
                 $row['subcategoria'] = $row['pcategoria'];
             }
 
+            $valores = explode(" ", $row['carga_horaria']);
+            $row['carga'] = $valores[0].":".$valores[2].":00";
+
             foreach($row as $k => $v){
                 $array[$k] = $v;
             }
@@ -185,8 +188,8 @@ if($idReport == 1){
 
 } else if($idReport == 5){
 
-    $relatorio4 = new tabela_reports();
-    $rs = $relatorio4->get_consolidado_eva();
+    $relatorio5 = new tabela_reports();
+    $rs = $relatorio5->get_consolidado_eva();
 
     $array = array();
     $cargaMinutoss = 0;
@@ -200,7 +203,19 @@ if($idReport == 1){
         foreach($resultSet as $row){
 
             $valores = explode(" ", $row['carga_horaria']);
-            $row['carga'] = $valores[0].":".$valores[2].":00";
+            $row['horas'] = $valores[0];
+            $row['minutos'] = $valores[2];
+
+            if(!empty($row['tcategoria'])){
+                $row['categoria'] = $row['tcategoria'];
+                $row['subcategoria'] = $row['scategoria'].'/'.$row['pcategoria'];
+            } elseif (!empty($row['scategoria'])){
+                $row['categoria'] = $row['scategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            } else {
+                $row['categoria'] = $row['pcategoria'];
+                $row['subcategoria'] = $row['pcategoria'];
+            }
 
             foreach($row as $k => $v){
                 $array[$k] = $v;
