@@ -398,7 +398,7 @@ body.ccn_context_dashboard {
     font-family: "[[setting:primary_font]]", sans-serif;
     color: #fff;
     line-height: 1;
-    padding: 10px 15px;
+    padding: 10px 10px;
     margin-right: 5px;
     margin-top: 3px;
     margin-bottom: 5px;
@@ -588,7 +588,8 @@ body.ccn_context_dashboard {
 }
 .forumpost .row h4 {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 .forumpost {
     border: 0 !important;
@@ -604,12 +605,13 @@ body.ccn_context_dashboard {
     text-align: left;
 }
 .forumpost .post-actions .btn.btn-link {
-    color: rgb(233, 174, 48);
+    color: rgb(250, 241, 120);
     background-color: #567fad;
     border-color: #567fad;
     margin: 0 0 0 8px;
     font-size: 14px;
     padding: .2rem .75rem;
+    font-weight: 500;
 }
 .forumpost .post-actions .btn.btn-link:hover {
     color: #fff;
@@ -681,8 +683,12 @@ body.ccn_context_dashboard {
     font-size: 14px;
 }
 .dashbord .forumpost .row {
-    background: #f5f5f5;
+    background: #c0d4dc;
     margin-bottom: 0 !important;
+    color: #000;
+    font-weight: 600!important;
+    font-family: "[[setting:primary_font]]", sans-serif;
+    font-size: 16px!important;
 }
 .dashbord .forumpost .rounded-circle {
     border: 2px solid #fff;
@@ -2165,7 +2171,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
     width: 100%;
     padding-right: 45px;
     padding-left: 10px;
-    background-image: -webkit-linear-gradient(175deg,#000000 0%,#0c3652 100%);
+    background-image: -webkit-linear-gradient(175deg,#024876e0 0%,#0c3652 100%);
     color: #ffffff!important;
 }
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .activityinstance>div,
@@ -2251,7 +2257,7 @@ body.pagelayout-maintenance, body.pagelayout-popup, body.pagelayout-admin, body.
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .badge,
 .ccn_context_focus .dashboard_navigationbar .dropdown-content .cc_tab .panel-body .badge {
     font-size: 10px;
-    padding: 2px 5px;
+    padding: 4px 8px;
     vertical-align: top;
     font-family: "[[setting:primary_font]]", sans-serif;
 }
