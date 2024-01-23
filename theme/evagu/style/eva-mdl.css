@@ -1040,6 +1040,7 @@ table {
 @media (min-width:992px) {
     .generaltable>thead>tr>th:first-child {
         border-radius: 5px 0 0 4px;
+        font-family: "[[setting:secondary_font]]", sans-serif;
     }
     .generaltable>thead>tr>th:last-child {
         border-radius: 0 5px 4px 0;
