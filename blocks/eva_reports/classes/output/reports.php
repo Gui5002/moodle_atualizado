@@ -444,9 +444,7 @@ class reports implements renderable, templatable
                             <div class="col-sm-12 col-md-3 mt-4">
                                 <input type="button" style="width: 100%;" class="btn" id="btnLimparFiltro4" name="btnLimparFiltro4" value="Limpar">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-9 mt-4">
+                            <div class="col-sm-12 col-md-9 mt-4 text-right" >
                                 <ul>
                                 <li>N/C = Não Concluído</li>
                                 <li>N/I = Não Iniciado</li>
