@@ -45,6 +45,7 @@ iframe {
 a {
     text-decoration: none;
     -webkit-font-smoothing: antialiased;
+    font-family: "[[setting:primary_font]]", sans-serif;
 }
 a:hover, a:focus {
     color: rgb(8, 158, 245);
