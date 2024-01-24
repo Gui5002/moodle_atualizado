@@ -445,6 +445,14 @@ class reports implements renderable, templatable
                                 <input type="button" style="width: 100%;" class="btn" id="btnLimparFiltro4" name="btnLimparFiltro4" value="Limpar">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-9 mt-4">
+                                <ul>
+                                <li>N/C = Não Concluído</li>
+                                <li>N/I = Não Iniciado</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -459,8 +467,8 @@ class reports implements renderable, templatable
                                     <th>Carga Horária</th>
                                     <th>Inscritos</th>
                                     <th>Concluintes</th>
-                                    <th>Não Concluintes</th>
-                                    <th>Não Iniciados</th>
+                                    <th>N/C</th>
+                                    <th>N/I</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
