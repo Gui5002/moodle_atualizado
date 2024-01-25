@@ -222,7 +222,8 @@ switch ($acao) {
         $tb_avaliador_id = $_GET['tb_avaliador_id'];
         $dados = $DB->get_records('eva_barema_avaliador', array('id'=>$tb_avaliador_id));
 
-        $mensagem = "\n\n".'Prezado Avaliador,'."\n\n".'Devido a sua situação voce foi substituído dessa avaliação.'."\n".'Clique no link abaixo e visualize as avaliações pendentes.'."\n";
+        // $mensagem = "\n\n".'Prezado Avaliador,'."\n\n".'Devido a sua situação voce foi substituído dessa avaliação.'."\n".'Clique no link abaixo e visualize as avaliações pendentes.'."\n";
+        $mensagem = "\n\n".'Prezado Avaliador,'."\n\n".'o senhor foi selecionado para corrigir as Avaliações de Aprendizagem que estavam a cargo de outro professor. '."\n".'Clique no link abaixo para iniciar o Barema e a correção das Avaliações de Aprendizagem.'."\n";
         foreach ($dados as $dado){
             $urlavaliacao = $CFG->wwwroot.'/blocks/eva_form_barema/gerencia.php?avaliador='. $dado->avaliador_tb_user_id;
             $avaliador_id = $dado->avaliador_tb_user_id;
