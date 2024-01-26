@@ -31,7 +31,6 @@ class reports implements renderable, templatable
         $data->wwwroot = $CFG->wwwroot;
 
         $categoria = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as categoria FROM mdl_course_categories WHERE `parent` = 0 ORDER BY categoria ASC');
-        $subcategoria = $DB->get_records_sql('SELECT DISTINCT upper(trim(`name`)) as subcategoria FROM mdl_course_categories WHERE `parent` > 0 ORDER BY subcategoria ASC');
         $allCourse = $DB->get_records_sql('SELECT DISTINCT upper(trim(fullname)) as curso, id  FROM mdl_course ORDER BY curso ASC');
         $cursosConsolidados = $DB->get_record_sql('SELECT (SELECT COUNT(*) FROM mdl_user) AS quantidade_usuarios, (SELECT COUNT(*) FROM mdl_course WHERE `category` > 0) AS quantidade_cursos');
 
@@ -112,7 +111,7 @@ class reports implements renderable, templatable
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label style="font-size: 0.625em !important;">Categoria do curso</label>
-                                <select id="filterCategory" name="filterCategory" class="form-control">
+                                <select id="filterCategory" name="filterCategory" class="form-control filterCategory">
                                     <option value="">Selecione uma opção</option>';
                 $arrCategoria = json_decode(json_encode($categoria, JSON_UNESCAPED_UNICODE), true);
 
@@ -125,15 +124,8 @@ class reports implements renderable, templatable
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label style="font-size: 0.625em !important;">Sub-categoria do curso</label>
-                                <select id="filterSubCategory" name="filterSubCategory" class="form-control">
-                                    <option value="">Selecione uma opção</option>';
-                $arrSubcategoria = json_decode(json_encode($subcategoria, JSON_UNESCAPED_UNICODE), true);
-
-                foreach ($arrSubcategoria as $row) {
-                    $text .= '<option value="' . $row['subcategoria'] . '">' . $row['subcategoria'] . '</option>';
-                }
-
-                $text .= '
+                                <select id="filterSubCategory" name="filterSubCategory" class="form-control filterSubCategory">
+                                    <option value="">Categoria não selecionada...</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-3">
@@ -407,7 +399,7 @@ class reports implements renderable, templatable
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label style="font-size: 0.625em !important;">Categoria do curso</label>
-                                <select id="filterCategory4" name="filterCategory4" class="form-control">
+                                <select id="filterCategory4" name="filterCategory4" class="form-control filterCategory">
                                     <option value="">Selecione uma opção</option>';
                 $arrCategoria = json_decode(json_encode($categoria, JSON_UNESCAPED_UNICODE), true);
 
@@ -420,15 +412,8 @@ class reports implements renderable, templatable
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label style="font-size: 0.625em !important;">Sub-categoria do curso</label>
-                                <select id="filterSubCategory4" name="filterSubCategory4" class="form-control">
-                                    <option value="">Selecione uma opção</option>';
-                $arrSubcategoria = json_decode(json_encode($subcategoria, JSON_UNESCAPED_UNICODE), true);
-
-                foreach ($arrSubcategoria as $row) {
-                    $text .= '<option value="' . $row['subcategoria'] . '">' . $row['subcategoria'] . '</option>';
-                }
-
-                $text .= '
+                                <select style="display: block" id="filterSubCategory4" name="filterSubCategory4" class="form-control filterSubCategory">
+                                    <option>Categoria não selecionada...</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-3">

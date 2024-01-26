@@ -10,46 +10,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 <script>
     var dadosCabecalho = '';
     const bodys = [];
-    function getSubCategorys(category = "", idReport = ""){
-        $('#filterSubCategory').find('option').remove();
-
-        $.ajax({
-            url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/consultas.php',
-            type: 'GET',
-            dataType: 'text',
-            data: {
-                "id": idReport,
-                "comando": '1',
-                "category": category
-            },
-            success: function(response){
-                var obj = jQuery.parseJSON(response);
-                $('#filterSubCategory').append('<option value="">Selecione uma opção</option>');
-                for(var i=0; i<obj.length; i++){
-                    $('#filterSubCategory').append('<option value="'+obj[i].subcategoryname+'">'+obj[i].subcategoryname+'</option>');
-                }
-            }
-        });
-    }
-
-    function modalShow(id,courseid){
-        $.ajax({
-            url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/notas.php',
-            type: 'GET',
-            dataType: 'text',
-            data: {
-                id : id,
-                courseid: courseid
-            },
-            success: function(response){
-                var txt = response;
-
-                $("#modalDiv").html("");
-                $("#modalDiv").html(txt);
-                $('#mymodal').modal({ show: true });
-            }
-        });
-    }
 
     function gerarPDF() {
         var cardBodyElement = document.querySelector('#print');
@@ -234,6 +194,56 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     $(document).ready(function(){
         let idReport = $("#idReport").val();
 
+        $(".filterCategory").change(function() {
+            var categoria = $(this).val();
+            if(idReport == '1'){
+                myTable.column(1).search('').draw();
+            }else if(idReport == '4'){
+                myTable.column(3).search('').draw();
+            }
+            $(".filterSubCategory").html("<option value=''>Carregando...</option>");
+            console.log(categoria);
+
+            $.ajax({
+                url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    "categoria": categoria
+                },
+                success: function(data) {
+                    var selectSubCategory = $(".filterSubCategory");
+                    selectSubCategory.empty();
+                    if (data.length > 0) {
+                        selectSubCategory.append($('<option>', {
+                            value: "",
+                            text: "Selecione uma subcategoria"
+                        }));
+                        data.forEach(function(item) {
+                            selectSubCategory.append($('<option>', {
+                                value: item.categoria_nome,
+                                text: item.categoria_nome
+
+                            }));
+                        });
+                        selectSubCategory.prop('disabled', false);
+                    } else {
+                        selectSubCategory.append($('<option>', {
+                            value: "",
+                            text: "Nenhuma subcategoria disponível"
+                        }));
+                        selectSubCategory.prop('disabled', true);
+                    }
+                },
+                error: function(error) {
+                    console.error("Erro na solicitação AJAX: ", error);
+                },
+                complete: function() {
+                    console.log("Complete");
+                }
+            });
+        });
+
         if(idReport == '1'){
             let filterCategory = $("#filterCategory").val();
             let filterSubCategory = $("#filterSubCategory").val();
@@ -317,13 +327,12 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterSubCategory").on('change',function(){
                 var filterSubCategory = this.value;
-
                 myTable.column(1).search(filterSubCategory, true, false).draw();
             });
 
             $("#filterCursos").on('change',function(){
                 var filterCursos = this.value;
-                myTable.column(2).search(filterCursos, true, false).draw();
+                myTable.column(2).search('^' + filterCursos + '$', true, false).draw();
             });
 
             $("#filterStatus").on('change',function(){
@@ -332,15 +341,13 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 myTable.column(9).search(filterStatus, true, false).draw();
             });
 
-
-
             $("#btnLimparFiltro").on('click',function(){
+                $(".filterSubCategory").empty();
+                $(".filterSubCategory").html("<option value=''>Categoria não selecionada...</option>");
                 $("#filterCursos").val('');
                 $('#select2-filterCursos-container').text('Selecione uma opção');
                 $("#filterCategory").val('');
                 $('#select2-filterCategory-container').text('Selecione uma opção');
-                $("#filterSubCategory").val('');
-                $('#select2-filterSubCategory-container').text('Selecione uma opção');
                 $("#filterStatus").val('');
                 $('#select2-filterStatus-container').text('Selecione uma opção');
 
@@ -446,7 +453,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos2").on('change',function(){
                 var filterCursos2 = this.value;
-                myTable.column(5).search(filterCursos2, true, false).draw();
+                myTable.column(5).search('^' + filterCursos2 + '$', true, false).draw();
             });
 
             $("#filterUsers2").on('change',function(){
@@ -499,9 +506,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     }
                 });
             });
-
-
-
 
             $("#matriculaEnd2").on('change', function () {
                 var matriculaStart2 = $("#matriculaStart2");
@@ -695,7 +699,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos3").on('change',function(){
                 var filterCursos3 = this.value;
-                myTable.column(5).search(filterCursos3, true, false).draw();
+                myTable.column(5).search('^' + filterCursos3 + '$', true, false).draw();
             });
             $("#filterStatus3").on('change',function(){
                 var filterStatus3 = this.value;
@@ -808,8 +812,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 if (matriculaStart3 || matriculaEnd3) {
                     hasData = true;
                 }
-
-
 
                 myTable.column(0).search('').draw();
                 myTable.column(4).search('').draw();
@@ -934,7 +936,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos4").on('change',function(){
                 var filterCursos4 = this.value;
-                myTable.column(0).search(filterCursos4, true, false).draw();
+                myTable.column(0).search('^' + filterCursos4 + '$', true, false).draw();
             });
 
             $("#filterStatus4").on('change',function(){
@@ -1029,14 +1031,14 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             $("#btnLimparFiltro4").on('click',function(){
                 var criacaoStart4 = $("#criacaoStart4").val();
                 var criacaoEnd4 = $("#criacaoEnd4").val();
+                $(".filterSubCategory").empty();
+                $(".filterSubCategory").html("<option value=''>Categoria não selecionada...</option>");
                 var hasData = false;
 
                 $("#filterCursos4").val('');
                 $('#select2-filterCursos4-container').text('Selecione uma opção');
                 $("#filterCategory4").val('');
                 $('#select2-filterCategory4-container').text('Selecione uma opção');
-                $("#filterSubCategory4").val('');
-                $('#select2-filterSubCategory4-container').text('Selecione uma opção');
                 $("#filterStatus4").val('');
                 $('#select2-filterStatus4-container').text('Selecione uma opção');
                 $("#criacaoStart4").val('');
@@ -1182,8 +1184,6 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     $('#categorias').empty();
                 }
             }
-
-
 
             function populateTable(data) {
                 $('#filterCursos5').empty();

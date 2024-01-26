@@ -43,10 +43,10 @@ class tabela_reports
         global $DB;
 
         $nowDate = new DateTime();
-        $nowDate = $nowDate->format('Y-m-d');
+		$nowDateFormatted = $nowDate->format('Y-m-d H:i:s');
 
         $start = isset($_REQUEST['matriculaStart2']) ? $_REQUEST['matriculaStart2'] : "1969-12-31";
-        $end   = isset($_REQUEST['matriculaEnd2'])   ? $_REQUEST['matriculaEnd2']   : $nowDate;
+        $end   = isset($_REQUEST['matriculaEnd2'])   ? $_REQUEST['matriculaEnd2']   : $nowDateFormatted;
         if(empty($end)){
             $end = $nowDate;
         }
@@ -108,7 +108,7 @@ class tabela_reports
         global $DB;
 
         $nowDate = new DateTime();
-        $nowDate = $nowDate->format('Y-m-d');
+        $nowDate = $nowDate->format('Y-m-d H:i:s');
 
         $start = isset($_REQUEST['matriculaStart3']) ? $_REQUEST['matriculaStart3'] : "1969-12-31";
         $end   = isset($_REQUEST['matriculaEnd3'])   ? $_REQUEST['matriculaEnd3']   : $nowDate;
@@ -168,7 +168,7 @@ class tabela_reports
         global $DB;
 
         $nowDate = new DateTime();
-        $nowDate = $nowDate->format('Y-m-d');
+        $nowDate = $nowDate->format('Y-m-d H:i:s');
 
         $start = isset($_REQUEST['criacaoStart4']) ? $_REQUEST['criacaoStart4'] : "1969-12-31";
         $end   = isset($_REQUEST['criacaoEnd4'])   ? $_REQUEST['criacaoEnd4']   : $nowDate;
@@ -221,5 +221,31 @@ class tabela_reports
         $rs = $DB->get_records_sql($sql);
         return $rs;
     }
+
+	public function get_sub_categorias()
+	{
+		global $DB;
+		$categoria = $_REQUEST['categoria'];
+
+		$sql = "SELECT
+            c.id AS categoriaid,
+            UPPER(c.name) AS categoria_nome,
+            c.parent AS ppid,
+            pp.name AS ppname,
+            sp.id AS spid,
+            sp.name AS spname
+        FROM 
+            mdl_course_categories c
+        LEFT JOIN 
+            mdl_course_categories pp ON c.parent = pp.id
+        LEFT JOIN 
+            mdl_course_categories sp ON pp.parent = sp.id
+        WHERE pp.name = '$categoria' OR sp.name = '$categoria'";
+
+			$rs = $DB->get_records_sql($sql);
+			return $rs;
+
+	}
+
 
 }

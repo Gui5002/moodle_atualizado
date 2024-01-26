@@ -8,9 +8,7 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG, $DB, $USER;
 
 $idReport = isset($_REQUEST['id'])    ? (integer)$_REQUEST['id'] : 0;
-$filtro   = "";
-$filtro2  = "";
-$x        = 0;
+
 
 
 //===============================RELATORIO 1 - CURSOS E CATEGORIAS - ========================================
@@ -189,7 +187,7 @@ if($idReport == 1){
 } else if($idReport == 5){
 
     $relatorio5 = new tabela_reports();
-    $rs = $relatorio5->get_consolidado_eva();
+	$rs = $relatorio5->get_consolidado_eva();
 
     $array = array();
     $cargaMinutoss = 0;
@@ -230,29 +228,30 @@ if($idReport == 1){
         echo json_encode($arr,JSON_UNESCAPED_UNICODE);
     }
 
-    /*if($rs){
-        $resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
+} else if ($_REQUEST['categoria']) {
+	$categoria = $_REQUEST['categoria'];
+	$query = new tabela_reports();
+	$rs = $query->get_sub_categorias();
 
-        foreach($resultSet as $row){
+	if($rs){
 
-            $valores = explode(" ", $row['carga_horaria']);
-            $cargaMinutos += $valores[2];
-            $cargaHoras += $valores[0];
+		$resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
 
-        }
+		foreach($resultSet as $row){
 
-        $horasMinutos = INT($cargaMinutos / 60);
-        $porcminutos =  ($cargaMinutos / 60) - $horasMinutos;
-        $minutos = 60 * $porcminutos;
-        $horas = $cargaHoras + $horasMinutos;
+			foreach($row as $k => $v){
+				$array[$k] = $v;
+			}
 
-        $carga = $horas.':'.$minutos.':00';
+			$arr[] = $array;
+		}
 
-        echo json_encode($carga,JSON_UNESCAPED_UNICODE);
-    }else{
-        $carga = '';
-        echo json_encode($carga,JSON_UNESCAPED_UNICODE);
-    }*/
+		echo json_encode($arr,JSON_UNESCAPED_UNICODE);
+	}else{
+		$arr = '';
+		echo json_encode(['error' => 'Erro na consulta'], JSON_UNESCAPED_UNICODE);
+}
+
 
 }
 
