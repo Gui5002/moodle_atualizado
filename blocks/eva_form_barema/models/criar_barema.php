@@ -94,7 +94,8 @@ function set_envio_email_avaliadores($idavaliadores, $baremaCurso,  $link_avalia
     $_POST['avaliador'] = $avaliador->fullname;
     $_POST['curso'] = $curso;
     $_POST['atividade'] = $atividade;
-    $_POST['message'] = 'Click no link abaixo para Iniciar o Barema de avaliações dos alunos';
+    // $_POST['message'] = 'Click no link abaixo para Iniciar o Barema de avaliações dos alunos';
+    $_POST['message'] = 'Prezado Avaliador, a lista dos alunos que irá avaliar já está disponível na EVA. Clique no link abaixo para iniciar o Barema e a correção das Avaliações de Aprendizagem.';
     $_POST['link'] = $link_avaliador;
 
     $envio = $contact->sendmessage($avaliador->email, $name, null , null);
