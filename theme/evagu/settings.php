@@ -16,6 +16,10 @@
 // This line protects the file from being accessed by a URL directly.
 defined('MOODLE_INTERNAL') || die();
 $ccnFontList = include($CFG->dirroot . '/theme/evagu/ccn/font_handler/ccn_font_select.php');
+require_once($CFG->dirroot . '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
+$ccnMdlHandler = new ccnMdlHandler();
+$ccnMdlVersion = $ccnMdlHandler->ccnGetCoreVersion();
+$ccnMdlVersion = (int)$ccnMdlVersion;
 // This is used for performance, we don't need to know about these settings on every page in Moodle, only when
 // we are looking at the admin settings pages.
 if ($ADMIN->fulltree) {

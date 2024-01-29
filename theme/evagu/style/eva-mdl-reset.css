@@ -1,5 +1,5 @@
 .dashboard_main_content a {
-    color: #555;
+  color: #555;
 }
 /* */
 .aalink.focus,
@@ -11,10 +11,10 @@ a:not([class]).focus,
 #page-footer a:not([class]):focus,
 .arrow_link:focus, a:not([class]):focus,
 .activityinstance>a:focus {
-    outline: none;
-    color: inherit;
-    background-color: inherit;
-    box-shadow: inherit;
+  outline: none;
+  color: inherit;
+  background-color: inherit;
+  box-shadow: inherit;
 }
 .aabtn.focus,
 .btn-link.focus,
@@ -47,8 +47,8 @@ a.dropdown-toggle:focus,
 .modal-dialog[tabindex="0"]:focus,
 .moodle-dialogue-base .closebutton:focus,
 button.close:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 *:focus,
 *:active,
@@ -59,10 +59,10 @@ a:focus,
 button:active,
 button:focus,
 .form-control:focus {
-    outline: none;
-    border-color: transparent;
-    box-shadow: none;
+  outline: none;
+  border-color: transparent;
+  box-shadow: none;
 }
 .bg-primary {
-    background-color: rgb(49, 94, 190);
+  background-color: rgb(49, 94, 190);
 }

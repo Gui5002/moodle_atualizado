@@ -24,14 +24,9 @@
     Example context (json):
     {}
 }}
-<div
-    id="message-drawer-{{uniqid}}"
-    class="ccn_37 drawer hidden message_container message_container_drawer"
-    aria-expanded="false"
-    aria-hidden="true"
-    data-region="message-drawer"
-    role="region"
->
+{{< core/drawer}}
+{{$drawercontent}}
+<div id="message-drawer-{{uniqid}}" class="--message-app --row message_container message_container_drawer" data-region="message-drawer" role="region">
   <div class="ui_kit_button">
     <button id="ccn-messagedrawer-close" type="button" class="btn btn-md btn-thm rounded"><i class="fa fa-times"></i></button>
     <button data-route="view-settings" data-route-param="{{loggedinuser.id}}" aria-label="{{#str}} settings, core_message {{/str}}" role="button" class="btn btn-md btn-thm pull-right">
@@ -76,6 +71,8 @@
     {{> core_message/message_drawer_view_overview_footer }}
   </div>
 </div>
+{{/drawercontent}}
+{{/core/drawer}}
 {{#js}}
   require(['jquery', 'core_message/message_drawer'], function($, MessageDrawer) {
   var root = $('#message-drawer-{{uniqid}}');
