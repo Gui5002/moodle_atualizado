@@ -240,7 +240,7 @@ class tabela_reports
             mdl_course_categories pp ON c.parent = pp.id
         LEFT JOIN 
             mdl_course_categories sp ON pp.parent = sp.id
-        WHERE pp.name = '$categoria' OR sp.name = '$categoria'";
+        WHERE pp.name = '$categoria' OR sp.name = '$categoria' OR c.name = '$categoria'";
 
 			$rs = $DB->get_records_sql($sql);
 			return $rs;

@@ -121,11 +121,11 @@ if($idReport == 1){
             $row['matricula'] = date('d/m/Y', strtotime($row['data_matricula']));
 
             if ($progresso == 0) {
-                $row['status'] = "NÃO INICIADO";
+                $row['status'] = "N/I";
             } elseif ($progresso == 100) {
-                $row['status'] = "CONCLUÍDO!";
+                $row['status'] = "CONCLUÍDO";
             } else {
-                $row['status'] = "NÃO CONCLUÍDO";
+                $row['status'] = "N/C";
             }
 
 

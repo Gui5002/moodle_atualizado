@@ -250,6 +250,12 @@ class reports implements renderable, templatable
                             <div class="col-sm-12 col-md-3 mt-4">
                                 <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnLimparFiltro2" name="btnLimparFiltro2" value="Limpar">
                             </div>
+                            <div class="col-sm-12 col-md-6 mt-4 text-right" >
+                                <ul>
+									<li>N/C = Não Concluído</li>
+									<li>N/I = Não Iniciado</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -331,9 +337,9 @@ class reports implements renderable, templatable
                                 <label style="font-size: 0.625em !important;">Status</label>
                                 <select id="filterStatus3" name="filterStatus3" class="form-control">
                                     <option value="">Selecione uma opção</option>
-                                    <option value="Concluído!">CONCLUÍDO</option>
-                                    <option value="Não Concluído">NÃO CONCLUÍDO</option>
-                                    <option value="Não Iniciado">NÃO INICIADO</option>
+                                    <option value="Concluído">CONCLUÍDO</option>
+                                    <option value="N/C">NÃO CONCLUÍDO</option>
+                                    <option value="N/I">NÃO INICIADO</option>
                                 </select>
                             </div>
                         </div>
@@ -348,6 +354,12 @@ class reports implements renderable, templatable
                             </div>
                             <div class="col-sm-12 col-md-3 mt-4">
                                 <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnLimparFiltro3" name="btnLimparFiltro3" value="Limpar">
+                            </div>
+                            <div class="col-sm-12 col-md-6 mt-4 text-right" >
+                                <ul>
+                                <li>N/C = Não Concluído</li>
+                                <li>N/I = Não Iniciado</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
