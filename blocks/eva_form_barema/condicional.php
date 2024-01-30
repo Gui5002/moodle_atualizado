@@ -299,7 +299,7 @@ switch ($acao) {
 //    break;
 }
 
-function enviar_email_para_substituicao($idavaliador, $baremaCurso, $link_avalaidor){
+function enviar_email_para_substituicao($idavaliador, $baremaCurso, $link_avalaidor, $mensagem){
     global $DB, $USER;
     $name = '';
 
@@ -317,7 +317,8 @@ function enviar_email_para_substituicao($idavaliador, $baremaCurso, $link_avalai
     $_POST['avaliador'] = $avaliador->fullname;
     $_POST['curso'] = $curso;
     $_POST['atividade'] = $atividade;
-    $_POST['message'] = 'Click no link abaixo para Iniciar o Barema de avaliações dos alunos';
+    $_POST['message'] = $mensagem;
+    // $_POST['message'] = 'Click no link abaixo para Iniciar o Barema de avaliações dos alunos';
     $_POST['link'] = $link_avalaidor;
 
 
