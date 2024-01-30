@@ -5,7 +5,8 @@
   <div class="wrapper" id="page-content">
     {{> theme_evagu/ccn_dashboard_navbar }}
     {{^disable_dashboard_drawer}}
-      <section class="dashboard_sidebar dn-1199 {{#dashboard_scroll_drawer}} ccn_dashboard_scroll_drawer {{/dashboard_scroll_drawer}}">
+      <section
+        class="dashboard_sidebar dn-1199 {{#dashboard_scroll_drawer}} ccn_dashboard_scroll_drawer {{/dashboard_scroll_drawer}}">
         <div class="dashboard_sidebars">
           <div class="user_board">
             {{#dashboard_nav_user}}
@@ -39,7 +40,8 @@
         </div>
       </section>
     {{/disable_dashboard_drawer}}
-    <div class="our-dashbord dashbord {{#disable_dashboard_drawer}} ccn_dashbord_disable_drawer {{/disable_dashboard_drawer}}">
+    <div
+      class="our-dashbord dashbord {{#disable_dashboard_drawer}} ccn_dashbord_disable_drawer {{/disable_dashboard_drawer}}">
       <div class="dashboard_main_content">
         <div class="container-fluid">
           <div class="main_content_container" id="region-main">
@@ -63,7 +65,8 @@
                   {{/has_blocks_fullwidth_top}}
                   {{#disable_dashboard_drawer}}
                     {{#sidebar_left}}
-                      <div class="{{#sidebar_double}} col-lg-3 col-xl-3 {{/sidebar_double}} {{^sidebar_double}} col-lg-4 col-xl-4 {{/sidebar_double}}">
+                      <div
+                        class="{{#sidebar_double}} col-lg-3 col-xl-3 {{/sidebar_double}} {{^sidebar_double}} col-lg-4 col-xl-4 {{/sidebar_double}}">
                         <div class="ccn-sidebar-region" aria-label="{{#str}}blocks{{/str}}">
                           {{{ leftblocks }}}
                         </div>
@@ -77,26 +80,29 @@
                     ">
                   {{/disable_dashboard_drawer}}
                   {{^disable_dashboard_drawer}}
-                    <div class="{{#sidebar_right}}col-lg-8 col-xl-8{{/sidebar_right}} {{^sidebar_right}}col-lg-12{{/sidebar_right}}">
+                    <div
+                      class="{{#sidebar_right}}col-lg-8 col-xl-8{{/sidebar_right}} {{^sidebar_right}}col-lg-12{{/sidebar_right}}">
                   {{/disable_dashboard_drawer}}
                   {{{ output.standard_top_of_body_html }}}
                   {{{ output.full_header }}}
                   {{#primarymoremenu}}
-                      <div class="primary-navigation">
-                          {{> core/moremenu}}
-                      </div>
+                    <div class="primary-navigation">
+                      {{> core/moremenu}}
+                    </div>
                   {{/primarymoremenu}}
                   {{#secondarymoremenu}}
-                      <div class="secondary-navigation">
-                          {{> core/moremenu}}
-                      </div>
+                    <div class="secondary-navigation">
+                      {{> core/moremenu}}
+                    </div>
                   {{/secondarymoremenu}}
                   {{{ output.edit_switch }}}
                   <div id="ccnSettingsMenuContainer">
-                    <div id="ccnSettingsMenuInner">{{! @ccnIrrevocable: These container divs #ccnSettingsMenuContainer/Inner must exist unconditionally, only contents can be conditional }}
+                    <div id="ccnSettingsMenuInner">
+                      {{! @ccnIrrevocable: These container divs #ccnSettingsMenuContainer/Inner must exist unconditionally, only contents can be conditional }}
                       {{#show_settings_controls}}
                         {{#hasregionmainsettingsmenu}}
-                          <div id="region-main-settings-menu" class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
+                          <div id="region-main-settings-menu"
+                            class="d-print-none {{#hasblocks}}has-blocks{{/hasblocks}}">
                             <div> {{{ output.region_main_settings_menu }}} </div>
                           </div>
                         {{/hasregionmainsettingsmenu}}
@@ -140,6 +146,7 @@
   </div>
   {{{ output.standard_after_main_region_html }}}
 </body>
+
 </html>
 {{#js}}
   M.util.js_pending('theme_boost/loader');

@@ -3019,9 +3019,10 @@ input[type=submit].btn-block {
 }
 .dropdown-item {
     font-size: 13px;
+    font-family: "[[setting:primary_font]]", sans-serif;
     display: block;
     width: 100%;
-    padding: 5px 10px;
+    padding: 5px 20px;
     clear: both;
     font-weight: 400;
     color: #212529;

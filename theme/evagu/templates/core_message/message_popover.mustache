@@ -28,13 +28,16 @@
 }}
 <li class="user_notif ccn-settings-nav ccn-settings-nav-msg">
   <div class="dropdown">
-  <div class="float-right popover-region collapsed">
-    <a id="message-drawer-toggle-{{uniqid}}" class="nav-link d-inline-block popover-region-toggle position-relative" href="#" role="button">
-      <div class="notification_icon">{{#pix}} t/message, core, {{#str}} togglemessagemenu, message {{/str}} {{/pix}}</div>
-      <div class="count-container {{^unreadcount}}hidden{{/unreadcount}}" data-region="count-container" aria-label="{{#str}} unreadconversations, core_message, {{unreadcount}} {{/str}}">{{unreadcount}}</div>
-    </a>
+    <div class="float-right popover-region collapsed">
+      <a id="message-drawer-toggle-{{uniqid}}" class="nav-link d-inline-block popover-region-toggle position-relative"
+        href="#" role="button">
+        <div class="notification_icon">{{#pix}} t/message, core, {{#str}} togglemessagemenu, message {{/str}} {{/pix}}
+        </div>
+        <div class="count-container {{^unreadcount}}hidden{{/unreadcount}}" data-region="count-container"
+          aria-label="{{#str}} unreadconversations, core_message, {{unreadcount}} {{/str}}">{{unreadcount}}</div>
+      </a>
+    </div>
   </div>
-</div>
 </li>
 {{#js}}
   require(

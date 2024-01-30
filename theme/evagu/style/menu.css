@@ -24,8 +24,7 @@ margin-top: 0;
   .mobile-menu {
     display: block;
   }
-  .mobile-menu .header,
-  .footer {
+  .mobile-menu .header, .footer {
     padding: 0 20px !important;
   }
 }
@@ -78,13 +77,10 @@ header.stylehome1.home3 a:not(.mobileBrand):not(.ccn-btn-backtocourse) {
 header.stylehome1.home4 a:not(.mobileBrand):not(.ccn-btn-backtocourse) {
   background-color: #201b72 !important;
 }
-.mobile-menu .header,
-.content,
-.footer {
+.mobile-menu .header, .content, .footer {
   text-align: center;
 }
-.mobile-menu .header,
-.footer {
+.mobile-menu .header, .footer {
   background: #777;
   font-size: 16px;
   font-weight: 600;

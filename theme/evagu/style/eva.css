@@ -6388,8 +6388,7 @@ background-color: #f9fafc;
 .login_form {
 padding: 20px 20px 0;
 }
-.sign_up_form .divide,
-.login_form .divide {
+.sign_up_form .divide, .login_form .divide {
 position: relative;
 }
 .sign_up_form .divide .lf_divider, .login_form .divide .lf_divider {
@@ -6405,7 +6404,8 @@ top: -10px;
 width: 62px;
 }
 .sign_up_form.inner_page, .login_form.inner_page {
-padding: 0 80px 0;
+padding: 0 30px 0;
+width: 800px!important;
 }
 .our-log.login-bg, .our-log.style4, .our-log.style3 {
 min-height: 100vh;
@@ -8454,9 +8454,8 @@ overflow: hidden;
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a:last-child {
 border-bottom: none;
 }
-.header_user_notif li.user_setting .dropdown-menu .user_setting_content a:hover,
-.header_user_notif li.user_setting .dropdown-menu .user_setting_content .no-action:hover {
-color: [[setting:color_accent_2]];
+.header_user_notif li.user_setting .dropdown-menu .user_setting_content a:hover, .header_user_notif li.user_setting .dropdown-menu .user_setting_content .no-action:hover {
+color: #007BB6;
 padding-left: 12px;
 }
 .header_user_notif li.user_setting .dropdown-menu .user_setting_content a.active,
@@ -11930,7 +11929,7 @@ height: auto;
 }
 .selected_filter_widget.style3 {
 border: none;
-padding: 0 15px;
+padding: 20px 20px;
 }
 .selected_filter_widget.style4 {
 background-color: #f9fafc;
@@ -13109,9 +13108,9 @@ transform: scale(2);
 #ccn-main .no-overflow {
 overflow: inherit !important;
 } */
-#ccn-main .py-3 {
+/*#ccn-main .py-3 {
 padding: 0 !important;
-}
+}*/
 #page-wrapper {
 overflow: hidden;
 }
