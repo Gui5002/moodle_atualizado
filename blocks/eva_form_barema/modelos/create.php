@@ -5,23 +5,25 @@
 // Remember also to comment or delete the lines restricting access
 // to administrators only (see below)
 
-require('../../config.php');
-global $DB, $PAGE, $USER, $CFG;
+require('../../../config.php');
+global $DB, $USER, $PAGE, $OUTPUT;
+//var_dump($_GET['id']);die();
+$char      = required_param('modelo', PARAM_TEXT); // Course Module ID
 
 if (!isloggedin()) {
     require_login();
 }
-
-$exist = $DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'posgraduacao'=>1));
-if (!$exist) {
-    print_error('nopermissiontoshow');
+//$exist = $DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'bolsa'=>1));
+if ( $char != "novo") {
+    print_error('invalidaccessparameter');
 }
 
-$PAGE->set_url('/blocks/eva_form_barema/avaliadores.php');
-$syscontext = context_system::instance();
-//    require_capability('moodle/site:config', $syscontext);
+$PAGE->set_url('/blocks/eva_form_barema/modelos/create.php?modelo='. $char);
 
-$title = "EVAGU: Barema de Pos Graduação - Cadastro de Avaliadores";
+$syscontext = context_system::instance();
+//require_capability('moodle/site:config', $syscontext);
+
+$title = "EVAGU: Novo Modelo de Pos";
 $PAGE->set_pagelayout('admin');
 
 $PAGE->set_context($syscontext);

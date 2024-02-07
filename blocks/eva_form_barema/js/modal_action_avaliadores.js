@@ -55,7 +55,7 @@ $(function (){
 
 
     $(".modalClose, .modalFechar").click(function (ev){
-        $(location).attr('href','/blocks/eva_form_barema/avaliadores.php');
+        $(location).attr('href', '/blocks/eva_form_barema/avaliadores/list.php');
     });
 });
 
@@ -172,7 +172,7 @@ function add_alter_avaliador_baremapos(btnEvent) {
     //================== FAZ A ADIÇÃO DE AVALIADORES ==========================
 
     if (btnEvent.id === 'id_Excluir') {
-        alert(id);
+
     }
 }
 

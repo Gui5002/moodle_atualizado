@@ -13,7 +13,7 @@ use templatable;
 
 require_once($CFG->libdir.'/formslib.php');
 
-class criar_modelo_pos implements renderable, templatable
+class ModeloController implements renderable, templatable
 {
     var $config;
     var $context;

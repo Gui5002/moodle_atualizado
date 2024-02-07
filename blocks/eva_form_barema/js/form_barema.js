@@ -137,7 +137,6 @@ function valida_nome_aluno(element) {
     const wwwroot = $("#id_wwwroot").val();
 
     var value  = $("#id_aluno").val();
-    // alert(value);
     $.ajax({
         url: wwwroot +'/blocks/eva_form_barema/completar.php',
         data: 'acao=validanome&valor='+value,
@@ -226,7 +225,6 @@ $(function (){
     // var toastLiveExample = document.getElementById('id_submitbutton')
     if (toastTrigger) {
         toastTrigger.addEventListener('click', function () {
-            alert('testeeeee')
             let qtd = $("#id_qtd").html();
             let radiobutton = [];
             radiobutton[1] = $("input[name='nt_faixa_1']:checked").val();

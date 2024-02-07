@@ -2,13 +2,14 @@
 
 require_once($CFG->dirroot. '/theme/evagu/ccn/block_handler/ccn_block_handler.php');
 
-require_once('classes/output/criar_pos_atribuicao.php');
-require_once('classes/output/criar_modelo_pos.php');
+// require_once('classes/output/criar_pos_atribuicao.php');
+require_once('classes/output/AtribuicaoController.php');
+require_once('classes/output/AvaliadorController.php');
+require_once('classes/output/ModeloController.php');
 require_once('classes/output/customize_conf.php');
 require_once('classes/output/avaliacao_config_view.php');
 require_once('classes/output/avaliacao_config_pdf.php');
 require_once('classes/output/avaliador_config_view.php');
-require_once('classes/output/avaliador_lista.php');
 require_once('classes/output/barema_config_lista.php');
 require_once('classes/output/relatorio_barema_config_pdf.php');
 require_once('classes/output/relatorio_barema_config_xls.php');
@@ -87,7 +88,7 @@ class block_eva_form_barema extends block_base {
             $modelo->$key = $value;
         }
 
-        if ($arraypath[2] === 'criar_modelo') {
+        if ($arraypath[2] === 'modelos') {
             if ( $_GET['modelo'] == "novo"){
                 if ($modelo->submitbutton == "Cadastrar") {
                     criar_modelo_pos($modelo);
@@ -97,7 +98,7 @@ class block_eva_form_barema extends block_base {
 
 
         //=========Aqui evita que novas instancia do block "eva_form_barema" faça alteraçao na table "mdl_eva_barema"================
-        if ($arraypath[2] === 'create') {
+        if ($arraypath[2] === 'atribuicao') {
 //            $configdata = $DB->get_record('eva_barema', array('id'=>1));
 //            if (!hash_equals($configdata->hash_barema, $this->instance->configdata)) {
 //                //=========Chama a função de inserção de Modelo Barema==================
@@ -109,8 +110,8 @@ class block_eva_form_barema extends block_base {
 
 
 
-            $novobarema = new \block_eva_form_barema\output\criar_pos_atribuicao($CFG->wwwroot . '/blocks/eva_form_barema/create.php?id='.$id, null, 'post');
-            $returnurlbarema = new moodle_url('/blocks/eva_form_barema/create.php?id='.$id);
+            $novobarema = new \block_eva_form_barema\output\AtribuicaoController($CFG->wwwroot . '/blocks/eva_form_barema/atribuicao/create.php?id='.$id, null, 'post');
+            $returnurlbarema = new moodle_url('/blocks/eva_form_barema/atribuicao/create.php?id='.$id);
             cadastrar_atribuicao($novobarema, $returnurlbarema, $fildsbarema);
         }
 
@@ -138,15 +139,17 @@ class block_eva_form_barema extends block_base {
             controller_barema_avaliacao($returnurl, $fildsbarema);
         }
 
+
+
         $customize_config = new \block_eva_form_barema\output\customize_conf($this->config, $this->context);
 
-        $avaliador_config_lista = new \block_eva_form_barema\output\avaliador_lista($this->config, $this->context);
+        $avaliador_lista = new \block_eva_form_barema\output\AvaliadorController($this->config, $this->context);
 
         $avaliacao_config_view = new \block_eva_form_barema\output\avaliacao_config_view($this->config, $this->context);
 
         $avaliador_config_view = new \block_eva_form_barema\output\avaliador_config_view($this->config, $this->context);
 
-        $novo_modelo = new \block_eva_form_barema\output\criar_modelo_pos($this->config, $this->context);
+        $novo_modelo = new \block_eva_form_barema\output\ModeloController($this->config, $this->context);
 
         $form_avaliador = new \block_eva_form_barema\output\form_barema($this->config, $this->context);
 
@@ -154,10 +157,9 @@ class block_eva_form_barema extends block_base {
 
         $this->content          = new stdClass;
 
-
-        if ($arraypath[2] === 'create') {
+        if ($arraypath[2] === 'atribuicao') {
             $this->content->text = $renderer->render($novobarema);
-        }else if ($arraypath[2] === 'criar_modelo') {
+        }else if ($arraypath[2] === 'modelos') {
             $this->content->text = $renderer->render($novo_modelo);
         }else if ($arraypath[2] === 'barema_avaliacao') {
             $this->content->text  = $renderer->render($form_avaliador);
@@ -179,11 +181,13 @@ class block_eva_form_barema extends block_base {
                 emails_pendente_avaliacao_pos($returnurl, $fildsinputs);
             }
         }else if ($arraypath[2] === 'barema_lista') {
+
             $barema_config_lista = new \block_eva_form_barema\output\barema_config_lista($this->config, $this->context);
             $this->content->text = $renderer->render($barema_config_lista);
 
             if ( $_GET['attemp'] == 'view'){
                 require_once '../../dompdf/autoload.inc.php';
+                
                 $avaliacao_config_pdf = new \block_eva_form_barema\output\avaliacao_config_pdf($this->config, $this->context);
                 $view =  $renderer->render($avaliacao_config_pdf);
 
@@ -227,7 +231,7 @@ class block_eva_form_barema extends block_base {
             }
 
         }else if ($arraypath[2] === 'avaliadores'){
-            $this->content->text = $renderer->render($avaliador_config_lista);
+            $this->content->text = $renderer->render($avaliador_lista);
         }
 
 //        $this->content->text = $renderer->render($avaliador_config_view);
