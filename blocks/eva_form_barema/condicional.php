@@ -130,44 +130,7 @@ switch ($acao) {
 
         echo json_encode($atual);
     break;
-//
-//    case 'verificastatus':
-//        $id_user = $_GET['id'];
-//        $atribuicao_id = $_GET['idatribuicao'];
-////        $idanteprojeto = $DB->get_field('eva_afastamento_atribuicao', 'tb_anteprojeto_id', array('id'=>$atribuicao_id, 'status'=>0));
-//        $anteprojetos = $DB->get_records('eva_afastamento_atribuicao', array('id'=>$atribuicao_id, 'status'=>0));
-//        $compareanteprojetos = $DB->get_records('eva_afastamento_atribuicao', array('avaliador_tb_user_id'=>$id_user, 'status'=>0, 'flag'=>0));
-//
-//
-//        $anteprojetoExiste = false;
-//        foreach ($anteprojetos as $data){
-//            $eixoateprojeto = $DB->get_field('eva_afastamento_anteprojeto', 'distribuicao', array('id'=>$data->tb_anteprojeto_id));
-//
-//            foreach ($compareanteprojetos as $compare){
-//                if (($compare->tb_anteprojeto_id == $data->tb_anteprojeto_id)){
-//                    $anteprojetoExiste = true;
-//                }
-//            }
-//            $eixoavaliador = $DB->get_field('eva_afastamento_avaliadores', 'eixo', array('avaliador_id'=>$id_user));
-//
-//        }
-//
-//
-//
-//        if ($anteprojetoExiste){
-//            $status['status'] = 'restric';
-//        }else{
-//            if ($eixoateprojeto == 'g'){
-//                $status['status'] = true;
-//            }else if ($eixoateprojeto == 'j' && $eixoavaliador == 'j'){
-//                $status['status'] = true;
-//            }else if ($eixoateprojeto == 'j' && $eixoavaliador == 'g'){
-//                $status['status'] = false;
-//            }
-//        }
-//            echo json_encode($status);
-//    break;
-//
+
     case 'substituicao':
         $data = date("Y-m-d");
         $ava_id = $_GET['id'];
@@ -253,50 +216,9 @@ switch ($acao) {
 
         $idtbalunos = $DB->get_record('eva_barema_alunos', array('tb_avaliador_id'=>$id_atribuicao, 'alunos_id'=>$id_aluno), 'id');
         $update = $DB->update_record('eva_barema_alunos', array('id'=>$idtbalunos->id, 'prazo'=>-10, 'datafinish'=>null));
-//
-//
+
         echo json_encode($update);
         break;
-//
-//    case 'emailparasubstituto':
-//        $id_tb_atribuicao = $_GET['id_tb_atribuicao'];
-//        $substitutoid = $_GET['idsubstituto'];
-//        $dados = $DB->get_records('eva_afastamento_atribuicao', array('id'=>$id_tb_atribuicao, 'flag'=>1));
-//
-//        $mensagem = "\n\n".'Prezado Avaliador,'."\n\n".'Você tem uma nova avaliação referente ao edital de afastamentos de estudo.'."\n".'Clique no link abaixo e visualize as avaliações pendentes.'."\n";
-//        foreach ($dados as $dado){
-//            $urlavaliacao = $CFG->wwwroot.'/blocks/eva_form_barema/avaliacao.php?gerenciar='. md5('userid='.$dado->avaliador_tb_user_id);
-//            $avaliador_id = $substitutoid;
-//            $anteprojeto_id = $dado->tb_anteprojeto_id;
-//        }
-//
-//        $retorno_email =  enviar_email_para_substituicao($avaliador_id, $anteprojeto_id, $urlavaliacao, $mensagem);
-//
-//        echo json_encode($retorno_email);
-//    break;
-//
-//    case 'infoSubstituicao':
-//        $id_atribuicao = $_GET['id_atribuicao'];
-//
-//        $dadossubstituto = $DB->get_records('eva_afastamento_atribuicao', array('id'=>$id_atribuicao));
-//        $dadossubstituido = $DB->get_records('eva_afastamento_substituicao', array('tb_atribuicao_id'=>$id_atribuicao));
-//        foreach ($dadossubstituto as $substituto){
-//            $fullname = pegando_nome_completo($substituto->avaliador_tb_user_id);
-//            $info['avaliador_substituto'] = $fullname;
-//            $info['qt_dia_substituto'] = $substituto->qt_dia_avaliacao;
-//            $info['data_substituto'] = $substituto->data_ini_avaliacao;
-//        }
-//        foreach ($dadossubstituido as $substituido){
-//            $fullname = pegando_nome_completo($substituido->avaliador_substituido);
-//            $info['avaliador_substituido'] = $fullname;
-//            $info['qt_dia_substituido'] = $substituido->qt_dia_substituido;
-//            $info['data_substituido'] = $substituido->data_substituido;
-//        }
-//
-//
-//
-//        echo json_encode($info);
-//    break;
 }
 
 function enviar_email_para_substituicao($idavaliador, $baremaCurso, $link_avalaidor, $mensagem){
@@ -321,10 +243,6 @@ function enviar_email_para_substituicao($idavaliador, $baremaCurso, $link_avalai
     // $_POST['message'] = 'Click no link abaixo para Iniciar o Barema de avaliações dos alunos';
     $_POST['link'] = $link_avalaidor;
 
-
-//    $from_email_nome['email'] = "eagu.bolsasdeestudo@agu.gov.br";
-//    $from_email_nome['nome'] = "EAGU - Barema de Pos-Graduação";
-//    $from_email_nome['subtitle'] = "Avaliador, você tem uma nova avaliação.";
 
 
     $envio = $contact_afastamento->sendmessage($avaliador->email, $name, null , null);

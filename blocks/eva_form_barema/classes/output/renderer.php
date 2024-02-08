@@ -15,14 +15,14 @@ class renderer extends plugin_renderer_base {
         return $returncustomconf;
     }
 
-    public function render_criar_modelo_pos(criar_modelo_pos $criar_modelo_pos) {
-        $criarmodelobolsa = $this->render_from_template('block_eva_form_barema/criar_modelo_pos', $criar_modelo_pos->export_for_template($this));
+    public function render_ModeloController(ModeloController $modelos) {
+        $criarmodelo = $this->render_from_template('block_eva_form_barema/modelos/create', $modelos->export_for_template($this));
 
-        return $criarmodelobolsa;
+        return $criarmodelo;
     }
 
-    public function render_criar_pos_atribuicao(criar_pos_atribuicao $criar_pos_atribuicao) {
-        $returnoform = $this->render_from_template('block_eva_form_barema/criar_pos_atribuicao', $criar_pos_atribuicao->export_for_template($this));
+    public function render_AtribuicaoController(AtribuicaoController $atribuicao) {
+        $returnoform = $this->render_from_template('block_eva_form_barema/atribuicoes/create', $atribuicao->export_for_template($this));
         return $returnoform;
     }
 
@@ -61,8 +61,8 @@ class renderer extends plugin_renderer_base {
         return $returnrelariobaremaxls;
     }
 
-    public function render_avaliador_config_lista(avaliador_lista $avaliador_conf) {
-        $returnbaremaconf = $this->render_from_template('block_eva_form_barema/avaliador_lista', $avaliador_conf->export_for_template($this));
+    public function render_AvaliadorController(AvaliadorController $avaliadores) {
+        $returnbaremaconf = $this->render_from_template('block_eva_form_barema/avaliadores/list', $avaliadores->export_for_template($this));
 
         return $returnbaremaconf;
     }
@@ -105,10 +105,10 @@ class renderer extends plugin_renderer_base {
     }
 
 
-    public function render_avaliador_form_edit(avaliador_form_edit $avaliador_form_edit) {
-        $returnavaformedit = $this->render_from_template('block_eva_form_barema/avaliador_modals_edit', $avaliador_form_edit->export_for_template($this));
-        return $returnavaformedit;
-    }
+    // public function render_avaliador_form_edit(avaliador_form_edit $avaliador_form_edit) {
+    //     $returnavaformedit = $this->render_from_template('block_eva_form_barema/avaliador_modals_edit', $avaliador_form_edit->export_for_template($this));
+    //     return $returnavaformedit;
+    // }
 
 
 }
