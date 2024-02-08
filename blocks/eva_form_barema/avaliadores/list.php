@@ -5,10 +5,8 @@
 // Remember also to comment or delete the lines restricting access
 // to administrators only (see below)
 
-require('../../config.php');
-global $PAGE, $OUTPUT, $USER;
-//var_dump($_GET['id']);die();
-$id      = required_param('id', PARAM_INT); // Course Module ID
+require('../../../config.php');
+global $DB, $PAGE, $USER, $CFG;
 
 if (!isloggedin()) {
     require_login();
@@ -19,12 +17,11 @@ if (!$exist) {
     print_error('nopermissiontoshow');
 }
 
-$PAGE->set_url('/blocks/eva_form_barema/create.php?id='.$id);
-
+$PAGE->set_url('/blocks/eva_form_barema/avaliadores/list.php');
 $syscontext = context_system::instance();
-//require_capability('moodle/site:config', $syscontext);
+//    require_capability('moodle/site:config', $syscontext);
 
-$title = "EVAGU: Barema Pós Graduação - Atribuição";
+$title = "EVAGU: Barema de Pos Graduação - Cadastro de Avaliadores";
 $PAGE->set_pagelayout('admin');
 
 $PAGE->set_context($syscontext);
@@ -33,4 +30,3 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 echo $OUTPUT->header();
 echo $OUTPUT->footer();
-

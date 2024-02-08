@@ -99,6 +99,7 @@ class avaliacao_config_pdf implements renderable, templatable {
                 $barema[$i-1]['notachecked'] =  $nota->$notaFaixa;
             }
         }
+        
         if (!$DB->get_field('eva_barema_permissao', 'user_id', array('user_id'=>$USER->id, 'posgraduacao'=>1))) {
             if (!$DB->get_field('eva_barema_avaliador', 'avaliador_tb_user_id', array('avaliador_tb_user_id'=>$USER->id))) {
                 $hidden = 'hidden';

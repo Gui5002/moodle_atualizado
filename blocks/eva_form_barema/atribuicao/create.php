@@ -5,25 +5,26 @@
 // Remember also to comment or delete the lines restricting access
 // to administrators only (see below)
 
-require('../../config.php');
-global $DB, $USER, $PAGE, $OUTPUT;
+require('../../../config.php');
+global $PAGE, $OUTPUT, $USER;
 //var_dump($_GET['id']);die();
-$char      = required_param('modelo', PARAM_TEXT); // Course Module ID
+$id      = required_param('id', PARAM_INT); // Course Module ID
 
 if (!isloggedin()) {
     require_login();
 }
-//$exist = $DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'bolsa'=>1));
-if ( $char != "novo") {
-    print_error('invalidaccessparameter');
+
+$exist = $DB->record_exists('eva_barema_permissao', array('user_id'=>$USER->id, 'posgraduacao'=>1));
+if (!$exist) {
+    print_error('nopermissiontoshow');
 }
 
-$PAGE->set_url('/blocks/eva_form_barema/criar_modelo.php?modelo='. $char);
+$PAGE->set_url('/blocks/eva_form_barema/atribuicao/create.php?id='.$id);
 
 $syscontext = context_system::instance();
 //require_capability('moodle/site:config', $syscontext);
 
-$title = "EVAGU: Novo Modelo de Pos";
+$title = "EVAGU: Barema Pós Graduação - Atribuição";
 $PAGE->set_pagelayout('admin');
 
 $PAGE->set_context($syscontext);
@@ -32,3 +33,4 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 echo $OUTPUT->header();
 echo $OUTPUT->footer();
+

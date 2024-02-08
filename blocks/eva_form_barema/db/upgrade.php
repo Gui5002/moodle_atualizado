@@ -7,7 +7,7 @@ function xmldb_block_eva_form_barema_upgrade($oldversion = 0) {
 
     $result = true;
 
-    if ($result && $oldversion < 2023121400) {
+    if ($result && $oldversion < 2023121410) {
 
         // ================== DEFINIÇÕES PARA CRIAR UM TABELA NOVA COM PRIMARIKEY ================================
 
@@ -95,7 +95,7 @@ function xmldb_block_eva_form_barema_upgrade($oldversion = 0) {
         }
 
         // Eva_form_barema savepoint reached.
-        upgrade_block_savepoint(true, 2023121400, 'eva_form_barema');
+        upgrade_block_savepoint(true, 2023121410, 'eva_form_barema');
 
     }
 

@@ -12,7 +12,7 @@ use templatable;
 
 require_once($CFG->libdir.'/formslib.php');
 
-class criar_pos_atribuicao extends moodleform implements renderable, templatable {
+class AtribuicaoController extends moodleform implements renderable, templatable {
 
     private function get_barema() {
         global $DB;
