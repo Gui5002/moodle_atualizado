@@ -8,20 +8,26 @@
         right: 0;
         top: 0;
     }
-    .m_area {
+    .avaliador_baremapos_Modal .modal-dialog .m_area {
         color: #000;
         /*background-color: #d1e9ff4d;*/
-        padding: 15px 13px;
+        padding: 10px;
         border-top: 0px solid #aac3e84f;
     }
-    /*.fcontainer .bitem {*/
-    /*    width: 50%;*/
-    /*    margin-left: 25%;*/
-    /*}*/
-    .modal-content {
+
+    .avaliador_baremapos_Modal .modal-dialog .bp-modal-content {
+        border-radius: 10px;
+        padding: 0px;
         width: 50%;
         margin: 13% auto;
     }
+    .avaliador_baremapos_Modal .modal-dialog .bp-modal-content .bp-modal-header{
+        padding: 15px;
+    }
+    .avaliador_baremapos_Modal .modal-dialog .bp-modal-footer{
+        padding: 10px;
+    }
+
     #id_titular_user_id, #id_suplente_user_id {
         width: 95%;
     }
@@ -31,17 +37,16 @@
 
 
 </style>
-
 <div class="avaliador_baremapos_Modal modal fade" id="avaliador_baremapos_Modal" tabindex="-1" aria-labelledby="avaliador_baremapos_ModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content bp-modal-content">
+            <div class="modal-header bp-modal-header">
                 <h5 class="modal-title" id="avaliador_baremapos_ModalLabel"></h5>
                 <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <input type="hidden" name="editavaliador_baremapos" id="id_edit_avaliador_baremapos" value="">
+                {{! <input type="hidden" name="editavaliador_baremapos" id="id_edit_avaliador_baremapos" value=""> }}
                 <div class="fcontainer clearfix m_area">
                     <div id="bitem_id_titular_user_id" class="form-group row bitem">
                         <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
@@ -49,7 +54,7 @@
                             <div class="form-label-addon d-flex align-items-center align-self-start">
                                 <div class="text-danger" title="Necessários">
                                     <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Necessários"
-                                       aria-label="Necessários"></i>
+                                    aria-label="Necessários"></i>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer eventButton">
+                <div class="modal-footer bp-modal-footer eventButton">
                     <button type="button" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>
                     <button type="button" name="editarbutton_avaliador" class="btn btn-primary btnEvento" data-root="{{{ config.wwwroot }}}" onclick="add_alter_avaliador_baremapos(this)"></button>
                 </div>
@@ -70,5 +75,4 @@
         </div>
     </div>
 </div>
-
 
