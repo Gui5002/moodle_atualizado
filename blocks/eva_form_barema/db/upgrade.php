@@ -7,7 +7,29 @@ function xmldb_block_eva_form_barema_upgrade($oldversion = 0) {
 
     $result = true;
 
-    if ($result && $oldversion < 2023121410) {
+    if ($result && $oldversion < 2023121412) {
+
+
+    // ================== DEFINIÇÕES PARA ALTERAR A TABELA DE PERMISSION BAREMA ================================
+
+        $table1 = new xmldb_table('eva_barema_permissao');
+        $field_b1 = new xmldb_field('admin', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'afastamento');
+        $field_b2 = new xmldb_field('status', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'created_at');
+        $field_b3 = new xmldb_field('logs', XMLDB_TYPE_TEXT, null, null, null, null, null, 'created_at');
+        $field_b4 = new xmldb_field('name', XMLDB_TYPE_TEXT, null, null, null, null, null, 'user_id');
+        // Conditionally launch add field posgraducao.
+        if (!$dbman->field_exists($table1, $field_b1)) {
+            $dbman->add_field($table1, $field_b1);
+        }
+        if (!$dbman->field_exists($table1, $field_b2)) {
+            $dbman->add_field($table1, $field_b2);
+        }
+        if (!$dbman->field_exists($table1, $field_b3)) {
+            $dbman->add_field($table1, $field_b3);
+        }
+        if (!$dbman->field_exists($table1, $field_b4)) {
+            $dbman->add_field($table1, $field_b4);
+        }
 
         // ================== DEFINIÇÕES PARA CRIAR UM TABELA NOVA COM PRIMARIKEY ================================
 
@@ -95,7 +117,7 @@ function xmldb_block_eva_form_barema_upgrade($oldversion = 0) {
         }
 
         // Eva_form_barema savepoint reached.
-        upgrade_block_savepoint(true, 2023121410, 'eva_form_barema');
+        upgrade_block_savepoint(true, 2023121412, 'eva_form_barema');
 
     }
 

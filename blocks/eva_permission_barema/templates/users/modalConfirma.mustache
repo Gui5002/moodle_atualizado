@@ -1,0 +1,38 @@
+<style>
+   .main-modal .d-modal .c-modal {
+        border-radius: 10px;
+        padding: 0px;
+        width: 45%;
+        margin: 13% auto;
+    }
+   .main-modal .d-modal .c-modal .h-modal{
+        padding: 15px;
+    }
+   .main-modal .modal-body p {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 0px;
+   }
+
+</style>   
+
+
+<div class="modal main-modal fade" id="confirmaModal" tabindex="-1" aria-labelledby="confirmaModalLabel" aria-hidden="true">
+  <div class="modal-dialog d-modal">
+    <div class="modal-content c-modal">
+      <div class="modal-header h-modal">
+        <h1 class="modal-title fs-5" id="confirmaModalLabel">Confirmação</h1>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="alert alert-danger" role="alert">
+            <p class="text-center"> Deseja excluir esse Registro? </p>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <div id="remove"></div>
+      </div>
+    </div>
+  </div>
+</div>
