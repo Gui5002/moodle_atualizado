@@ -129,12 +129,12 @@
     }
 
 </style>
-{{> block_eva_form_barema/customize_config}}
+
 <h5 class="card-title">Avaliadores Cadastrados</h5>
 <div class="section mb20">
     <div class="row">
         <div class="col-lg-12">
-            <a class="btn-primary btn-thm btnAdicionarModal"
+            <a class="btn-primary btn-thm"
                data-baremaid="{{baremaid}}"
                data-root="{{{ config.wwwroot }}}"
                href="/blocks/eva_barema_bolsa/create.php?id=1"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
@@ -155,7 +155,7 @@
         <thead class="tableprimary">
         <tr>
             <th>#</th>
-            <th>Posicão</th>
+            <th>Eixo</th>
             <th>Nome</th>
             <th>E-mail</th>
             <th class="text-center">Qtd Ant.proj. Pendentes</th>
@@ -167,7 +167,7 @@
         {{#dadosuser}}
             <tr>
                 <td data-title="#">{{id_user}}</td>
-                <td data-title="posicao">{{posicao}}</td>
+                <td data-title="Eixo">{{eixo}}</td>
                 <td data-title="Nome">{{nome}}</td>
                 <td data-title="E-mail">{{email}}</td>
                 <td data-title="qtd_anteprojeto" class="text-center">{{qtd_anteprojeto}}</td>
@@ -184,8 +184,6 @@
                        data-iduser="{{id_user}}"
                        data-root="{{{ config.wwwroot }}}"
                        data-status = "{{status}}"
-                       data-colunastatus = "{{coluna_status}}"
-                       data-colunauserid = "{{coluna_user_id}}"
                        href="javascript:void(0);" onclick="status_avaliadores(this)">
                         <i class="icon fa fa-eye{{icon_eye}} fa-fw " title="{{status}} avaliador" role="img" aria-label="{{status}} Avaliador"></i>
                     </a>

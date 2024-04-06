@@ -1,42 +1,26 @@
-<div class="anteproject_modal modal fade" id="modalanteproject" tabindex="-1" aria-labelledby="modalanteprojectLabel" tabindex="-1" data-backdrop="static">
+<link rel="stylesheet" href="/blocks/eva_barema_bolsa/css/create_avaliador_modal.css">
+
+
+<div class="anteprojeto_Modal modal fade" id="modalanteproject" tabindex="-1" aria-labelledby="modalanteprojectLabel" tabindex="-1" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalanteprojectLabel"></h5>
+                <h5 class="modal-title" id="modalanteprojectLabel"> Anteprojeto</h5>
                 <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <!--                <form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_barema_bolsa/create.php?id={{id}}" method="post">-->
-            <form method="post" enctype="multipart/form-data" id="form_file" >
-                <input type="hidden" id="wwwroot" value="{{{ config.wwwroot }}}">
-                <div class="fcontainer clearfix m_area">
-                    <div id="bitem_id_anteprojeto" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break " for="anteprojeto">Anteprojeto</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
+                <form method="post" enctype="multipart/form-data" id="form_file" >
+                    <input type="hidden" id="wwwroot" value="{{{ config.wwwroot }}}">
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="anteprojeto"> Anteprojeto  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
                             <input type="text" id="anteprojeto" class="form-control anteprojeto" name="anteprojeto" required>
-                            <div id="invalid_anteprojeto" class="form-control-feedback invalid-feedback"></div>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo anteprojeto esta vazio.</div>                  
                         </div>
-                    </div>
-
-
-                    <div id="bitem_id_programa" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break " for="programa">Programa</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
+                        <div class="container-fluid">
+                            <label for="programa">Programa <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
                             <select name="programa" id="programa" class="form-select " aria-label=".form-select">
                                 <option value="">--Selecione--</option>
                                 <option value="Doutorado">Doutorado</option>
@@ -46,172 +30,140 @@
                             </select>
                             <div class="form-control-feedback invalid-feedback"> - O Campo programa esta vazio.</div>
                         </div>
-                    </div>
+                    </fieldset>
 
-
-                    <div id="bitem_id_pesquisa" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break " for="pesquisa">Nome da Pesquisa</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="pesquisa">Nome da Pesquisa  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <textarea type="text" class="form-control" id="pesquisa" name="pesquisa" rows="1" cols="100"></textarea>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo pesquisa esta vazio.</div>               
                         </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
-                            <textarea type="text" class="form-control" id="pesquisa" name="pesquisa" rows="3" cols="100"></textarea>
-                            <div class="form-control-feedback invalid-feedback"> - O Campo pesquisa esta vazio.</div>
-                        </div>
-                    </div>
+                    </fieldset>
 
-                    <div class="p-2 mb-3 bg-secondary text-white text-center">Articulação com área prioritária para treinamento da AGU
-                        <div class="form-control-static">
-                            As áreas prioritárias indicadas pela PGFN e pela PGBC estão representadas por letras.
-                        </div>
-                    </div>
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label>Eixo Jurídico  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
 
-<!--              ========= Area Prioritaria Jurico ===================================-->
-
-                    <div id="bitem_id_eixojuridico" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break ">Eixo Jurídico</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
                             <div class="boxe">
-                                <div class="form-check">
+                                <div class="check position-relative">
                                     <input class="form-check-input" type="checkbox" value="0" id="ch_0" name="cap_eixo_juridico" {{checked1}}>
                                     <label class="form-check-label fontSize2" for="ch_0">Não aplicável</label>
                                 </div>
                                 {{#chekejuridico}}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{numero}}" id="ch_{{id}}" name="cap_eixo_juridico" {{checked1}}>
-                                        <label class="form-check-label fontSize2" for="ch_{{id}}">{{numero}}. {{articulacaojuridica}}</label>
-                                    </div>
+                                <div class="check position-relative">
+                                    <input class="form-check-input" type="checkbox" value="{{numero}}" data-label="{{numero}}. {{articulacaojuridica}}" id="ch_{{id}}" name="cap_eixo_juridico" {{checked1}}>
+                                    <label class="form-check-label fontSize2" for="ch_{{id}}">{{numero}}. {{articulacaojuridica}}</label>
+                                </div>
                                 {{/chekejuridico}}
                             </div>
                             <input type="hidden" class="form-control juridico">
-                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>
+                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>    
                         </div>
-                    </div>
+                    </fieldset>
 
-<!--              ========= Area Prioritaria  Tecnico Jurico=========================================-->
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label>Governança e Gestão<i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
 
-                    <div id="bitem_id_eixojuridico" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break ">Governança e Gestão</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
                             <div class="boxe">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="0" id="che_0" name="cap_tecnico_juridico" {{checked2}}>
-                                    <label class="form-check-label fontSize2" for="che_0">Não aplicável</label>
+                                <div class="check position-relative">
+                                    <input class="form-check-input" type="checkbox" value="0" id="ch_0" name="cap_eixo_juridico" {{checked1}}>
+                                    <label class="form-check-label fontSize2" for="ch_0">Não aplicável</label>
                                 </div>
                                 {{#chekegestao}}
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{numero}}" id="ch_{{id}}" name="cap_tecnico_juridico" {{checked2}}>
+                                    <div class="check position-relative">
+                                        <input class="form-check-input" type="checkbox" value="{{numero}}" data-label="{{numero}}. {{articulacaotecnica}}" id="ch_{{id}}" name="cap_tecnico_juridico" {{checked2}}>
                                         <label class="form-check-label fontSize2" for="ch_{{id}}">{{numero}}. {{articulacaotecnica}}</label>
                                     </div>
                                 {{/chekegestao}}
                             </div>
                             <input type="hidden" class="form-control tec_juridico">
-                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>
+                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>  
                         </div>
-                    </div>
+                    </fieldset>
 
-
-<!--                ========= Distribuição =========================================-->
-
-                    <div id="bitem_id_eixojuridico" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break ">Distribuição</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 form-inline align-items-start felement">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" value="j" id="juridico" name="distribuicao" {{checked2}}>
-                                <label class="form-check-label fontSize2" for="juridico">Jurídico</label>
-                            </div>
-                            <input type="hidden" class="form-control distribuicao">
-                            <div class="form-control-feedback invalid-feedback">- Escolha uma distribuição</div>
-                        </div>
-                        <div class="col-md-3 form-inline align-items-start felement">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" value="g" id="tecnico" name="distribuicao" {{checked2}}>
-                                <label class="form-check-label fontSize2" for="tecnico">Gestão</label>
-                            </div>
-                        </div>
-                    </div>
-
-<!--                ========= File Anteprojeto =========================================-->
-                    <div id="bitem_id_file" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label for="formFile" class="form-label">Anteprojeto</label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-<!--                        <div class="col-md-9 form-inline align-items-start felement">-->
-<!--                            <input name="fileanteprojeto" class="form-control-md fc-file is-invalid fileanteprojeto" type="file" id="formFile">-->
-<!--                            <div id="invalid_file" class="form-control-feedback invalid-feedback"></div>-->
-<!--                            <div class="alert alert-primary al-msg d-none" id="id_alert" role="alert"></div>-->
-<!--                            <div class="alert alert-danger al-msg d-none" id="id_alert_w" role="alert"></div>-->
-<!--                        </div>-->
-                        <div class="col-md-9 form-inline align-items-start felement">
-                            <select name="fileanteprojeto" id="nomeArquivo" class="form-select " aria-label=".form-select">
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="anteprojeto">Arquivo Anteprojeto  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <select name="fileanteprojeto" id="nomeArquivo" class="form-select w100" aria-label=".form-select">
                                 <option value="">--Selecione--</option>
                                 {{#selectfile}}
                                     <option value="{{path}}">{{nome}}</option>
                                 {{/selectfile}}
                             </select>
-                            <div class="form-control-feedback invalid-feedback"> - O Campo Nome do Arquivo esta vazio.</div>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo Nome do Arquivo esta vazio.</div>               
                         </div>
-
-                    </div>
-
-                    <div id="bitem_id_notacapes" class="form-group row bitem">
-                        <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
-                            <label class="d-inline word-break " for="notacapes">Nota Capes </label>
-                            <div class="form-label-addon d-flex align-items-center align-self-start">
-                                <div class="text-danger" title="Necessários">
-                                    <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9 form-inline align-items-start felement">
-                            <input type="text" id="id_notacapes" class="form-control notacapes" name="notacapes" required maxlength="4"><span style="align-self: center; font-weight: 500"> Pontos</span>
+                        <div class="container-fluid">
+                            <label for="notacapes">Nota Capes <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <input type="text" id="id_notacapes" class="form-control notacapes" name="notacapes" required maxlength="4">
                             <div id="invalid_notacapes" class="form-control-feedback invalid-feedback">- Nota Capes esta vazio</div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="container-fluid label">
+                                <label for="distribuicao">Distribuição <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            </div>
+                            <fieldset class="check">
+                                <div class="container-fluid">
+                                    <div class="radio-check">
+                                        <div><input class="form-check-input" type="radio" value="j" id="juridico" name="distribuicao" {{checked2}}></div>
+                                        <div><label class="form-check-label fontSize2" for="juridico">Jurídico</label></div>
+                                    </div>
 
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="radio-check"> 
+                                        <div><input class="form-check-input" type="radio" value="g" id="tecnico" name="distribuicao" {{checked2}}></div>
+                                        <div><label class="form-check-label fontSize2" for="tecnico">Gestão</label></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid md">
+                            <button type="button" id="btnfechar" class="btn btn-secondary modalFechar">Fechar</button>
+                            <input type="button" id="btnanteprojeto" class="btn btn-primary btnEvento" name="btn_anteprojeto" value="Cadastrar">
+                            <input 
+                                type="button" 
+                                id="anteprojeto-preview" class="btn btn-primary btnEventoPreview" value="Preview">
+                        </div>
+                        <div class="container-fluid sm">
                             <div class="alert alert-primary al-msg d-none" id="id_alert" role="alert"></div>
                             <div class="alert alert-danger al-msg d-none" id="id_alert_w" role="alert"></div>
                         </div>
+                    </fieldset>
+                </form>
+
+                <div class="modal-foot hidden">
+                    <div class="field-main">
+                        <h3>Dados Anteprojeto</h3>
+                        <span>
+                            <div class="div1">Anteprojeto :</div>
+                            <div class="div2" id="atp"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Programa :</div>
+                            <div class="div2" id="prog"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Pesquisa :</div>
+                            <div class="div2" id="pesq"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Área prioritária para capacitação :</div>
+                            <div class="div2" id="area"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Documento Anteprojeto :</div>
+                            <div class="div2" id="file"></div>
+                        </span>
                     </div>
                 </div>
-                <div class="modal-footer eventButton">
-<!--                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>-->
-
-                    <button type="button" id="btnfechar" class="btn btn-secondary modalFechar">Fechar</button>
-                    <input type="button" id="btnanteprojeto" class="btn btn-primary btnEvento" name="btn_anteprojeto" value="Cadastrar">
-                </div>
-            </form>
             </div>
         </div>
     </div>
 </div>
+{{> block_eva_barema_bolsa/modal_preview_antprojeto }}
 <script src="/blocks/eva_barema_bolsa/js/jquery.mask.js"></script>
-<script src="/blocks/eva_barema_bolsa/js/create_anteprojeto_modal.js"></script>
+<script src="./js/create_anteprojeto_modal.js"></script>

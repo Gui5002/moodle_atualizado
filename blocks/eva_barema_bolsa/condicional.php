@@ -75,47 +75,48 @@ switch ($acao) {
         $anteprojeto = $DB->get_record('eva_bolsa_anteprojeto', array("id" => $numero['id']));
 
         if ($anteprojeto->distribuicao == 'j'){
-            $titularsuplente = $DB->get_records('eva_bolsa_avaliadores', array("eixo" => $anteprojeto->distribuicao));
+            $titularsuplente = $DB->get_records('eva_bolsa_avaliadores', array("eixo" => $anteprojeto->distribuicao, "status" => 1));
             $i=0;
-            $ct=1;
+            // $ct=1;
             //======Titular e Suplente===========
             foreach ($titularsuplente as $key=>$t_s) {
-                $titular_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->titular_user_id}'";
+                $titular_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->user_id}'";
                 $ava_titulares = $DB->get_record_sql($titular_sql);
-                $suplente_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->suplente_user_id}'";
-                $ava_suplente = $DB->get_record_sql($suplente_sql);
+                // $suplente_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->suplente_user_id}'";
+                // $ava_suplente = $DB->get_record_sql($suplente_sql);
                 $avaliadores[$i]['id'] = $ava_titulares->id;
-                $avaliadores[$i]['nome'] = $ct.' - '.$ava_titulares->fullname;
-                if ($t_s->status_titular == 0){
-                    $avaliadores[$i]['afastado'] =  'disabled';
-                }
+                $avaliadores[$i]['nome'] = $ava_titulares->fullname;
+                // if ($t_s->status == 0){
+                //     $avaliadores[$i]['afastado'] =  'disabled';
+                // }
 
                 $i++;
-                $avaliadores[$i]['id'] = $ava_suplente->id;
-                $avaliadores[$i]['nome'] = $ct.'.1 - '.$ava_suplente->fullname;
-                $avaliadores[$i]['afastado'] = ($t_s->status_suplente == 0) ? 'disabled' : '';
-                $i++; $ct++;
+                // $avaliadores[$i]['id'] = $ava_suplente->id;
+                // $avaliadores[$i]['nome'] = $ct.'.1 - '.$ava_suplente->fullname;
+                // $avaliadores[$i]['afastado'] = ($t_s->status_suplente == 0) ? 'disabled' : '';
+                // $i++; 
+                // $ct++;
             }
 
         }else{
-            $titularsuplente = $DB->get_records('eva_bolsa_avaliadores', array());
+            $titularsuplente = $DB->get_records('eva_bolsa_avaliadores', array('status' => 1));
             $i=0;
             $ct=1;
             foreach ($titularsuplente as $key=>$t_s) {
-                $titular_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->titular_user_id}'";
+                $titular_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->user_id}'";
                 $ava_titulares = $DB->get_record_sql($titular_sql);
-                $suplente_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->suplente_user_id}'";
-                $ava_suplente = $DB->get_record_sql($suplente_sql);
+                // $suplente_sql = "SELECT id, fullname, email FROM vw_autocomplete_user where id = '{$t_s->suplente_user_id}'";
+                // $ava_suplente = $DB->get_record_sql($suplente_sql);
                 $avaliadores[$i]['id'] = $ava_titulares->id;
-                $avaliadores[$i]['nome'] = $ct.' - '.$ava_titulares->fullname;
-                if ($t_s->status_titular == 0){
-                    $avaliadores[$i]['afastado'] =  'disabled';
-                }
+                $avaliadores[$i]['nome'] = $ava_titulares->fullname;
+                // if ($t_s->status_titular == 0){
+                //     $avaliadores[$i]['afastado'] =  'disabled';
+                // }
                 $i++;
-                $avaliadores[$i]['id'] = $ava_suplente->id;
-                $avaliadores[$i]['nome'] = $ct.'.1 - '.$ava_suplente->fullname;
-                $avaliadores[$i]['afastado'] = ($t_s->status_suplente == 0) ? 'disabled' : '';
-                $i++; $ct++;
+                // $avaliadores[$i]['id'] = $ava_suplente->id;
+                // $avaliadores[$i]['nome'] = $ct.'.1 - '.$ava_suplente->fullname;
+                // $avaliadores[$i]['afastado'] = ($t_s->status_suplente == 0) ? 'disabled' : '';
+                // $i++; $ct++;
             }
         }
     echo json_encode($avaliadores);
@@ -147,11 +148,11 @@ switch ($acao) {
     case 'editavaliadores':
 
         $id = $_GET['id'];
-        $coluna_user_id = $_GET['coluna_user_id'];
+        // $coluna_user_id = $_GET['coluna_user_id'];
         $user_id = $_GET['user_id'];
         $eixo = $_GET['eixo'];
 
-        $retorno = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id, $coluna_user_id=>$user_id, 'eixo'=>$eixo));
+        $retorno = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id, 'user_id'=>$user_id, 'eixo'=>$eixo));
 
         if ($retorno){
             $message['msg'] = "Avaliador alterado com sucesso!";
@@ -165,15 +166,15 @@ switch ($acao) {
     case 'mudarstatus':
         $avaliador = "";
         $avaliador_id = $_GET['id'];
-        $coluna_status = $_GET['coluna_status'];
-        $coluna_user_id = $_GET['coluna_user_id'];
+        // $coluna_status = $_GET['coluna_status'];
+        // $coluna_user_id = $_GET['user_id'];
         if ($_GET['status'] == 'suspend') {
             $avaliador['status'] = 0;
         }else{
             $avaliador['status'] = 1;
         }
-        $id_table_avaliador = $DB->get_record('eva_bolsa_avaliadores', array($coluna_user_id=>$avaliador_id), 'id');
-        $resposta = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id_table_avaliador->id, $coluna_status=>$avaliador['status']));
+        $id_table_avaliador = $DB->get_record('eva_bolsa_avaliadores', array('user_id'=>$avaliador_id), 'id');
+        $resposta = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id_table_avaliador->id, 'status'=>$avaliador['status']));
         if ($resposta){
             if ($avaliador['status'] == 1) {
                 $message['msg'] = "Avaliador ativado com sucesso!";

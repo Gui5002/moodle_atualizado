@@ -9,7 +9,6 @@ $(function (){
 
     let baremaid = $('.btnEditModal').attr('data-baremaid');
 
-
     $(".btnEditModal, .btnAdicionarModal, .btnDeleteModal").click(function (event){
         const wwwroot = $(this).attr('data-root');
         let id = $(this).attr('data-id');
@@ -63,10 +62,11 @@ function status_avaliadores(valor){
         var wwwroot = $(valor).attr('data-root');
         var status = $(valor).attr('data-status');
         var id = $(valor).attr('data-iduser');
-        var coluna_status = $(valor).attr('data-colunastatus');
-        var coluna_user_id = $(valor).attr('data-colunauserid');
+        // var coluna_status = $(valor).attr('data-colunastatus');
+        // var coluna_user_id = $(valor).attr('data-colunauserid');
         $.ajax({
-            url: wwwroot+'/blocks/eva_barema_bolsa/condicional.php?status='+status+'&id='+id+'&coluna_status='+coluna_status+'&coluna_user_id='+coluna_user_id,
+            // url: wwwroot+'/blocks/eva_barema_bolsa/condicional.php?status='+status+'&id='+id+'&coluna_status='+coluna_status+'&user_id='+coluna_user_id,
+            url: wwwroot+'/blocks/eva_barema_bolsa/condicional.php?status='+status+'&id='+id,
             data: 'acao=mudarstatus',
             success: function ( resposta ) {
                 let dados = JSON.parse(resposta);
@@ -83,10 +83,11 @@ function status_avaliadores(valor){
 //==================== ACAO DO ONMOUSECLICK ===============================
 function add_alter_avaliador_afast(btnEvent) {
     const wwwroot = $(btnEvent).attr('data-root');
-
-
+    
+    
     //=============== FAZ A ALTERAÇÃO - MODAL EDIT EVALIADORES =====================================
     if (btnEvent.id === 'id_Alterar') {
+
         let id = $('.editinputavaliadores').attr('data-id');
         let coluna_user_id = $('.editinputavaliadores').attr('data-colunauserid');
         let user_id = $('.juridico_gestao').val();
@@ -110,17 +111,17 @@ function add_alter_avaliador_afast(btnEvent) {
     }
     //================== FAZ A ADIÇÃO DE AVALIADORES ==========================
     if (btnEvent.id === 'id_Adicionar') {
-        let titular_user_id = $('.selecttitular').val();
-        let suplente_user_id = $('.selectsuplente').val();
+        let user_id = $('.selecttitular').val();
+        // let suplente_user_id = $('.selectsuplente').val();
         let radiobutton_eixo = $("input[name='distribuicao']:checked").val();
 
-        var error = verificacamposvazio(titular_user_id, suplente_user_id, radiobutton_eixo);
+        var error = verificacamposvazio(user_id, radiobutton_eixo);
 
         if (error > 0) {
             return false;
         }
         $.ajax({
-            url: wwwroot + '/blocks/eva_barema_bolsa/condicional.php?titular_user_id=' + titular_user_id + '&suplente_user_id=' + suplente_user_id + '&eixo=' + radiobutton_eixo,
+            url: wwwroot + '/blocks/eva_barema_bolsa/condicional.php?user_id=' + user_id  + '&eixo=' + radiobutton_eixo,
             data: 'acao=adicionarvaliador',
             success: function (resp) {
                 var dados = JSON.parse(resp);
@@ -143,17 +144,17 @@ function add_alter_avaliador_afast(btnEvent) {
     }
 }
 
-function verificacamposvazio(titular_user_id, suplente_user_id, radiobutton_eixo) {
+function verificacamposvazio(user_id, radiobutton_eixo) {
     let error = 0;
 
-    if (titular_user_id == "") {
+    if (user_id == "") {
         error += 1;
         $(".selecttitular").addClass('is-invalid').focus()
     }
-    if (suplente_user_id == "") {
-        error += 1;
-        $(".selectsuplente").addClass('is-invalid').focus()
-    }
+    // if (suplente_user_id == "") {
+    //     error += 1;
+    //     $(".selectsuplente").addClass('is-invalid').focus()
+    // }
     if (radiobutton_eixo == undefined) {
         error += 1;
         $(".distribuicao").addClass('is-invalid').focus()
