@@ -17,7 +17,7 @@ $(function (){
         let header = $(this).attr('data-header');
         let eixo = $(this).attr('data-eixo');
         let btn = $(this).attr('data-btn');
-        $("#avaliador_afast_ModalLabel").html(header);
+        $("#avaliador_bolsa_ModalLabel").html(header);
 
         $.ajax({
             url: wwwroot+'/blocks/eva_barema_bolsa/condicional.php',
@@ -70,7 +70,7 @@ function status_avaliadores(valor){
             data: 'acao=mudarstatus',
             success: function ( resposta ) {
                 let dados = JSON.parse(resposta);
-                    $('#avaliador_afast_Modal').modal('hide');
+                    $('#avaliador_bolsa_Modal').modal('hide');
                     $('.msgsuccess').html(dados.msg);
                     setTimeout(function () {
                         $('#msgSuccess').modal('show');
@@ -100,7 +100,7 @@ function add_alter_avaliador_afast(btnEvent) {
                 var dados = JSON.parse(resp);
                 console.log(dados)
                 if (dados) {
-                    $('#avaliador_afast_Modal').modal('hide');
+                    $('#avaliador_bolsa_Modal').modal('hide');
                     $('.msgsuccess').html(dados.msg)
                     setTimeout(function () {
                         $('#msgSuccess').modal('show');
@@ -125,13 +125,23 @@ function add_alter_avaliador_afast(btnEvent) {
             data: 'acao=adicionarvaliador',
             success: function (resp) {
                 var dados = JSON.parse(resp);
-                console.log(dados);
+                console.log(dados['msg']);
+                if(dados['msg'] != false){
+                    $('#avaliador_bolsa_Modal').modal('hide');
+                    var alert = '<div class="alert alert-success" role="alert"><strong>Avaliador adicionado com sucesso!</strong></div>'
+                    $('.msg').html(alert)
+                    setTimeout(function () {
+                        $('#msg_id').modal('show');
+                    }, 100);
+                }else{
+                    $('#avaliador_bolsa_Modal').modal('hide');
+                    var alert = '<div class="alert alert-warning" role="alert"><strong>Avaliador já existe!</strong></div>'
+                    $('.msg').html(alert)
+                    setTimeout(function () {
+                        $('#msg_id').modal('show');
+                    }, 100);
+                }
 
-                $('#avaliador_afast_Modal').modal('hide');
-                $('.msgsuccess').html('Avaliador adicionado com Sucesso.')
-                setTimeout(function () {
-                    $('#msgSuccess').modal('show');
-                }, 100);
 
             }
         });

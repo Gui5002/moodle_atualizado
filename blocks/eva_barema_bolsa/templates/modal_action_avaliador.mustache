@@ -1,7 +1,7 @@
 {{! <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/> }}
 
 <style>
-    .avaliador_afast_modal:before {
+    .avaliador_bolsa_modal:before {
         background-color: rgba(0,0,0,.9);
         bottom: 0;
         content: "";
@@ -11,13 +11,13 @@
         top: 0;
     }
 
-    .avaliador_afast_modal .modal-dialog .modal-content{
+    .avaliador_bolsa_modal .modal-dialog .modal-content{
         border-radius: 5px;
         padding: 0px;
         width: 50%;
         margin: 13% auto;
     }
-    .avaliador_afast_modal .modal-dialog .modal-content .modal-header{
+    .avaliador_bolsa_modal .modal-dialog .modal-content .modal-header{
         padding: 15px;
     }
 
@@ -37,11 +37,11 @@
 </style>
 
 
-<div class="avaliador_afast_modal modal fade" id="avaliador_afast_Modal" tabindex="-1" aria-labelledby="avaliador_afast_ModalLabel" data-backdrop="static">
+<div class="avaliador_bolsa_modal modal fade" id="avaliador_bolsa_Modal" tabindex="-1" aria-labelledby="avaliador_bolsa_ModalLabel" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="avaliador_afast_ModalLabel"></h5>
+                <h5 class="modal-title" id="avaliador_bolsa_ModalLabel"></h5>
                 <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -77,7 +77,7 @@
                             <div class="col-md-4 form-inline align-items-start felement">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="j" id="juridico" name="distribuicao">
-                                    <label class="form-check-label fontSize2" for="juridico">Jurídico</label>
+                                    <label class="form-check-label fontSize2" for="juridico">Eixo Jurídico</label>
                                 </div>
                                 <input type="hidden" class="form-control distribuicao">
                                 <div class="form-control-feedback invalid-feedback">- Escolha uma distribuição</div>
@@ -85,7 +85,7 @@
                             <div class="col-md-4 form-inline align-items-start felement">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="g" id="tecnico" name="distribuicao">
-                                    <label class="form-check-label fontSize2" for="tecnico">Gestão</label>
+                                    <label class="form-check-label fontSize2" for="tecnico">Governança e Gestão</label>
                                 </div>
                             </div>
                         </div>

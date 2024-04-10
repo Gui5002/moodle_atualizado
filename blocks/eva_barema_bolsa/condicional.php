@@ -140,8 +140,15 @@ switch ($acao) {
 
     case 'adicionarvaliador':
         $avaliadores =  $_GET;
-        $avaliador = $DB->insert_record('eva_bolsa_avaliadores', $avaliadores);
-        echo json_encode($avaliadores);
+        $userid = $_GET['user_id'];
+        $existe = $DB->record_exists('eva_bolsa_avaliadores', array('user_id'=>$userid));
+        if(!$existe){
+            $avaliador = $DB->insert_record('eva_bolsa_avaliadores', $avaliadores);
+            $info['msg'] = true;
+        }else{
+            $info['msg'] = false;
+        }
+        echo json_encode($info);
 
     break;
 

@@ -1,0 +1,43 @@
+<style>
+    .msg_modal:before {
+        background-color: rgba(0,0,0,.9);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .msg_modal .modal-dialog .modal-content{
+        border-radius: 5px;
+        padding: 0px;
+        width: 50%;
+        margin: 13% auto;
+    }
+    .msg_modal .modal-dialog .modal-content .modal-header{
+        padding: 15px;
+    }
+
+
+
+</style>
+
+<div class="msg_modal modal fade" id="msg_id" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content contentmodal">
+            <div class="modal-header">
+                <h5 class="modal-title">Mensagem</h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+
+                <div class="msg"></div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modalClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
