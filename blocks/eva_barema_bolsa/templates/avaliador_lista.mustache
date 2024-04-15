@@ -125,7 +125,7 @@
         color: #0c3551!important;
     }
     .fa-fw {
-        font-size: 1rem;
+        font-size: 14px;
     }
 
 </style>
@@ -143,7 +143,6 @@
                data-baremaid="{{baremaid}}"
                data-root="{{{ config.wwwroot }}}"
                data-header="Adicionar um avaliador"
-               data-btn="Adicionar"
                data-toggle="modal"
                data-target="#avaliador_bolsa_Modal"
                href="#"><i class="icon fa ccn-flaticon-user fa-fw"></i>Adicionar um avaliador</a>
@@ -167,7 +166,16 @@
         {{#dadosuser}}
             <tr>
                 <td data-title="#">{{id_user}}</td>
-                <td data-title="Eixo">{{eixo}}</td>
+                <td data-title="Eixo">
+                    {{eixo}} 
+                    <a class="bt-lapis" 
+                       data-id="{{id}}"
+                       data-iduser="{{id_user}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       data-status = "{{status}}"
+                       href="javascript:void(0);"
+                       ><i class="icon fa fa-pencil fa-fw i-con" title="Trocar eixo" {{hide_pencil}}></i></a>
+                </td>
                 <td data-title="Nome">{{nome}}</td>
                 <td data-title="E-mail">{{email}}</td>
                 <td data-title="qtd_anteprojeto" class="text-center">{{qtd_anteprojeto}}</td>

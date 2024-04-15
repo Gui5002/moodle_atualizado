@@ -139,14 +139,18 @@ $(function (){
         let chbox_juridico = [];
         $.each($("input[name='cap_eixo_juridico']:checked"), function () {
             chbox_juridico.push($(this).attr("data-label"));
-            chbox_juridico[0] = "Eixo Jurídico nao definido";
+            if(chbox_juridico[0] == undefined){
+                chbox_juridico[0] = "Eixo Jurídico nao definido";
+            }
         });
 
         
         let chbox_tecnico_juridico = [];
         $.each($("input[name='cap_tecnico_juridico']:checked"), function () {
             chbox_tecnico_juridico.push($(this).attr("data-label"));
-            chbox_tecnico_juridico[0] = "Eixo Governaça e Gestão nao definido";
+            if(chbox_tecnico_juridico[0] == undefined){
+                chbox_tecnico_juridico[0] = "Eixo Governaça e Gestão nao definido";
+            }
         });
         const areaPrioritaria = chbox_juridico.concat(chbox_tecnico_juridico);
         var li = '';

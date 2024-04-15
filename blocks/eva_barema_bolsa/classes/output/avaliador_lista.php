@@ -107,6 +107,7 @@ class avaliador_lista implements renderable, templatable {
                 $avaliadores[$i]['qtd_anteprojeto'] = count($qtd_avaliacao);
                 // $avaliadores[$i]['coluna_status'] = 'status';
                 // $avaliadores[$i]['coluna_user_id'] = 'user_id';
+                $avaliadores[$i]['hide_pencil'] = (count($qtd_avaliacao ) > 0)?'hidden':'';
                 $avaliadores[$i]['eixo'] = ($ava->eixo == 'j' ? 'Jurídico' : 'Gestão');
                 if ($ava->status == 1){
                     $avaliadores[$i]['icon'] = 'online';

@@ -159,7 +159,7 @@ switch ($acao) {
         $user_id = $_GET['user_id'];
         $eixo = $_GET['eixo'];
 
-        $retorno = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id, 'user_id'=>$user_id, 'eixo'=>$eixo));
+        $retorno = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id, 'eixo'=>$eixo));
 
         if ($retorno){
             $message['msg'] = "Avaliador alterado com sucesso!";
@@ -170,6 +170,12 @@ switch ($acao) {
 
     break;
 
+    case 'pegareixo':
+        $id = $_GET['id'];
+        $eixo = $DB->get_record('eva_bolsa_avaliadores', array('id'=>$id), 'eixo');
+        $array['eixo'] = $eixo->eixo;
+        echo json_encode($array);
+    break;    
     case 'mudarstatus':
         $avaliador = "";
         $avaliador_id = $_GET['id'];
@@ -184,9 +190,11 @@ switch ($acao) {
         $resposta = $DB->update_record_raw('eva_bolsa_avaliadores', array('id'=>$id_table_avaliador->id, 'status'=>$avaliador['status']));
         if ($resposta){
             if ($avaliador['status'] == 1) {
-                $message['msg'] = "Avaliador ativado com sucesso!";
+                $message['msg'] = "Avaliador ativado!";
+                $message['alert'] = "success";
             }else{
-                $message['msg'] = "Avaliador desativado com sucesso!";
+                $message['msg'] = "Avaliador desativado!";
+                $message['alert'] = "warning";
             }
         }else{
             $message['msg'] = "Algo deu errado...!";
