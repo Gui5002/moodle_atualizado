@@ -2,8 +2,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Model Barema Removal';
-$string['formlibpg'] = 'Form Barema Removal';
+$string['pluginname'] = 'Model Barema Afastamento';
+$string['formlibpg'] = 'Form Barema Afastamento';
 $string['formlibpgbody'] = 'The Content of our Form Barema block';
 $string['formlibpgconteudo'] = '<p>This is the English language file for your block. If you are not an English speaker, you can replace en with your appropriate language code</p><br>';
 $string['formlibpgfooter'] = 'Footer here...';
