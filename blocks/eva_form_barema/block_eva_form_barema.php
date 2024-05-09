@@ -165,8 +165,10 @@ class block_eva_form_barema extends block_base {
             $this->content->text  = $renderer->render($form_avaliador);
         }else if ($arraypath[2] === 'gerencia') {
             if ($_GET['qt_aluno_por_avaliador']){
+                
                 $alunos = new \block_eva_form_barema\output\alunos($this->config, $this->context);
                 $this->content->text  = $renderer->render($alunos);
+
             }elseif ($_GET['avaliador']){
                 $avaliacao = new \block_eva_form_barema\output\gerenciar_alunos($this->config, $this->context);
                 $this->content->text  = $renderer->render($avaliacao);
@@ -233,6 +235,7 @@ class block_eva_form_barema extends block_base {
         }else if ($arraypath[2] === 'avaliadores'){
             $this->content->text = $renderer->render($avaliador_lista);
         }
+
 
 //        $this->content->text = $renderer->render($avaliador_config_view);
 

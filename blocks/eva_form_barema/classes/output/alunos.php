@@ -82,20 +82,19 @@ class alunos implements renderable, templatable
     }
 
     private function pagination_relatorio (){
-//        var_dump($_GET);die();
-
+        
         //INPÚT GET
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $per_page = (isset($_GET['per_page']) && ($_GET['per_page'] <= 50)) ? (int)$_GET['per_page'] : 5;
-
+        
         //POSITIONING
         $start = ($page > 1) ? ($page * $per_page) - $per_page : 0;
-
+        
         $caderno['page'] = $page;
         $caderno['perPage'] = $per_page;
         $caderno['start'] = $start;
         $caderno = (object) $caderno;
-
+        
 
         return  $caderno;
     }
@@ -128,38 +127,38 @@ class alunos implements renderable, templatable
 //        $cursoid = explode('=',$cursoalunos[0]);
 
 
-        $idtbavaliador = $_GET['qt_aluno_por_avaliador'];
+$idtbavaliador = $_GET['qt_aluno_por_avaliador'];
 
 
-        $cursoid = $DB->get_record('eva_barema_avaliador', array('id' => $idtbavaliador), 'id, avaliador_tb_user_id, tb_curso_id, tb_atividade_id, url_avaliacao, data_atribuicao');
+$cursoid = $DB->get_record('eva_barema_avaliador', array('id' => $idtbavaliador), 'id, avaliador_tb_user_id, tb_curso_id, tb_atividade_id, url_avaliacao, data_atribuicao');
 
-        $voltar = $cursoid->avaliador_tb_user_id;
+$voltar = $cursoid->avaliador_tb_user_id;
 
-        $cursoname = $DB->get_record('course', array('id' => $cursoid->tb_curso_id), 'fullname');
+$cursoname = $DB->get_record('course', array('id' => $cursoid->tb_curso_id), 'fullname');
 
-        $dadosAlunosCursos = $DB->get_records('eva_barema_alunos', array('tb_avaliador_id' => $idtbavaliador));
+$dadosAlunosCursos = $DB->get_records('eva_barema_alunos', array('tb_avaliador_id' => $idtbavaliador));
 
 
-        $prazo = new \block_eva_form_barema\models\prazos();
-        $tempo = $prazo->quantosDiasFaltam($cursoid->data_atribuicao, 15);
+$prazo = new \block_eva_form_barema\models\prazos();
+$tempo = $prazo->quantosDiasFaltam($cursoid->data_atribuicao, 15);
 
 //      data 2023/08/03 => 1691031600
 
-        $i = 0;
-        foreach ($dadosAlunosCursos as $cha=>$ac) {
-            $nome = $DB->get_record_sql("SELECT fullname FROM vw_autocomplete_user WHERE id={$ac->alunos_id} ORDER BY fullname ASC");
-
-            if ($ac->datafinish) {
-                $diasresp = $prazo->diasRespostas($cursoid->data_atribuicao, $ac->datafinish);
-                $prazo = ($diasresp > $ac->prazo) ? 'fora': 'dentro';
-                if ($prazo == 'dentro') {
-                    $DB->update_record('eva_barema_alunos', array('id'=>$ac->id, 'prazo'=>null));
-                }else{
-                    $DB->update_record('eva_barema_alunos', array('id'=>$ac->id, 'prazo'=>0));
-                }
-            }
-
-
+$i = 0;
+foreach ($dadosAlunosCursos as $cha=>$ac) {
+    $nome = $DB->get_record_sql("SELECT fullname FROM vw_autocomplete_user WHERE id={$ac->alunos_id} ORDER BY fullname ASC");
+    
+    if ($ac->datafinish) {
+        $diasresp = $prazo->diasRespostas($cursoid->data_atribuicao, $ac->datafinish);
+        $prazo = ($diasresp > $ac->prazo) ? 'fora': 'dentro';
+        if ($prazo == 'dentro') {
+            $DB->update_record('eva_barema_alunos', array('id'=>$ac->id, 'prazo'=>null));
+        }else{
+            $DB->update_record('eva_barema_alunos', array('id'=>$ac->id, 'prazo'=>0));
+        }
+    }
+            
+            
             $alunosCursos[$i]['id'] = $ac->alunos_id;
             $alunosCursos[$i]['alunos'] = $nome->fullname;
             if ($ac->status == 1 && $ac->prazo == null) {
@@ -170,10 +169,10 @@ class alunos implements renderable, templatable
                 if ($ac->status == 1 && $ac->prazo == 0){
                     $alunosCursos[$i]['textColor'] = 'fw600';
                     $alunosCursos[$i]['acao_link'] = '<i class="icon fa ccn-flaticon-info text-info fa-fw" style="font-weight: 600;font-size: 15px;"
-                                                    data-toggle="tooltip" data-placement="right"
-                                                    data-custom-class="custom-tooltip"
-                                                    data-title="Aluno respondeu fora do prazo... Esperando atorização do Admin."  
-                                                  ></i>';
+                    data-toggle="tooltip" data-placement="right"
+                    data-custom-class="custom-tooltip"
+                    data-title="Aluno respondeu fora do prazo... Esperando atorização do Admin."  
+                    ></i>';
                     $alunosCursos[$i]['href_link'] = '';
                 }else if ($ac->status == 1 && $ac->prazo < 0) {
                     $alunopendente[$i]['textColor'] = 'fw600';
@@ -183,41 +182,41 @@ class alunos implements renderable, templatable
                 if ($ac->status == 0 && $ac->prazo > 0){
                     $alunosCursos[$i]['textColor'] = 'text-danger fw600';
                     $alunosCursos[$i]['acao_link'] = '<i class="icon fa ccn-flaticon-info text-danger fa-fw" style="font-weight: 600;font-size: 15px;"
-                                                        data-toggle="tooltip" data-placement="right"
-                                                        data-custom-class="custom-tooltip"
-                                                        data-title="Aluno ainda nao fez a Atividade."  
-                                                      ></i>';
+                    data-toggle="tooltip" data-placement="right"
+                    data-custom-class="custom-tooltip"
+                    data-title="Aluno ainda nao fez a Atividade."  
+                    ></i>';
                     $alunosCursos[$i]['href_link'] = '';
                 }
             }
-//            $alunosCursos[$i]['acao_link'] = ($ac->status == 1) ? '<i class="flaticon-download-1 " style="font-weight: 600;font-size: 15px;"></i>' : '<i class="icon fa ccn-flaticon-info text-danger fa-fw" title="Informação da Substituição" style="font-weight: 600;font-size: 15px;"></i>';
+            //            $alunosCursos[$i]['acao_link'] = ($ac->status == 1) ? '<i class="flaticon-download-1 " style="font-weight: 600;font-size: 15px;"></i>' : '<i class="icon fa ccn-flaticon-info text-danger fa-fw" title="Informação da Substituição" style="font-weight: 600;font-size: 15px;"></i>';
 //            $alunosCursos[$i]['href_link'] = $cursoid->url_avaliacao . '&aluno_id=' . $ac->alunos_id.'&tb_id_avaliador='.$idtbavaliador;
 
-            $i++;
-        }
+$i++;
+}
 
-        $alunoOdenados =  $this->ordenaAlunos($alunosCursos);
+$alunoOdenados =  $this->ordenaAlunos($alunosCursos);
 
-        $nomeavaliador = $DB->get_record_sql("SELECT fullname FROM vw_autocomplete_user WHERE id={$cursoid->avaliador_tb_user_id}");
+$nomeavaliador = $DB->get_record_sql("SELECT fullname FROM vw_autocomplete_user WHERE id={$cursoid->avaliador_tb_user_id}");
 
-        $data->listalunos = $alunoOdenados;
-        $data->cursoalunos = $cursoname->fullname;
-        $data->nomeavaliador = $nomeavaliador->fullname;
+$data->listalunos = $alunoOdenados;
+$data->cursoalunos = $cursoname->fullname;
+$data->nomeavaliador = $nomeavaliador->fullname;
 
-        //====================================================lista de avaliados===============================================
+//====================================================lista de avaliados===============================================
 
-        $clausulaWhere = $this->filter_busca();
+$clausulaWhere = $this->filter_busca();
 
-        $where = $clausulaWhere ? 'WHERE'.$clausulaWhere.'ORDER BY data DESC' : '';
+$where = $clausulaWhere ? 'WHERE'.$clausulaWhere.'ORDER BY data DESC' : '';
 
-        $caderno = $this->pagination_relatorio();
+$caderno = $this->pagination_relatorio();
 
 //buscando os dados no banco
-        $sql = "SELECT SQL_CALC_FOUND_ROWS `id`, barema, curso, atividade, avaliador, aluno, `data` 
+$sql = "SELECT SQL_CALC_FOUND_ROWS `id`, barema, curso, atividade, avaliador, aluno, `data` 
                 FROM vw_relatorio_barema {$where} LIMIT {$caderno->start}, {$caderno->perPage}";
 
 //        var_dump($sql);die();
-        $relatorios = $DB->get_records_sql($sql);
+$relatorios = $DB->get_records_sql($sql);
 
         $sqltotal = "SELECT FOUND_ROWS() as total";
         $resultado_pg = $DB->get_record_sql($sqltotal)->total;
@@ -306,6 +305,7 @@ class alunos implements renderable, templatable
                 $i++;
             }
         }
+
 
         $barema     = $_GET['barema'];
         $curso      = $_GET['curso'];

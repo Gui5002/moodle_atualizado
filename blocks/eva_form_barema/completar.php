@@ -315,20 +315,47 @@ case 'buscaperguntaresposta':
 
         $array_avaliadorid = explode(',', $_GET['avaliadores']);
         $quizid = $_GET['quizid'];
+        $courseid = $_GET['courseid'];
 //        $quizid = 22;
 
         $excluiu = $DB->delete_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
 
 //        $quiz = $DB->count_records('quiz_attempts', array('quiz'=>$quizid, 'state'=>'finished'), '', 'userid');
-        $quiz = $DB->count_records('quiz_attempts', array('quiz'=>$quizid), '', 'userid');
-
-        $result = intdiv($quiz, count($array_avaliadorid));
-        $resto = ($quiz % count($array_avaliadorid));
+        // $quiz = $DB->count_records('quiz_attempts', array('quiz'=>$quizid), '', 'userid');
+        $quiz = $DB->get_records('quiz_attempts', array('quiz'=>$quizid), '', 'userid');
+        $v1=0;
+        $v2=0;
+        foreach ($quiz as $alunos) {
+            $existes = $DB->record_exists('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos->userid));
+        // }
+        // if(true){
+            
+            $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos->userid));
+            if ($existes) {
+                $foiavaliado = false;
+                foreach ($id_existes as $idexiste) {
+                    $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
+                    if (($tb_avaliador->tb_curso_id == $courseid) && ($tb_avaliador->tb_atividade_id == $quizid)) {
+                        $foiavaliado = true;
+                    }
+                }
+                if(!$foiavaliado) {
+                    $v1++; 
+                }
+            }else{
+                $v2++;
+            }
+            
+            $i++;
+        }
+        $qt = $v1 + $v2;
+        $result = intdiv($qt, count($array_avaliadorid));
+        $resto = ($qt % count($array_avaliadorid));
 
         for ($x=1; $x<=count($array_avaliadorid); $x++){
             $inteiros[]['qt_avaliando'] = $result;
         }
-
+        
         if ($resto > 0){
             foreach ($inteiros as $int){
                 if ($resto > 0){
@@ -341,15 +368,18 @@ case 'buscaperguntaresposta':
         }else{
             $users = $inteiros;
         }
-
+        
         foreach ($array_avaliadorid as $key=>$avaliador){
             $nome_aluno = $DB->get_record_sql("SELECT fullname from vw_autocomplete_user where id = '{$avaliador}' ORDER BY fullname");
             $users[$key]['avaliador_id'] = $avaliador;
             $users[$key]['avaliador'] = ucwords(strtolower($nome_aluno->fullname));
-            $users[$key]['total'] = $quiz;
+            $users[$key]['total'] = $qt;
             $i++;
         }
-
+        
+        // echo json_encode($users);
+        // break;
+        // exit();
         echo json_encode($users);
     break;
 
