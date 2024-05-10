@@ -38,7 +38,6 @@ $(function (){
                 data: 'acao=buscarsubcategoria&id_subcategoria='+idcategoria,
                 success: function ( resposta ) {
                     var dados = JSON.parse(resposta);
-                    console.log(dados )
                     var options = '';
                     $('#id_tb_subcategoria_id').html(options);
                     if (dados) {
@@ -130,27 +129,25 @@ $(function (){
         });
     });
 
-
-
-
-
     //====================== CHAMA O MODAL E FAZ A DISTRIBUIÇÃO DOS ALUNOS PARA OS AVALIADORES===================
     let qt_total_aluno = '';
     $("#id_dist").click(function (){
 
+       
         const wwwroot = $(".wwwroot").attr('data-root');
         var avaliadorid = $('#id_avaliador_tb_user_id').val();
+        var courseid = $('#id_tb_curso_id').val();
         var quizid = $('#id_tb_atividade_id').val();
         var message = '';
         var error = vericicaCampos(avaliadorid, quizid);
-
+        
         if (error > 0) {
             return false;
         }
 
         $.ajax({
             url: wwwroot +'/blocks/eva_form_barema/completar.php',
-            data: 'acao=quantosalunos&quizid='+quizid+'&avaliadores='+avaliadorid,
+            data: 'acao=quantosalunos&quizid='+quizid+'&courseid='+courseid+'&avaliadores='+avaliadorid,
 
             success: function (response) {
                 var qtalunos = JSON.parse(response);
@@ -270,8 +267,6 @@ $(function (){
             success: function (response) {
                 var qtalunos = JSON.parse(response);
 
-                console.log(qtalunos);
-
                 var msgsucesso = '' +
                     '<div class="alert alert-success d-flex align-items-center text-center" role="alert">' +
                     '<div class="">Adicionado com Sucesso!</div>\n' +
@@ -296,12 +291,8 @@ $(function (){
                             data: 'acao=buscardistribuicao',
                             success: function (res) {
                                 let cont = JSON.parse(res);
-
-                                console.log(cont);
                                 var buscas="";
 
-                                // setTimeout(function () {
-                                // },1000)
                                     for (let i=1; i <= cont.length; i++){
                                         buscas += '<p>'+cont[i].ava + ' - Qtd de Alunos :' + cont[i].avaid +'</p>';
                                     }

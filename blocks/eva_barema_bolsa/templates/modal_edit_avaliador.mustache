@@ -1,38 +1,39 @@
 <style>
-    .avaliador_edit_modal:before {
-        background-color: rgba(0,0,0,.9);
-        bottom: 0;
-        content: "";
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .m_area {
-        color: #000;
-        /*background-color: #d1e9ff4d;*/
-        padding: 15px 13px;
-        border-top: 0px solid #aac3e84f;
-    }
-    /*.fcontainer .bitem {*/
-    /*    width: 50%;*/
-    /*    margin-left: 25%;*/
-    /*}*/
-    .mc-edit {
-        width: 50%;
-        margin: 13% auto;
-    }
-    #id_user_id, #id_suplente_user_id {
-        width: 95%;
-    }
-    .ml200 {
-        margin-left: 252px;
-    }
 
+dialog {
+    padding: 5px;
+    background-color: rgb(243 243 243);
+    border: 2px solid #0202334f;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1em rgb(0 0 0 / 60%);
+    z-index: 9999;
+  }
+dialog .ipt{
+    margin: 0px;
+}
+dialog .ipt-ch{
+    width: 42px;
+    height: 42px;
+}
+dialog .ipt-text{
+    height: 42px;
+}
+dialog .bt {
+    display: flex;
+}
+dialog .bt .bt-close {
+    width: 50px;
+    background-color: #dddcdc !important;
+    border: 1px solid #afa9a9 !important;
+    color: black !important;
+}
+dialog .bt .bt-enviar {
+    margin-right: 0px;
+}
 
 </style>
-
-<div class="avaliador_edit_modal modal fade" id="avaliador_edit_Modal" tabindex="-1" aria-labelledby="avaliador_edit_ModalLabel" data-backdrop="static">
+<!--
+<div class="avaliador_bolsa_modal modal fade" id="avaliador_edit_Modal" tabindex="-1" aria-labelledby="avaliador_edit_ModalLabel" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content mc-edit">
             <div class="modal-header">
@@ -40,11 +41,6 @@
                 <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-<!--                <form autocomplete="off" action="{{{ config.wwwroot }}}/blocks/eva_form_barema/avaliadores.php?baremaid={{baremaid}}" method="post"-->
-<!--                <form autocomplete="off" action="" method="post"-->
-<!--                      accept-charset="utf-8" id="mform1" class="mform" data-boost-form-errors-enhanced="1">-->
-<!--                    <input type="hidden" class="editinputavaliadores" value="">-->
                     <input type="hidden" class="editinputavaliadores"
                     data-id
                     data-colunauserid
@@ -90,10 +86,37 @@
                         <button type="button" class="btn btn-secondary modalFechar" data-dismiss="modal">Fechar</button>
                         <button type="button" name="editarbutton_avaliador" class="btn btn-primary btnEvento" onclick="add_alter_avaliador_afast(this)"></button>
                     </div>
-<!--                </form>-->
+              </form>
             </div>
         </div>
     </div>
 </div>
+-->
+
+    <dialog class="dlg" style="">
+    <div class="mb-1">
+        <input type="hidden" class="input_id" name="id">
+        <div class="input-group input-group-sm">
+        <div class="input-group-text ipt-ch">
+            <input class="form-check-input ipt" name="eixo" id="j_id" type="radio" value="j" >
+        </div>
+        <span class="input-group-text ipt-text">
+            <label for="j_id" style="width: 80px;">Jurídico</label>
+        </span>
+        </div>
+        <div class="input-group input-group-sm">
+        <div class="input-group-text ipt-ch">
+            <input class="form-check-input ipt" name="eixo" id="g_id" type="radio" value="g" >
+        </div>
+        <span class="input-group-text ipt-text">
+            <label for="g_id" style="width: 80px;">Gestão</label>
+        </span>
+        </div>
+    </div>
+    <div class="bt">
+        <button type="button" id="close" class="btn btn-sm bt-close ">X</button>
+        <button type="button" id="id_Alterar" class="btn btn-sm bt-enviar w-100">Alterar</button>
+    </div>
+    </dialog>
 
 

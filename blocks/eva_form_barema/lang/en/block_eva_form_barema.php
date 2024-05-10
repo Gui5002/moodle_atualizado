@@ -41,7 +41,7 @@ $string['alunorandpass'] = 'Student Data';
 $string['aluno'] = 'Name';
 $string['missingaluno'] = 'The name field is empty.';
 $string['validanome'] = '- Aluno não está nessa atividade.';
-$string['jafoiavaliado'] = '- Esse Aluno ja foi avaliador.';
+$string['jafoiavaliado'] = '- Esse Aluno ja foi avaliadooooo.';
 
 $string['validanomecompleto'] = 'Por favor Digite o nome completo ';
 

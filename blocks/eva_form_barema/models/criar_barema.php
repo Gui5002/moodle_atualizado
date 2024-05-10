@@ -32,27 +32,60 @@ function atribuicao_avaliador_create($avaliadores, $baremaCurso){
 //        $id_avaliador = $DB->get_field_sql("SELECT id FROM mdl_eva_barema_avaliador WHERE avaliador_tb_user_id = {$dadosava} ORDER BY id DESC");
 
         $cont = $DB->get_record_sql("SELECT id, avaliador_tb_user_id FROM mdl_eva_barema_avaliador ORDER BY id DESC");
-        $qt = $qt_aluno;
         foreach ($idusers as $key=>$al){
-            if ($qt > 0){
-                $arrayalunos[] = array(
-                    'quiz_att_id'       => $al->id,
-                    'tb_avaliador_id'   => $cont->id,
-                    'avaliador_id'      => $cont->avaliador_tb_user_id,
-                    'alunos_id'         => $al->userid,
-                    'status'            => ($al->state == "finished") ? 1 : 0 ,
-                    'prazo'            => ($al->state == "inprogress") ? $baremaCurso->prazo : null ,
-                );
-                $qt--;
-                unset($idusers[$key]);
-            }
+            $arrayalunos[] = array(
+                'quiz_att_id'       => $al->id,
+                'tb_avaliador_id'   => $cont->id,
+                'avaliador_id'      => $cont->avaliador_tb_user_id,
+                'alunos_id'         => $al->userid,
+                'status'            => ($al->state == "finished") ? 1 : 0 ,
+                'prazo'            => ($al->state == "inprogress") ? $baremaCurso->prazo : null ,
+            );
+            unset($idusers[$key]);
         }
 
         $link_avalaidor = $CFG->wwwroot.'/blocks/eva_form_barema/gerencia.php?avaliador='.$dadosava;
         set_envio_email_avaliadores($dadosava, $baremaCurso, $link_avalaidor);
     }
 
-    $DB->insert_records('eva_barema_alunos', $arrayalunos);
+    $i=0;
+    foreach ($arrayalunos as $alunos) {
+        $existes = $DB->record_exists('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
+        $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
+        if ($existes) {
+            $foiavaliado = false;
+            foreach ($id_existes as $idexiste) {
+                $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
+                if (($tb_avaliador->tb_curso_id == $arrayavaliador['tb_curso_id']) && ($tb_avaliador->tb_atividade_id == $arrayavaliador['tb_atividade_id'])) {
+                    $foiavaliado = true;
+                }
+            }
+            if(!$foiavaliado) {
+                $a2[] = array(
+                    'quiz_att_id'       => $alunos['quiz_att_id'],
+                    'tb_avaliador_id'   => $alunos['tb_avaliador_id'],
+                    'avaliador_id'      => $alunos['avaliador_id'],
+                    'alunos_id'         => $alunos['alunos_id'],
+                    'status'            => $alunos['status'] ,
+                    'prazo'            =>  $alunos['prazo'],
+                );
+            }
+        }else{
+            $a1[] = array(
+                'quiz_att_id'       => $alunos['quiz_att_id'],
+                'tb_avaliador_id'   => $alunos['tb_avaliador_id'],
+                'avaliador_id'      => $alunos['avaliador_id'],
+                'alunos_id'         => $alunos['alunos_id'],
+                'status'            => $alunos['status'] ,
+                'prazo'            =>  $alunos['prazo'],
+            );
+        }
+        $i++;
+    }
+    $mergealunos = array_merge($a1, $a2);
+    // var_dump($mergealunos);die();
+    // $cont = count($mergealunos);
+    $DB->insert_records('eva_barema_alunos', $mergealunos);
 
 
     $sqljoin = "SELECT id FROM mdl_eva_barema_resposta_padrao WHERE tb_quiz_id = '{$baremaCurso->tb_atividade_id}'";
@@ -164,6 +197,7 @@ function barema_avaliacao_create($data) {
     global $DB;
     $avaliacao = (object) $data;
 
+    var_dump($avaliacao);die();
 
     $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$avaliacao->tb_avaliador_id));
     $avaliacao->data_avaliacao = date('Y-m-d h:i:sa');
@@ -177,6 +211,7 @@ function barema_avaliacao_create($data) {
 
     if ($avaliacao->aluno_tb_user_id){
 
+        // var_dump($avaliacao);die();
         $existe = $DB->record_exists('eva_barema_avaliacao', array('tb_avaliador_id'=>$avaliacao->tb_avaliador_id, 'aluno_tb_user_id'=>$avaliacao->aluno_tb_user_id));
         if (!$existe) {
 
@@ -275,12 +310,13 @@ function cadastrar_atribuicao($novobarema, $returnurlbarema, $fildsbarema) {
 function controller_barema_avaliacao($returnurl, $fildsbarema) {
     global $DB, $PAGE;
 
+    
     if ($_POST['cancelbutton']) {
         redirect($returnurl);
-
+        
     }else if ($_POST['submitbutton']){
-
-
+        
+        
         $data = barema_avaliacao_create($fildsbarema);
 
         if ($data){

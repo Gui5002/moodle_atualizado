@@ -41,7 +41,7 @@ $string['alunorandpass'] = 'Dados do aluno';
 $string['aluno'] = 'Nome';
 $string['missingaluno'] = 'O Campo nome está vazio.';
 $string['validanome'] = '- Aluno não está nessa atividade.';
-$string['jafoiavaliado'] = '- Esse Aluno ja foi avaliador.';
+$string['jafoiavaliado'] = '- Esse Aluno ja foi avaliado.';
 
 $string['lotacao'] = 'Lotação';
 $string['missinglotacao'] = 'O campo lotacão está vazio.';

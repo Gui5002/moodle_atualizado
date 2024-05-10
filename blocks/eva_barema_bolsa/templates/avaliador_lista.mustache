@@ -125,16 +125,16 @@
         color: #0c3551!important;
     }
     .fa-fw {
-        font-size: 1rem;
+        font-size: 14px;
     }
 
 </style>
-{{> block_eva_form_barema/customize_config}}
+
 <h5 class="card-title">Avaliadores Cadastrados</h5>
 <div class="section mb20">
     <div class="row">
         <div class="col-lg-12">
-            <a class="btn-primary btn-thm btnAdicionarModal"
+            <a class="btn-primary btn-thm"
                data-baremaid="{{baremaid}}"
                data-root="{{{ config.wwwroot }}}"
                href="/blocks/eva_barema_bolsa/create.php?id=1"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
@@ -143,9 +143,8 @@
                data-baremaid="{{baremaid}}"
                data-root="{{{ config.wwwroot }}}"
                data-header="Adicionar um avaliador"
-               data-btn="Adicionar"
                data-toggle="modal"
-               data-target="#avaliador_afast_Modal"
+               data-target="#avaliador_bolsa_Modal"
                href="#"><i class="icon fa ccn-flaticon-user fa-fw"></i>Adicionar um avaliador</a>
         </div>
     </div>
@@ -155,19 +154,28 @@
         <thead class="tableprimary">
         <tr>
             <th>#</th>
-            <th>Posicão</th>
+            <th>Eixo</th>
             <th>Nome</th>
             <th>E-mail</th>
             <th class="text-center">Qtd Ant.proj. Pendentes</th>
-            <th class="text-center">status</th>
-            <th class="text-center">Açao</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Ação</th>
         </tr>
         </thead>
         <tbody class="">
         {{#dadosuser}}
             <tr>
                 <td data-title="#">{{id_user}}</td>
-                <td data-title="posicao">{{posicao}}</td>
+                <td data-title="Eixo">
+                    {{eixo}} 
+                    <a class="bt-lapis" 
+                       data-id="{{id}}"
+                       data-iduser="{{id_user}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       data-status = "{{status}}"
+                       href="javascript:void(0);"
+                       ><i class="icon fa fa-pencil fa-fw i-con" title="Trocar eixo" {{hide_pencil}}></i></a>
+                </td>
                 <td data-title="Nome">{{nome}}</td>
                 <td data-title="E-mail">{{email}}</td>
                 <td data-title="qtd_anteprojeto" class="text-center">{{qtd_anteprojeto}}</td>
@@ -184,8 +192,6 @@
                        data-iduser="{{id_user}}"
                        data-root="{{{ config.wwwroot }}}"
                        data-status = "{{status}}"
-                       data-colunastatus = "{{coluna_status}}"
-                       data-colunauserid = "{{coluna_user_id}}"
                        href="javascript:void(0);" onclick="status_avaliadores(this)">
                         <i class="icon fa fa-eye{{icon_eye}} fa-fw " title="{{status}} avaliador" role="img" aria-label="{{status}} Avaliador"></i>
                     </a>
@@ -220,7 +226,7 @@
 {{> block_eva_barema_bolsa/modal_edit_avaliador }}
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-{{> block_eva_barema_bolsa/msg_sucesso }}
+{{> block_eva_barema_bolsa/msg }}
 {{> block_eva_barema_bolsa/msg_pergunta }}
 <script type="text/javascript" src="/blocks/eva_barema_bolsa/js/modal_action_avaliadores.js"></script>
 <script>$('.ccnDashBlHd ').addClass('hidden')</script>
