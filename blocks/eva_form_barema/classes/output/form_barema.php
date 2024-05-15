@@ -34,41 +34,43 @@ class form_barema implements renderable, templatable {
         $idcurse = trim($_GET['curso_id']);
         $idquiz = trim($_GET['quiz_id']);
         $idestudante = trim($_GET['aluno_id']);
+        $tbidavaliador = trim($_GET['tb_id_avaliador']);
 
+        
         $sql = "SELECT id from vw_autocomplete_user where id = '{$idestudante}'";
         $existealuno =  $DB->record_exists_sql($sql);
-
-
+        
+        
         if ($existealuno) {
             //============== verifica se aluno ja foi avaliado ====================================
-
+            // $existe = $DB->record_exists('eva_barema_avaliacao', array('tb_avaliador_id'=>$tbidavaliador, 'aluno_tb_user_id'=>$idestudante));
             $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$idestudante));
             $podeavaliar = true;
-
             if ($id_existes) {
-
+                $i=0;
                 foreach ($id_existes as $idexiste) {
 
                     $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
-                    //======== Verificar se o avaliador logado e a atividade autal é o mesmo que avaliou o aluno e se o status esta true====
+                    //======== Verificar se o avaliador logado e a atividade atual é o mesmo que avaliou o aluno e se o status esta true====
                     //===O aluno so pode ser avaliador uma vez nesse curso e atividade !!!==========
 
                     $repetir_avaliacao = $DB->get_record('eva_barema_avaliacao', array('tb_avaliador_id'=>$tb_avaliador->id, 'aluno_tb_user_id'=>$idexiste->aluno_tb_user_id));
-                    if ($tb_avaliador->tb_curso_id == $idcurse && $tb_avaliador->tb_atividade_id == $idquiz && ($repetir_avaliacao->flag == 1)) {
+                    if (($tb_avaliador->tb_curso_id == $idcurse) && ($tb_avaliador->tb_atividade_id == $idquiz) && ($repetir_avaliacao->flag == 1)) {
                         //=== esse aluno pode ser avaliado denovo caso a flag for = 1 =======
                         $podeavaliar = true;
 
-                    }else if ($tb_avaliador->tb_curso_id == $idcurse && $tb_avaliador->tb_atividade_id == $idquiz) {
+                    }else if (($tb_avaliador->tb_curso_id == $idcurse) && ($tb_avaliador->tb_atividade_id == $idquiz)) {
                         //===esse aluna ja foi avaliado com esses parametros de courso e de quiz ===
                         $podeavaliar = false;
                     }
+                    $i++;
                 }
 
                 if ($podeavaliar) {
 
                     $sql = "SELECT qz.id, qz.quiz, qz.userid, qu.questionsummary, qu.rightanswer, qu.responsesummary FROM mdl_quiz_attempts qz 
-                        INNER JOIN mdl_question_attempts qu ON qz.uniqueid = qu.questionusageid
-                        WHERE qz.quiz = '{$idquiz}' AND qz.userid = '{$idestudante}'";
+                    INNER JOIN mdl_question_attempts qu ON qz.uniqueid = qu.questionusageid
+                    WHERE qz.quiz = '{$idquiz}' AND qz.userid = '{$idestudante}'";
                     $dados = $DB->get_records_sql($sql);
                     $reposta = $DB->get_field('eva_barema_resposta_padrao', 'resposta', array('tb_quiz_id'=>$idquiz));
                     foreach ($dados as $key=>$dado){

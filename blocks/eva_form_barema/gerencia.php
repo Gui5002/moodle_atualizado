@@ -33,10 +33,11 @@ if (($avaliadorid != $USER->id) && !($confirmausuario == $USER->id) && !($admin 
 
 $PAGE->set_url($url);
 
+
 $syscontext = context_system::instance();
 //require_capability('moodle/site:config', $syscontext);
 
-$title = "EVAGU: ". $titulo;
+$title = "EVAGU: Dados Expresso";
 $PAGE->set_pagelayout('admin');
 
 $PAGE->set_context($syscontext);
@@ -45,4 +46,5 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 echo $OUTPUT->header();
 echo $OUTPUT->footer();
+var_dump('teste');die();
 
