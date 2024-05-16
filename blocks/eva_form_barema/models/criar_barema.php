@@ -49,6 +49,8 @@ function atribuicao_avaliador_create($avaliadores, $baremaCurso){
     }
 
     $i=0;
+    $a1 = array();
+    $a2 = array();
     foreach ($arrayalunos as $alunos) {
         $existes = $DB->record_exists('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
         $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
