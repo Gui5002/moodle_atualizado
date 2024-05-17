@@ -262,7 +262,7 @@ class pos_contact {
         // Build the body of the email using user-entered information.
 
         // Note: Name of message field is defined in the language pack.
-        $fieldmessage = get_string('field-message', 'pos_contact');
+        $fieldmessage = 'Mensagem';
 
         $htmlmessage = '';
 
@@ -349,7 +349,7 @@ class pos_contact {
         );
 
         // Create the footer - Add some system information.
-        $footmessage = get_string('extrainfo', 'pos_contact');
+        $footmessage = '';
         $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
 
@@ -367,8 +367,6 @@ class pos_contact {
         } else { // Checked.
             $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
         }
-
-
 
         //======================ACRESCENTADO PARA O FORMULARIO DE SOLICITACAO ===================================
         if ($copiaemail){
