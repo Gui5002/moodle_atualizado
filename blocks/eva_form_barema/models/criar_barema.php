@@ -46,7 +46,8 @@ function atribuicao_avaliador_create($avaliadores, $baremaCurso){
 
     
     foreach ($avaliadores as $dadosava) {
-        $qt_aluno = $DB->get_field('eva_barema_distribuicao', 'qt_alunos', array('avaliador_id'=>$dadosava));
+        // $qt_aluno = $DB->get_field('eva_barema_distribuicao', 'qt_alunos', array('avaliador_id'=>$dadosava));
+        $qt = $DB->get_record_sql("SELECT id, qt_alunos FROM mdl_eva_barema_distribuicao WHERE avaliador_id = '{$dadosava}' ORDER BY id DESC");
         $url_barema = '/blocks/eva_form_barema/barema_avaliacao.php?barema_id='.$baremaCurso->tb_barema_id.'&avaliador_id='.$dadosava.'&curso_id='.$baremaCurso->tb_curso_id.'&quiz_id='.$baremaCurso->tb_atividade_id;
         $arrayavaliador = array(
             'tb_barema_id'            => $baremaCurso->tb_barema_id,
@@ -55,18 +56,20 @@ function atribuicao_avaliador_create($avaliadores, $baremaCurso){
             'tb_subcategoria_id'      => $baremaCurso->tb_subcategoria_id,
             'tb_curso_id'             => $baremaCurso->tb_curso_id,
             'tb_atividade_id'         => $baremaCurso->tb_atividade_id,
-            'qtd_alunos'              => $qt_aluno,
+            'qtd_alunos'              => $qt->qt_alunos,
             'barema_modelo'           => $old_barema->hash_barema,
             'url_avaliacao'           => $url_barema,
             'data_atribuicao'         => date('Y-m-d')
         );
         
         $DB->insert_record('eva_barema_avaliador', $arrayavaliador);
-        $id = $DB->get_record_sql("SELECT MAX(id) id FROM mdl_eva_barema_avaliador");
 
-        $cont = $DB->get_record('eva_barema_avaliador', array('id'=>$id->id));
+        // $id = $DB->get_record_sql("SELECT MAX(id) id FROM mdl_eva_barema_avaliador");
+        // $cont = $DB->get_record('eva_barema_avaliador', array('id'=>$id->id));
 
-        $qt = $qt_aluno;
+        $cont = $DB->get_record_sql("SELECT id, avaliador_tb_user_id FROM mdl_eva_barema_avaliador ORDER BY id DESC");
+
+        $qt = $qt->qt_alunos;
         foreach ($idusers as $key=>$al){
             if ($qt > 0){
                 $arrayalunos[] = array(
@@ -197,8 +200,6 @@ function emails_pendente_avaliacao_pos($returnurl, $fildsinputs) {
 function barema_avaliacao_create($data) {
     global $DB;
     $avaliacao = (object) $data;
-
-    var_dump($avaliacao);die();
 
     $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$avaliacao->tb_avaliador_id));
     $avaliacao->data_avaliacao = date('Y-m-d h:i:sa');
