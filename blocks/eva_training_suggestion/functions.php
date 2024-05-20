@@ -227,15 +227,15 @@ global $CFG, $DB, $USER;
 
                         setTimeout(function(){
                             limparCampos();
-                        },5000);
+                        },1000);
 
-                        setTimeout(function(){
-                            if(pageid > 0){
-                                window.location = '<?php echo $CFG->wwwroot?>/mod/page/view.php?id=' + pageid;
-                            }else{
-                                window.location = '<?php echo $CFG->wwwroot?>';
-                            }
-                        }, 7000);
+                        // setTimeout(function(){
+                        //     if(pageid > 0){
+                        //         window.location = '<?php echo $CFG->wwwroot?>/mod/page/view.php?id=' + pageid;
+                        //     }else{
+                        //         window.location = '<?php echo $CFG->wwwroot?>';
+                        //     }
+                        // }, 7000);
                     }
                 }
             });
