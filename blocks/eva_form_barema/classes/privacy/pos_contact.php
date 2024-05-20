@@ -336,7 +336,6 @@ class pos_contact {
                 }
             }
         }
-        var_dump($to);die();
 
 
         // Sanitize user agent and referer.
