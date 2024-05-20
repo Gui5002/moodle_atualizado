@@ -28,6 +28,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class pos_contact {
+    public $fromname;
+    public $fromemail;
+    public $isspambot;
+    public $errmsg;
 
     /**
      * Class constructor. Receives and validates information received through a
@@ -233,22 +237,23 @@ class pos_contact {
      *
      * @return     boolean  $status - True if message was successfully sent, false if not.
      */
-    public function sendmessage($email, $name, $sendconfirmationemail = false, $copiaemail = false, $from_email_nome = false)
+    public function sendmessage($email, $name, $sendconfirmationemail = false)
     {
         global $USER, $CFG, $SITE;
 
         // Create the sender from the submitted name and email address.
-        if (!$from_email_nome) {
-            $from = $this->makeemailuser($this->fromemail, $this->fromname);
-        } else {
-            $from = $this->makeemailuser($from_email_nome['email'], $from_email_nome['nome']);
-        }
+        $from = $this->makeemailuser($this->fromemail, $this->fromname);
+        // if (!$from_email_nome) {
+        // } else {
+        //     $from = $this->makeemailuser($from_email_nome['email'], $from_email_nome['nome']);
+        // }
 
         // Create the recipient.
         $to = $this->makeemailuser($email, $name);
 
-        $Cc = $this->makeemailuser($copiaemail, $name);
-
+        
+        // $Cc = $this->makeemailuser($copiaemail, $name);
+        
         // Create the Subject for message.
         $subject = '';
         if (empty(get_config('pos_contact', 'nosubjectsitename'))) { // Not checked.
@@ -257,15 +262,15 @@ class pos_contact {
             $subject .= '[' . format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext]) . '] ';
         }
         $subject .= optional_param(get_string('field-subject', 'pos_contact'),
-                get_string('defaultsubject', 'pos_contact'), PARAM_TEXT);
-
+        get_string('defaultsubject', 'pos_contact'), PARAM_TEXT);
+        
         // Build the body of the email using user-entered information.
-
+        
         // Note: Name of message field is defined in the language pack.
         $fieldmessage = 'Mensagem';
-
+        
         $htmlmessage = '';
-
+        
 //        /**
 //         * Callback function for array_filter.
 //         *
@@ -331,6 +336,8 @@ class pos_contact {
                 }
             }
         }
+        var_dump($to);die();
+
 
         // Sanitize user agent and referer.
         $httpuseragent = format_text($_SERVER['HTTP_USER_AGENT'], FORMAT_PLAIN, array('trusted' => false));
@@ -369,10 +376,10 @@ class pos_contact {
         }
 
         //======================ACRESCENTADO PARA O FORMULARIO DE SOLICITACAO ===================================
-        if ($copiaemail){
-            $status = email_to_user($Cc, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
-                $from->email, $from->firstname);
-        }
+        // if ($copiaemail){
+        //     $status = email_to_user($Cc, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
+        //         $from->email, $from->firstname);
+        // }
 
 
         $CFG->noreplyaddress = $noreplyaddress;

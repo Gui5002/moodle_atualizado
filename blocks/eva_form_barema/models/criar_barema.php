@@ -135,7 +135,7 @@ function set_envio_email_avaliadores($idavaliadores, $baremaCurso,  $link_avalia
     $_POST['message'] = 'Prezado Avaliador, a lista dos alunos que irá avaliar já está disponível na EVA. Clique no link abaixo para iniciar o Barema e a correção das Avaliações de Aprendizagem.';
     $_POST['link'] = $link_avaliador;
 
-    $envio = $contact->sendmessage($avaliador->email, $name, null , null);
+    $envio = $contact->sendmessage($avaliador->email, $name, null);
     $mensagem[] = $envio;
 //        if () {
 //            // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
