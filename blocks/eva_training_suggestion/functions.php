@@ -223,26 +223,26 @@ global $CFG, $DB, $USER;
                     goToByScroll("page");
 
                     if(email > 0 && email !== "undefined"){
-                        enviarEmail(userid,pageid,id_ts,eva_slc_cargo,organ,eva_slc_2,eva_txtarea_1,eva_txtarea_2,slc_priority_area_legal,slc_technical_legal,eva_slc_comp,slc_modality,eva_slc_realizacao,eva_input_1,eva_input_2,eva_input_3,eva_input_4,eva_input_5,slc_previsao);
+                        enviarEmail(userid,pageid,ts,eva_slc_cargo,eva_slc_1,eva_txtarea_1,eva_txtarea_2,slc_modality,eva_input_1,eva_input_4);
 
                         setTimeout(function(){
                             limparCampos();
-                        },5000);
+                        },1000);
 
-                        setTimeout(function(){
-                            if(pageid > 0){
-                                window.location = '<?php echo $CFG->wwwroot?>/mod/page/view.php?id=' + pageid;
-                            }else{
-                                window.location = '<?php echo $CFG->wwwroot?>';
-                            }
-                        }, 7000);
+                        // setTimeout(function(){
+                        //     if(pageid > 0){
+                        //         window.location = '<?php echo $CFG->wwwroot?>/mod/page/view.php?id=' + pageid;
+                        //     }else{
+                        //         window.location = '<?php echo $CFG->wwwroot?>';
+                        //     }
+                        // }, 7000);
                     }
                 }
             });
         }
     }
 
-    function enviarEmail(userid,pageid,ts,eva_slc_cargo,eva_slc_1,eva_slc_2,eva_txtarea_1,eva_txtarea_2,slc_priority_area_legal,slc_technical_legal,eva_slc_comp,slc_modality,eva_slc_realizacao,eva_input_1,eva_input_2,eva_input_3,eva_input_4,eva_input_5,slc_previsao){
+    function enviarEmail(userid,pageid,ts,eva_slc_cargo,eva_slc_1,eva_txtarea_1,eva_txtarea_2,slc_modality,eva_input_1,eva_input_4){
         $.ajax({
             url: '<?php echo $CFG->wwwroot?>/blocks/eva_training_suggestion/send_mail.php',
             type: 'POST',
