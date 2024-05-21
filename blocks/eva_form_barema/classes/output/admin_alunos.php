@@ -100,7 +100,7 @@ class admin_alunos implements renderable, templatable {
 
         $i=0;
         foreach ($totalalunos as $alunos){
-            $nome = $DB->get_record_sql("SELECT fullname FROM vw_autocomplete_user WHERE id = '$alunos->alunos_id'");
+            $nome = $DB->get_record_sql("SELECT fullname, suap FROM vw_autocomplete_user WHERE id = '$alunos->alunos_id'");
 
             $tb_avaliacao = $DB->get_record('eva_barema_avaliacao', array('tb_avaliador_id'=>$id_tbavaliador, 'aluno_tb_user_id'=>$alunos->alunos_id), 'nt_avaliador, data_avaliacao, flag');
 
@@ -183,7 +183,7 @@ class admin_alunos implements renderable, templatable {
             $alunopendente[$i]['nome'] = $nome->fullname;
 //            $alunopendente[$i]['barema'] = $barema->nome_modelo;
 //            $alunopendente[$i]['curso'] = $curso->fullname;
-//            $alunopendente[$i]['quiz'] = $atividade->name;
+           $alunopendente[$i]['suap'] = $nome->suap;
             $alunopendente[$i]['data'] = $dataavaliacao;
             $alunopendente[$i]['nota'] = $data;
             $alunopendente[$i]['status'] = $status;

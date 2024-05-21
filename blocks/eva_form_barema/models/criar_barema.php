@@ -3,16 +3,51 @@
 function atribuicao_avaliador_create($avaliadores, $baremaCurso){
     global $DB, $CFG, $USER;
 
+
+
 //    $distribuicao = $DB->get_records('eva_barema_distribuicao', array('usuario_id'=>$USER->id));
 //    $idusers =  $DB->get_records('quiz_attempts', array('quiz'=>$baremaCurso->tb_atividade_id, 'state'=>'finished'), '', 'id, userid');
-    $idusers =  $DB->get_records('quiz_attempts', array('quiz'=>$baremaCurso->tb_atividade_id), '', 'id, userid, state');
+    $alunoquiz =  $DB->get_records('quiz_attempts', array('quiz'=>$baremaCurso->tb_atividade_id), '', 'id, userid, state');
+
+
+    $a1 = array();
+    $a2 = array();
+    foreach ($alunoquiz as $key=>$alunos) {
+        $existes = $DB->record_exists('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos->userid));
+        $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos->userid));
+        if ($existes) {
+            $foiavaliado = false;
+            foreach ($id_existes as $idexiste) {
+                $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
+                if (($tb_avaliador->tb_curso_id == $baremaCurso->tb_curso_id) && ($tb_avaliador->tb_atividade_id == $baremaCurso->tb_atividade_id)) {
+                    $foiavaliado = true;
+                }
+            }
+            if(!$foiavaliado) {
+                $a2[] = array(
+                    'id'       => $alunos->id,
+                    'userid'   => $alunos->userid,
+                    'state'    => $alunos->state
+                );
+            }
+        }else{
+            $a1[] = array(
+                'id'       => $alunos->id,
+                'userid'   => $alunos->userid,
+                'state'    => $alunos->state
+            );
+        }
+    }
+    $idusers = array_merge($a1, $a2);
 
     $old_barema = $DB->get_record('eva_barema', array('id'=>$baremaCurso->tb_barema_id));
     $arrayavaliador = array();
     $arrayalunos = array();
 
+    
     foreach ($avaliadores as $dadosava) {
-        $qt_aluno = $DB->get_field('eva_barema_distribuicao', 'qt_alunos', array('avaliador_id'=>$dadosava));
+        // $qt_aluno = $DB->get_field('eva_barema_distribuicao', 'qt_alunos', array('avaliador_id'=>$dadosava));
+        $qt = $DB->get_record_sql("SELECT id, qt_alunos FROM mdl_eva_barema_distribuicao WHERE avaliador_id = '{$dadosava}' ORDER BY id DESC");
         $url_barema = '/blocks/eva_form_barema/barema_avaliacao.php?barema_id='.$baremaCurso->tb_barema_id.'&avaliador_id='.$dadosava.'&curso_id='.$baremaCurso->tb_curso_id.'&quiz_id='.$baremaCurso->tb_atividade_id;
         $arrayavaliador = array(
             'tb_barema_id'            => $baremaCurso->tb_barema_id,
@@ -21,71 +56,40 @@ function atribuicao_avaliador_create($avaliadores, $baremaCurso){
             'tb_subcategoria_id'      => $baremaCurso->tb_subcategoria_id,
             'tb_curso_id'             => $baremaCurso->tb_curso_id,
             'tb_atividade_id'         => $baremaCurso->tb_atividade_id,
-            'qtd_alunos'              => $qt_aluno,
+            'qtd_alunos'              => $qt->qt_alunos,
             'barema_modelo'           => $old_barema->hash_barema,
             'url_avaliacao'           => $url_barema,
             'data_atribuicao'         => date('Y-m-d')
         );
-
+        
         $DB->insert_record('eva_barema_avaliador', $arrayavaliador);
 
-//        $id_avaliador = $DB->get_field_sql("SELECT id FROM mdl_eva_barema_avaliador WHERE avaliador_tb_user_id = {$dadosava} ORDER BY id DESC");
+        // $id = $DB->get_record_sql("SELECT MAX(id) id FROM mdl_eva_barema_avaliador");
+        // $cont = $DB->get_record('eva_barema_avaliador', array('id'=>$id->id));
 
         $cont = $DB->get_record_sql("SELECT id, avaliador_tb_user_id FROM mdl_eva_barema_avaliador ORDER BY id DESC");
-        foreach ($idusers as $key=>$al){
-            $arrayalunos[] = array(
-                'quiz_att_id'       => $al->id,
-                'tb_avaliador_id'   => $cont->id,
-                'avaliador_id'      => $cont->avaliador_tb_user_id,
-                'alunos_id'         => $al->userid,
-                'status'            => ($al->state == "finished") ? 1 : 0 ,
-                'prazo'            => ($al->state == "inprogress") ? $baremaCurso->prazo : null ,
-            );
-            unset($idusers[$key]);
-        }
 
+        $qt = $qt->qt_alunos;
+        foreach ($idusers as $key=>$al){
+            if ($qt > 0){
+                $arrayalunos[] = array(
+                    'quiz_att_id'       => $al['id'],
+                    'tb_avaliador_id'   => $cont->id,
+                    'avaliador_id'      => $cont->avaliador_tb_user_id,
+                    'alunos_id'         => $al['userid'],
+                    'status'            => ($al['state'] == "finished") ? 1 : 0 ,
+                    'prazo'            => ($al['state'] == "inprogress") ? $baremaCurso->prazo : null ,
+                );
+                $qt--;
+                unset($idusers[$key]);
+            }
+        }
+        
         $link_avalaidor = $CFG->wwwroot.'/blocks/eva_form_barema/gerencia.php?avaliador='.$dadosava;
         set_envio_email_avaliadores($dadosava, $baremaCurso, $link_avalaidor);
     }
 
-    $i=0;
-    foreach ($arrayalunos as $alunos) {
-        $existes = $DB->record_exists('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
-        $id_existes = $DB->get_records('eva_barema_avaliacao', array('aluno_tb_user_id'=>$alunos['alunos_id']));
-        if ($existes) {
-            $foiavaliado = false;
-            foreach ($id_existes as $idexiste) {
-                $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$idexiste->tb_avaliador_id));
-                if (($tb_avaliador->tb_curso_id == $arrayavaliador['tb_curso_id']) && ($tb_avaliador->tb_atividade_id == $arrayavaliador['tb_atividade_id'])) {
-                    $foiavaliado = true;
-                }
-            }
-            if(!$foiavaliado) {
-                $a2[] = array(
-                    'quiz_att_id'       => $alunos['quiz_att_id'],
-                    'tb_avaliador_id'   => $alunos['tb_avaliador_id'],
-                    'avaliador_id'      => $alunos['avaliador_id'],
-                    'alunos_id'         => $alunos['alunos_id'],
-                    'status'            => $alunos['status'] ,
-                    'prazo'            =>  $alunos['prazo'],
-                );
-            }
-        }else{
-            $a1[] = array(
-                'quiz_att_id'       => $alunos['quiz_att_id'],
-                'tb_avaliador_id'   => $alunos['tb_avaliador_id'],
-                'avaliador_id'      => $alunos['avaliador_id'],
-                'alunos_id'         => $alunos['alunos_id'],
-                'status'            => $alunos['status'] ,
-                'prazo'            =>  $alunos['prazo'],
-            );
-        }
-        $i++;
-    }
-    $mergealunos = array_merge($a1, $a2);
-    // var_dump($mergealunos);die();
-    // $cont = count($mergealunos);
-    $DB->insert_records('eva_barema_alunos', $mergealunos);
+    $DB->insert_records('eva_barema_alunos', $arrayalunos);
 
 
     $sqljoin = "SELECT id FROM mdl_eva_barema_resposta_padrao WHERE tb_quiz_id = '{$baremaCurso->tb_atividade_id}'";
@@ -131,7 +135,7 @@ function set_envio_email_avaliadores($idavaliadores, $baremaCurso,  $link_avalia
     $_POST['message'] = 'Prezado Avaliador, a lista dos alunos que irá avaliar já está disponível na EVA. Clique no link abaixo para iniciar o Barema e a correção das Avaliações de Aprendizagem.';
     $_POST['link'] = $link_avaliador;
 
-    $envio = $contact->sendmessage($avaliador->email, $name, null , null);
+    $envio = $contact->sendmessage($avaliador->email, $name, null);
     $mensagem[] = $envio;
 //        if () {
 //            // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
@@ -196,8 +200,6 @@ function emails_pendente_avaliacao_pos($returnurl, $fildsinputs) {
 function barema_avaliacao_create($data) {
     global $DB;
     $avaliacao = (object) $data;
-
-    var_dump($avaliacao);die();
 
     $tb_avaliador = $DB->get_record('eva_barema_avaliador', array('id'=>$avaliacao->tb_avaliador_id));
     $avaliacao->data_avaliacao = date('Y-m-d h:i:sa');
