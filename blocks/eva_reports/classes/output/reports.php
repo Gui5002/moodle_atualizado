@@ -24,7 +24,8 @@ class reports implements renderable, templatable
 
         require_once($CFG->libdir . '/filelib.php');
 
-        $id = optional_param('id', null, PARAM_INT);
+		$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
 
         $data = new \stdClass();
 
@@ -77,13 +78,13 @@ class reports implements renderable, templatable
         $text = '';
         $text .= '<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />';
 
-        if (empty($id) and is_null($id)) {
-            $text = '
-            <div class="alert alert-warning" role="alert">
-                  Nenhum código de relatório foi encontrado.
-            </div>
-            ';
-        } else {
+		if (!isset($id) or strlen(trim($id)) == false) {
+			$text .= '
+        <div class="alert alert-warning" role="alert">
+            Nenhum código de relatório foi encontrado.
+        </div>
+    ';
+		} else {
             if ($id == 1) {
                 $text .= '
                 <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
@@ -629,7 +630,116 @@ class reports implements renderable, templatable
                  </div>
                 
                 ';
-            }
+            } else if ($id == 0) {
+				$text .= '
+                <input id="idReport" name="idReport" value="' . $id . '" type="hidden">
+                <div id="modalDiv"></div>
+                <div class="row">
+                    <div class="col-sm-8 col-md-12 col-lg-12 col-xl-12">
+                        <label id="arrowLabel" name="arrowLabel" class="em15 fGray negrito" style="cursor: pointer;">Filtro&nbsp<i id="arrow" name="arrow" class="fa fa-angle-down"></i></label>
+                    </div>
+                </div>
+                <div class="card sombreamento" style="display: block;" id="cardFiltros" name="cardFiltros">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Usuários</label>
+                                <select id="filterUsers0" name="filterUsers0" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+				$arrUsers = json_decode(json_encode($usuarios, JSON_UNESCAPED_UNICODE), true);
+
+				foreach ($arrUsers as $row) {
+					$text .= '<option value="' . $row['nome'] . '">' . $row['nome'] . '</option>';
+				}
+
+				$text .= '
+                                </select>
+                            </div>
+                        
+                        
+                            <div class="col-sm-8 col-md-3">
+                                <label style="font-size: 0.625em !important;">Cursos</label>
+                                <select id="filterCursos0" name="filterCursos0" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+				$arrCursos = json_decode(json_encode($allCourse, JSON_UNESCAPED_UNICODE), true);
+
+				foreach ($arrCursos as $row) {
+					$text .= '<option value="' . $row['curso'] . '">' . $row['curso'] . '</option>';
+				}
+
+				$text .= '
+                                </select>
+                            </div>    
+                            <div class="col-sm-8 col-md-3">
+                                <label style="font-size: 0.625em !important;">Cargo</label>
+                                <select id="filterCargo0" name="filterCargo0" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+				$cargo = $DB->get_records_sql('SELECT DISTINCT upper(trim(`cargo`)) as cargo FROM vw_relatorio_conclusao WHERE `progresso` = 100 ORDER BY cargo ASC');
+				$arrCargo = json_decode(json_encode($cargo, JSON_UNESCAPED_UNICODE), true);
+
+				foreach ($arrCargo as $row) {
+					$text .= '<option value="' . $row['cargo'] . '">' . $row['cargo'] . '</option>';
+				}
+
+				$text .= '
+                                </select>
+                            </div>    
+                            <div class="col-sm-8 col-md-3">
+                                <label style="font-size: 0.625em !important;">Exercicio</label>
+                                <select id="filterExercicio0" name="filterExercicio0" class="form-control">
+                                    <option value="">Selecione uma opção</option>';
+				$exercicio = $DB->get_records_sql('SELECT DISTINCT upper(trim(`exercicio`)) as exercicio FROM vw_relatorio_conclusao WHERE `progresso` = 100 ORDER BY exercicio ASC');
+				$arrExercicio = json_decode(json_encode($exercicio, JSON_UNESCAPED_UNICODE), true);
+
+				foreach ($arrExercicio as $row) {
+					$text .= '<option value="' . $row['exercicio'] . '">' . $row['exercicio'] . '</option>';
+				}
+
+				$text .= '
+                                </select>
+                            </div>
+                       </div>
+                            ';
+
+
+				$text .= '
+                            
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <label style="font-size: 0.625em !important;">Conclusao</label>
+                                <div class="input-group" id="conclusao_div0">
+                                    <input type="date" class="input-sm form-control" name="conclusaoStart0" id="conclusaoStart0" style="max-height: 27px;">
+                                    <span class="input-group-addon">até</span>
+                                    <input type="date" class="input-sm form-control" name="conclusaoEnd0" id="conclusaoEnd0" style="max-height: 27px;">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3 mt-4">
+                                <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnLimparFiltro0" name="btnLimparFiltro0" value="Limpar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
+                        <table cellspacing="0" style="font-size: 1em; width: 100%;" id="tab_sug2" name="tab_sug2" class="table table-hover table-bordered">
+                            <thead style="background: #185287; color: #fff;">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Categoria</th>
+                                    <th>Curso</th>
+                                    <th>Cargo</th>
+                                    <th>Exercício</th>
+                                    <th>Sigla</th>
+                                    <th>Conclusão</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                ';
+			}
         }
 
         $data->text = $text;

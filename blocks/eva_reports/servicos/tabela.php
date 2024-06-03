@@ -228,6 +228,44 @@ if($idReport == 1){
         echo json_encode($arr,JSON_UNESCAPED_UNICODE);
     }
 
+} else if($idReport == 0){
+
+	$relatorio2 = new tabela_reports();
+	$rs = $relatorio2->get_conclusao();
+	$arr = array();
+
+	if ($rs) {
+		$resultSet = json_decode(json_encode($rs, JSON_UNESCAPED_UNICODE), true);
+		$array['progress'] = '';
+		foreach ($resultSet as $row) {
+			$array = array();
+
+			$row['data'] = date('d/m/Y', strtotime($row['data_final']));
+			$row['progresso'] = $row['progresso'];
+
+			if(!empty($row['scategoria'])){
+				$row['categoria'] = $row['scategoria'].'/'.$row['pcategoria'];
+			} else{
+				$row['categoria'] = $row['pcategoria'];
+			}
+
+
+
+
+			foreach ($row as $k => $v) {
+				$array[$k] = $v;
+			}
+
+			$arr[] = $array;
+		}
+
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+	} else {
+		$arr = array(); // Inicializa o array vazio
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+	}
+
+
 } else if ($_REQUEST['categoria']) {
 	$categoria = $_REQUEST['categoria'];
 	$query = new tabela_reports();
