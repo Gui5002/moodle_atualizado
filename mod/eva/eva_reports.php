@@ -32,8 +32,8 @@ if($id == 1){
     $subtitle = " - Consolidado por curso";
 }else if($id == 5){
     $subtitle = " - Consolidado EVA";
-}else if($id == 6){
-    $subtitle = " - EVA";
+}else if($id == 0 && $id == true){
+    $subtitle = " - Conclusão";
 }
 
 $title = "Relatórios";

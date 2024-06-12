@@ -1227,6 +1227,250 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             }
             fetchData()
+        } else if(idReport == '0'){
+            let filterCargo0 = $("#filterCargo0").val();
+            let filterExercicio0 = $("#filterExercicio0").val();
+            let filterCursos0 = $("#filterCursos0").val();
+            let filterUsers0 = $("#filterUsers0").val();
+            let conclusao0 = $("#conclusao0").val();
+
+            $("#filterCargo0").select2({theme: "classic"});
+            $("#filterExercicio0").select2({theme: "classic"});
+            $("#filterCursos0").select2({theme: "classic"});
+            $("#filterUsers0").select2({theme: "classic"});
+
+            var myTable = $("#tab_sug2").DataTable({
+                "dom": 'Bfrtip',
+                "fixedHeader": false,
+                "responsive": true,
+                "deferRender": true,
+                "searching": true,
+                "ajax": {
+                    "url": "<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php",
+                    "dataSrc": "",
+                    "data": {
+                        "id": idReport
+                    }
+                },
+                "aaSorting": [
+                    [0, 'asc']
+                ],
+                "columnDefs": [
+                    {
+                        targets: [6, 7],
+                        className: 'dt-center'
+                    },
+                    {
+                        "targets": [6, 7],
+                        "className": 'col-md-1'
+                    },
+                    {
+                        targets: [7],
+                        orderable: false
+                    }
+                ],
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+                },
+                "oLanguage": {
+                    "sEmptyTable": "Carregando..."
+                },
+                "buttons": [
+                    { extend: 'excel', className: 'excelButton' },
+                    { extend: 'csv', className: 'csvButton' }
+                ],
+                "columns": [
+                    {
+                        "data": "nome_completo",
+                        "render": function (data, type, row) {
+                            return '<a href="/user/profile.php?id=' + (row.user_id ? row.user_id : '') + '">' + data + '</a>';
+                        }
+                    },
+                    { "data": "email" },
+                    { "data": "categoria" },
+                    {
+                        "data": "nome_curso",
+                        "render": function (data, type, row) {
+                            return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
+                        }
+                    },
+                    { "data": "cargo" },
+                    { "data": "exercicio" },
+                    { "data": "sigla" },
+                    { "data": "data" }
+                ],
+                "createdRow": function (row, data, index) {
+                    $(row).find('td').css('font-family', 'Raleway, sans-serif');
+                }
+            });
+
+
+
+            $("#filterCargo0").on('change',function(){
+                var filterCargo0 = this.value;
+                myTable.column(4).search(filterCargo0, true, false).draw();
+
+            });
+
+            $("#filterExercicio0").on('change',function(){
+                var filterExercicio0 = this.value;
+                myTable.column(5).search(filterExercicio0, true, false).draw();
+
+            });
+
+            $("#filterCursos0").on('change',function(){
+                var filterCursos0 = this.value;
+                myTable.column(3).search('^' + filterCursos0 + '$', true, false).draw();
+            });
+
+            $("#filterUsers0").on('change',function(){
+                var filterUsers0 = this.value;
+                myTable.column(0).search(filterUsers0, true, false).draw();
+            });
+
+
+            $("#conclusaoStart0").on('change', function () {
+                var conclusaoStart0 = $("#conclusaoStart0").val();
+                var conclusaoEnd0 = $("#conclusaoEnd0");
+
+                conclusaoEnd0.prop('disabled', true);
+
+                myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                myTable.rows().remove().draw();
+
+                $.ajax({
+                    url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {
+                        "id": idReport,
+                        "conclusaoStart0": conclusaoStart0,
+                        "conclusaoEnd0": conclusaoEnd0.val(),
+                    },
+                    success: function (response) {
+                        var obj = jQuery.parseJSON(response);
+
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
+                    },
+                    error: function () {
+                        myTable.rows().remove().draw();
+                        myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                        myTable.rows().remove().draw();
+                    },
+                    complete: function () {
+
+                        conclusaoEnd0.prop('disabled', false);
+                    }
+                });
+            });
+
+            $("#conclusaoEnd0").on('change', function () {
+                var conclusaoStart0 = $("#conclusaoStart0");
+                var conclusaoEnd0 = $("#conclusaoEnd0").val();
+
+                conclusaoStart0.prop('disabled', true);
+
+                myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                myTable.rows().remove().draw();
+
+                $.ajax({
+                    url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                    type: 'GET',
+                    dataType: 'text',
+                    data: {
+                        "id": idReport,
+                        "conclusaoStart0": conclusaoStart0.val(),
+                        "conclusaoEnd0": conclusaoEnd0,
+                    },
+                    success: function (response) {
+                        var obj = jQuery.parseJSON(response);
+
+                        if (obj.length === 0) {
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        } else {
+                            myTable.rows().remove().draw();
+                            myTable.rows.add(obj).draw();
+                        }
+                    },
+                    error: function () {
+                        myTable.rows().remove().draw();
+                        myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                        myTable.rows().remove().draw();
+                    },
+                    complete: function () {
+                        conclusaoStart0.prop('disabled', false);
+                    }
+                });
+            });
+
+
+            $("#btnLimparFiltro0").on('click',function(){
+                var conclusaoStart0 = $("#conclusaoStart0").val();
+                var conclusaoEnd0 = $("#conclusaoEnd0").val();
+                var hasData = false;
+
+
+
+                $('#select2-filterCargo0-container').text('Selecione uma opção');
+                $("#filterCargo0").val('');
+                $('#select2-filterExercicio0-container').text('Selecione uma opção');
+                $("#filterExercicio0").val('');
+                $('#select2-filterCursos0-container').text('Selecione uma opção');
+                $("#filterCursos0").val('');
+                $('#select2-filterUsers0-container').text('Selecione uma opção');
+                $("#filterUsers0").val('');
+                $("#conclusaoStart0").val('');
+                $("#conclusaoEnd0").val('');
+
+                myTable.column(0).search('').draw();
+                myTable.column(3).search('').draw();
+                myTable.column(4).search('').draw();
+                myTable.column(5).search('').draw();
+
+                if (conclusaoStart0 || conclusaoEnd0) {
+                    hasData = true;
+                }
+
+                if (hasData) {
+                    myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
+                    myTable.rows().remove().draw();
+                    $.ajax({
+                        url: '<?=$CFG->wwwroot?>/blocks/eva_reports/servicos/tabela.php',
+                        type: 'GET',
+                        dataType: 'text',
+                        data: {
+                            "id": idReport
+                        },
+
+                        success: function(response) {
+                            var obj = jQuery.parseJSON(response);
+
+                            if (obj.length === 0) {
+                                myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                                myTable.rows().remove().draw();
+                            } else {
+                                myTable.rows().remove().draw();
+                                myTable.rows.add(obj).draw();
+                            }
+
+
+                        },
+                        error: function () {
+                            myTable.rows().remove().draw();
+                            myTable.settings()[0].oLanguage.sEmptyTable = "Nenhum registro encontrado";
+                            myTable.rows().remove().draw();
+                        }
+                    });
+                }
+
+            });
         }
 
         $("#arrowLabel").on('click',function(){

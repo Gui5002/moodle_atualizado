@@ -247,5 +247,52 @@ class tabela_reports
 
 	}
 
+	public function get_conclusao()
+	{
+		global $DB;
+
+		$nowDate = new DateTime();
+		$nowDateFormatted = $nowDate->format('Y-m-d H:i:s');
+
+		$start = isset($_REQUEST['conclusaoStart0']) ? $_REQUEST['conclusaoStart0'] : "1969-12-31";
+		$end   = isset($_REQUEST['conclusaoEnd0'])   ? $_REQUEST['conclusaoEnd0']   : $nowDateFormatted;
+		if(empty($end)){
+			$end = $nowDateFormatted;
+		}
+		$filtro0 = 'WHERE (progresso = 100 OR (comp IS NOT NULL AND progresso > 0))';
+
+		$filtro0 .= " AND (DATE(data_final) > '$start') AND (DATE(data_final) < '$end')";
+
+		$sql = "SELECT *
+				FROM (
+					SELECT 
+						id,
+						user_id,
+						nome_completo,
+						email,
+						sigla,
+						exercicio,
+						cargo,
+						course_id,
+						nome_curso,
+						UPPER(pcategoria) as pcategoria,
+						UPPER(scategoria) as scategoria,
+						FROM_UNIXTIME(data_conclusao) as atv,
+						FROM_UNIXTIME(timecompleted) as comp,
+						CASE 
+							WHEN data_conclusao IS NULL THEN FROM_UNIXTIME(timecompleted)
+							WHEN timecompleted IS NULL THEN FROM_UNIXTIME(data_conclusao)
+							WHEN data_conclusao >= timecompleted THEN FROM_UNIXTIME(data_conclusao)
+							ELSE FROM_UNIXTIME(timecompleted)
+						END as data_final,
+						progresso
+					FROM vw_relatorio_conclusao
+					WHERE (data_conclusao IS NOT NULL OR timecompleted IS NOT NULL) 
+				) AS subquery $filtro0";
+
+		$rs = $DB->get_records_sql($sql);
+		return $rs;
+	}
+
 
 }
