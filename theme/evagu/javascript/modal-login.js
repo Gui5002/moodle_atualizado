@@ -9,3 +9,18 @@ $("#login_username, #username").change(function () {
         $(this).val(caracteres);
     }
 })
+
+function toggleDivs() {
+    const div1 = document.getElementById('login');
+    const div2 = document.getElementById('forgotSenha');
+    const div3 = document.getElementById('img-login');
+    const hidden = document.getElementsByClassName('forHidden');
+
+    div1.classList.toggle('hidden');
+    div2.classList.toggle('hidden');
+    div3.classList.toggle('hidden');
+
+    for (let i = 0; i < hidden.length; i++) {
+        hidden[i].classList.toggle('hidden');
+    }
+}

@@ -26,6 +26,12 @@ if (!isloggedin() or isguestuser()) {   // Show the block
     }
     $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/theme/evagu/style/tela-login.css'));
     $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/theme/evagu/javascript/modal-login.js'));
+    $_ccnlogin .= "\n".'<div class="center hidden" id="forgotSenha">
+						<div id="img-login">
+    					<img class="login-img" src="/theme/evagu/images/login/logo-login.png" alt="Login">
+    					<p>RECUPERAÇÃO DE SENHA</p>
+						</div><p style="font-weight: bolder; font-size: large; text-align: center">Usuário dententor de e-mail @AGU</p><p style="text-align: center">Entre em contato com o telefone<br><b>0800 003 6262</b><br>e solicite a recuperação de senha.</p>';
+    $_ccnlogin .= '<p style="font-weight: bolder; font-size: large; text-align: center">Usuário dententor de outros e-mails</p><p style="text-align: center"><a href="'.$CFG->wwwroot.'/mod/page/view.php?id=1">Clique aqui</a> e solicite sua senha.<br><br><br><a href="#" class="tdu btn-fpswd float-right" onclick="toggleDivs()">Voltar</a></div>';
     $_ccnlogin .= "\n".'<form class="loginform" id="login" method="post" action="'.get_login_url().'">';
     $_ccnlogin .= '<div class="form-group">';
     $_ccnlogin .= '<input type="text" name="username" placeholder="'.get_string('username', 'theme_evagu').'" id="login_username" ';
@@ -40,8 +46,14 @@ if (!isloggedin() or isguestuser()) {   // Show the block
                       <div class="form-group custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" name="rememberusername" id="rememberusername">
                         <label class="custom-control-label" for="rememberusername">'.get_string('rememberusername', 'admin').'</label>
-                        <a class="tdu btn-fpswd float-right" href="'.$forgot.'">'.get_string('forgotaccount').'</a>
-                      </div>';
+                        <!--<a class="tdu btn-fpswd float-right" href="'.$forgot.'">'.get_string('forgotaccount').'</a>-->
+                        <a href="#" class="tdu btn-fpswd float-right" onclick="toggleDivs()">'
+						  .get_string('forgotaccount').'
+						</a>
+                      </div>
+                      
+                      
+                      ';
     }
     $_ccnlogin .= '<button type="submit" class="btn btn-log btn-block btn-thm2">'.get_string('login').'</button>';
         $_ccnlogin .= '<input type="hidden" name="logintoken" value="'.s(\core\session\manager::get_login_token()).'" />';
