@@ -155,7 +155,7 @@ if($idReport == 1){
 
         foreach($resultSet as $row){
 
-            $row['criacao'] = date('d/m/Y', strtotime($row['criacao']));
+            $row['inicio'] = date('d/m/Y', strtotime($row['inicio']));
 
             if(!empty($row['tcategoria'])){
                 $row['categoria'] = $row['tcategoria'];
