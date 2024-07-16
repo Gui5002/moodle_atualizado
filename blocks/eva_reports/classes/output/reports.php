@@ -430,11 +430,11 @@ class reports implements renderable, templatable
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-3">
-                                <label style="font-size: 0.625em !important;">Data de criação</label>
-                                <div class="input-group" id="criacao_div4">
-                                    <input type="date" class="input-sm form-control" name="criacaoStart4" id="criacaoStart4" style="max-height: 27px;">
+                                <label style="font-size: 0.625em !important;">Data de inicio</label>
+                                <div class="input-group" id="inicio_div4">
+                                    <input type="date" class="input-sm form-control" name="inicioStart4" id="inicioStart4" style="max-height: 27px;">
                                     <span class="input-group-addon">até</span>
-                                    <input type="date" class="input-sm form-control" name="criacaoEnd4" id="criacaoEnd4" style="max-height: 27px;">
+                                    <input type="date" class="input-sm form-control" name="inicioEnd4" id="inicioEnd4" style="max-height: 27px;">
                                 </div>
                             </div>
                         </div>
@@ -457,7 +457,7 @@ class reports implements renderable, templatable
                             <thead>
                                 <tr>
                                     <th>Nome Curso</th>
-                                    <th>Data Criação</th>
+                                    <th>Data Inicio</th>
                                     <th>Categoria</th>
                                     <th>Subcategoria</th>
                                     <th>Carga Horária</th>
