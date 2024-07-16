@@ -899,7 +899,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                             return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
                         }
                     },
-                    { "data": "criacao" },
+                    { "data": "inicio" },
                     { "data": "categoria" },
                     { "data": "subcategoria" },
                     { "data": "carga" },
@@ -944,11 +944,11 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 myTable.column(9).search(filterStatus4, true, false).draw();
             });
 
-            $("#criacaoStart4").on('change', function () {
-                var criacaoStart4 = $("#criacaoStart4").val();
-                var criacaoEnd4 = $("#criacaoEnd4");
+            $("#inicioStart4").on('change', function () {
+                var inicioStart4 = $("#inicioStart4").val();
+                var inicioEnd4 = $("#inicioEnd4");
 
-                criacaoEnd4.prop('disabled', true);
+                inicioEnd4.prop('disabled', true);
 
                 myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
                 myTable.rows().remove().draw();
@@ -959,8 +959,8 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     dataType: 'text',
                     data: {
                         "id": idReport,
-                        "criacaoStart4": criacaoStart4,
-                        "criacaoEnd4": criacaoEnd4.val(),
+                        "inicioStart4": inicioStart4,
+                        "inicioEnd4": inicioEnd4.val(),
                     },
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
@@ -979,7 +979,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         myTable.rows().remove().draw();
                     },
                     complete: function () {
-                        criacaoEnd4.prop('disabled', false);
+                        inicioEnd4.prop('disabled', false);
                     }
                 });
             });
@@ -987,11 +987,11 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
 
 
-            $("#criacaoEnd4").on('change', function () {
-                var criacaoStart4 = $("#criacaoStart4");
-                var criacaoEnd4 = $("#criacaoEnd4").val();
+            $("#inicioEnd4").on('change', function () {
+                var inicioStart4 = $("#inicioStart4");
+                var inicioEnd4 = $("#inicioEnd4").val();
 
-                criacaoStart4.prop('disabled', true);
+                inicioStart4.prop('disabled', true);
 
                 myTable.settings()[0].oLanguage.sEmptyTable = "Carregando...";
                 myTable.rows().remove().draw();
@@ -1002,8 +1002,8 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                     dataType: 'text',
                     data: {
                         "id": idReport,
-                        "criacaoStart4": criacaoStart4.val(),
-                        "criacaoEnd4": criacaoEnd4,
+                        "inicioStart4": inicioStart4.val(),
+                        "inicioEnd4": inicioEnd4,
                     },
                     success: function (response) {
                         var obj = jQuery.parseJSON(response);
@@ -1022,15 +1022,15 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                         myTable.rows().remove().draw();
                     },
                     complete: function () {
-                        criacaoStart4.prop('disabled', false);
+                        inicioStart4.prop('disabled', false);
                     }
                 });
             });
 
 
             $("#btnLimparFiltro4").on('click',function(){
-                var criacaoStart4 = $("#criacaoStart4").val();
-                var criacaoEnd4 = $("#criacaoEnd4").val();
+                var inicioStart4 = $("#inicioStart4").val();
+                var inicioEnd4 = $("#inicioEnd4").val();
                 $(".filterSubCategory").empty();
                 $(".filterSubCategory").html("<option value=''>Categoria não selecionada...</option>");
                 var hasData = false;
@@ -1041,10 +1041,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 $('#select2-filterCategory4-container').text('Selecione uma opção');
                 $("#filterStatus4").val('');
                 $('#select2-filterStatus4-container').text('Selecione uma opção');
-                $("#criacaoStart4").val('');
-                $("#criacaoEnd4").val('');
+                $("#inicioStart4").val('');
+                $("#inicioEnd4").val('');
 
-                if (criacaoStart4 || criacaoEnd4) {
+                if (inicioStart4 || inicioEnd4) {
                     hasData = true;
                 }
 

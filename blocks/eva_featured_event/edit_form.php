@@ -16,7 +16,7 @@ class block_eva_featured_event_edit_form extends block_edit_form
         // Subtitle
         $mform->addElement('textarea', 'config_body', get_string('config_body', 'theme_evagu'));
         $mform->setDefault('config_body', 'Breve texto falando do evento teste para BLOCK, com informações claras para finalizar a visualização da pagina inicial do portal EVA com registro teste e texto modelo.');
-        $mform->setType('config_body', PARAM_RAW);
+        $mform->setType('config_body', PARAM_RAW);''
 
         // Date
         $mform->addElement('date_selector', 'config_date', get_string('config_date', 'theme_evagu'));

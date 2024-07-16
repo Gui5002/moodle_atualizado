@@ -170,15 +170,15 @@ class tabela_reports
         $nowDate = new DateTime();
         $nowDate = $nowDate->format('Y-m-d H:i:s');
 
-        $start = isset($_REQUEST['criacaoStart4']) ? $_REQUEST['criacaoStart4'] : "1969-12-31";
-        $end   = isset($_REQUEST['criacaoEnd4'])   ? $_REQUEST['criacaoEnd4']   : $nowDate;
+        $start = isset($_REQUEST['inicioStart4']) ? $_REQUEST['inicioStart4'] : "1969-12-31";
+        $end   = isset($_REQUEST['inicioEnd4'])   ? $_REQUEST['inicioEnd4']   : $nowDate;
         if(empty($end)){
             $end = $nowDate;
         }
         $filtro4 = 'WHERE 1 = 1';
 
         $filtro4 .= " 
-                AND `data_criacao` BETWEEN '$start' AND '$end'
+                AND `data_inicio` BETWEEN '$start' AND '$end'
             ";
         $sql = "SELECT 
                     `id`,
@@ -192,7 +192,7 @@ class tabela_reports
                     `concluintes`,
                     `naoconcluidos`,
                     `naoiniciados`,
-                    `data_criacao` as `criacao`
+                    `data_inicio` as `inicio`
                 FROM
                     vw_courses_and_categories
                 $filtro4";
