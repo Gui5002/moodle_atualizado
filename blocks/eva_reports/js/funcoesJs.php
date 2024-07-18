@@ -11,6 +11,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     var dadosCabecalho = '';
     const bodys = [];
 
+    function escapeRegex(value) {
+        return value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
     function gerarPDF() {
         var cardBodyElement = document.querySelector('#print');
         var tituloPDFElement = document.querySelector('#tituloPDF');
@@ -332,7 +336,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos").on('change',function(){
                 var filterCursos = this.value;
-                myTable.column(2).search('^' + filterCursos + '$', true, false).draw();
+                myTable.column(2).search('^' + escapeRegex(filterCursos) + '$', true, false).draw();
             });
 
             $("#filterStatus").on('change',function(){
@@ -410,7 +414,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                 },
                 "oLanguage": {
                     "sEmptyTable": "Carregando..."
-            },
+                },
                 "buttons": [
                     { extend: 'excel', className: 'excelButton' },
                     { extend: 'csv', className: 'csvButton' }
@@ -453,7 +457,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos2").on('change',function(){
                 var filterCursos2 = this.value;
-                myTable.column(5).search('^' + filterCursos2 + '$', true, false).draw();
+                myTable.column(5).search('^' + escapeRegex(filterCursos2) + '$', true, false).draw();
             });
 
             $("#filterUsers2").on('change',function(){
@@ -699,7 +703,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos3").on('change',function(){
                 var filterCursos3 = this.value;
-                myTable.column(5).search('^' + filterCursos3 + '$', true, false).draw();
+                myTable.column(5).search('^' + escapeRegex(filterCursos3) + '$', true, false).draw();
             });
             $("#filterStatus3").on('change',function(){
                 var filterStatus3 = this.value;
@@ -899,7 +903,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                             return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
                         }
                     },
-                    { "data": "inicio" },
+                    { "data": "criacao" },
                     { "data": "categoria" },
                     { "data": "subcategoria" },
                     { "data": "carga" },
@@ -936,7 +940,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos4").on('change',function(){
                 var filterCursos4 = this.value;
-                myTable.column(0).search('^' + filterCursos4 + '$', true, false).draw();
+                myTable.column(0).search('^' + escapeRegex(filterCursos4) + '$', true, false).draw();
             });
 
             $("#filterStatus4").on('change',function(){
@@ -1320,7 +1324,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             $("#filterCursos0").on('change',function(){
                 var filterCursos0 = this.value;
-                myTable.column(3).search('^' + filterCursos0 + '$', true, false).draw();
+                myTable.column(3).search('^' + escapeRegex(filterCursos0) + '$', true, false).draw();
             });
 
             $("#filterUsers0").on('change',function(){
