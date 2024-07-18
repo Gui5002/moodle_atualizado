@@ -903,7 +903,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
                             return '<a href="/course/view.php?id=' + (row.course_id ? row.course_id : '') + '">' + data + '</a>';
                         }
                     },
-                    { "data": "criacao" },
+                    { "data": "inicio" },
                     { "data": "categoria" },
                     { "data": "subcategoria" },
                     { "data": "carga" },
