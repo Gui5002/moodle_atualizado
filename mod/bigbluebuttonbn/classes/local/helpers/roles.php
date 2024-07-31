@@ -184,9 +184,9 @@ class roles {
      *
      * @param string|integer $id
      *
-     * @return stdClass $role
+     * @return stdClass|null $role
      */
-    protected static function get_role($id): stdClass {
+    protected static function get_role($id): ?stdClass {
         $roles = (array) role_get_names();
         if (is_numeric($id) && isset($roles[$id])) {
             return (object) $roles[$id];
@@ -196,6 +196,7 @@ class roles {
                 return $role;
             }
         }
+        return null;
     }
 
     /**
@@ -209,12 +210,12 @@ class roles {
         $data = [
             'all' => [
                 'name' => get_string('mod_form_field_participant_list_type_all', 'bigbluebuttonbn'),
-                'children' => []
+                'children' => [],
             ],
         ];
         $data['role'] = [
             'name' => get_string('mod_form_field_participant_list_type_role', 'bigbluebuttonbn'),
-            'children' => self::get_roles_select($context, true)
+            'children' => self::get_roles_select($context, true),
         ];
         $data['user'] = [
             'name' => get_string('mod_form_field_participant_list_type_user', 'bigbluebuttonbn'),
@@ -253,7 +254,7 @@ class roles {
      * Returns an array to populate a list of participants used in mod_form.php with default values.
      *
      * @param context $context
-     * @param int $ownerid
+     * @param int|null $ownerid
      *
      * @return array
      */
@@ -271,14 +272,14 @@ class roles {
                     $participantlist[] = [
                         'selectiontype' => 'user',
                         'selectionid' => (string) $ownerid,
-                        'role' => self::ROLE_MODERATOR];
+                        'role' => self::ROLE_MODERATOR, ];
                 }
                 continue;
             }
             $participantlist[] = [
                 'selectiontype' => 'role',
                 'selectionid' => $defaultrule,
-                'role' => self::ROLE_MODERATOR];
+                'role' => self::ROLE_MODERATOR, ];
         }
         return $participantlist;
     }
@@ -329,7 +330,7 @@ class roles {
      *
      * @param context $context
      * @param array $participantlist
-     * @param int $userid
+     * @param int|null $userid
      *
      * @return bool
      */
@@ -420,7 +421,7 @@ class roles {
             $meetinginfo->moderatorCount += 1;
         }
         $cache->set($meetingid, ['creation_time' => $result['creation_time'],
-            'meeting_info' => json_encode($meetinginfo)]);
+            'meeting_info' => json_encode($meetinginfo), ]);
     }
 
     /**
