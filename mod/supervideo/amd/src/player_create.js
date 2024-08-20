@@ -14,9 +14,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax, PlayerRender) {
-    return progress = {
+    var progress = {
 
-        youtube : function(view_id, return_currenttime, elementId, videoid, playersize, showcontrols, autoplay) {
+        ottflix : function(view_id, start_currenttime, elementId, videoid) {
+            window.addEventListener('message', function receiveMessage(event) {
+                console.trace(event.data);
+
+                if (event.data.origem == 'OTTFLIX-player' && event.data.name == "progress") {
+                    progress._internal_saveprogress(event.data.currentTime, event.data.duration);
+                }
+            });
+        },
+
+        youtube : function(view_id, start_currenttime, elementId, videoid, playersize, showcontrols, autoplay) {
 
             progress._internal_view_id = view_id;
 
@@ -27,8 +37,8 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 playsinline : 1,
             };
 
-            if (return_currenttime) {
-                playerVars.start = return_currenttime;
+            if (start_currenttime) {
+                playerVars.start = start_currenttime;
             }
 
             if (YT && YT.Player) {
@@ -74,7 +84,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 150);
         },
 
-        resource_audio : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
+        resource_audio : function(view_id, start_currenttime, elementId, fullurl, autoplay, showcontrols) {
 
             progress._internal_view_id = view_id;
 
@@ -100,14 +110,14 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 autoplay : autoplay ? true : false,
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
-                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
+                seekTime : parseInt(start_currenttime) ? parseInt(start_currenttime) : 0,
             };
             var player = new PlayerRender("#" + elementId + " audio", config);
             player.on("ready", function() {
-                if (return_currenttime) {
-                    player.currentTime = parseInt(return_currenttime);
+                if (start_currenttime) {
+                    player.currentTime = parseInt(start_currenttime);
                     setTimeout(function() {
-                        player.currentTime = parseInt(return_currenttime);
+                        player.currentTime = parseInt(start_currenttime);
                     }, 1000);
 
                     if (!autoplay) {
@@ -125,7 +135,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 200);
         },
 
-        resource_video : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
+        resource_video : function(view_id, start_currenttime, elementId, fullurl, autoplay, showcontrols) {
 
             progress._internal_view_id = view_id;
 
@@ -135,9 +145,8 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
 
             var embed =
                     "<video " + embedparameters + " crossorigin playsinline>" +
-                    "    <source src='" + fullurl + "' type='audio/mp4'>" +
+                    "    <source src='" + fullurl + "'>" +
                     "</video>";
-            console.log(embed);
             $("#" + elementId).html(embed);
 
             var config = {
@@ -153,15 +162,15 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
                 // autoplay : autoplay ? 1 : 0,
-                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
+                seekTime : parseInt(start_currenttime) ? parseInt(start_currenttime) : 0,
             };
             var player = new PlayerRender("#" + elementId + " video", config);
 
             player.on("ready", function() {
-                if (return_currenttime) {
-                    player.currentTime = parseInt(return_currenttime);
+                if (start_currenttime) {
+                    player.currentTime = parseInt(start_currenttime);
                     setTimeout(function() {
-                        player.currentTime = parseInt(return_currenttime);
+                        player.currentTime = parseInt(start_currenttime);
                     }, 1000);
 
                     if (!autoplay) {
@@ -185,15 +194,15 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 200);
         },
 
-        vimeo : function(view_id, return_currenttime, vimeoid, elementId) {
+        vimeo : function(view_id, start_currenttime, vimeoid, elementId) {
 
             progress._internal_view_id = view_id;
 
             var iframe = document.getElementById(elementId);
             var player = new Vimeo.Player(iframe);
 
-            if (return_currenttime) {
-                player.setCurrentTime(return_currenttime);
+            if (start_currenttime) {
+                player.setCurrentTime(start_currenttime);
             }
 
             document.addEventListener("setCurrentTime", function(event) {
@@ -350,7 +359,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
 
             if (currenttime) {
                 Ajax.call([{
-                    methodname : 'mod_supervideo_services_progress_save',
+                    methodname : 'mod_supervideo_progress_save',
                     args       : {
                         view_id     : progress._internal_view_id,
                         currenttime : parseInt(currenttime),
@@ -426,4 +435,5 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             return accumulator + a;
         }
     };
+    return progress;
 });

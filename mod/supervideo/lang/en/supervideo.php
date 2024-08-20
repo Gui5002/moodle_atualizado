@@ -17,20 +17,22 @@
 /**
  * lang file
  *
- * @package    mod_supervideo
- * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   mod_supervideo
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['modulenameplural'] = 'Super Videos';
 $string['modulename'] = 'Super Video';
 $string['pluginname'] = 'Super Video';
-$string['modulenameplural'] = 'Super Videos';
 
 $string['dnduploadlabel-mp3'] = 'Add Audio with Super Video';
 $string['dnduploadlabel-mp4'] = 'Add Video with Super Video';
 $string['dnduploadlabeltext'] = 'Add video with Super Video';
 
-$string['videourl'] = 'Youtube, Vimeo, Google Drive, external link with MP4/MP3 extension or an MP4/MP3 file';
+$string['videourl'] = 'Youtube, Vimeo, Google Drive, external link with MP4/MP3/M3U8/WebM extension or an MP4/MP3/WebM file';
+$string['videourl_error'] = 'Super Video URL';
+$string['videofile'] = 'Or select an MP3, MP4 or WebM file';
 $string['videourl_help'] = '<h4>Youtube</h4>
 <div>Add a Youtube URL that you used. want to add to the course:</div>
 <div><strong>Ex:</strong> https://www.youtube.com/watch?v=SNhUMChfolc</div>
@@ -44,8 +46,6 @@ $string['videourl_help'] = '<h4>Youtube</h4>
 <div>Add a URL of a video you have hosted on your own server:</div>
 <div><strong>Ex:</strong> https://host.com.br/file/video.mp4</div>
 <div><strong>Ex:</strong> https://host.com.br/file/video.mp3</div>';
-$string['videourl_error'] = 'Super Video URL';
-$string['videofile'] = 'Or select an MP3 or MP4 file';
 $string['videofile_help'] = 'You can upload an MP3 or MP4 file, host it on MoodleData and show it in the Super Video player';
 $string['pluginadministration'] = 'Super Videos';
 $string['modulename_help'] = 'This module adds a Super Video within Moodle.';
@@ -55,7 +55,10 @@ $string['showcontrols'] = 'Controls';
 $string['showcontrols_desc'] = 'Show player controls';
 $string['autoplay'] = 'Play automatically';
 $string['autoplay_desc'] = 'Automatically play the player load';
+$string['maxwidth'] = 'Maximum Width for Video Player';
+$string['maxwidth_desc'] = 'Maximum width, in pixels, that the video player can expand to. Values below 500 pixels will be considered.';
 $string['playersize'] = 'Video size';
+$string['record_kapture'] = 'Record your video with Kapture';
 
 $string['idnotfound'] = 'Unrecognized link like Youtube, Google Drive or Vimeo';
 $string['seu_mapa_view'] = 'Your View map:';
@@ -109,3 +112,51 @@ $string['privacy:metadata:supervideo_view:percent'] = '';
 $string['privacy:metadata:supervideo_view:mapa'] = '';
 $string['privacy:metadata:supervideo_view:timecreated'] = '';
 $string['privacy:metadata:supervideo_view:timemodified'] = '';
+
+$string['app_title'] = 'Super Video Kapture Module';
+$string['logo_title'] = 'Logo';
+$string['selecionar_slide'] = 'Select Slide';
+$string['layout_cam'] = 'Cam Layout';
+$string['layout_presentation'] = 'Presentation Layout';
+$string['layout_1'] = 'Layout 1';
+$string['layout_2'] = 'Layout 2';
+$string['layout_5'] = 'Layout 5';
+$string['layout_4'] = 'Layout 4';
+$string['layout_6'] = 'Layout 6';
+$string['layout_3'] = 'Layout 3';
+$string['finalizar_gravacao'] = 'Finish Recording';
+$string['esta_aba'] = 'This Tab';
+$string['tela_inteira'] = 'Fullscreen';
+$string['desligado'] = 'Off';
+$string['inverter_camera'] = 'Invert Camera';
+$string['camera_redonda'] = 'Round Camera';
+$string['tamanho_camera'] = 'Camera Size';
+$string['compartilhar_audio_sistema'] = 'Share System Audio';
+$string['contagem_regressiva'] = 'Countdown';
+$string['iniciar_gravacao'] = 'Start Recording';
+$string['iniciar_gravacao_fullscreen'] = 'Start Recording in FullScreen';
+$string['kapture_precisa_camera'] = 'Kapture needs access to your microphone and camera.';
+$string['aprovar_permissao'] = 'Select <b><i>Allow</i></b> when your browser asks for permissions.';
+$string['erro_camera_microfone.'] = 'An error occurred while requesting Camera and Microphone.';
+$string['entre_contato_suporte_erro'] = 'Contact support and provide the error ';
+$string['camera'] = 'Camera';
+$string['microfone'] = 'Microphone';
+$string['erro'] = 'Error:';
+$string['nao_suportado_celular'] = 'Not supported on Mobile';
+$string['finalizar'] = 'Finish';
+$string['salvar_gravacao_ottflix'] = 'Save your recording in Super Video Module';
+$string['title_captura'] = 'Capture ';
+$string['salvar_ottflix'] = 'Save in Super Video Module';
+$string['salvar_computador'] = 'Save to Computer';
+$string['selecione_apresentacao'] = 'Select Presentation';
+$string['buscar_arquivos'] = 'Search files';
+$string['enviar_novo'] = 'Send new';
+$string['ou'] = 'or';
+$string['carregando_documentos'] = 'Loading documents...';
+$string['processando'] = 'Processing...';
+$string['titulo_muito_curto'] = 'Title too short!';
+$string['upload_concluido'] = 'Upload completed. Waiting for processing!';
+$string['ottflix'] = 'Super Video Module';
+$string['falha_upload_ottflix'] = 'Failed to upload to Super Video Module';
+$string['abortado_upload_ottflix'] = 'Upload to Super Video Module aborted!';
+$string['error_accessing_camera'] = 'Error accessing camera or capturing screen';
