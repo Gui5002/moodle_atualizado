@@ -17,19 +17,19 @@
 /**
  * Backup files
  *
- * @package    mod_supervideo
+ * @package   mod_supervideo
  * @category   backup
- * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
- * @license    https://www.eduardokraus.com/
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   https://www.eduardokraus.com/
  */
 
 /**
  * Structure step to restore one supervideo activity
  *
- * @package    mod_supervideo
+ * @package   mod_supervideo
  * @category   backup
- * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
- * @license    https://www.eduardokraus.com/
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   https://www.eduardokraus.com/
  */
 class restore_supervideo_activity_structure_step extends restore_activity_structure_step {
 
@@ -40,7 +40,7 @@ class restore_supervideo_activity_structure_step extends restore_activity_struct
      */
     protected function define_structure() {
 
-        $paths = array();
+        $paths = [];
         $paths[] = new restore_path_element('supervideo', '/activity/supervideo');
 
         // Return the paths wrapped into standard activity structure.
