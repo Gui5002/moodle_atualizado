@@ -17,6 +17,8 @@
 namespace mod_supervideo\completion;
 
 /**
+ * Completion Util class
+ *
  * @package   mod_supervideo
  * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,12 +26,13 @@ namespace mod_supervideo\completion;
 class completion_util {
 
     /**
-     * @param \stdClass $course
-     * @param \stdClass $cm
-     * @param int $userid
+     * Function get_completion_state
+     *
+     * @param $course
+     * @param $cm
+     * @param $userid
      *
      * @return bool
-     *
      * @throws \dml_exception
      */
     public static function get_completion_state($course, $cm, $userid) {

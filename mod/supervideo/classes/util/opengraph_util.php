@@ -28,6 +28,7 @@ class opengraph_util {
     /**
      * Holds all the Open Graph values we've parsed from a page
      *
+     * @var array
      */
     private $values = [];
 

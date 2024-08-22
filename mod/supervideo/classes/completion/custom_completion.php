@@ -21,6 +21,8 @@ namespace mod_supervideo\completion;
 use core_completion\activity_custom_completion;
 
 /**
+ * Custom ompletion Class
+ *
  * @package   mod_supervideo
  * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,6 +30,8 @@ use core_completion\activity_custom_completion;
 class custom_completion extends activity_custom_completion {
 
     /**
+     * Function get_state
+     *
      * @param string $rule The completion rule.
      *
      * @return int The completion state.

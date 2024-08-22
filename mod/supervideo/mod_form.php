@@ -31,12 +31,12 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  *
  * @package   mod_supervideo
  * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   https://www.eduardokraus.com/
  */
 class mod_supervideo_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
+     *
      * @throws coding_exception
      * @throws dml_exception
      */
@@ -70,7 +70,7 @@ class mod_supervideo_mod_form extends moodleform_mod {
             'accepted_types' => ['.mp3', '.mp4', '.webm'],
             'maxbytes' => 0,
         ];
-        $mform->addElement('filepicker', 'videofile', get_string('videofile', 'mod_supervideo'), null, $filemanageroptions);
+        $mform->addElement('filemanager', 'videofile', get_string('videofile', 'mod_supervideo'), null, $filemanageroptions);
         $mform->addHelpButton('videofile', 'videofile', 'mod_supervideo');
 
         // Adding the standard "intro" and "introformat" fields.
@@ -164,9 +164,11 @@ class mod_supervideo_mod_form extends moodleform_mod {
 
         $draftitemid = file_get_submitted_draft_itemid('videofile');
 
-        $id = intval($defaultvalues['id']);
-        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_supervideo', 'content', $id);
-        $defaultvalues['videofile'] = $draftitemid;
+        if (isset($defaultvalues['id'])) {
+            $id = intval($defaultvalues['id']);
+            file_prepare_draft_area($draftitemid, $this->context->id, 'mod_supervideo', 'content', $id);
+            $defaultvalues['videofile'] = $draftitemid;
+        }
 
         $defaultvalues['completionpercentenabled'] = !empty($defaultvalues['completionpercent']) ? 1 : 0;
         if (empty($defaultvalues['completionpercent'])) {
