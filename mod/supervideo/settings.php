@@ -17,9 +17,9 @@
 /**
  * setting file
  *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_supervideo
+ * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -27,30 +27,22 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
     require_once("$CFG->libdir/resourcelib.php");
 
-    $title = get_string('showmapa', 'mod_supervideo');
-    $description = get_string('showmapa_desc', 'mod_supervideo');
     $settings->add(new admin_setting_configcheckbox('supervideo/showmapa',
-        $title, $description, 1));
+        get_string('showmapa', 'mod_supervideo'),
+        get_string('showmapa_desc', 'mod_supervideo'), 1));
 
-    $options = [
+    $options = array(
         0 => get_string('settings_opcional_desmarcado', 'mod_supervideo'),
         1 => get_string('settings_opcional_marcado', 'mod_supervideo'),
         2 => get_string('settings_obrigatorio_desmarcado', 'mod_supervideo'),
         3 => get_string('settings_obrigatorio_marcado', 'mod_supervideo'),
-    ];
+    );
 
-    $title = get_string('showcontrols', 'mod_supervideo');
-    $description = get_string('showcontrols_desc', 'mod_supervideo');
     $settings->add(new admin_setting_configselect('supervideo/showcontrols',
-        $title, $description, 1, $options));
+        get_string('showcontrols', 'mod_supervideo'),
+        get_string('showcontrols_desc', 'mod_supervideo'), 1, $options));
 
-    $title = get_string('autoplay', 'mod_supervideo');
-    $description = get_string('autoplay_desc', 'mod_supervideo');
     $settings->add(new admin_setting_configselect('supervideo/autoplay',
-        $title, $description, 0, $options));
-
-    $title = get_string('maxwidth', 'mod_supervideo');
-    $description = get_string('maxwidth_desc', 'mod_supervideo');
-    $settings->add(new admin_setting_configtext('supervideo/maxwidth',
-        $title, $description, 0, PARAM_INT));
+        get_string('autoplay', 'mod_supervideo'),
+        get_string('autoplay_desc', 'mod_supervideo'), 0, $options));
 }

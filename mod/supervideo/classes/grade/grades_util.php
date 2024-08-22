@@ -14,15 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace mod_supervideo\grade;
-
 /**
  * Grades implementation for mod_supervideo.
- *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+namespace mod_supervideo\grade;
+
 class grades_util {
 
     /**
@@ -75,11 +72,8 @@ class grades_util {
      * @return int
      */
     public static function grade_item_update($supervideo, $grades = null) {
-        global $CFG;
 
-        require_once("{$CFG->dirroot}/lib/gradelib.php");
-
-        if (!defined('GRADE_TYPE_VALUE')) {
+        if (!defined('MOODLE_INTERNAL')) {
             define('GRADE_TYPE_VALUE', 1);
         }
 

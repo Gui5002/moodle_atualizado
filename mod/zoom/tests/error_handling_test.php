@@ -29,7 +29,7 @@ use basic_testcase;
 /**
  * PHPunit testcase class.
  */
-final class error_handling_test extends basic_testcase {
+class error_handling_test extends basic_testcase {
     /**
      * Exception for when the meeting isn't found on Zoom.
      * @var not_found_exception

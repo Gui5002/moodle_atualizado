@@ -17,9 +17,9 @@
 /**
  * form file
  *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_supervideo
+ * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -30,15 +30,13 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
  * class mod_supervideo_mod_for
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2023 Eduardo kraus (http://eduardokraus.com)
  * @license   https://www.eduardokraus.com/
  */
 class mod_supervideo_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
-     * @throws coding_exception
-     * @throws dml_exception
      */
     public function definition() {
         global $DB, $CFG, $PAGE, $COURSE, $USER;
@@ -51,24 +49,24 @@ class mod_supervideo_mod_form extends moodleform_mod {
         }
 
         $mform = $this->_form;
-        $mform->updateAttributes(['enctype' => 'multipart/form-data']);
+        $mform->updateAttributes(array('enctype' => 'multipart/form-data'));
 
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
-        $mform->addElement('text', 'name', get_string('name'), ['size' => '48'], []);
+        $mform->addElement('text', 'name', get_string('name'), array('size' => '48'), array());
         $mform->setType('name', !empty($CFG->formatstringstriptags) ? PARAM_TEXT : PARAM_CLEANHTML);
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 
         $mform->addElement('text', 'videourl',
-            get_string('videourl', 'mod_supervideo'), ['size' => '60'], []);
+            get_string('videourl', 'mod_supervideo'), array('size' => '60'), []);
         $mform->setType('videourl', PARAM_TEXT);
         $mform->addRule('videourl', null, 'required', null, 'client');
         $mform->addHelpButton('videourl', 'videourl', 'mod_supervideo');
 
         $filemanageroptions = [
-            'accepted_types' => ['.mp3', '.mp4', '.webm'],
-            'maxbytes' => 0,
+            'accepted_types' => ['.mp3', '.mp4'],
+            'maxbytes' => 0
         ];
         $mform->addElement('filepicker', 'videofile', get_string('videofile', 'mod_supervideo'), null, $filemanageroptions);
         $mform->addHelpButton('videofile', 'videofile', 'mod_supervideo');
@@ -80,14 +78,14 @@ class mod_supervideo_mod_form extends moodleform_mod {
             $this->add_intro_editor();
         }
 
-        $sizeoptions = [
-            1 => 'Video HD (16x9)',
-            2 => 'Video ED (4x3)',
+        $sizeoptions = array(
+            1 => 'Vídeo HD (16x9)',
+            2 => 'Vídeo ED (4x3)',
 
             5 => 'PDF / DOC / XLS',
-            "4x3" => 'Video 4x3',
-            "16x9" => 'Video 16x9',
-        ];
+            "4x3" => 'Vídeo 4x3',
+            "16x9" => 'Vídeo 16x9',
+        );
         if ($supervideo && $supervideo->playersize != 0) {
             if (!isset($sizeoptions[$supervideo->playersize])) {
                 $sizeoptions[$supervideo->playersize] = $supervideo->playersize;
@@ -142,30 +140,20 @@ class mod_supervideo_mod_form extends moodleform_mod {
             $urlparse = \mod_supervideo\util\url::parse($supervideo->videourl);
             $engine = $urlparse->engine;
         }
-        $btn = false;
-        if (!($this->_cm && $this->_cm->instance)) {
-            $course = $this->optional_param('course', 0, PARAM_INT);
-            $section = $this->optional_param('section', false, PARAM_INT);
-            if ($course && $section !== false) {
-                $btn = "course={$course}&section={$section}&sesskey=" . sesskey();
-            }
-        }
-        $PAGE->requires->strings_for_js(['record_kapture'], 'supervideo');
-        $PAGE->requires->js_call_amd('mod_supervideo/mod_form', 'init', [$engine, $USER->lang, $btn]);
+        $PAGE->requires->js_call_amd('mod_supervideo/mod_form', 'init', [$engine, $USER->lang]);
     }
 
     /**
      * Set up the completion checkbox which is not part of standard data.
      *
      * @param array $defaultvalues
+     *
      */
     public function data_preprocessing(&$defaultvalues) {
         parent::data_preprocessing($defaultvalues);
 
         $draftitemid = file_get_submitted_draft_itemid('videofile');
-
-        $id = intval($defaultvalues['id']);
-        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_supervideo', 'content', $id);
+        file_prepare_draft_area($draftitemid, $this->context->id, 'mod_supervideo', 'content', $defaultvalues['id']);
         $defaultvalues['videofile'] = $draftitemid;
 
         $defaultvalues['completionpercentenabled'] = !empty($defaultvalues['completionpercent']) ? 1 : 0;
@@ -193,10 +181,7 @@ class mod_supervideo_mod_form extends moodleform_mod {
     }
 
     /**
-     * add_completion_rules_oold function
-     *
      * @return array
-     *
      * @throws coding_exception
      */
     public function add_completion_rules_oold() {
@@ -212,9 +197,7 @@ class mod_supervideo_mod_form extends moodleform_mod {
     /**
      * Display module-specific activity completion rules.
      * Part of the API defined by moodleform_mod
-     *
      * @return array Array of string IDs of added items, empty array if none
-     *
      * @throws coding_exception
      */
     public function add_completion_rules() {
@@ -223,7 +206,7 @@ class mod_supervideo_mod_form extends moodleform_mod {
             $mform->createElement('checkbox', 'completionpercentenabled', '',
                 get_string('completionpercent_label', 'mod_supervideo')),
             $mform->createElement('text', 'completionpercent',
-                get_string('completionpercent_label', 'mod_supervideo'), ['size' => '2']),
+                get_string('completionpercent_label', 'mod_supervideo'), array('size' => '2')),
             $mform->createElement('html', '%'),
         ];
 
@@ -236,8 +219,6 @@ class mod_supervideo_mod_form extends moodleform_mod {
     }
 
     /**
-     * completion_rule_enabled function
-     *
      * @param array $data
      *
      * @return bool
@@ -248,13 +229,10 @@ class mod_supervideo_mod_form extends moodleform_mod {
 
 
     /**
-     * validation function
-     *
      * @param $data
      * @param $files
      *
      * @return array
-     *
      * @throws coding_exception
      */
     public function validation($data, $files) {

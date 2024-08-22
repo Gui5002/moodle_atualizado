@@ -333,7 +333,6 @@ $ccnLcVbCollection = array(
   "eva_users",
   "eva_users_slider",
   "eva_users_slider_round",
-  "eva_video",
   "eva_publicidade",
 );
 $ccnControlBlockListUri = $CFG->wwwroot . '/theme/evagu/ccn/visualize/ccn_block/jpeg/large/';

@@ -14,15 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Supervideo View implementation for mod_supervideo.
+ */
+
 namespace mod_supervideo\analytics;
 
 use mod_supervideo\grade\grades_util;
 
 /**
- * Supervideo View implementation for mod_supervideo.
- *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2023 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class supervideo_view {
@@ -30,7 +32,6 @@ class supervideo_view {
      * @param $cmid
      *
      * @return object
-     *
      * @throws \dml_exception
      */
     public static function create($cmid) {
@@ -41,17 +42,17 @@ class supervideo_view {
 
         if ($supervideoview) {
             if ($supervideoview->currenttime > ($supervideoview->duration - 3)) {
-                return self::internal_create($cmid);
+                return self::_create($cmid);
             }
             if ($supervideoview->percent < 90) {
                 return $supervideoview;
             }
         }
 
-        return self::internal_create($cmid);
+        return self::_create($cmid);
     }
 
-    private static function internal_create($cmid) {
+    private static function _create($cmid) {
         global $USER, $DB;
 
         $supervideoview = (object)[
@@ -82,7 +83,6 @@ class supervideo_view {
      * @param int $mapa
      *
      * @return bool
-     *
      * @throws \coding_exception
      * @throws \dml_exception
      * @throws \moodle_exception

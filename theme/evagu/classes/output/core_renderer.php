@@ -803,7 +803,6 @@ public function user_menu($user = null, $withlinks = null) {
             "eva_users_slider_2",
             "eva_users_slider_2_dark",
             "eva_users_slider_round",
-            "eva_video",
             "eva_video_pesquisa",
         );
         // for blocks ControlledByOverrides in /templates
@@ -953,7 +952,6 @@ public function user_menu($user = null, $withlinks = null) {
             "eva_users_slider_2",
             "eva_users_slider_2_dark",
             "eva_users_slider_round",
-            "eva_video",
             "eva_video_pesquisa",
         );
         // ccnBreak

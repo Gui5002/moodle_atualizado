@@ -18,46 +18,23 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2024 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * local_contact class. Handles processing of information submitted from a web form.
- * @copyright  2016-2024 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
-    /**
-     * The name of the sender for the message.
-     *
-     * @var string
-     */
     public $fromname;
-
-    /**
-     * The email address of the sender for the message.
-     *
-     * @var string
-     */
     public $fromemail;
-
-    /**
-     * True if the information submitted is considered to have been sent from a spambot.
-     *
-     * @var bool
-     */
     public $isspambot;
-
-    /**
-     * Error message in case there are any issues.
-     *
-     * @var string
-     */
     public $errmsg;
 
-    /**
+/**
      * Class constructor. Receives and validates information received through a
      * web form submission.
      *
@@ -187,10 +164,10 @@ class local_contact {
 
         // Validate against email address whitelist and blacklist.
         $skipdomaintest = false;
-        // TODO: MDL-0 - Create a plugin setting for this list.
+        // TODO: Create a plugin setting for this list.
         $whitelist = ''; // Future code: $config->whitelistemails .
         $whitelist = ',' . $whitelist . ',';
-        // TODO: MDL-0 - Create a plugin blacklistemails setting.
+        // TODO: Create a plugin blacklistemails setting.
         $blacklist = ''; // Future code: $config->blacklistemails .
         $blacklist = ',' . $blacklist . ',';
         if (!$this->isspambot && stripos($whitelist, ',' . $this->fromemail . ',') != false) {
@@ -208,7 +185,7 @@ class local_contact {
 
         // Validate against domain whitelist and blacklist... except for the nice people.
         if (!$skipdomaintest && !$this->isspambot) {
-            // TODO: MDL-0 - Create a plugin whitelistdomains setting.
+            // TODO: Create a plugin whitelistdomains setting.
             $whitelist = ''; // Future code: $config->whitelistdomains .
             $whitelist = ',' . $whitelist . ',';
             $domain = substr(strrchr($this->fromemail, '@'), 1);
@@ -217,7 +194,7 @@ class local_contact {
                 // Ya, you check out. This email domain is gold here!
                 $blacklist = '';
             } else {
-                 // TODO: MDL-0 - Create a plugin blacklistdomains setting.
+                 // TODO: Create a plugin blacklistdomains setting.
                 $blacklist = 'example.com,example.net,sample.com,test.com,specified.com'; // Future code:$config->blacklistdomains .
                 $blacklist = ',' . $blacklist . ',';
                 if (
@@ -231,7 +208,7 @@ class local_contact {
             }
         }
 
-        // TODO: MDL-0 - Test IP address against blacklist.
+        // TODO: Test IP address against blacklist.
 
         // END: Spambot detection... Wait, got some photo ID on you? ;-) .
     }

@@ -1,10 +1,3 @@
-3.0.7 (2021101015)
-Bug: Fix content-type (CONTRIB-9539).
-
-3.0.6 (2021101014)
-Bug: Fix codechecker errors (CONTRIB-9416).
-Bug: Fix error on return of get_role (CONTRIB-9525).
-
 3.0.5 (2021101013)
 Bug: Fix import recording link (CONTRIB-9415).
 Bug: Fix BBB index page (CONTRIB-9081).

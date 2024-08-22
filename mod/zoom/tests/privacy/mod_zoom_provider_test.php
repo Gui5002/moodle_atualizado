@@ -35,7 +35,7 @@ use mod_zoom\privacy\provider;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @coversDefaultClass \mod_zoom\privacy\provider
  */
-final class mod_zoom_provider_test extends provider_testcase {
+class mod_zoom_provider_test extends provider_testcase {
     /** @var object The zoom instance object. */
     protected $zoominstance;
 

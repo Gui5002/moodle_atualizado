@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax, PlayerRender) {
-    var mod_form = {
+    return mod_form = {
         id_name               : null,
         id_videourl           : null,
         fitem_id_videourl     : null,
@@ -22,8 +22,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
         fitem_id_showcontrols : null,
         fitem_id_autoplay     : null,
 
-        init : function(engine, lang, courseSection) {
-            console.log([engine, lang, courseSection]);
+        init : function(engine, lang) {
 
             mod_form.id_name = $("#id_name");
             mod_form.id_videourl = $("#id_videourl");
@@ -40,21 +39,6 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             mod_form.upload_file(engine);
 
             mod_form.loadposter(lang);
-
-            console.log(courseSection);
-            if (courseSection) {
-                mod_form.id_videourl.after(`
-                    <div style="width:100%;">
-                        <a id="kapture-open" class='btn btn-primary' 
-                           href='${M.cfg.wwwroot}/mod/supervideo/vendor/kapture/?${courseSection}'>
-                            ${M.util.get_string('record_kapture', 'supervideo')}   
-                        </a>
-                    </div>`);
-                mod_form.id_name.focus(function() {
-                    var videotitle = mod_form.id_name.val();
-                    $("#kapture-open").attr("href", `${M.cfg.wwwroot}/mod/supervideo/vendor/kapture/?${courseSection}&videotitle=${videotitle}`)
-                })
-            }
         },
 
         upload_file : function(engine) {
@@ -79,7 +63,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             mod_form.id_videourl.prop("readonly", false);
 
             var promise = (Ajax.call([{
-                methodname : 'mod_supervideo_opengraph_getinfo',
+                methodname : 'mod_supervideo_services_opengraph_getinfo',
                 args       : {
                     url : url.replace("[link]:", "")
                 }
@@ -189,7 +173,7 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             return matches && matches[1];
         },
         testUrlExternalFile : function(url) {
-            var re = /^https?.*\.(mp3|mp4|m3u8|webm)/i;
+            var re = /^https?.*\.(mp3|mp4)/i;
             var matches = re.exec(url);
             return matches && matches[1];
         },
@@ -232,6 +216,8 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             var playerRender = new PlayerRender();
             playerRender.loadposter($, lang);
         }
+
     };
-    return mod_form;
 });
+
+

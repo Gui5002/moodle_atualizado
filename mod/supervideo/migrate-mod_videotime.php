@@ -17,17 +17,15 @@
 /**
  * Migrate vídeos from mod_videotime
  *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_supervideo
+ * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
-(new \core\task\file_trash_cleanup_task())->execute();
 
 require_login();
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
-session_write_close();
 
 $modulevideotime = $DB->get_record('modules', ['name' => 'videotime']);
 if (!$modulevideotime) {
@@ -53,11 +51,11 @@ foreach ($videotimes as $videotime) {
 
     $supervideo->id = $DB->insert_record("supervideo", $supervideo);
 
-    $coursemodules = $DB->get_record("course_modules", [
-        'module' => $modulevideotime->id,
-        'instance' => $videotime->id,
-        'deletioninprogress' => 0
-    ]);
+    $coursemodules = $DB->get_record("course_modules",
+        [
+            'module' => $modulevideotime->id,
+            'instance' => $videotime->id
+        ]);
 
     if ($coursemodules) {
         $coursemodules->module = $modulesupervideo->id;

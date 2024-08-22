@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Supervideo View implementation for mod_supervideo.
+ */
+
 namespace mod_supervideo\report;
 
 use html_writer;
@@ -21,10 +25,8 @@ use mod_supervideo\util\url;
 use moodle_url;
 
 /**
- * Supervideo View implementation for mod_supervideo.
- *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2023 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class supervideo_view extends \table_sql {
@@ -46,7 +48,6 @@ class supervideo_view extends \table_sql {
      * @param $supervideo
      *
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public function __construct($uniqueid, $cmid, $userid, $supervideo) {
         global $DB;
@@ -165,7 +166,6 @@ class supervideo_view extends \table_sql {
      *                      current language.
      *
      * @return string contents of cell in column 'fullname', for this row.
-     *
      * @throws \moodle_exception
      */
     public function col_fullname($linha) {
@@ -177,10 +177,10 @@ class supervideo_view extends \table_sql {
         }
 
         if ($COURSE->id == SITEID) {
-            $profileurl = new moodle_url('/user/profile.php', ['id' => $linha->user_id]);
+            $profileurl = new moodle_url('/user/profile.php', array('id' => $linha->user_id));
         } else {
             $profileurl = new moodle_url('/user/view.php',
-                ['id' => $linha->user_id, 'course' => $COURSE->id]);
+                array('id' => $linha->user_id, 'course' => $COURSE->id));
         }
         return html_writer::link($profileurl, $name);
     }
@@ -236,9 +236,7 @@ class supervideo_view extends \table_sql {
 
         $mapas = json_decode($linha->mapa);
         foreach ($mapas as $id => $mapa) {
-            if ($id == 0) {
-                continue;
-            }
+            if ($id == 0) continue;
             if ($mapa) {
                 $htmlmapa .= "<div id='mapa-visualizacao-" . $id . "' style='opacity:1'></div>";
             } else {
@@ -271,7 +269,6 @@ class supervideo_view extends \table_sql {
      * @param $linha
      *
      * @return string
-     *
      * @throws \coding_exception
      * @throws \moodle_exception
      */

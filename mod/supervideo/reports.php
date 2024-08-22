@@ -17,20 +17,20 @@
 /**
  * Report for supervideo.
  *
- * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_supervideo
+ * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');
 require_once($CFG->libdir . '/tablelib.php');
 
 $courseid = optional_param('course', 0, PARAM_INT);
-$course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
+$course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 
 require_course_login($course);
 
-$PAGE->set_url('/mod/supervideo/reports.php', ['course' => $courseid]);
+$PAGE->set_url('/mod/supervideo/reports.php', array('course' => $courseid));
 $PAGE->set_title("{$course->shortname}: " . get_string('reports'));
 $PAGE->set_heading($course->fullname . ": " . get_string('modulename', 'mod_supervideo'));
 echo $OUTPUT->header();
@@ -48,11 +48,10 @@ $sql = "SELECT cm.*, sv.name
 $supervideos = $DB->get_records_sql($sql, ["course" => $courseid]);
 $reportnode = ["children" => []];
 foreach ($supervideos as $supervideo) {
-    $videoname = format_string($supervideo->name);
     $reportnode["children"][] = [
         "display" => true,
         "action" => "{$CFG->wwwroot}/mod/supervideo/report.php?id={$supervideo->id}",
-        "text" => "{$videoname}",
+        "text" => "{$supervideo->name}",
     ];
 }
 

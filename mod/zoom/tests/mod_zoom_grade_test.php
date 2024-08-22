@@ -29,7 +29,7 @@ use advanced_testcase;
 /**
  * PHPunit testcase class.
  */
-final class mod_zoom_grade_test extends advanced_testcase {
+class mod_zoom_grade_test extends advanced_testcase {
     /**
      * @var \stdClass Course record.
      */

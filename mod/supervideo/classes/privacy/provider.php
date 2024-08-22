@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Privacy Subsystem implementation for mod_supervideo.
+ */
+
 namespace mod_supervideo\privacy;
 
 use context;
@@ -29,10 +33,10 @@ use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
 
 /**
- * Privacy Subsystem implementation for mod_supervideo.
+ * The mod_supervideo module does not store any data.
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2023 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
@@ -256,7 +260,6 @@ class provider implements
      * @param array $cmids The course module IDs.
      *
      * @return array
-     *
      * @throws \Exception
      */
     protected static function get_supervideo_ids_to_cmids_from_cmids(array $cmids) {
@@ -287,7 +290,6 @@ class provider implements
      *                                    and the dataset.
      *
      * @return void
-     *
      * @throws \Exception
      */
     protected static function recordset_loop_and_export(moodle_recordset $recordset, $splitkey, $initial,
