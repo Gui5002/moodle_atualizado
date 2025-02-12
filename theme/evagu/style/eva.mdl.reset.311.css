@@ -1,4 +1,5 @@
-.usermenu:focus-within, div.dropdown-item:focus-within,
+.usermenu:focus-within,
+div.dropdown-item:focus-within,
 .form-autocomplete-suggestions li[aria-selected="true"] {
   box-shadow: none;
 }

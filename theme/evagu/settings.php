@@ -36,8 +36,7 @@ if ($ADMIN->fulltree) {
     array(
       '1' => 'Blog style 1',
       '2' => 'Blog style 2',
-    )
-  );
+      ));
   $page->add($setting);
   // Back to Top
   $setting = new admin_setting_configselect(
@@ -1255,8 +1254,7 @@ if ($ADMIN->fulltree) {
     array(
       '0' => 'Style 1 (default)',
       '1' => 'Style 2',
-    )
-  );
+      ));
   $page->add($setting);
   // Breadcrumb background
   $name = 'theme_evagu/login_bg';

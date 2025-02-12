@@ -14,9 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 namespace theme_evagu\output;
-
 defined('MOODLE_INTERNAL') || die;
-
 use action_link;
 use action_menu;
 use action_menu_filler;
@@ -38,10 +36,8 @@ use renderer_base;
 use pix_icon;
 use stdClass;
 use ccnUserHandler;
-
-require_once($CFG->dirroot . "/course/format/lib.php");
-class core_renderer extends \core_renderer
-{
+require_once($CFG->dirroot."/course/format/lib.php");
+class core_renderer extends \core_renderer {
     /**
      * Return the image URL, if any.
      *
@@ -51,8 +47,7 @@ class core_renderer extends \core_renderer
      * @param int $maxheight The maximum height, or null when the maximum height does not matter.
      * @return moodle_url|false
      */
-    public function get_theme_image_headerlogo1($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_headerlogo1($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->headerlogo1)) {
             $url = $this->page->theme->setting_file_url('headerlogo1', 'headerlogo1');
@@ -63,8 +58,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_headerlogo1($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_headerlogo2($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_headerlogo2($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->headerlogo2)) {
             $url = $this->page->theme->setting_file_url('headerlogo2', 'headerlogo2');
@@ -75,8 +69,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_headerlogo2($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_headerlogo3($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_headerlogo3($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->headerlogo3)) {
             $url = $this->page->theme->setting_file_url('headerlogo3', 'headerlogo3');
@@ -87,8 +80,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_headerlogo3($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_headerlogo_mobile($maxwidth = null, $maxheight = 100)
-    {
+public function get_theme_image_headerlogo_mobile($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->headerlogo_mobile)) {
             $url = $this->page->theme->setting_file_url('headerlogo_mobile', 'headerlogo_mobile');
@@ -99,8 +91,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_headerlogo_mobile($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_footerlogo1($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_footerlogo1($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->footerlogo1)) {
             $url = $this->page->theme->setting_file_url('footerlogo1', 'footerlogo1');
@@ -111,8 +102,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_footerlogo1($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_heading_bg($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_heading_bg($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->heading_bg)) {
             $url = $this->page->theme->setting_file_url('heading_bg', 'heading_bg');
@@ -123,8 +113,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_heading_bg($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_login_bg($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_login_bg($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->login_bg)) {
             $url = $this->page->theme->setting_file_url('login_bg', 'login_bg');
@@ -135,8 +124,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_login_bg($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_favicon($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_favicon($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->favicon)) {
             $url = $this->page->theme->setting_file_url('favicon', 'favicon');
@@ -147,8 +135,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_favicon($maxwidth, $maxheight);
         }
     }
-    public function get_theme_image_preloader_image($maxwidth = null, $maxheight = 100)
-    {
+    public function get_theme_image_preloader_image($maxwidth = null, $maxheight = 100) {
         global $CFG;
         if (!empty($this->page->theme->settings->preloader_image)) {
             $url = $this->page->theme->setting_file_url('preloader_image', 'preloader_image');
@@ -159,8 +146,7 @@ class core_renderer extends \core_renderer
             return parent::get_theme_image_preloader_image($maxwidth, $maxheight);
         }
     }
-    public function ccn_render_lang_menu()
-    {
+public function ccn_render_lang_menu() {
         global $CFG;
         $langs = get_string_manager()->get_list_of_translations();
         $strlang = get_string('language');
@@ -177,19 +163,19 @@ class core_renderer extends \core_renderer
                 'name' => $langname,
                 'url' => new moodle_url($this->page->url, array('lang' => $langtype)),
                 'code' => $langtype,
-                'icon' => $CFG->wwwroot . '/theme/evagu/pix/lang/' . strtoupper(str_replace("_", "-", $langtype)) . '.svg',
+                'icon' => $CFG->wwwroot.'/theme/evagu/pix/lang/'.strtoupper(str_replace("_", "-", $langtype)).'.svg',
             ];
         }
         $current_icon = '';
-        foreach ($langArr as $k => $lang) {
-            if ($lang['name'] == $currentlang) $current_icon = $langArr[$k]['icon'];
+        foreach($langArr as $k=>$lang){
+            if($lang['name'] == $currentlang) $current_icon = $langArr[$k]['icon'];
         }
-        $context = [
-            'has_lang_menu' => $haslangmenu,
-            'current_lang' => $currentlang,
-            'current_icon' => $current_icon,
-            'strlang' => $strlang,
-            'langs' => $langArr,
+        $context =[
+            'has_lang_menu'=> $haslangmenu,
+            'current_lang'=> $currentlang,
+            'current_icon'=> $current_icon,
+            'strlang'=> $strlang,
+            'langs'=> $langArr,
         ];
         return $this->render_from_template('theme_evagu/ccn_lang_menu', $context);
     }
@@ -203,8 +189,7 @@ class core_renderer extends \core_renderer
      * @param custom_menu $menu
      * @return string
      */
-    protected function render_custom_menu(custom_menu $menu)
-    {
+    protected function render_custom_menu(custom_menu $menu) {
         global $CFG;
         $langs = get_string_manager()->get_list_of_translations();
         $haslangmenu = $this->lang_menu() != '';
@@ -225,9 +210,9 @@ class core_renderer extends \core_renderer
             }
         }
         $content = '';
-        foreach ($menu->get_children() as $item) {
-            $content .= $this->render_custom_menu_item($item);
-        }
+                foreach ($menu->get_children() as $item) {
+                        $content .= $this->render_custom_menu_item($item);
+                    }
         return $content;
     }
     /**
@@ -242,8 +227,7 @@ class core_renderer extends \core_renderer
      * @param custom_menu_item $menunode
      * @return string
      */
-    protected function render_custom_menu_item(custom_menu_item $menunode)
-    {
+    protected function render_custom_menu_item(custom_menu_item $menunode) {
         // Required to ensure we get unique trackable id's
         static $submenucount = 0;
         if ($menunode->has_children()) {
@@ -253,9 +237,9 @@ class core_renderer extends \core_renderer
             if ($menunode->get_url() !== null) {
                 $url = $menunode->get_url();
             } else {
-                $url = '#cm_submenu_' . $submenucount;
+                $url = '#cm_submenu_'.$submenucount;
             }
-            $content .= html_writer::link($url, strip_tags(format_text($menunode->get_text(), FORMAT_HTML)), array('class' => 'ccn-menu-item', 'title' => $menunode->get_title()));
+            $content .= html_writer::link($url, strip_tags(format_text($menunode->get_text(), FORMAT_HTML)), array('class'=>'ccn-menu-item', 'title'=>$menunode->get_title()));
             // $content .= html_writer::link($url, $menunode->get_text(), array('class'=>'ccn-menu-item', 'title'=>$menunode->get_title()));
             // $content .= html_writer::start_tag('div', array('id'=>'cm_submenu_'.$submenucount, 'class'=>'yui3-menu custom_menu_submenu'));
             // $content .= html_writer::start_tag('div', array('class'=>'yui3-menu-content'));
@@ -287,18 +271,18 @@ class core_renderer extends \core_renderer
                     $url = '#';
                 }
                 $content .=
-                    html_writer::link($url, strip_tags(format_text($menunode->get_text(), FORMAT_HTML)), array('class' => 'ccn-menu-item', 'title' => $menunode->get_title()));
+                    html_writer::link($url, strip_tags(format_text($menunode->get_text(), FORMAT_HTML)), array('class'=>'ccn-menu-item', 'title'=>$menunode->get_title()));
             }
             $content .= html_writer::end_tag('li');
         }
         // Return the sub menu
         $ccnUserHandler = new ccnUserHandler();
         $ccnCurrentUserIsGuestOrAnon = $ccnUserHandler->ccnCurrentUserIsGuestOrAnon();
-        if (
+        if(
             !empty($this->page->theme->settings->header_main_menu)
             && $this->page->theme->settings->header_main_menu == '1'
             && $ccnCurrentUserIsGuestOrAnon == TRUE
-        ) {
+        ){
             return NULL;
         }
         return $content;
@@ -310,8 +294,7 @@ class core_renderer extends \core_renderer
      *
      * @return string HTML fragment.
      */
-    public function standard_head_html()
-    {
+    public function standard_head_html() {
         global $CFG, $SESSION, $SITE, $PAGE;
         // Before we output any content, we need to ensure that certain
         // page components are set up.
@@ -335,8 +318,8 @@ class core_renderer extends \core_renderer
             $output .= $class::html_head_setup();
         }
         $output .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\n";
-        if (!empty($this->page->theme->settings->meta_keywords)) {
-            $output .= '<meta name="keywords" content="' . $this->page->theme->settings->meta_keywords . '" />' . "\n";
+        if(!empty($this->page->theme->settings->meta_keywords)){
+            $output .= '<meta name="keywords" content="'.$this->page->theme->settings->meta_keywords.'" />' . "\n";
         } else {
             $output .= '<meta name="keywords" content="moodle, ' . $this->page->title . '" />' . "\n";
         }
@@ -344,8 +327,8 @@ class core_renderer extends \core_renderer
         $output .= $this->metarefreshtag;
         // Check if a periodic refresh delay has been set and make sure we arn't
         // already meta refreshing
-        if ($this->metarefreshtag == '' && $this->page->periodicrefreshdelay !== null) {
-            $output .= '<meta http-equiv="refresh" content="' . $this->page->periodicrefreshdelay . ';url=' . $this->page->url->out() . '" />';
+        if ($this->metarefreshtag=='' && $this->page->periodicrefreshdelay!==null) {
+            $output .= '<meta http-equiv="refresh" content="'.$this->page->periodicrefreshdelay.';url='.$this->page->url->out().'" />';
         }
         // Set up help link popups for all links with the helptooltip class
         $this->page->requires->js_init_call('M.util.help_popups.setup');
@@ -355,7 +338,7 @@ class core_renderer extends \core_renderer
                 // This is a horrifically bad way to handle focus but it is passed in
                 // through messy formslib::moodleform
                 $this->page->requires->js_function_call('old_onload_focus', array($matches[1], $matches[2]));
-            } else if (strpos($focus, '.') !== false) {
+            } else if (strpos($focus, '.')!==false) {
                 // Old style of focus, bad way to do it
                 debugging('This code is using the old style focus event, Please update this code to focus on an element id or the moodleform focus method.', DEBUG_DEVELOPER);
                 $this->page->requires->js_function_call('old_onload_focus', explode('.', $focus, 2));
@@ -381,12 +364,8 @@ class core_renderer extends \core_renderer
         $output .= $this->page->requires->get_head_code($this->page, $this);
         // List alternate versions.
         foreach ($this->page->alternateversions as $type => $alt) {
-            $output .= html_writer::empty_tag('link', array(
-                'rel' => 'alternate',
-                'type' => $type,
-                'title' => $alt->title,
-                'href' => $alt->url
-            ));
+            $output .= html_writer::empty_tag('link', array('rel' => 'alternate',
+                'type' => $type, 'title' => $alt->title, 'href' => $alt->url));
         }
         // Add noindex tag if relevant page and setting applied.
         $allowindexing = isset($CFG->allowindexing) ? $CFG->allowindexing : 0;
@@ -398,18 +377,18 @@ class core_renderer extends \core_renderer
             $CFG->additionalhtmlhead .= '<meta name="robots" content="noindex" />';
         }
         if (!empty($CFG->additionalhtmlhead)) {
-            $output .= "\n" . $CFG->additionalhtmlhead;
+            $output .= "\n".$CFG->additionalhtmlhead;
         }
         if ($PAGE->pagelayout == 'frontpage') {
             $summary = s(strip_tags(format_text($SITE->summary, FORMAT_HTML)));
-            if (!empty($this->page->theme->settings->meta_description)) {
-                $output .= '<meta name="description" content="' . $this->page->theme->settings->meta_description . '" />' . "\n";
+            if(!empty($this->page->theme->settings->meta_description)){
+                $output .= '<meta name="description" content="'.$this->page->theme->settings->meta_description.'" />' . "\n";
             } elseif (!empty($summary)) {
                 $output .= "<meta name=\"description\" content=\"$summary\" />\n";
             }
         }
-        if (!empty($this->page->theme->settings->meta_abstract)) {
-            $output .= '<meta name="abstract" content="' . $this->page->theme->settings->meta_abstract . '" />' . "\n";
+        if(!empty($this->page->theme->settings->meta_abstract)){
+            $output .= '<meta name="abstract" content="'.$this->page->theme->settings->meta_abstract.'" />' . "\n";
         }
         return $output;
     }
@@ -420,8 +399,7 @@ class core_renderer extends \core_renderer
      *
      * @return string HTML fragment.
      */
-    public function standard_footer_html()
-    {
+    public function standard_footer_html() {
         global $CFG, $SCRIPT;
         $output = '';
         if (during_initial_install()) {
@@ -443,16 +421,13 @@ class core_renderer extends \core_renderer
         $output .= $this->unique_performance_info_token;
         if ($this->page->devicetypeinuse == 'legacy') {
             // The legacy theme is in use print the notification
-            $output .= html_writer::tag('div', get_string('legacythemeinuse'), array('class' => 'legacythemeinuse'));
+            $output .= html_writer::tag('div', get_string('legacythemeinuse'), array('class'=>'legacythemeinuse'));
         }
         // Get links to switch device types (only shown for users not on a default device)
         $output .= $this->theme_switch_links();
         if (!empty($CFG->debugpageinfo)) {
-            $output .= '<div class="performanceinfo pageinfo">' . get_string(
-                'pageinfodebugsummary',
-                'core_admin',
-                $this->page->debug_summary()
-            ) . '</div>';
+            $output .= '<div class="performanceinfo pageinfo">' . get_string('pageinfodebugsummary', 'core_admin',
+                $this->page->debug_summary()) . '</div>';
         }
         if (debugging(null, DEBUG_DEVELOPER) and has_capability('moodle/site:config', context_system::instance())) {  // Only in developer mode
             // Add link to profiling report if necessary
@@ -460,14 +435,11 @@ class core_renderer extends \core_renderer
                 $txt = get_string('profiledscript', 'admin');
                 $title = get_string('profiledscriptview', 'admin');
                 $url = $CFG->wwwroot . '/admin/tool/profiling/index.php?script=' . urlencode($SCRIPT);
-                $link = '<a title="' . $title . '" href="' . $url . '">' . $txt . '</a>';
+                $link= '<a title="' . $title . '" href="' . $url . '">' . $txt . '</a>';
                 $output .= '<div class="profilingfooter">' . $link . '</div>';
             }
-            $purgeurl = new moodle_url('/admin/purgecaches.php', array(
-                'confirm' => 1,
-                'sesskey' => sesskey(),
-                'returnurl' => $this->page->url->out_as_local_url(false)
-            ));
+            $purgeurl = new moodle_url('/admin/purgecaches.php', array('confirm' => 1,
+                'sesskey' => sesskey(), 'returnurl' => $this->page->url->out_as_local_url(false)));
             $output .= '<li class="list-inline-item"><div class="purgecaches">' .
                 html_writer::link($purgeurl, get_string('purgecaches', 'admin')) . '</div></li>';
         }
@@ -487,8 +459,7 @@ class core_renderer extends \core_renderer
      *
      * @return string HTML fragment.
      */
-    public function main_content()
-    {
+    public function main_content() {
         // This is here because it is the only place we can inject the "main" role over the entire main content area
         // without requiring all theme's to manually do it, and without creating yet another thing people need to
         // remember in the theme.
@@ -497,8 +468,7 @@ class core_renderer extends \core_renderer
         // DO NOT add an id.
         return $this->unique_main_content_token;
     }
-    public function user_menu($user = null, $withlinks = null)
-    {
+public function user_menu($user = null, $withlinks = null) {
         global $USER, $CFG;
         require_once($CFG->dirroot . '/user/lib.php');
         if (is_null($user)) {
@@ -540,7 +510,7 @@ class core_renderer extends \core_renderer
         if (isguestuser()) {
             $returnstr = get_string('loggedinasguest');
             if (!$loginpage && $withlinks) {
-                $returnstr .= " (<a href=\"$loginurl\">" . get_string('login') . '</a>)';
+                $returnstr .= " (<a href=\"$loginurl\">".get_string('login').'</a>)';
             }
             return html_writer::div(
                 html_writer::span(
@@ -619,31 +589,31 @@ class core_renderer extends \core_renderer
             $idx = 0;
             foreach ($opts->navitems as $key => $value) {
                 $ccnMenuItemIcon = '';
-                if (strpos($value->url, '/my')) {
+                if(strpos($value->url, '/my')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-puzzle-1"></i>';
                 }
-                if (strpos($value->url, '/profile.php')) {
+                if(strpos($value->url, '/profile.php')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-student"></i>';
                 }
-                if (strpos($value->url, '/grade')) {
+                if(strpos($value->url, '/grade')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-rating"></i>';
                 }
-                if (strpos($value->url, '/message')) {
+                if(strpos($value->url, '/message')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-speech-bubble"></i>';
                 }
-                if (strpos($value->url, '/preferences.php')) {
+                if(strpos($value->url, '/preferences.php')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-settings"></i>';
                 }
-                if (strpos($value->url, '/logout.php')) {
+                if(strpos($value->url, '/logout.php')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-logout"></i>';
                 }
-                if (strpos($value->url, '/switchrole.php')) {
+                if(strpos($value->url, '/switchrole.php')){
                     $ccnMenuItemIcon = '<i class="icon fa fa-fw flaticon-add-contact"></i>';
                 }
-                if (isset($value->imgsrc) && !empty($value->imgsrc)) {
-                    $ccnMenuItemIcon = '<img class="iconsmall" src="' . $value->imgsrc . '" alt=""/>';
+                if(isset($value->imgsrc) && !empty($value->imgsrc)){
+                    $ccnMenuItemIcon = '<img class="iconsmall" src="'.$value->imgsrc.'" alt=""/>';
                 }
-                $ccn_nav_items .= '<a class="dropdown-item" href="' . $value->url . '"> ' . $ccnMenuItemIcon . $value->title . '</a>';
+                $ccn_nav_items .= '<a class="dropdown-item" href="'. $value->url .'"> '. $ccnMenuItemIcon . $value->title .'</a>';
                 switch ($value->itemtype) {
                     case 'divider':
                         // If the nav item is a divider, add one and skip link processing.
@@ -692,10 +662,9 @@ class core_renderer extends \core_renderer
      * @param string $region the region the block is appearing in.
      * @return string the HTML to be output.
      */
-    public function block(block_contents $bc, $region)
-    {
+    public function block(block_contents $bc, $region) {
         global $PAGE;
-        $bc = clone ($bc); // Avoid messing up the object passed in.
+        $bc = clone($bc); // Avoid messing up the object passed in.
         if (empty($bc->blockinstanceid) || !strip_tags($bc->title)) {
             $bc->collapsible = block_contents::NOT_HIDEABLE;
         }
@@ -1001,15 +970,15 @@ class core_renderer extends \core_renderer
         $context->ariarole = !empty($bc->attributes['role']) ? $bc->attributes['role'] : 'complementary';
         $context->class = $bc->attributes['class'];
         $context->type = $bc->attributes['data-block'];
-        if (array_key_exists('ccn_style', $bc->attributes)) {
+        if(array_key_exists('ccn_style', $bc->attributes)){
             $context->ccn_style = $bc->attributes['ccn_style'];
         }
-        if (in_array($context->type, $ccn_lc_vbCollection)) {
-            $ccnActionUrl = $this->page->url->out(false, array('sesskey' => sesskey(), 'bui_editid' => $context->blockinstanceid, 'eva_live_customizer' => '1'));
+        if(in_array($context->type, $ccn_lc_vbCollection)) {
+            $ccnActionUrl = $this->page->url->out(false, array('sesskey'=> sesskey(), 'bui_editid'=> $context->blockinstanceid, 'eva_live_customizer'=> '1'));
             $context->ccn_lc_vb = $ccnActionUrl;
         }
         $ccnControlBlockAppearance = array_merge($ccnBlockInventory, $ccnPseudoBlockInventory);
-        if (in_array($context->type, $ccnControlBlockAppearance) && !in_array($context->type, $ccnBreakoutBlockInvetory)) {
+        if(in_array($context->type, $ccnControlBlockAppearance) && !in_array($context->type, $ccnBreakoutBlockInvetory)) {
             $context->ccn_block = true;
         } else {
             $context->ccn_block = false;
@@ -1023,11 +992,11 @@ class core_renderer extends \core_renderer
             $context->controls = $this->block_controls($bc->controls, $id);
         }
         $context->ccn_context_course = false;
-        if ($PAGE->pagelayout && ($PAGE->pagelayout == 'course' || $PAGE->pagelayout == 'incourse' || $PAGE->pagelayout == 'coursecategory')) {
+        if($PAGE->pagelayout && ($PAGE->pagelayout == 'course' || $PAGE->pagelayout == 'incourse' || $PAGE->pagelayout == 'coursecategory')) {
             $context->ccn_context_course = true;
-        } elseif ($PAGE->pagelayout && $PAGE->pagelayout == 'mydashboard' && $this->page->theme->settings->dashboard_layout == '1') {
+        } elseif($PAGE->pagelayout && $PAGE->pagelayout == 'mydashboard' && $this->page->theme->settings->dashboard_layout == '1') {
             return $this->render_from_template('theme_evagu/ccn_block_dashboard_front', $context);
-        } elseif ($PAGE->pagelayout && ($PAGE->pagelayout == 'mydashboard' || $PAGE->pagelayout == 'admin')) {
+        } elseif($PAGE->pagelayout && ($PAGE->pagelayout == 'mydashboard' || $PAGE->pagelayout == 'admin')) {
             return $this->render_from_template('theme_evagu/ccn_block_dashboard_dash', $context);
         }
         return $this->render_from_template('core/block', $context);
@@ -1041,22 +1010,20 @@ class core_renderer extends \core_renderer
      * @param string $id An optional ID
      * @return string the HTML to output.
      */
-    public function heading($text, $level = 2, $classes = null, $id = null)
-    {
-        $level = (int) $level;
+    public function heading($text, $level = 2, $classes = null, $id = null) {
+        $level = (integer) $level;
         if ($level < 1 or $level > 6) {
             throw new coding_exception('Heading level must be an integer between 1 and 6.');
         }
         return html_writer::tag('h' . $level, $text, array('id' => $id, 'class' => renderer_base::prepare_classes($classes) . ' ccnMdlHeading'));
     }
-    /**
+     /**
      * Renders the header bar.
      *
      * @param context_header $contextheader Header bar object.
      * @return string HTML for the header bar.
      */
-    protected function render_context_header(context_header $contextheader)
-    {
+    protected function render_context_header(context_header $contextheader) {
         // Generate the heading first and before everything else as we might have to do an early return.
         if (!isset($contextheader->heading)) {
             // $heading = $this->heading($this->page->heading, $contextheader->headinglevel);
@@ -1070,7 +1037,7 @@ class core_renderer extends \core_renderer
             // Return the heading wrapped in an sr-only element so it is only visible to screen-readers.
             return html_writer::div($heading, 'sr-only');
         }
-        if ($heading !== NULL || isset($contextheader->additionalbuttons) || isset($contextheader->imagedata)) {
+        if($heading !== NULL || isset($contextheader->additionalbuttons) || isset($contextheader->imagedata)){
             // All the html stuff goes here.
             $html = html_writer::start_div('page-context-header');
         }
@@ -1080,7 +1047,7 @@ class core_renderer extends \core_renderer
             $html .= html_writer::div($contextheader->imagedata, 'page-header-image');
         }
         // Headings.
-        if ($heading !== NULL) {
+        if($heading !== NULL){
             $html .= html_writer::tag('div', $heading, array('class' => 'page-header-headings'));
         }
         // Buttons.
@@ -1110,13 +1077,12 @@ class core_renderer extends \core_renderer
             }
             $html .= html_writer::end_div();
         }
-        if ($heading !== NULL || isset($contextheader->additionalbuttons) || isset($contextheader->imagedata)) {
+        if($heading !== NULL || isset($contextheader->additionalbuttons) || isset($contextheader->imagedata)){
             $html .= html_writer::end_div();
         }
         return $html;
-    }
-    public function context_header($headerinfo = null, $headinglevel = 1)
-    {
+}
+    public function context_header($headerinfo = null, $headinglevel = 1) {
         global $DB, $USER, $CFG, $SITE, $PAGE;
         require_once($CFG->dirroot . '/user/lib.php');
         $context = $this->page->context;
@@ -1173,14 +1139,11 @@ class core_renderer extends \core_renderer
                         $userbuttons['togglecontact'] = array(
                             'buttontype' => 'togglecontact',
                             'title' => get_string($contacttitle, 'message'),
-                            'url' => new moodle_url(
-                                '/message/index.php',
-                                array(
+                            'url' => new moodle_url('/message/index.php', array(
                                     'user1' => $USER->id,
                                     'user2' => $user->id,
                                     $contacturlaction => $user->id,
-                                    'sesskey' => sesskey()
-                                )
+                                    'sesskey' => sesskey())
                             ),
                             'image' => $contactimage,
                             'linkattributes' => \core_message\helper::togglecontact_link_params($user, $iscontact),
@@ -1213,7 +1176,7 @@ class core_renderer extends \core_renderer
             return $html;
         }
         $contextheader = new context_header($heading, $headinglevel, $imagedata, $userbuttons);
-        if ($PAGE->pagetype === 'user-profile') {
+        if($PAGE->pagetype === 'user-profile') {
             $contextheader = new context_header('', $headinglevel, null, $userbuttons);
         }
         return $this->render_context_header($contextheader);
@@ -1238,12 +1201,11 @@ class core_renderer extends \core_renderer
     //
     //     return $this->render_from_template('ccn_signup_form_layout', $context);
     // }
-    /**
+/**
      * We want to show the custom menus as a list of links in the footer on small screens.
      * Just return the menu object exported so we can render it differently.
      */
-    public function custom_menu_flat()
-    {
+    public function custom_menu_flat() {
         global $CFG;
         $custommenuitems = '';
         if (empty($custommenuitems) && !empty($CFG->custommenuitems)) {
@@ -1267,4 +1229,4 @@ class core_renderer extends \core_renderer
         }
         return $custommenu->export_for_template($this);
     }
-}
+    }

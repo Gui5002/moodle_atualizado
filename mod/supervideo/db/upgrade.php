@@ -88,28 +88,6 @@ function xmldb_supervideo_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023032506, 'mod', 'supervideo');
     }
 
-    if ($oldversion < 2023052000) {
-
-        // Add auth table.
-        $table = new xmldb_table('supervideo_auth');
-
-        // Add fields.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
-        $table->add_field('user_id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
-        $table->add_field('created_at', XMLDB_TYPE_INTEGER, '11', null, XMLDB_NOTNULL);
-        $table->add_field('secret', XMLDB_TYPE_CHAR, '64', null, XMLDB_NOTNULL);
-
-        // Add keys and index.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-
-        // Create table if it does not exist.
-        if (!$dbman->table_exists($table)) {
-            $dbman->create_table($table);
-        }
-
-        upgrade_plugin_savepoint(true, 2023052000, 'mod', 'supervideo');
-    }
-
     if ($oldversion < 2023071800) {
 
         $table = new xmldb_table('supervideo');
@@ -191,5 +169,105 @@ function xmldb_supervideo_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023081602, 'mod', 'supervideo');
     }
 
+    if ($oldversion < 2024083102) {
+
+        $table = new xmldb_table('supervideo');
+
+        $origem = new xmldb_field("origem", XMLDB_TYPE_CHAR, 10, null, false, false, "", "introformat");
+        if (!$dbman->field_exists($table, $origem)) {
+            $dbman->add_field($table, $origem);
+        }
+
+        $supervideos = $DB->get_records("supervideo");
+        foreach ($supervideos as $supervideo) {
+            $origem = xmldb_supervideo_upgrade_parse($supervideo->videourl);
+            if ($origem) {
+                $supervideo->origem = $origem;
+            }
+
+            if ($supervideo->origem == "link") {
+                $supervideo->videourl = str_replace("[link]:", "", $supervideo->videourl);
+            }
+
+            $DB->update_record("supervideo", $supervideo);
+        }
+
+        upgrade_plugin_savepoint(true, 2024083102, 'mod', 'supervideo');
+    }
+
+    if ($oldversion < 2024100800) {
+
+        $table = new xmldb_table('supervideo_auth');
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2024100800, 'mod', 'supervideo');
+    }
+
+    if ($oldversion < 2024101100) {
+
+        $sql = "
+            SELECT cm.id AS cm_id, c.id AS c_id, cm.instance AS cm_instance
+              FROM mdl_course_modules cm
+              JOIN mdl_modules        m ON m.id = cm.module
+              JOIN mdl_context        c ON c.instanceid = cm.id
+             WHERE m.name      LIKE 'supervideo'
+               AND c.contextlevel = :contextlevel";
+        $modules = $DB->get_records_sql($sql, ["contextlevel" => CONTEXT_MODULE]);
+
+        foreach ($modules as $module) {
+            $files = $DB->get_records("files", ["contextid" => $module->c_id]);
+            foreach ($files as $file) {
+                if ($file->itemid != $module->cm_instance) {
+                    $file->itemid = $module->cm_instance;
+                    $file->pathnamehash = get_file_storage()->get_pathname_hash(
+                        $file->contextid, $file->component, $file->filearea, $file->itemid,
+                        $file->filepath, $file->filename);
+                    $DB->update_record("files", $file);
+                }
+            }
+        }
+
+        upgrade_plugin_savepoint(true, 2024101100, 'mod', 'supervideo');
+    }
+
     return true;
+}
+
+/**
+ * Function xmldb_supervideo_upgrade_parse
+ *
+ * @param $videourl
+ *
+ * @return bool|string
+ */
+function xmldb_supervideo_upgrade_parse($videourl) {
+
+    if (strpos($videourl, "ottflix.com") > 1) {
+        return "ottflix";
+    }
+    if (strpos($videourl, "[link]:") === 0) {
+        return "link";
+    }
+    if (strpos($videourl, "[resource-file") === 0) {
+        return "upload";
+    }
+    if (strpos($videourl, "youtu")) {
+        if (preg_match('/youtu(\.be|be\.com)\/(watch\?v=|embed\/|live\/|shorts\/)?([a-z0-9_\-]{11})/i', $videourl, $output)) {
+            return "youtube";
+        }
+    }
+    if (strpos($videourl, "vimeo")) {
+        return "vimeo";
+    }
+    if (strpos($videourl, "docs.google.com") || strpos($videourl, "drive.google.com")) {
+        return "drive";
+    }
+
+    if (preg_match('/^https?.*\.(mp3|mp4|m3u8|webm)/i', $videourl, $output)) {
+        return "link";
+    }
+
+    return false;
 }

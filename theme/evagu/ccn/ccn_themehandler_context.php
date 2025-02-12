@@ -4,14 +4,14 @@
 */
 defined('MOODLE_INTERNAL') || die();
 $templatecontext = [
-  'lang_menu' =>  $langMenu,
+'lang_menu' =>  $langMenu,
   'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
   'output' => $OUTPUT,
   'ccnLogoUrl' => $ccnLogoUrl,
   'pageheading' => format_text($pageheading, FORMAT_HTML, array('filter' => true)),
   'sidepreblocks' => $blockshtml,
   'ccn_login' => $_ccnlogin,
-  // 'ccn_registration' => $_ccnregistration,
+    // 'ccn_registration' => $_ccnregistration,
   'ccn_activitynav' => $_ccnCourseSectionNav,
   'ccn_course_url' => $ccnCourseUrl,
   'ccn_dashboard_url' => $CFG->wwwroot . '/my',
@@ -38,7 +38,7 @@ $templatecontext = [
   'headerlogo1' => $headerlogo1,
   'headerlogo2' => $headerlogo2,
   'headerlogo3' => $headerlogo3,
-  'headerlogo_mobile' => $headerlogo_mobile,
+    'headerlogo_mobile' => $headerlogo_mobile,
   'footerlogo1' => $footerlogo1,
   'heading_bg' => $heading_bg,
   'favicon' => $favicon,
@@ -148,7 +148,7 @@ $templatecontext = [
   'logotype_footer' => $logotype_footer,
   'logo_image_footer' => $logo_image_footer,
   'logo_footer' => $logo_footer,
-  'user_profile_picture' => new moodle_url('/user/pix.php/' . $USER->id . '/f1.jpg'),
+  'user_profile_picture' => new moodle_url('/user/pix.php/'.$USER->id.'/f1.jpg'),
   'profile_icon_username' => $ccnProfileIconUsername,
   'user_username' => $USER->username,
   'user_firstname' => $USER->firstname,
@@ -244,7 +244,7 @@ $templatecontext = [
   'dashboard_nav_flat' => $dashboard_left_drawer == 3,
   'disable_dashboard_drawer' => $dashboard_left_drawer == 2 || ($dashboard_left_drawer == 1 && !$sidebar_left),
   'incourse' => $incourse == 1,
-  'in_course_activity' => $inCourseActivity,
+'in_course_activity'=>$inCourseActivity,
   'show_course_start' => $showCourseStartDate != 1,
   'show_course_category' => $showCourseCategory != 1,
   // 'user_profile_layout_dashboard' => $user_profile_layout_dashboard == 1,
@@ -262,7 +262,7 @@ $templatecontext = [
   'if_breadcrumb_trail' => get_config('theme_evagu', 'breadcrumb_trail') != 1,
   'evagu_focus_sidebar' => !empty(get_config('theme_evagu', 'evagu_focus_sidebar')) && get_config('theme_evagu', 'evagu_focus_sidebar') === '1' ? false : true,
   'lang_menu_icons' => !empty(get_config('theme_evagu', 'language_menu')) && get_config('theme_evagu', 'language_menu') === '1' ? false : true,
-];
+  ];
 $PAGE->requires->jquery();
 $ccnLcVbCollection = array(
   "eva_about_1",
@@ -343,7 +343,7 @@ $PAGE->requires->js_init_call('ccnControl', array($ccnControlBlockListUri, $ccnC
 $nav = $PAGE->flatnav;
 $templatecontext['flatnavigation'] = $nav;
 $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
-if ($PAGE->pagetype == "admin-setting-themesettingevagu") {
+if($PAGE->pagetype == "admin-setting-themesettingevagu") {
   $PAGE->requires->css('/theme/evagu/style/eva.editor.theme.css');
   $PAGE->requires->js('/theme/evagu/javascript/eva.editor.theme.js', true);
 }

@@ -5,12 +5,12 @@
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/authlib.php');
 include_once($CFG->dirroot . '/theme/evagu/ccn/page_handler/ccn_page_handler.php');
-if ($SESSION) {
-    $ccnPageHandler = new ccnPageHandler();
-    $ccnGetPageUrl = $ccnPageHandler->ccnGetPageUrl();
-    if (!strpos($ccnGetPageUrl->path, 'login')) {
-        $SESSION->wantsurl = (new moodle_url($this->page->url))->out(false);
-    }
+if($SESSION){
+  $ccnPageHandler = new ccnPageHandler();
+  $ccnGetPageUrl = $ccnPageHandler->ccnGetPageUrl();
+  if(!strpos($ccnGetPageUrl->path, 'login')){
+    $SESSION->wantsurl = (new moodle_url($this->page->url))->out(false);
+  }
 }
 if (signup_is_enabled()) {
     $signup = $CFG->wwwroot . '/login/signup.php';
@@ -26,37 +26,37 @@ if (!isloggedin() or isguestuser()) {   // Show the block
     }
     $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/theme/evagu/style/tela-login.css'));
     $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/theme/evagu/javascript/modal-login.js'));
-    $_ccnlogin .= "\n" . '<div class="center hidden" id="forgotSenha">
+    $_ccnlogin .= "\n".'<div class="center hidden" id="forgotSenha">
 						<div id="img-login">
     					<img class="login-img" src="/theme/evagu/images/login/logo-login.png" alt="Login">
     					<p>RECUPERAÇÃO DE SENHA</p>
 						</div><p style="font-weight: bolder; font-size: large; text-align: center">Usuário dententor de e-mail @AGU</p><p style="text-align: center">Entre em contato com o telefone<br><b>0800 003 6262</b><br>e solicite a recuperação de senha.</p>';
-    $_ccnlogin .= '<p style="font-weight: bolder; font-size: large; text-align: center">Usuário dententor de outros e-mails</p><p style="text-align: center"><a href="' . $CFG->wwwroot . '/mod/page/view.php?id=1">Clique aqui</a> e solicite sua senha.<br><br><br><a href="#" class="tdu btn-fpswd float-right" onclick="toggleDivs()">Voltar</a></div>';
-    $_ccnlogin .= "\n" . '<form class="loginform" id="login" method="post" action="' . get_login_url() . '">';
+    $_ccnlogin .= '<p style="font-weight: bolder; font-size: large; text-align: center">Usuário dententor de outros e-mails</p><p style="text-align: center"><a href="'.$CFG->wwwroot.'/mod/page/view.php?id=1">Clique aqui</a> e solicite sua senha.<br><br><br><a href="#" class="tdu btn-fpswd float-right" onclick="toggleDivs()">Voltar</a></div>';
+    $_ccnlogin .= "\n".'<form class="loginform" id="login" method="post" action="'.get_login_url().'">';
     $_ccnlogin .= '<div class="form-group">';
-    $_ccnlogin .= '<input type="text" name="username" placeholder="' . get_string('username', 'theme_evagu') . '" id="login_username" ';
-    $_ccnlogin .= ' class="form-control fc-campo" required value="' . s($username) . '" autocomplete="username"/></div>';
+    $_ccnlogin .= '<input type="text" name="username" placeholder="'.get_string('username', 'theme_evagu').'" id="login_username" ';
+    $_ccnlogin .= ' class="form-control fc-campo" required value="'.s($username).'" autocomplete="username"/></div>';
     $_ccnlogin .= '<div class="form-group">';
-    $_ccnlogin .= '<input type="password" name="password" id="login_password" placeholder="' . get_string('password', 'theme_evagu') . '" ';
+    $_ccnlogin .= '<input type="password" name="password" id="login_password" placeholder="'.get_string('password', 'theme_evagu').'" ';
     $_ccnlogin .= ' class="form-control fc-campo" required value="" autocomplete="current-password"/>';
     $_ccnlogin .= '</div>';
     if (isset($CFG->rememberusername) and $CFG->rememberusername == 2) {
         $checked = $username ? 'checked="checked"' : '';
-        $_ccnlogin .= '
+        $_ccnlogin .='
                       <div class="form-group custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" name="rememberusername" id="rememberusername">
-                        <label class="custom-control-label" for="rememberusername">' . get_string('rememberusername', 'admin') . '</label>
-                        <!--<a class="tdu btn-fpswd float-right" href="' . $forgot . '">' . get_string('forgotaccount') . '</a>-->
+                        <label class="custom-control-label" for="rememberusername">'.get_string('rememberusername', 'admin').'</label>
+                        <!--<a class="tdu btn-fpswd float-right" href="'.$forgot.'">'.get_string('forgotaccount').'</a>-->
                         <a href="#" class="tdu btn-fpswd float-right" onclick="toggleDivs()">'
-            . get_string('forgotaccount') . '
+						  .get_string('forgotaccount').'
 						</a>
                       </div>
                       
                       
                       ';
     }
-    $_ccnlogin .= '<button type="submit" class="btn btn-log btn-block btn-thm2">' . get_string('login') . '</button>';
-    $_ccnlogin .= '<input type="hidden" name="logintoken" value="' . s(\core\session\manager::get_login_token()) . '" />';
+    $_ccnlogin .= '<button type="submit" class="btn btn-log btn-block btn-thm2">'.get_string('login').'</button>';
+        $_ccnlogin .= '<input type="hidden" name="logintoken" value="'.s(\core\session\manager::get_login_token()).'" />';
     $_ccnlogin .= "</form>\n";
     $authsequence = get_enabled_auth_plugins(true); // Get all auths, in sequence.
     $potentialidps = array();

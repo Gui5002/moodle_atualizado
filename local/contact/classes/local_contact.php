@@ -91,8 +91,8 @@ class local_contact {
                 $this->fromemail = required_param('email', PARAM_TEXT);
             }
         }
-        $this->fromname = trim($this->fromname ?? '');
-        $this->fromemail = trim($this->fromemail ?? '');
+        $this->fromname = isset($this->fromname) ? trim($this->fromname) : '';
+        $this->fromemail = isset($this->fromemail) ? trim($this->fromemail) : '';
 
         $this->isspambot = false;
         $this->errmsg = '';
@@ -247,7 +247,7 @@ class local_contact {
      */
     private function makeemailuser($email, $name = '', $id = -99) {
         $emailuser = new stdClass();
-        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ?? '');
+        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ? filter_var($email, FILTER_SANITIZE_EMAIL) : '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailuser->email = '';
         }
@@ -310,7 +310,7 @@ class local_contact {
          * @return boolean true if string is not empty, otherwise false.
          */
         function filterempty($string) {
-            $string = trim($string ?? '');
+            $string = isset($string) ? trim($string) : '';
             return ($string !== null && $string !== false && $string !== '');
         }
 
@@ -422,8 +422,8 @@ class local_contact {
             current_language(),
             getremoteaddr(),
             $this->moodleuserstatus($from->email),
-            format_text($SITE->fullname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]) . ': ',
-            format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]),
+            format_text($SITE->fullname, FORMAT_HTML, ['context' => $systemcontext]) . ': ',
+            format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext]),
             $CFG->wwwroot,
             $httpuseragent,
             $httpreferer,
