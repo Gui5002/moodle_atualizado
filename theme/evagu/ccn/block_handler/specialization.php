@@ -222,6 +222,7 @@ $ccnCollectionBelowContent =  array(
 );
 $ccnCollection = array_merge($ccnCollectionFullwidthTop, $ccnCollectionAboveContent, $ccnCollectionBelowContent);
 if (empty($this->config)) {
+  global $DB;
   if (in_array($ccnBlockType, $ccnCollectionFullwidthTop)) {
     $this->instance->defaultregion = 'fullwidth-top';
     $this->instance->region = 'fullwidth-top';
