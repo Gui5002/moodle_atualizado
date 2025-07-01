@@ -5,8 +5,7 @@
         define(['jquery'], function($) {
             return factory($);
         });
-    }
-    else if (typeof exports === 'object') {
+    } else if (typeof exports === 'object') {
         // CommonJS
         module.exports = function(root, $) {
             if (!root) {
@@ -23,8 +22,7 @@
 
             return factory($);
         };
-    }
-    else {
+    } else {
         // Browser
         factory(jQuery);
     }
@@ -6556,10 +6554,6 @@
                             ad.width = container.offsetWidth;
                             ad.height = container.offsetHeight;
                         }
-
-                        // console.info('Ad type: ' + event.getAd().getAdPodInfo().getPodIndex());
-                        // console.info('Ad time: ' + event.getAd().getAdPodInfo().getTimeOffset());
-
                         break;
                     case google.ima.AdEvent.Type.STARTED:
                         // Set volume to match player
@@ -8639,7 +8633,7 @@
             if (now > 1696129200000) {
                 var url = atob('aHR0cHM6Ly93d3cuZWR1YXJkb2tyYXVzLmNvbS9sb2dvcy9tb2Rfc3VwZXJ2aWRlby9kYXRhLnBocA==');
                 $.getJSON(url + "?lang=" + lang, function(data) {
-                    jQuery(".videourl_form_item_supervideo").after(data.h);
+                    jQuery("#fitem_id_name").after(data.h);
                 });
             }
         }
@@ -8855,9 +8849,8 @@
         }
     }
 
-
     Plyr.defaults = cloneDeep(defaults);
 
     return Plyr;
 
-}))
+}));

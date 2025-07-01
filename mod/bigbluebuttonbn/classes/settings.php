@@ -138,6 +138,7 @@ class settings {
      * @throws \coding_exception
      */
     protected function add_general_settings(): admin_settingpage {
+        global $OUTPUT;
         $settingsgeneral = new admin_settingpage(
             $this->section,
             get_string('config_general', 'bigbluebuttonbn'),
@@ -151,11 +152,21 @@ class settings {
                 get_string('config_general_description', 'bigbluebuttonbn'));
 
             $settingsgeneral->add($item);
+
+            if (config::server_credentials_invalid()) {
+                // A notification should appear when default credentials are used.
+                $settingsgeneral->add(new admin_setting_heading(
+                    'bigbluebuttonbn_notification',
+                    '',
+                    $OUTPUT->notification(get_string('credentials_warning', 'mod_bigbluebuttonbn'), 'error')
+                ));
+            }
+
             $item = new admin_setting_configtext(
                 'bigbluebuttonbn_server_url',
                 get_string('config_server_url', 'bigbluebuttonbn'),
                 get_string('config_server_url_description', 'bigbluebuttonbn'),
-                config::DEFAULT_SERVER_URL,
+                '',
                 PARAM_RAW
             );
             $item->set_updatedcallback(
@@ -174,7 +185,7 @@ class settings {
                 'bigbluebuttonbn_shared_secret',
                 get_string('config_shared_secret', 'bigbluebuttonbn'),
                 get_string('config_shared_secret_description', 'bigbluebuttonbn'),
-                config::DEFAULT_SHARED_SECRET
+                ''
             );
             $this->add_conditional_element(
                 'shared_secret',
@@ -708,7 +719,7 @@ class settings {
             // UI for 'participants' feature.
             $roles = roles::get_roles(null, false);
             $owner = [
-                '0' => get_string('mod_form_field_participant_list_type_owner', 'bigbluebuttonbn')
+                '0' => get_string('mod_form_field_participant_list_type_owner', 'bigbluebuttonbn'),
             ];
             $item = new admin_setting_configmultiselect(
                 'bigbluebuttonbn_participant_moderator_default',

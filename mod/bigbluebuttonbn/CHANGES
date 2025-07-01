@@ -1,3 +1,18 @@
+3.0.9 (2021101017)
+Bug: Fix checks for meeting URL (CONTRIB-9602).
+Bug: Fix dismissed recordings filter field (CONTRIB-9601).
+Bug: Fix dismissed recordings (CONTRIB-9569).
+
+3.0.8 (2021101016)
+Bug: Backport registration (CONTRIB-9485).
+
+3.0.7 (2021101015)
+Bug: Fix content-type (CONTRIB-9539).
+
+3.0.6 (2021101014)
+Bug: Fix codechecker errors (CONTRIB-9416).
+Bug: Fix error on return of get_role (CONTRIB-9525).
+
 3.0.5 (2021101013)
 Bug: Fix import recording link (CONTRIB-9415).
 Bug: Fix BBB index page (CONTRIB-9081).

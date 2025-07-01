@@ -42,7 +42,7 @@ class config {
     const CHECKSUM_ALGORITHMS = [
         self::DEFAULT_CHECKSUM_ALGORITHM,
         'SHA256',
-        'SHA512'
+        'SHA512',
     ];
 
     /**
@@ -63,8 +63,8 @@ class config {
      */
     protected static function defaultvalues() {
         return [
-            'server_url' => self::DEFAULT_SERVER_URL,
-            'shared_secret' => self::DEFAULT_SHARED_SECRET,
+            'server_url' => '',
+            'shared_secret' => '',
             'voicebridge_editable' => false,
             'importrecordings_enabled' => false,
             'importrecordings_from_deleted_enabled' => false,
@@ -117,7 +117,7 @@ class config {
             'lockonjoin_default' => true,
             'lockonjoin_editable' => false,
             'welcome_default' => '',
-            'checksum_algorithm' => self::DEFAULT_CHECKSUM_ALGORITHM
+            'checksum_algorithm' => self::DEFAULT_CHECKSUM_ALGORITHM,
         ];
     }
 
@@ -168,6 +168,27 @@ class config {
      */
     public static function importrecordings_enabled() {
         return (boolean)self::get('importrecordings_enabled');
+    }
+
+    /**
+     * Check if bbb server credentials are invalid.
+     *
+     * @return bool
+     */
+    public static function server_credentials_invalid(): bool {
+        // Test server credentials across all versions of the plugin are flagged.
+        $parsedurl = parse_url(self::get('server_url'));
+        $defaultserverurl = parse_url(self::DEFAULT_SERVER_URL);
+        if (!isset($parsedurl['host'])) {
+            return false;
+        }
+        if (strpos($parsedurl['host'], $defaultserverurl['host']) === 0) {
+            return true;
+        }
+        if (strpos($parsedurl['host'], 'test-moodle.blindsidenetworks.com') === 0) {
+            return true;
+        }
+        return false;
     }
 
     /**

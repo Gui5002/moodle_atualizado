@@ -18,23 +18,46 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2024 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * local_contact class. Handles processing of information submitted from a web form.
- * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2024 TNG Consulting Inc. - www.tngconsulting.ca
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
+    /**
+     * The name of the sender for the message.
+     *
+     * @var string
+     */
     public $fromname;
+
+    /**
+     * The email address of the sender for the message.
+     *
+     * @var string
+     */
     public $fromemail;
+
+    /**
+     * True if the information submitted is considered to have been sent from a spambot.
+     *
+     * @var bool
+     */
     public $isspambot;
+
+    /**
+     * Error message in case there are any issues.
+     *
+     * @var string
+     */
     public $errmsg;
 
-/**
+    /**
      * Class constructor. Receives and validates information received through a
      * web form submission.
      *
@@ -68,8 +91,8 @@ class local_contact {
                 $this->fromemail = required_param('email', PARAM_TEXT);
             }
         }
-        $this->fromname = trim($this->fromname ?? '');
-        $this->fromemail = trim($this->fromemail ?? '');
+        $this->fromname = isset($this->fromname) ? trim($this->fromname) : '';
+        $this->fromemail = isset($this->fromemail) ? trim($this->fromemail) : '';
 
         $this->isspambot = false;
         $this->errmsg = '';
@@ -164,10 +187,10 @@ class local_contact {
 
         // Validate against email address whitelist and blacklist.
         $skipdomaintest = false;
-        // TODO: Create a plugin setting for this list.
+        // TODO: MDL-0 - Create a plugin setting for this list.
         $whitelist = ''; // Future code: $config->whitelistemails .
         $whitelist = ',' . $whitelist . ',';
-        // TODO: Create a plugin blacklistemails setting.
+        // TODO: MDL-0 - Create a plugin blacklistemails setting.
         $blacklist = ''; // Future code: $config->blacklistemails .
         $blacklist = ',' . $blacklist . ',';
         if (!$this->isspambot && stripos($whitelist, ',' . $this->fromemail . ',') != false) {
@@ -185,7 +208,7 @@ class local_contact {
 
         // Validate against domain whitelist and blacklist... except for the nice people.
         if (!$skipdomaintest && !$this->isspambot) {
-            // TODO: Create a plugin whitelistdomains setting.
+            // TODO: MDL-0 - Create a plugin whitelistdomains setting.
             $whitelist = ''; // Future code: $config->whitelistdomains .
             $whitelist = ',' . $whitelist . ',';
             $domain = substr(strrchr($this->fromemail, '@'), 1);
@@ -194,7 +217,7 @@ class local_contact {
                 // Ya, you check out. This email domain is gold here!
                 $blacklist = '';
             } else {
-                 // TODO: Create a plugin blacklistdomains setting.
+                 // TODO: MDL-0 - Create a plugin blacklistdomains setting.
                 $blacklist = 'example.com,example.net,sample.com,test.com,specified.com'; // Future code:$config->blacklistdomains .
                 $blacklist = ',' . $blacklist . ',';
                 if (
@@ -208,7 +231,7 @@ class local_contact {
             }
         }
 
-        // TODO: Test IP address against blacklist.
+        // TODO: MDL-0 - Test IP address against blacklist.
 
         // END: Spambot detection... Wait, got some photo ID on you? ;-) .
     }
@@ -224,7 +247,7 @@ class local_contact {
      */
     private function makeemailuser($email, $name = '', $id = -99) {
         $emailuser = new stdClass();
-        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ?? '');
+        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ? filter_var($email, FILTER_SANITIZE_EMAIL) : '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailuser->email = '';
         }
@@ -287,7 +310,7 @@ class local_contact {
          * @return boolean true if string is not empty, otherwise false.
          */
         function filterempty($string) {
-            $string = trim($string ?? '');
+            $string = isset($string) ? trim($string) : '';
             return ($string !== null && $string !== false && $string !== '');
         }
 
@@ -399,8 +422,8 @@ class local_contact {
             current_language(),
             getremoteaddr(),
             $this->moodleuserstatus($from->email),
-            format_text($SITE->fullname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]) . ': ',
-            format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]),
+            format_text($SITE->fullname, FORMAT_HTML, ['context' => $systemcontext]) . ': ',
+            format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext]),
             $CFG->wwwroot,
             $httpuseragent,
             $httpreferer,

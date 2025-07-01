@@ -21,6 +21,7 @@
  * @copyright  2015 UC Regents
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require(__DIR__ . '/../../config.php');
 require_once(__DIR__ . '/lib.php');
 require_once(__DIR__ . '/locallib.php');
@@ -147,12 +148,7 @@ foreach ($participants as $p) {
     $row[] = userdate($p->leave_time, get_string('strftimedatetimeshort', 'langconfig'));
 
     // Duration.
-    $durationremainder = $p->duration % 60;
-    if ($durationremainder != 0) {
-        $p->duration += 60 - $durationremainder;
-    }
-
-    $row[] = $p->duration / 60;
+    $row[] = format_time($p->duration);
 
     $table->data[] = $row;
 }
@@ -166,7 +162,11 @@ if ($export != 'xls') {
         'export' => 'xls',
     ]);
     $xlsstring = get_string('application/vnd.ms-excel', 'mimetypes');
-    $xlsicon = html_writer::img($OUTPUT->image_url('f/spreadsheet'), $xlsstring, ['title' => $xlsstring]);
+    $xlsicon = html_writer::img(
+        $OUTPUT->image_url('f/spreadsheet'),
+        $xlsstring,
+        ['title' => $xlsstring, 'class' => 'mimetypeicon']
+    );
     echo get_string('export', 'mod_zoom') . ': ' . html_writer::link($exporturl, $xlsicon);
 
     echo $OUTPUT->footer();

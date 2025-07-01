@@ -14,9 +14,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax, PlayerRender) {
-    return progress = {
+    var progress = {
 
-        youtube : function(view_id, return_currenttime, elementId, videoid, playersize, showcontrols, autoplay) {
+        ottflix : function(view_id, start_currenttime, elementId, videoid) {
+            window.addEventListener('message', function receiveMessage(event) {
+                if (event.data.origem == 'OTTFLIX-player' && event.data.name == "progress") {
+                    progress._internal_saveprogress(event.data.currentTime, event.data.duration);
+                }
+            });
+        },
+
+        youtube : function(view_id, start_currenttime, elementId, videoid, playersize, showcontrols, autoplay) {
 
             progress._internal_view_id = view_id;
 
@@ -27,8 +35,8 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 playsinline : 1,
             };
 
-            if (return_currenttime) {
-                playerVars.start = return_currenttime;
+            if (start_currenttime) {
+                playerVars.start = start_currenttime;
             }
 
             if (YT && YT.Player) {
@@ -74,19 +82,25 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 150);
         },
 
-        resource_audio : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
+        resource_audio : function(view_id, start_currenttime, elementId, fullurl, autoplay, showcontrols) {
+
+            $("body").removeClass("distraction-free-mode");
 
             progress._internal_view_id = view_id;
 
             var embedparameters = "";
-            if (showcontrols) embedparameters += "controls ";
-            if (autoplay) embedparameters += "autoplay ";
+            if (showcontrols) {
+                embedparameters += "controls ";
+            }
+            if (autoplay) {
+                embedparameters += "autoplay ";
+            }
 
-            var embed =
-                    "<audio " + embedparameters + " crossorigin playsinline >" +
-                    "    <source src='" + fullurl + "' type='audio/mp3'>" +
-                    "</audio>";
-            $("#" + elementId).html(embed);
+            var embed = `<audio ${embedparameters} crossorigin playsinline id="${elementId}_audio"></audio>`;
+            $(`#${elementId}`).html(embed);
+            progress._error_load(`${elementId}_audio`);
+            //$(`#${elementId}_audio`).html(`<source src="${fullurl}">`);
+            $(`#${elementId}_audio`).attr("src", fullurl);
 
             var config = {
                 controls :
@@ -100,14 +114,14 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 autoplay : autoplay ? true : false,
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
-                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
+                seekTime : parseInt(start_currenttime) ? parseInt(start_currenttime) : 0,
             };
             var player = new PlayerRender("#" + elementId + " audio", config);
             player.on("ready", function() {
-                if (return_currenttime) {
-                    player.currentTime = parseInt(return_currenttime);
+                if (start_currenttime) {
+                    player.currentTime = parseInt(start_currenttime);
                     setTimeout(function() {
-                        player.currentTime = parseInt(return_currenttime);
+                        player.currentTime = parseInt(start_currenttime);
                     }, 1000);
 
                     if (!autoplay) {
@@ -125,20 +139,23 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 200);
         },
 
-        resource_video : function(view_id, return_currenttime, elementId, fullurl, autoplay, showcontrols) {
+        resource_video : function(view_id, start_currenttime, elementId, fullurl, autoplay, showcontrols) {
 
             progress._internal_view_id = view_id;
 
             var embedparameters = "";
-            if (showcontrols) embedparameters += "controls ";
-            if (autoplay) embedparameters += "autoplay ";
+            if (showcontrols) {
+                embedparameters += "controls ";
+            }
+            if (autoplay) {
+                embedparameters += "autoplay ";
+            }
 
-            var embed =
-                    "<video " + embedparameters + " crossorigin playsinline>" +
-                    "    <source src='" + fullurl + "' type='audio/mp4'>" +
-                    "</video>";
-            console.log(embed);
-            $("#" + elementId).html(embed);
+            var embed = `<video ${embedparameters} crossorigin playsinline id="${elementId}_video"></video>`;
+            $(`#${elementId}`).html(embed);
+            progress._error_load(`${elementId}_video`);
+            // $(`#${elementId}_video`).html(`<source src="${fullurl}">`);
+            $(`#${elementId}_video`).attr("src", fullurl);
 
             var config = {
                 controls :
@@ -153,15 +170,15 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 storage  : {enabled : true, key : "id-" + view_id},
                 speed    : {selected : 1, options : [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 4]},
                 // autoplay : autoplay ? 1 : 0,
-                seekTime : parseInt(return_currenttime) ? parseInt(return_currenttime) : 0,
+                seekTime : parseInt(start_currenttime) ? parseInt(start_currenttime) : 0,
             };
             var player = new PlayerRender("#" + elementId + " video", config);
 
             player.on("ready", function() {
-                if (return_currenttime) {
-                    player.currentTime = parseInt(return_currenttime);
+                if (start_currenttime) {
+                    player.currentTime = parseInt(start_currenttime);
                     setTimeout(function() {
-                        player.currentTime = parseInt(return_currenttime);
+                        player.currentTime = parseInt(start_currenttime);
                     }, 1000);
 
                     if (!autoplay) {
@@ -185,15 +202,15 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             }, 200);
         },
 
-        vimeo : function(view_id, return_currenttime, vimeoid, elementId) {
+        vimeo : function(view_id, start_currenttime, vimeoid, elementId) {
 
             progress._internal_view_id = view_id;
 
             var iframe = document.getElementById(elementId);
             var player = new Vimeo.Player(iframe);
 
-            if (return_currenttime) {
-                player.setCurrentTime(return_currenttime);
+            if (start_currenttime) {
+                player.setCurrentTime(start_currenttime);
             }
 
             document.addEventListener("setCurrentTime", function(event) {
@@ -230,7 +247,9 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             progress._internal_saveprogress(1, 1);
 
             if (playersize == 5) {
-                progress._internal_resize(480, 640);
+                $("body").removeClass("distraction-free-mode");
+
+                progress._internal_resize(10, 640);
             } else if (playersize == 6) {
                 progress._internal_resize(4, 3);
                 progress._internal_max_height();
@@ -246,7 +265,40 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             $("#mapa-visualizacao").hide();
         },
 
+        _error_load : function(elementId) {
+            function errorF(e) {
+                $(`#${elementId}, #mapa-visualizacao`).hide();
+                //$("body").removeClass("distraction-free-mode");
+
+                switch (e.target.error.code) {
+                    case e.target.error.MEDIA_ERR_ABORTED:
+                        $(`#error_media_err_aborted`).show();
+                        break;
+                    case e.target.error.MEDIA_ERR_NETWORK:
+                        $(`#error_media_err_network`).show();
+                        break;
+                    case e.target.error.MEDIA_ERR_DECODE:
+                        $(`#error_media_err_decode`).show();
+                        break;
+                    case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                        $(`#error_media_err_src_not_supported`).show();
+                        break;
+                    default:
+                        $(`#error_default`).show();
+                        break;
+                }
+            }
+
+            var videoElem = document.getElementById(elementId);
+            videoElem.addEventListener("error", errorF);
+        },
+
         _internal_resize : function(width, height) {
+
+            if ($("body").hasClass("distraction-free-mode")) {
+                progress._internal_max_height();
+                return;
+            }
 
             function _resizePage() {
                 var videoBoxWidth = $("#supervideo_area_embed").width();
@@ -261,11 +313,12 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
             $(window).resize(_resizePage);
             _resizePage();
 
-
             var element = $("#supervideo_area_embed");
             var lastWidth = element.width();
             setInterval(function() {
-                if (lastWidth === element.width()) return;
+                if (lastWidth === element.width()) {
+                    return;
+                }
                 lastWidth = element.width();
 
                 _resizePage();
@@ -276,29 +329,41 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
         },
 
         _internal_max_height : function() {
-            $(window).resize(_resizePage);
-            _resizePage();
+            $(window).resize(progress._internal_max_height__resizePage);
+            progress._internal_max_height__resizePage();
+        },
 
-            function _resizePage() {
+        _internal_max_height__resizePage : function() {
 
-                var $supervideo_area_embed = $("#supervideo_area_embed");
+            var $supervideoArea = $("#supervideo_area_embed video,#supervideo_area_embed iframe");
 
-                $supervideo_area_embed.css({
-                    "max-height" : "inherit",
-                    "height"     : "inherit",
-                });
+            $supervideoArea.css({
+                "max-height" : "inherit",
+                "height"     : "inherit",
+            });
 
-                var header_height = ($("#header") && $("#header").height()) || 60;
-                var window_height = $(window).height();
+            var windowHeight = $(window).height();
+            if ($("body").hasClass("distraction-free-mode")) {
 
-                var player_max_height = window_height - header_height;
+                var activityHeight = 0;
 
-                if ($supervideo_area_embed.height() > player_max_height) {
-                    $supervideo_area_embed.css({
-                        "max-height" : player_max_height,
-                        "height"     : player_max_height
-                    });
+                var $activity = $(".activity-navigation");
+                if (!$activity.is(":hidden")) {
+                    activityHeight = $activity.height();
                 }
+
+                var playerMaxHeight = windowHeight - (activityHeight + 65 + 3); // 3 is padding button
+                $supervideoArea.css({
+                    "max-height" : playerMaxHeight,
+                    "height"     : playerMaxHeight
+                });
+            } else {
+                var headerHeight = ($("#header") && $("#header").height()) || 60;
+                var playerMaxHeightOther = windowHeight - headerHeight;
+                $supervideoArea.css({
+                    "max-height" : playerMaxHeightOther,
+                    "height"     : playerMaxHeightOther
+                });
             }
         },
 
@@ -345,12 +410,28 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
                 percent = Math.floor(percent / progress._internal_progress_length * 100);
             }
 
-            if (progress._internal_last_percent == percent) return;
+            if (progress._internal_last_percent == percent) {
+                return;
+            }
             progress._internal_last_percent = percent;
+
+            if ($("body").hasClass("distraction-free-mode")) {
+                if (currenttime > (duration * .95)) {
+                    $(".activity-navigation").hide();
+                    progress._internal_max_height__resizePage();
+
+                    $("#mapa-visualizacao").addClass("fixed-booton");
+                } else {
+                    $(".activity-navigation").show();
+                    progress._internal_max_height__resizePage();
+
+                    $("#mapa-visualizacao").removeClass("fixed-booton");
+                }
+            }
 
             if (currenttime) {
                 Ajax.call([{
-                    methodname : 'mod_supervideo_services_progress_save',
+                    methodname : 'mod_supervideo_progress_save',
                     args       : {
                         view_id     : progress._internal_view_id,
                         currenttime : parseInt(currenttime),
@@ -424,6 +505,15 @@ define(["jquery", "core/ajax", "mod_supervideo/player_render"], function($, Ajax
 
         _internal_add : function(accumulator, a) {
             return accumulator + a;
-        }
+        },
+
+        error_idnotfound : function() {
+            $("body").removeClass("distraction-free-mode");
+        },
+
+        secondary_navigation : function() {
+            $(".secondary-navigation").appendTo("#page-header .w-100");
+        },
     };
+    return progress;
 });

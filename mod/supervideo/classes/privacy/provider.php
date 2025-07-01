@@ -14,10 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Privacy Subsystem implementation for mod_supervideo.
- */
-
 namespace mod_supervideo\privacy;
 
 use context;
@@ -33,10 +29,10 @@ use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
 
 /**
- * The mod_supervideo module does not store any data.
+ * Privacy Subsystem implementation for mod_supervideo.
  *
  * @package   mod_supervideo
- * @copyright 2023 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
@@ -232,7 +228,6 @@ class provider implements
         $DB->delete_records_select('supervideo_view', $sql, $params);
     }
 
-
     /**
      * Delete multiple users within a single context.
      *
@@ -260,6 +255,7 @@ class provider implements
      * @param array $cmids The course module IDs.
      *
      * @return array
+     *
      * @throws \Exception
      */
     protected static function get_supervideo_ids_to_cmids_from_cmids(array $cmids) {
@@ -282,14 +278,15 @@ class provider implements
      * Loop and export from a recordset.
      *
      * @param moodle_recordset $recordset The recordset.
-     * @param string           $splitkey  The record key to determine when to export.
-     * @param mixed            $initial   The initial data to reduce from.
-     * @param callable         $reducer   The function to return the dataset, receives current dataset, and the current
+     * @param string $splitkey            The record key to determine when to export.
+     * @param mixed $initial              The initial data to reduce from.
+     * @param callable $reducer           The function to return the dataset, receives current dataset, and the current
      *                                    record.
-     * @param callable         $export    The function to export the dataset, receives the last value from $splitkey
+     * @param callable $export            The function to export the dataset, receives the last value from $splitkey
      *                                    and the dataset.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected static function recordset_loop_and_export(moodle_recordset $recordset, $splitkey, $initial,

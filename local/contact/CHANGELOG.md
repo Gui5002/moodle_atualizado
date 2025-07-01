@@ -1,6 +1,28 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2024-10-03
+### Updated
+- Fixed compatibility with Moodle 4.5.
+
+## [1.4.1] - 2024-06-19
+### Updated
+- Fixed compatibility with PHP 5.6.
+
+## [1.4.0] - 2024-04-26
+### Added
+- GitHub actions CI workflow.
+- *.patch to gitignore.
+- Security issue reporting link.
+### Updated
+- Added a little space between the post-submission message and the Continue button.
+- Smarter continue button URL logic after the form was submitted.
+- Contributing guidelines and bug reporting form.
+- Refactored for compliance with Moodle coding guidelines.
+- Compatible with Moodle 3.0 to 4.4.
+- Compatible with PHP 5.6 to 8.3.
+- Copyright notice to 2024.
+
 ## [1.3.1] - 2023-10-23
 ### Added
 - Added support for attachments.

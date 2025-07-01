@@ -40,13 +40,13 @@ list($options, $unrecognized) = cli_get_params(
         'help' => false,
         'courseid' => 0,
         'bigbluebuttonid' => 0,
-        'run' => false
+        'run' => false,
     ],
     [
         'h' => 'help',
         'c' => 'courseid',
         'b' => 'bigbluebuttoncmid',
-        'r' => 'run'
+        'r' => 'run',
     ]
 );
 
@@ -101,11 +101,12 @@ foreach ($bbcms as $bbcm) {
     cli_writeln("Processing BigbluebButton {$instance->get_meeting_name()}(id:{$instance->get_instance_id()}),"
         . " in course {$bbcm->get_course()->fullname}(id:{$bbcm->get_course()->id})....");
     $recordings = recording::get_records(['status' => recording::RECORDING_STATUS_DISMISSED,
-        'bigbluebuttonbnid' => $instance->get_instance_id()]);
+        'bigbluebuttonbnid' => $instance->get_instance_id(), ]);
     $recordingkeys = array_map(function($rec) {
         return $rec->get('recordingid');
     }, $recordings);
-    $recordingmeta = \mod_bigbluebuttonbn\local\proxy\recording_proxy::fetch_recordings($recordingkeys);
+    $result = \mod_bigbluebuttonbn\local\proxy\recording_proxy::fetch_recordings($recordingkeys);
+    $recordingmeta = $result['recordings'];
     if (empty($recordings)) {
         cli_writeln("\t->No dimissed recordings found ...");
     } else {

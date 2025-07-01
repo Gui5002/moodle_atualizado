@@ -15,14 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * lib file
+ * Lib file.
  *
- * @package    mod_supervideo
- * @copyright  2023 Eduardo kraus (http://eduardokraus.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   mod_supervideo
+ * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
+ * Supervideo_supports function.
+ *
  * @param string $feature
  *
  * @return bool|int|null
@@ -59,13 +61,13 @@ function supervideo_supports($feature) {
     }
 }
 
-
 /**
+ * supervideo_update_grades File.
+ *
  * @param stdClass $supervideo
  * @param int $userid
  * @param bool $nullifnone
  *
- * @return null
  * @throws coding_exception
  * @throws dml_exception
  */
@@ -81,6 +83,8 @@ function supervideo_update_grades($supervideo, $userid = 0, $nullifnone = true) 
 }
 
 /**
+ * supervideo_get_user_grades file.
+ *
  * @param stdClass $supervideo
  * @param int $userid
  *
@@ -113,19 +117,28 @@ function supervideo_get_user_grades($supervideo, $userid = 0) {
 }
 
 /**
+ * supervideo_add_instance file.
+ *
  * @param stdClass $supervideo
- * @param mod_supervideo_mod_form|null $mform
+ * @param mod_supervideo_mod_form $mform
  *
  * @return bool|int
  * @throws dml_exception
  * @throws coding_exception
+ * @throws moodle_exception
  */
-function supervideo_add_instance(stdClass $supervideo, mod_supervideo_mod_form $mform = null) {
+function supervideo_add_instance(stdClass $supervideo, $mform = null) {
     global $DB;
 
     $supervideo->timemodified = time();
     $supervideo->timecreated = time();
     $supervideo->playersize = optional_param("playersize", null, PARAM_RAW);
+
+    if ($supervideo->origem == "upload") {
+        $supervideo->videourl = "file";
+    } else if ($videourl = optional_param("videourl_{$supervideo->origem}", false, PARAM_TEXT)) {
+        $supervideo->videourl = $videourl;
+    }
 
     $supervideo->id = $DB->insert_record('supervideo', $supervideo);
 
@@ -136,37 +149,17 @@ function supervideo_add_instance(stdClass $supervideo, mod_supervideo_mod_form $
 }
 
 /**
- * @param stdClass $supervideo
- *
- * @throws coding_exception
- */
-function supervideo_set_mainfile($supervideo) {
-    $fs = get_file_storage();
-    $cmid = $supervideo->coursemodule;
-    $draftitemid = $supervideo->videofile;
-
-    $context = context_module::instance($cmid);
-    if ($draftitemid) {
-        $options = ['subdirs' => true, 'embed' => true];
-        file_save_draft_area_files($draftitemid, $context->id, 'mod_supervideo', 'content', $supervideo->id, $options);
-    }
-    $files = $fs->get_area_files($context->id, 'mod_supervideo', 'content', 0, 'sortorder', false);
-    if (count($files) == 1) {
-        $file = reset($files);
-        file_set_sortorder($context->id, 'mod_supervideo', 'content', 0, $file->get_filepath(), $file->get_filename(), 1);
-    }
-}
-
-/**
  * function supervideo_update_instance
  *
  * @param stdClass $supervideo
- * @param mod_supervideo_mod_form|null $mform
+ * @param mod_supervideo_mod_form $mform
  *
  * @return bool
  * @throws dml_exception
+ * @throws coding_exception
+ * @throws moodle_exception
  */
-function supervideo_update_instance(stdClass $supervideo, mod_supervideo_mod_form $mform = null) {
+function supervideo_update_instance(stdClass $supervideo, $mform = null) {
     global $DB;
 
     $supervideo->timemodified = time();
@@ -176,8 +169,37 @@ function supervideo_update_instance(stdClass $supervideo, mod_supervideo_mod_for
     $result = $DB->update_record('supervideo', $supervideo);
 
     \mod_supervideo\grade\grades_util::grade_item_update($supervideo);
+    supervideo_set_mainfile($supervideo);
 
     return $result;
+}
+
+/**
+ * supervideo_set_mainfile file.
+ *
+ * @param stdClass $supervideo
+ *
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function supervideo_set_mainfile($supervideo) {
+    $cmid = $supervideo->coursemodule;
+    $draftitemid = $supervideo->videofile;
+
+    $context = context_module::instance($cmid);
+    if ($draftitemid) {
+        $options = [
+            'subdirs' => true,
+            'embed' => true,
+        ];
+        file_save_draft_area_files($draftitemid, $context->id, 'mod_supervideo', 'content', $supervideo->id, $options);
+    }
+    $files = supervideo_get_area_files($context->id);
+    if ($files && count($files) == 1) {
+        $file = reset($files);
+        file_set_sortorder($context->id, 'mod_supervideo', 'content', 0, $file->get_filepath(), $file->get_filename(), 1);
+    }
 }
 
 /**
@@ -188,26 +210,25 @@ function supervideo_update_instance(stdClass $supervideo, mod_supervideo_mod_for
  * @return bool
  * @throws dml_exception
  * @throws coding_exception
+ * @throws moodle_exception
  */
 function supervideo_delete_instance($id) {
     global $DB;
 
-    if (!$supervideo = $DB->get_record('supervideo', array('id' => $id))) {
+    if (!$supervideo = $DB->get_record('supervideo', ['id' => $id])) {
         return false;
     }
 
-    $fs = get_file_storage();
     $cm = get_coursemodule_from_id('supervideo', $supervideo->id);
     if ($cm) {
-        $files = $fs->get_area_files(context_module::instance($cm->id)->id, 'mod_supervideo', 'content',
-            $supervideo->id, 'sortorder DESC, id ASC', false);
+        $files = supervideo_get_area_files(context_module::instance($cm->id)->id);
 
         foreach ($files as $file) {
             $file->delete();
         }
     }
-    $DB->delete_records('supervideo', array('id' => $supervideo->id));
-    $DB->delete_records('supervideo_view', array('cm_id' => $cm->id));
+    $DB->delete_records('supervideo', ['id' => $supervideo->id]);
+    $DB->delete_records('supervideo_view', ['cm_id' => $cm->id]);
 
     return true;
 }
@@ -271,8 +292,8 @@ function supervideo_user_complete($course, $user, $mod, $supervideo) {
             echo "  <td>" . $registro->user_id . "</td>";
             echo "  <td>" . fullname($registro) . "</td>";
             echo "  <td>" . $registro->email . "</td>";
-            echo "  <td>" . formatTime($registro->currenttime) . "</td>";
-            echo "  <td>" . formatTime($registro->duration) . "</td>";
+            echo "  <td>" . supervideo_format_time($registro->currenttime) . "</td>";
+            echo "  <td>" . supervideo_format_time($registro->duration) . "</td>";
             echo "  <td>" . $registro->percent . "%</td>";
             echo "  <td>" . userdate($registro->timecreated) . "</td>";
             echo "  <td>" . userdate($registro->timemodified) . "</td>";
@@ -285,7 +306,14 @@ function supervideo_user_complete($course, $user, $mod, $supervideo) {
     }
 }
 
-function formatTime($time) {
+/**
+ * supervideo_format_time function
+ *
+ * @param $time
+ *
+ * @return string
+ */
+function supervideo_format_time($time) {
     if ($time < 60) {
         return "00:00:{$time}";
     } else {
@@ -306,36 +334,8 @@ function formatTime($time) {
 }
 
 /**
- * function supervideo_get_coursemodule_info
+ * supervideo_extend_settings_navigation function.
  *
- * @param stdClass $coursemodule
- *
- * @return cached_cm_info
- * @throws dml_exception
- */
-function supervideo_get_coursemodule_info($coursemodule) {
-    global $DB;
-
-    $supervideo = $DB->get_record('supervideo', ['id' => $coursemodule->instance],
-        'id, name, videourl, intro, introformat, completionpercent');
-
-    $info = new cached_cm_info();
-    if ($supervideo) {
-        $info->name = $supervideo->name;
-    }
-
-    if ($coursemodule->showdescription) {
-        $info->content = format_module_intro('supervideo', $supervideo, $coursemodule->id, false);
-    }
-
-    if ($coursemodule->completion == COMPLETION_TRACKING_AUTOMATIC) {
-        $info->customdata['customcompletionrules']['completionpercent'] = $supervideo->completionpercent;
-    }
-
-    return $info;
-}
-
-/**
  * @param settings_navigation $settings
  * @param navigation_node $supervideonode
  *
@@ -357,9 +357,9 @@ function supervideo_extend_settings_navigation($settings, $supervideonode) {
         $beforekey = $keys[$i + 1];
     }
 
-    if (has_capability('moodle/course:manageactivities', $PAGE->cm->context)) {
+    if (has_capability('mod/supervideo:addinstance', $PAGE->cm->context)) {
         $node = navigation_node::create(get_string('report', 'mod_supervideo'),
-            new moodle_url('/mod/supervideo/report.php', array('id' => $PAGE->cm->id)),
+            new moodle_url('/mod/supervideo/report.php', ['id' => $PAGE->cm->id]),
             navigation_node::TYPE_SETTING, null, 'mod_supervideo_report',
             new pix_icon('i/report', ''));
         $supervideonode->add_node($node, $beforekey);
@@ -367,6 +367,8 @@ function supervideo_extend_settings_navigation($settings, $supervideonode) {
 }
 
 /**
+ * supervideo_extend_navigation_course function
+ *
  * @param \navigation_node $navigation
  * @param stdClass $course
  * @param \context $context
@@ -386,41 +388,29 @@ function supervideo_extend_navigation_course($navigation, $course, $context) {
 /**
  * Serve the files from the supervideo file areas
  *
- * @param stdClass $course the course object
- * @param stdClass $cm the course module object
- * @param stdClass $context the context
- * @param string $filearea the name of the file area
- * @param array $args extra arguments (itemid, path)
+ * @param stdClass $course    the course object
+ * @param stdClass $cm        the course module object
+ * @param context $context    the context
+ * @param string $filearea    the name of the file area
+ * @param array $args         extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
- * @param array $options additional options affecting the file serving
+ * @param array $options      additional options affecting the file serving
  *
  * @return bool false if the file not found, just send the file otherwise and do not return anything
- *
  * @throws coding_exception
  * @throws moodle_exception
  * @throws require_login_exception
  */
-function supervideo_pluginfile($course, $cm, context $context, $filearea, $args, $forcedownload, array $options = array()) {
+function supervideo_pluginfile($course, $cm, context $context, $filearea, $args, $forcedownload, array $options = []) {
 
-    // Check the contextlevel is as expected - if your plugin is a block, this becomes CONTEXT_BLOCK, etc.
-    if ($context->contextlevel != CONTEXT_MODULE) {
-        return false;
-    }
-
-    // Make sure the user is logged in and has access to the module
-    // (plugins that are not course modules should leave out the 'cm' part).
     require_login($course, true, $cm);
 
-    // Check the relevant capabilities - these may vary depending on the filearea being accessed.
     if (!has_capability('mod/supervideo:view', $context)) {
         return false;
     }
 
-    // Leave this line out if you set the itemid to null in make_pluginfile_url (set $itemid to 0 instead).
-    $itemid = array_shift($args); // The first item in the $args array.
-
-    // Use the itemid to retrieve any relevant data records and perform any security checks to see if the
-    // user really does have access to the file in question.
+    array_shift($args); // Remove File ID for cache.
+    $itemid = array_shift($args);
 
     // Extract the filename / filepath from the $args array.
     $filename = array_pop($args); // The last item in the $args array.
@@ -435,12 +425,11 @@ function supervideo_pluginfile($course, $cm, context $context, $filearea, $args,
     // Retrieve the file from the Files API.
     $fs = get_file_storage();
     $file = $fs->get_file($context->id, 'mod_supervideo', $filearea, $itemid, $filepath, $filename);
-    if (!$file) {
-        return false; // The file does not exist.
+    if ($file) {
+        send_stored_file($file, 86400, 0, $forcedownload, $options);
+        return true;
     }
-
-    // We can now send the file back to the browser - in this case with a cache lifetime of 1 day and no filtering.
-    send_stored_file($file, 86400, 0, $forcedownload, $options);
+    return false;
 }
 
 /**
@@ -459,24 +448,27 @@ function supervideo_dndupload_register() {
             [
                 'extension' => 'mp4',
                 'message' => get_string('dnduploadlabel-mp4', 'mod_supervideo'),
-            ]
+            ],
+            [
+                'extension' => 'webm',
+                'message' => get_string('dnduploadlabel-mp4', 'mod_supervideo'),
+            ],
         ],
         'types' => [
             [
                 'identifier' => 'text/html',
                 'message' => get_string('dnduploadlabeltext', 'mod_supervideo'),
-                'noname' => true
+                'noname' => true,
             ],
             [
                 'identifier' => 'text',
                 'message' => get_string('dnduploadlabeltext', 'mod_supervideo'),
-                'noname' => true
-            ]
-        ]
+                'noname' => true,
+            ],
+        ],
     ];
     return $ret;
 }
-
 
 /**
  * Handle a file that has been uploaded
@@ -486,6 +478,7 @@ function supervideo_dndupload_register() {
  * @return int instance id of the newly created mod
  * @throws coding_exception
  * @throws dml_exception
+ * @throws moodle_exception
  */
 function supervideo_dndupload_handle($uploadinfo) {
     global $USER;
@@ -497,6 +490,9 @@ function supervideo_dndupload_handle($uploadinfo) {
     $data->intro = '';
     $data->introformat = FORMAT_HTML;
     $data->coursemodule = $uploadinfo->coursemodule;
+
+    $data->origem = "upload";
+    $data->videourl = "file";
 
     $data->playersize = 1;
     $data->showcontrols = 1;
@@ -512,7 +508,7 @@ function supervideo_dndupload_handle($uploadinfo) {
         $files = $fs->get_area_files($draftcontext->id, 'user', 'draft', $uploadinfo->draftitemid, '', false);
         if ($file = reset($files)) {
 
-            $data->videourl = "[resource-file:{$file->get_filename()}]";
+            $data->videourl = "{$file->get_filename()}";
             $options = ['subdirs' => true, 'embed' => true];
             file_save_draft_area_files(
                 $uploadinfo->draftitemid, $context->id, 'mod_supervideo', 'content', $data->instance, $options);
@@ -533,8 +529,8 @@ function supervideo_dndupload_handle($uploadinfo) {
  * Callback which returns human-readable strings describing the active completion custom rules for the module instance.
  *
  * @param cm_info|stdClass $cm object with fields ->completion and ->customdata['customcompletionrules']
+ *
  * @return array $descriptions the array of descriptions for the custom rules.
- * @throws coding_exception
  */
 function mod_supervideo_get_completion_active_rule_descriptions($cm) {
     // Values will be present in cm_info, and we assume these are up to date.
@@ -549,17 +545,15 @@ function mod_supervideo_get_completion_active_rule_descriptions($cm) {
 }
 
 /**
- * Sets the automatic completion state for this database item based on the
- * count of on its entries.
- * @since Moodle 3.3
- * @param object $data The data object for this activity
+ * Sets the automatic completion state for this database item based on the count of on its entries.
+ *
+ * @param object $data   The data object for this activity
  * @param object $course Course
- * @param object $cm course-module
+ * @param object $cm     course-module
+ *
  * @throws moodle_exception
  */
 function supervideo_update_completion_state($data, $course, $cm) {
-
-    throw new Exception("bbbb");
 
     // If completion option is enabled, evaluate it and return true/false.
     $completion = new completion_info($course);
@@ -579,15 +573,13 @@ function supervideo_update_completion_state($data, $course, $cm) {
  * on its settings. The call for this is in completion lib where the modulename is appended
  * to the function name. This is why there are unused parameters.
  *
- * @deprecated since Moodle 3.11
- * @todo MDL-71196 Final deprecation in Moodle 4.3
- * @see \mod_data\completion\custom_completion
- * @since Moodle 3.3
- * @param stdClass $course Course
+ * @param stdClass $course     Course
  * @param cm_info|stdClass $cm course-module
- * @param int $userid User ID
- * @param bool $type Type of comparison (or/and; can be used as return value if no conditions)
+ * @param int $userid          User ID
+ * @param bool $type           Type of comparison (or/and; can be used as return value if no conditions)
+ *
  * @return bool True if completed, false if not, $type if conditions not set.
+ * @throws dml_exception
  */
 function supervideo_get_completion_state($course, $cm, $userid, $type) {
     global $DB, $PAGE;
@@ -599,7 +591,7 @@ function supervideo_get_completion_state($course, $cm, $userid, $type) {
     if (isset($PAGE->cm->id) && $PAGE->cm->id == $cm->id) {
         $data = $PAGE->activityrecord;
     } else {
-        $data = $DB->get_record('data', array('id' => $cm->instance), '*', MUST_EXIST);
+        $data = $DB->get_record('data', ['id' => $cm->instance], '*', MUST_EXIST);
     }
     // If completion option is enabled, evaluate it and return true/false.
     if ($data->completionpercent) {
@@ -614,4 +606,274 @@ function supervideo_get_completion_state($course, $cm, $userid, $type) {
         }
     }
     return $result;
+}
+
+/**
+ * Mark the activity completed (if required) and trigger the course_module_viewed event.
+ *
+ * @param  stdClass $supervideo supervideo object
+ * @param  stdClass $course     course object
+ * @param  stdClass $cm         course module object
+ * @param  stdClass $context    context object
+ *
+ * @throws coding_exception
+ */
+function supervideo_view($supervideo, $course, $cm, $context) {
+
+    // Trigger course_module_viewed event.
+    $params = [
+        'context' => $context,
+        'objectid' => $supervideo->id,
+    ];
+
+    $event = \mod_supervideo\event\course_module_viewed::create($params);
+    $event->add_record_snapshot('course_modules', $cm);
+    $event->add_record_snapshot('course', $course);
+    $event->add_record_snapshot('supervideo', $supervideo);
+    $event->trigger();
+
+    // Completion.
+    $completion = new completion_info($course);
+    $completion->set_module_viewed($cm);
+}
+
+/**
+ * Export file supervideo contents
+ *
+ * @param $cm
+ * @param $baseurl
+ *
+ * @return array of file content
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function supervideo_export_contents($cm, $baseurl) {
+    global $DB;
+
+    $contents = [];
+    $context = context_module::instance($cm->id);
+    $supervideo = $DB->get_record('supervideo', ['id' => $cm->instance], '*', MUST_EXIST);
+
+    $config = get_config('supervideo');
+    if ($config->showcontrols == 2) {
+        $config->showcontrols = 0;
+    } else if ($config->showcontrols == 3) {
+        $config->showcontrols = 1;
+    } else {
+        $config->showcontrols = $supervideo->showcontrols;
+    }
+    if ($config->autoplay == 2) {
+        $config->autoplay = 0;
+    } else if ($config->autoplay == 3) {
+        $config->autoplay = 1;
+    } else {
+        $config->autoplay = $supervideo->autoplay;
+    }
+    $config->playersize = $supervideo->playersize;
+    $supervideoview = \mod_supervideo\analytics\supervideo_view::create($cm->id);
+    $config->datamapa = base64_encode($supervideoview->mapa);
+    $config->viewid = $supervideoview->id;
+    $config->currenttime = $supervideoview->currenttime;
+
+    if ($supervideo->origem == "link") {
+        $contents[] = [
+            'type' => "link",
+            'filename' => "link.{$supervideo->videourl}",
+            'filepath' => $supervideo->videourl,
+            'filesize' => 1,
+            'fileurl' => $supervideo->videourl,
+            'timecreated' => time(),
+            'timemodified' => time(),
+            'sortorder' => 0,
+            'userid' => 0,
+            'author' => '',
+            'license' => json_encode($config, JSON_NUMERIC_CHECK),
+        ];
+        return $contents;
+    }
+    if ($supervideo->origem == "ottflix") {
+        if (preg_match('/\/\w+\/\w+\/([A-Z0-9\-\_]{3,255})/', $supervideo->videourl, $path)) {
+            $contents[] = [
+                'type' => 'ottflix',
+                'filename' => 'ottflix.mp4',
+                'filepath' => "",
+                'filesize' => 1,
+                'fileurl' => $path[1],
+                'timecreated' => time(),
+                'timemodified' => time(),
+                'sortorder' => 0,
+                'userid' => 0,
+                'author' => '',
+                'license' => json_encode($config),
+            ];
+            return $contents;
+        }
+    }
+    if ($supervideo->origem == "upload") {
+        $files = supervideo_get_area_files($context->id);
+        foreach ($files as $file) {
+            $path = "/{$context->id}/mod_supervideo/content/{$supervideo->id}{$file->get_filepath()}{$file->get_filename()}";
+            $fullurl = moodle_url::make_file_url('/pluginfile.php', $path, false)->out();
+            $file = [
+                'type' => 'file',
+                'engine' => 'resource',
+                'filename' => $file->get_filename(),
+                'filepath' => $file->get_filepath(),
+                'filesize' => $file->get_filesize(),
+                'fileurl' => $fullurl,
+                'timecreated' => $file->get_timecreated(),
+                'timemodified' => $file->get_timemodified(),
+                'sortorder' => $file->get_sortorder(),
+                'userid' => $file->get_userid(),
+                'author' => $file->get_author(),
+                'license' => json_encode($config, JSON_NUMERIC_CHECK),
+            ];
+            $contents[] = $file;
+
+            return $contents;
+        }
+    }
+    if ($supervideo->origem == "youtube") {
+        if (preg_match('/youtu(\.be|be\.com)\/(watch\?v=|embed\/|live\/|shorts\/)?([a-z0-9_\-]{11})/i',
+            $supervideo->videourl, $output)) {
+            $contents[] = [
+                'type' => 'youtube',
+                'filename' => 'youtube.mp4',
+                'filepath' => "",
+                'filesize' => 1,
+                'fileurl' => "https://www.youtube.com/watch?v={$output[3]}",
+                'timecreated' => time(),
+                'timemodified' => time(),
+                'sortorder' => 0,
+                'userid' => 0,
+                'author' => '',
+                'license' => json_encode($config, JSON_NUMERIC_CHECK),
+            ];
+            return $contents;
+        }
+    }
+    if ($supervideo->origem == "drive") {
+        $config->showmapa = false;
+        if (preg_match('/([a-zA-Z0-9\-_]{33})/', $supervideo->videourl, $output)) {
+            $parametersdrive = implode('&amp;', [
+                $supervideo->showcontrols ? 'controls=1' : 'controls=0',
+                $supervideo->autoplay ? 'autoplay=1' : 'autoplay=0',
+            ]);
+            $url = "https://drive.google.com/file/d/{$output[1]}/preview?{$parametersdrive}";
+
+            $contents[] = [
+                'type' => 'google-drive',
+                'filename' => 'google-drive.mp4',
+                'filepath' => "",
+                'filesize' => 1,
+                'fileurl' => $url,
+                'timecreated' => time(),
+                'timemodified' => time(),
+                'sortorder' => 0,
+                'userid' => 0,
+                'author' => '',
+                'license' => json_encode($config, JSON_NUMERIC_CHECK),
+            ];
+            return $contents;
+        }
+    }
+    if ($supervideo->origem == "vimeo") {
+        $parametersvimeo = implode('&amp;', [
+            'pip=1',
+            'title=0',
+            'byline=0',
+            $supervideo->showcontrols ? 'title=1' : 'title=0',
+            $supervideo->autoplay ? 'autoplay=1' : 'autoplay=0',
+            $supervideo->showcontrols ? 'controls=1' : 'controls=0',
+        ]);
+
+        if (preg_match('/vimeo.com\/(\d+)(\/(\w+))?/', $supervideo->videourl, $output)) {
+            if (isset($output[3])) {
+                $url = "https://player.vimeo.com/video/{$output[1]}?h={$output[3]}&pip{$parametersvimeo}";
+            } else {
+                $url = "https://player.vimeo.com/video/{$output[1]}?pip{$parametersvimeo}";
+            }
+        }
+
+        $contents[] = [
+            'type' => 'vimeo',
+            'filename' => 'vimeo.mp4',
+            'filepath' => "",
+            'filesize' => 1,
+            'fileurl' => $url,
+            'timecreated' => time(),
+            'timemodified' => time(),
+            'sortorder' => 0,
+            'userid' => 0,
+            'author' => '',
+            'license' => json_encode($config, JSON_NUMERIC_CHECK),
+        ];
+        return $contents;
+    }
+}
+
+/**
+ * Given a course_module object, this function returns any
+ * "extra" information that may be needed when printing
+ * this activity in a course listing.
+ * See {@link get_array_of_activities()} in course/lib.php
+ *
+ * @param stdClass $coursemodule
+ *
+ * @return cached_cm_info info
+ * @throws dml_exception
+ */
+function supervideo_get_coursemodule_info($coursemodule) {
+    global $DB;
+
+    if (!$supervideo = $DB->get_record('supervideo', ['id' => $coursemodule->instance],
+        'id, name, videourl, intro, introformat, completionpercent')) {
+        return null;
+    }
+
+    $info = new cached_cm_info();
+    $info->name = $supervideo->name;
+    if ($coursemodule->showdescription) {
+        $info->content = format_module_intro('supervideo', $supervideo, $coursemodule->id, false);
+    }
+
+    if ($coursemodule->showdescription) {
+        $info->content = format_module_intro('supervideo', $supervideo, $coursemodule->id, false);
+    }
+
+    if ($coursemodule->completion == COMPLETION_TRACKING_AUTOMATIC) {
+        $info->customdata['customcompletionrules']['completionpercent'] = $supervideo->completionpercent;
+    }
+
+    $info->completionpassgrade = false;
+    $info->downloadcontent = false;
+    $info->lang = false;
+
+    return $info;
+}
+
+/**
+ * Function supervideo_get_area_files
+ *
+ * @param int $contextid
+ *
+ * @return array
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
+ */
+function supervideo_get_area_files($contextid) {
+    $fs = get_file_storage();
+    $files = $fs->get_area_files($contextid, 'mod_supervideo', 'content');
+
+    $returnfiles = [];
+    /** @var stored_file $file */
+    foreach ($files as $file) {
+        if ($file->get_filename() != '.') {
+            $returnfiles[] = $file;
+        }
+    }
+
+    return $returnfiles;
 }
