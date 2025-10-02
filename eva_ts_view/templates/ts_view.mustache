@@ -1,0 +1,141 @@
+<div id="modalDiv"></div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <label id="arrowLabel" name="arrowLabel" class="em15 fGray negrito" style="cursor: pointer;">Filtros&nbsp;<i id="arrow" name="arrow" class="fa fa-angle-down"></i></label>
+    </div>
+</div>
+<div class="card sombreamento" style="display: block;" id="cardFiltros" name="cardFiltros">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 verticalLine">
+                <div class="em15 fGray negrito">
+                    Órgão
+                </div>
+                <div class="row">
+                    <div style="width: 100%;" class="btn-group" role="group" aria-label="Botões">
+                        <div class="col-md-8"><input type="button" style="float: right; padding: 0; border: none; background: none;" class="fGray ml-1 mt-2 mr-1" id="btnSlcAll" name="btnSlcAll" value="Selecione todos"></div>
+                        <div class="col-md-4"><input type="button" style="float: right; padding: 0; border: none; background: none;" class="fGray ml-1 mt-2 mr-1" id="btnLimpar" name="btnLimpar" value="Limpar seleção"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group rounded">
+                            <input type="search" name="searchInput" id="searchInput" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;" placeholder="Buscar órgão" aria-label="Buscar órgão" aria-describedby="search-addon" />
+                            <span class="input-group-text border-0" onclick="buscaOrgaos();" name="search-addon" id="search-addon" style="cursor: pointer; background: none;">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-1 mt-1 mr-1">
+                    <div id="box" name="box" class="checkContainer">
+                        <div id="checkOptions" name="checkOptions">
+                            {{{rs}}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 verticalLine">
+                <div class="em15 fGray negrito">Identificação</div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 mt-2">
+                        <select id="slcNome" name="slcNome" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Nome do usuário</option>
+                            {{{user}}}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 mt-2">
+                        <select id="slcEixo" name="slcEixo" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Eixo</option>
+                            {{{eixo}}}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 mt-2">
+                        <select id="slcPubAlvo" name="slcPubAlvo" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Público-alvo</option>
+                            {{{rsAll}}}
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mt-2">
+                        <select id="slcStatus" name="slcStatus" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Status</option>
+                            {{{status}}}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 mt-2">
+                        <select id="slcModalidade" name="slcModalidade" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Modalidade</option>
+                            {{{modalidade}}}
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mt-2">
+                        <select id="slcTema" name="slcTema" class="form-control" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                            <option value="">Tema AGU</option>
+                            {{{theme}}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="em15 fGray negrito">Data da solicitação</div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <label class="form-check-label" for="inpDateIni">Dt. inicial</label>
+                        <input type="date" class="form-control" id="inpDateIni" name="inpDateIni" style="border-top: none; border-right: none; border-radius: 0; border-left: none;">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label class="form-check-label" for="inpDateFim">Dt. final</label>
+                        <input type="date" class="form-control" id="inpDateFim" name="inpDateFim" style="border-top: none; border-right: none; border-radius: 0; border-left: none;" placeholder="Dt. final">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 mt-4">
+                        <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnPesquisar" name="btnPesquisar" value="Pesquisar">
+                    </div>
+                    <div class="col-sm-12 col-md-6 mt-4">
+                        <input type="button" style="width: 100%;" class="btn btn-primary btn-lg" id="btnLimparFiltro" name="btnLimparFiltro" value="Limpar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5 table-responsive">
+        <table cellspacing="0" style="font-size: 0.675em; width: 100%;" id="tab_sug" name="tab_sug" class="table table-hover table-bordered">
+            <thead style="background: #185287; color: #fff;">
+                <tr>
+                    <th>Usuário</th>
+                    <th>Cargo</th>
+                    <th>Órgão</th>
+                    <th>Tema AGU</th>
+                    <th>Eixo jurídico</th>
+                    <th>Eixo técnico</th>
+                    <th>Competência</th>
+                    <th>Necessidade</th>
+                    <th>Público</th>
+                    <th>Nª Paticipantes</th>
+                    <th>Transversalidade</th>
+                    <th>Carga Horaria</th>
+                    <th>Modalidade</th>
+                    <th>Realização</th>
+                    <th>Instituição / Instrutor</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Previsão de diárias e passagens</th>
+                    <th>Data da Sugestão</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
