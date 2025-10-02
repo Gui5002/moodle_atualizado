@@ -27,7 +27,7 @@ class training_suggestion implements renderable, templatable {
         $ts_id = optional_param('id_ts', 0, PARAM_INT);
         $page_id = optional_param('id', 0, PARAM_INT);
 
-        $rs = $DB->get_records('eva_superior_organ', ['st_status' => 1]);
+        $rs = $DB->get_records('eva_superior_organ', ['st_status' => 1], 'no_organ ASC');
 
         if($rs){
             $data->resultSet = $rs;
@@ -99,10 +99,10 @@ class training_suggestion implements renderable, templatable {
         $data->ds_theme = $rsAll[$ts_id]->ds_theme;
 
         $slc_priority_area_legal = explode(",",$rsAll[$ts_id]->slc_priority_area_legal);
-//
-//        for ($i = 0; $i <= 37; $i++) {
-//            $data->checked1 = ((in_array($i, $slc_priority_area_legal)) ? "checked" : "");
-//        }
+
+        for ($i = 0; $i <= 37; $i++) {
+            $data->checked1 = ((in_array($i, $slc_priority_area_legal)) ? "checked" : "");
+        }
 //
 //        $slc_technical_legal = explode(",",$rsAll[$ts_id]->slc_technical_legal);
 //

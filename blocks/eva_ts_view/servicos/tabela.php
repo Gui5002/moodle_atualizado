@@ -108,12 +108,45 @@ $sql = 'select
 $rs = $DB->get_records_sql($sql);
 
 $array = array();
-$eixojuri = "";
+
 $eixo = "";
 $eixotecn = "";
 $eixoT = "";
 $modalidade = "";
 $modal = "";
+
+$eixojuri = "";
+$opcoesEixo = [
+    0  => "Não aplicável",
+    1  => "Meios adequados de resolução de conflitos na administração pública",
+    2  => "Representação de agentes públicos pela AGU",
+    3  => "Proteção da probidade e combate à corrupção",
+    4  => "Direito digital, sigilo de dados e comunicação e direito à informação",
+    5  => "Recuperação de ativos",
+    6  => "Direito Administrativo Sancionador",
+    7  => "Proteção de políticas públicas",
+    8  => "Licitações, contratos, c onvênios",
+    9  => "Direito da saúde e judicialização da saúde",
+    10 => "Recursos e Sistema de Precedentes no Processo Civil",
+    11 => "Direito previdenciário e judicialização previdenciária",
+    12 => "Controle de constitucionalidade e processo constitucional",
+    13 => "Direito internacional",
+    14 => "Processo Tributário",
+    15 => "Direito Ambiental",
+    16 => "Defesa da Democracia",
+    17 => "Direito Regulatório",
+    18 => "Crimes Contra a Administração Pública e Assistência da Acusação",
+    19 => "Liderança, Competências Comportamentais, Comunicação e Gestão de Pessoas",
+    20 => "Transformação Digital, Inteligência Artificial e Law Design",
+    21 => "Governança, Gestão Pública, Gestão Estratégica e Auditoria Interna",
+    22 => "Tecnologia da Informação e Análise de dados",
+    23 => "Ética, Cidadania, Integridade e Transparência",
+    24 => "Educação e Gestão Corporativa",
+    25 => "Plano de logística sustentável e compras públicas",
+    26 => "Gestão orçamentária",
+    27 => "Diversidade e Gestão Inclusiva",
+    28 => "Sustentabilidade Ambiental"
+];
 
 if($rs){
     $resultSet = json_decode(json_encode($rs,JSON_UNESCAPED_UNICODE),true);
@@ -121,24 +154,16 @@ if($rs){
     foreach($resultSet as $row){
         $id = $row['id'];
 
-        if($row['slc_priority_area_legal'] !== ""){
+        if (!empty($row['slc_priority_area_legal'])) {
+    
+            $eixojuri = "";
             $ej = explode(",", $row['slc_priority_area_legal']);
-
-            for($i=0;$i<count($ej);$i++){
-                if($ej[$i] == 0){
-                    $eixo = "Não aplicável";
-                }else if($ej[$i] == 1){
-                    $eixo = "Combate à corrupção e recuperação de ativos";
-                }else if($ej[$i] == 2){
-                    $eixo = "Judicialização da saúde pública";
-                }else if($ej[$i] == 3){
-                    $eixo = "Mecanismos para resolver controvérsias e disputas em organizações internacionais";
-                }
-
-                if($i < 1){
-                    $eixojuri = $eixo;
-                }else{
-                    $eixojuri .= "<br/><br/>" . $eixo;
+        
+            foreach ($ej as $valor) {
+                $chave = (int) trim($valor);
+                if (array_key_exists($chave, $opcoesEixo)) {
+                    $eixo = $opcoesEixo[$chave];
+                    $eixojuri .= '<option value="' . htmlspecialchars($chave) . '">' . mb_strtoupper(htmlspecialchars($eixo)) . '</option>';
                 }
             }
         }
@@ -147,6 +172,7 @@ if($rs){
             $et = explode(",", $row['slc_technical_legal']);
 
             for($x=0;$x<count($et);$x++){
+                $eixotecn = ""; 
                 if($et[$x] == 0){
                     $eixoT = "Não aplicável";
                 }else if($et[$x] == 38){

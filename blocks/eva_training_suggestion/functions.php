@@ -60,10 +60,10 @@ global $CFG, $DB, $USER;
         var error          = 0;
         var msg            = "";
 
-        // var slc_priority_area_legal = [];
-        // $.each($("input[name='eva_checkbox_1']:checked"), function(){
-        //     slc_priority_area_legal.push($(this).val());
-        // });
+        var slc_priority_area_legal = [];
+        $.each($("input[name='eva_checkbox_1']:checked"), function(){
+            slc_priority_area_legal.push($(this).val());
+         });
 
         // var slc_technical_legal = [];
         // $.each($("input[name='eva_checkbox_2']:checked"), function(){
@@ -104,10 +104,10 @@ global $CFG, $DB, $USER;
             $('#eva_txtarea_1').addClass('is-invalid').focus();
         }
 
-        // if(slc_priority_area_legal.length < 1){
-        //     error += 1;
-        //     $("input[name='eva_checkbox_1']").addClass('is-invalid').focus();
-        // }
+        if(slc_priority_area_legal.length < 1){
+            error += 1;
+            $("input[name='eva_checkbox_1']").addClass('is-invalid').focus();
+        }
 
         // if(eva_slc_comp == ""){
         //     error += 1;
@@ -163,7 +163,7 @@ global $CFG, $DB, $USER;
                     // 'eva_slc_2': eva_slc_2,
                     'eva_txtarea_1': eva_txtarea_1,
                     'eva_txtarea_2': eva_txtarea_2,
-                    // 'slc_priority_area_legal': slc_priority_area_legal,
+                    'slc_priority_area_legal': slc_priority_area_legal,
                     // 'slc_technical_legal': slc_technical_legal,
                     // 'eva_slc_comp': eva_slc_comp,
                     'slc_modality': slc_modality,
@@ -256,7 +256,7 @@ global $CFG, $DB, $USER;
                 // 'eva_slc_2': eva_slc_2,
                 'eva_txtarea_1': eva_txtarea_1,
                 'eva_txtarea_2': eva_txtarea_2,
-                // 'slc_priority_area_legal': slc_priority_area_legal,
+                'slc_priority_area_legal': slc_priority_area_legal,
                 // 'slc_technical_legal': slc_technical_legal,
                 // 'eva_slc_comp': eva_slc_comp,
                 'slc_modality': slc_modality,
@@ -280,9 +280,9 @@ global $CFG, $DB, $USER;
         // $('#eva_slc_2').val('');
         $('#eva_txtarea_1').val('');
         $('#eva_txtarea_2').val('');
-        // $.each($("input[name='eva_checkbox_1']:checked"), function(){
-        //     $(this).prop('checked',false);
-        // });
+        $.each($("input[name='eva_checkbox_1']:checked"), function(){
+            $(this).prop('checked',false);
+         });
         // $.each($("input[name='eva_checkbox_2']:checked"), function(){
         //     $(this).prop('checked',false);
         // });

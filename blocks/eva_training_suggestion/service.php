@@ -10,7 +10,7 @@ $eva_slc_1 = isset($_REQUEST['eva_slc_1']) ? $_REQUEST['eva_slc_1'] : "";
 //$eva_slc_2 = isset($_REQUEST['eva_slc_2']) ? $_REQUEST['eva_slc_2'] : 0;
 $eva_txtarea_1 = isset($_REQUEST['eva_txtarea_1']) ? $_REQUEST['eva_txtarea_1'] : "";
 $eva_txtarea_2 = isset($_REQUEST['eva_txtarea_2']) ? $_REQUEST['eva_txtarea_2'] : "";
-//$slc_priority_area_legal = isset($_REQUEST['slc_priority_area_legal']) ? $_REQUEST['slc_priority_area_legal'] : "";
+$slc_priority_area_legal = isset($_REQUEST['slc_priority_area_legal']) ? $_REQUEST['slc_priority_area_legal'] : "";
 $slc_technical_legal = isset($_REQUEST['slc_technical_legal']) ? $_REQUEST['slc_technical_legal'] : "";
 //$eva_slc_comp = isset($_REQUEST['eva_slc_comp']) ? $_REQUEST['eva_slc_comp'] : "";
 $slc_modality = isset($_REQUEST['slc_modality']) ? $_REQUEST['slc_modality'] : "";
@@ -41,10 +41,10 @@ if($eva_txtarea_1 == ""){
     $msg .= "- A descrição do tema não pode ficar em branco.<br/>";
 }
 
-//if($slc_priority_area_legal == ""){
-//    $error = $error + 1;
-//    $msg .= "- Selecione ao menos uma área prioritária do eixo jurídico.<br/>";
-//}
+if($slc_priority_area_legal == ""){
+    $error = $error + 1;
+    $msg .= "- Selecione ao menos uma área prioritária do eixo jurídico.<br/>";
+}
 
 if($eva_txtarea_2 == ""){
     $error = $error + 1;
@@ -91,7 +91,7 @@ if($error > 0){
 
         //     echo json_encode($arr,JSON_UNESCAPED_UNICODE);
         // }else{
-//        $slc_priority_area_legal = implode(",",$slc_priority_area_legal);
+        $slc_priority_area_legal = implode(",",$slc_priority_area_legal);
         $slc_technical_legal = implode(",",$slc_technical_legal);
         $slc_modality = implode(",",$slc_modality);
         $slc_se_necessary = implode(",",$slc_se_necessary);
@@ -110,7 +110,7 @@ if($error > 0){
 
         $objData->id_slc_cargo = $eva_slc_cargo;
         $objData->ds_theme = $eva_txtarea_1;
-//        $objData->slc_priority_area_legal = $slc_priority_area_legal;
+        $objData->slc_priority_area_legal = $slc_priority_area_legal;
         $objData->slc_technical_legal = $slc_technical_legal;
 //        $objData->id_slc_comp_ass = $eva_slc_comp;
         $objData->ds_development_need = $eva_txtarea_2;
@@ -148,7 +148,7 @@ if($error > 0){
         $objData = new \stdClass();
         $verifica = $DB->record_exists($table, ["id" => $ts]);
 
-//        $slc_priority_area_legal = implode(",",$slc_priority_area_legal);
+        $slc_priority_area_legal = implode(",",$slc_priority_area_legal);
         $slc_technical_legal = implode(",",$slc_technical_legal);
         $slc_modality = implode(",",$slc_modality);
         $slc_se_necessary = implode(",",$slc_se_necessary);
@@ -168,7 +168,7 @@ if($error > 0){
 
         $objData->id_slc_cargo = $eva_slc_cargo;
         $objData->ds_theme = $eva_txtarea_1;
-//        $objData->slc_priority_area_legal = $slc_priority_area_legal;
+        $objData->slc_priority_area_legal = $slc_priority_area_legal;
         $objData->slc_technical_legal = $slc_technical_legal;
 //        $objData->id_slc_comp_ass = $eva_slc_comp;
         $objData->ds_development_need = $eva_txtarea_2;

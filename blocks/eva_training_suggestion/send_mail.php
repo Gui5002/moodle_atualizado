@@ -12,7 +12,7 @@ $eva_slc_1 = isset($_REQUEST['eva_slc_1']) ? $_REQUEST['eva_slc_1'] : 0;
 $eva_slc_2 = isset($_REQUEST['eva_slc_2']) ? $_REQUEST['eva_slc_2'] : 0;
 $eva_txtarea_1 = isset($_REQUEST['eva_txtarea_1']) ? $_REQUEST['eva_txtarea_1'] : "";
 $eva_txtarea_2 = isset($_REQUEST['eva_txtarea_2']) ? $_REQUEST['eva_txtarea_2'] : "";
-//$slc_priority_area_legal = isset($_REQUEST['slc_priority_area_legal']) ? $_REQUEST['slc_priority_area_legal'] : "";
+$slc_priority_area_legal = isset($_REQUEST['slc_priority_area_legal']) ? $_REQUEST['slc_priority_area_legal'] : "";
 $slc_technical_legal = isset($_REQUEST['slc_technical_legal']) ? $_REQUEST['slc_technical_legal'] : "";
 //$eva_slc_comp = isset($_REQUEST['eva_slc_comp']) ? $_REQUEST['eva_slc_comp'] : 0;
 $slc_modality = isset($_REQUEST['slc_modality']) ? $_REQUEST['slc_modality'] : "";
@@ -73,48 +73,38 @@ $message .= '
     <div style="width: 70%;float: right;">&nbsp;'.$eva_txtarea_1.'</div>
 </div><br><br>';
 
-/*
-$treinamentos = [
-    "0" => "Não aplicável",
-    "1" => "Combate à corrupção e recuperação de ativos",
-    "2" => "Judicialização da saúde pública",
-    "3" => "Mecanismos para resolver controvérsias e disputas em organizações internacionais",
-    "4" =>" Meios adequados de resolução de conflitos na administração pública: arbitragem, consensualidade e negociação",
-    "5" => "Regime de previdência dos servidores públicos federais e militares",
-    "6" => "Regime geral de previdência social",
-    "7" => "Processo estrutural",
-    "8" => "Recursos excepcionais para tribunais superiores",
-    "9" => "Processo, direito coletivo e direito internacional do trabalho",
-    "10" => "Proteção do patrimônio público e do meio ambiente",
-    "11" => "Representação de agentes públicos pela agu",
-    "12" => "Licitação, contratos, convênios, acordos, ajustes e outros instrumentos congêneres",
-    "13" => "Direito da Saúde",
-    "14" => "Direito da Informação",
-    "15" => "Direito portuário; aquaviário; rodoviário; ferroviário; aeronáutico e aeroportuário",
-    "16" => "Direito da ciência, tecnologia e inovações",
-    "17" => "Direito Urbanístico",
-    "18" => "Direito administrativo disciplina",
-    "19" => "Controle de constitucionalidade e processo constituciona",
-    "20" => "Ação de descumprimento de preceito fundamental",
-    "21" => "Direito à intimidade, privacidade e à imagem",
-    "22" => "Sigilo de dados e comunicação e direito à informação (lei geral de proteção de dados)",
-    "23" => "Conflito e ponderação de direitos (direitos fundamentais x reserva do possível)",
-    "24" => "Finanças públicas e regras fiscais (lrf, loa e ldo)",
-    "25" => "Riscos fiscais e riscos fiscais decorrentes de decisões judiciais",
-    "26" => "Relações interfederativas (federalismo, relações financeiras entre união e estados)",
-    "27" => "Responsabilidade do presidente da república",
-    "28" => "Processo penal nos tribunais superiore",
-    "29" => "Defesa da probidade e transparência pública",
-    "30" => "Direito regulatório",
-    "31" => "Regulação do mercado de capitais e de valores mobiliários",
-    "32" => "Regulação do setor de energia e petróleo",
-    "33" => "Regulação do setor de telecomunicações",
-    "34" => "Regulação do setor de aviação civil",
-    "35" => "Regulação do setor de transportes terrestres",
-    "36" => "Direitos e obrigações relativos à propriedade industrial",
-    "37" => "Sistema brasileiro de defesa da concorrência"
-];
 
+$treinamentos = [
+    0  => "Não aplicável",
+    1  => "Meios adequados de resolução de conflitos na administração pública",
+    2  => "Representação de agentes públicos pela AGU",
+    3  => "Proteção da probidade e combate à corrupção",
+    4  => "Direito digital, sigilo de dados e comunicação e direito à informação",
+    5  => "Recuperação de ativos",
+    6  => "Direito Administrativo Sancionador",
+    7  => "Proteção de políticas públicas",
+    8  => "Licitações, contratos, convênios",
+    9  => "Direito da saúde e judicialização da saúde",
+    10 => "Recursos e Sistema de Precedentes no Processo Civil",
+    11 => "Direito previdenciário e judicialização previdenciária",
+    12 => "Controle de constitucionalidade e processo constitucional",
+    13 => "Direito internacional",
+    14 => "Processo Tributário",
+    15 => "Direito Ambiental",
+    16 => "Defesa da Democracia",
+    17 => "Direito Regulatório",
+    18 => "Crimes Contra a Administração Pública e Assistência da Acusação",
+    19 => "Liderança, Competências Comportamentais, Comunicação e Gestão de Pessoas",
+    20 => "Transformação Digital, Inteligência Artificial e Law Design",
+    21 => "Governança, Gestão Pública, Gestão Estratégica e Auditoria Interna",
+    22 => "Tecnologia da Informação e Análise de dados",
+    23 => "Ética, Cidadania, Integridade e Transparência",
+    24 => "Educação e Gestão Corporativa",
+    25 => "Plano de logística sustentável e compras públicas",
+    26 => "Gestão orçamentária",
+    27 => "Diversidade e Gestão Inclusiva",
+    28 => "Sustentabilidade Ambiental"
+];
 
 $eixo_juridico = "";
 $x = 0;
@@ -139,7 +129,6 @@ $message .= '
     <div style="width: 30%;float: left;"><b>Articulação  com área prioritária para treinamento da AGU - eixo jurídico:</b></div>
     <div style="width: 70%;float: right;">&nbsp;'.$eixo_juridico.'</div>
 </div><br><br><br>';
-*/
 
 /*
 $capacitacoes = [
