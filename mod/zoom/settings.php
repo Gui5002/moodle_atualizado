@@ -172,6 +172,24 @@ if ($ADMIN->fulltree) {
     );
     $settings->add($recycleonjoin);
 
+    // Only call to the web services and load the setting if the connection is OK.
+    if (isset($status) && $status === 'connectionok') {
+        $zoomgroups = [];
+        $groups = zoom_webservice()->get_groups();
+        foreach ($groups as $group) {
+            $zoomgroups[$group->id] = $group->name;
+        }
+
+        $protectedgroups = new admin_setting_configmultiselect(
+            'zoom/protectedgroups',
+            get_string('protectedgroups', 'mod_zoom'),
+            get_string('protectedgroups_desc', 'mod_zoom'),
+            [],
+            $zoomgroups
+        );
+        $settings->add($protectedgroups);
+    }
+
     // Global settings.
     $settings->add(new admin_setting_heading(
         'zoom/globalsettings',
@@ -373,6 +391,22 @@ if ($ADMIN->fulltree) {
         $downloadicalchoices
     );
     $settings->add($offerdownloadical);
+
+    $sendicalnotificationshelp = get_string('sendicalnotifications_help', 'mod_zoom');
+    if (empty($CFG->allowattachments)) {
+        $sendicalnotificationshelp .= '<div class="alert alert-block alert-warning" role="alert">'
+                                      . get_string('sendicalnotifications_warning', 'mod_zoom') . '</div>';
+    }
+
+    $sendicalnotifications = new admin_setting_configcheckbox(
+        'zoom/sendicalnotifications',
+        get_string('sendicalnotifications', 'mod_zoom'),
+        $sendicalnotificationshelp,
+        0,
+        1,
+        0
+    );
+    $settings->add($sendicalnotifications);
 
     // Default Zoom settings.
     $settings->add(new admin_setting_heading(

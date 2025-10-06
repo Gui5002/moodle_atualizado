@@ -24,7 +24,7 @@ use moodle_url;
  * Supervideo View implementation for mod_supervideo.
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo Kraus {@link http://eduardokraus.com}
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class supervideo_view extends \table_sql {
@@ -475,7 +475,7 @@ class supervideo_view extends \table_sql {
                         u.email,
                         (
                             SELECT COUNT(*)
-                            FROM mdl_supervideo_view sv1
+                            FROM {supervideo_view} sv1
                             WHERE sv1.cm_id = sv.cm_id
                             AND sv1.user_id = sv.user_id
                             AND sv1.percent > 0
@@ -485,9 +485,9 @@ class supervideo_view extends \table_sql {
                         u.middlename,
                         u.alternatename
                     FROM
-                        mdl_supervideo_view sv
+                        {supervideo_view} sv
                     JOIN
-                        mdl_user u ON u.id = sv.user_id
+                        {user} u ON u.id = sv.user_id
                     WHERE
                         sv.cm_id = :cm_id {$where}
                     GROUP BY

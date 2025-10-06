@@ -14,16 +14,19 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-
 {{!
-    @template mod_supervideo/mobile_view_page
+    @template mod_supervideo/embed_pandavideo
 
     Example context (json):
     {
-      "wwwroot": "https://seusite.com",
-      "cmid": 123
+      "elementid": "elementid",
+      "driveid": "1sdgdfgsfgdgf",
+      "parametersdrive": "autoplay=1"
     }
 }}
 
-{{=<% %>=}}
-<core-iframe [src]="<% config.wwwroot %>/mod/supervideo/view.php?mobile=1&id=<% cmid %>" [allowFullscreen]="true"></core-iframe>
+<iframe id="{{{elementid}}}"
+        style="width: 100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+        sandbox="allow-scripts allow-forms allow-same-origin allow-modals"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        src="{{{video_player}}}"></iframe>

@@ -14,7 +14,6 @@
     You should have received a copy of the GNU General Public License
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
-
 {{!
     @template mod_supervideo/error
 
@@ -26,7 +25,8 @@
     }
 }}
 
-<div id="{{{elementId}}}" class='alert alert-{{{type}}}'>
-    <i class='fa fa-exclamation-circle'></i>
+<div id="{{{elementId}}}" {{{extratags}}}
+     class="alert alert-{{{type}}}">
+    <i class="fa fa-exclamation-circle"></i>
     <div>{{{message}}}</div>
 </div>

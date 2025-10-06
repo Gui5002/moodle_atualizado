@@ -18,14 +18,14 @@
  * version file
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2024101200;
-$plugin->requires = 2014051200;
-$plugin->release = '2.6.19';
-$plugin->component = 'mod_supervideo';
+$plugin->version = 2025091000;
+$plugin->release = "2.11.2";
+$plugin->requires = 2021041900;
+$plugin->component = "mod_supervideo";
 $plugin->maturity = MATURITY_STABLE;

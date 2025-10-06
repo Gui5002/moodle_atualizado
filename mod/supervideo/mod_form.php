@@ -18,7 +18,7 @@
  * form file
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,24 +26,23 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/course/moodleform_mod.php");
 
+use mod_supervideo\form\supervideo_filepicker;
+
 /**
  * class mod_supervideo_mod_for
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  */
 class mod_supervideo_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
      *
-     * @throws coding_exception
-     * @throws dml_exception
+     * @throws Exception
      */
     public function definition() {
         global $DB, $CFG, $PAGE, $COURSE, $USER;
-
-        $PAGE->requires->css("/mod/supervideo/style.css");
 
         $supervideo = null;
         if ($this->_cm && $this->_cm->instance) {
@@ -60,7 +59,8 @@ class mod_supervideo_mod_form extends moodleform_mod {
         $mform->addRule("name", null, "required", null, "client");
         $mform->addRule("name", get_string("maximumchars", "", 255), "maxlength", 255, "client");
 
-        $origems = ["upload", "ottflix", "youtube", "vimeo", "drive", "link"];
+        // Origem.
+        $origems = ["upload", "ottflix", "pandavideo", "youtube", "vimeo", "drive", "link"];
         if ($supervideo && in_array($supervideo->origem, $origems)) {
             $mform->addElement("hidden", "origem", $supervideo->origem);
             $mform->setType("origem", PARAM_TEXT);
@@ -68,9 +68,11 @@ class mod_supervideo_mod_form extends moodleform_mod {
             if ($supervideo->origem == "upload") {
                 $mform->addElement("hidden", "videourl", $supervideo->videourl);
                 $mform->setType("videourl", PARAM_TEXT);
+            } else if ($supervideo->origem == "pandavideo" || $supervideo->origem == "ottflix") {
+                supervideo_filepicker::add_form($mform, $supervideo->origem, "videourl");
             } else {
-                $mform->addElement("text", "videourl",
-                    get_string("origem_{$supervideo->origem}", "mod_supervideo"), ["size" => "60"], []);
+                $title = get_string("origem_{$supervideo->origem}", "mod_supervideo");
+                $mform->addElement("text", "videourl", $title, ["size" => "60"], []);
                 $mform->setType("videourl", PARAM_TEXT);
                 $mform->addHelpButton("videourl", "origem_{$supervideo->origem}", "mod_supervideo");
             }
@@ -90,23 +92,64 @@ class mod_supervideo_mod_form extends moodleform_mod {
                     continue;
                 }
 
-                $mform->addElement("text", "videourl_{$origem}",
-                    get_string("origem_{$origem}", "mod_supervideo"), ["size" => "60"], []);
-                $mform->setType("videourl_{$origem}", PARAM_TEXT);
-                $mform->addHelpButton("videourl_{$origem}", "origem_{$origem}", "mod_supervideo");
+                if ($origem == "pandavideo" || $origem == "ottflix") {
+                    supervideo_filepicker::add_form($mform, $origem, "videourl_{$origem}");
+                } else {
+                    $mform->addElement(
+                        "text",
+                        "videourl_{$origem}",
+                        get_string("origem_{$origem}", "mod_supervideo"),
+                        ["size" => "60"], []
+                    );
+                    $mform->setType("videourl_{$origem}", PARAM_TEXT);
+                    $mform->addHelpButton("videourl_{$origem}", "origem_{$origem}", "mod_supervideo");
+                }
                 if (!$supervideo) {
                     $mform->hideIf("videourl_{$origem}", "origem", "neq", $origem);
                 }
             }
         }
 
+        // Ottflix IA.
+        $mform->addElement(
+            "static",
+            "ottflix_ia_text",
+            get_string("ottflix_ia", "mod_supervideo"),
+            get_string("ottflix_ia_desc", "mod_supervideo")
+        );
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "upload");
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "youtube");
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "vimeo");
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "drive");
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "pandavideo");
+        $mform->hideIf("ottflix_ia_text", "origem", "eq", "link");
+
+        $options = [
+            "InteractiveVideo" => get_string("ottflix_ia_interactivevideo", "mod_supervideo"),
+            "AdvancedText"     => get_string("ottflix_ia_advancedtext", "mod_supervideo"),
+            "Accordion"        => get_string("ottflix_ia_accordion", "mod_supervideo"),
+            "Dialogcards"      => get_string("ottflix_ia_dialogcards", "mod_supervideo"),
+            "QuestionSet"      => get_string("ottflix_ia_questionset", "mod_supervideo"),
+            "DragText"         => get_string("ottflix_ia_dragtext", "mod_supervideo"),
+        ];
+        $attributes = ["multiple" => "multiple", "size" => 6];
+        $mform->addElement("select", "ottflix_ia", "", $options, $attributes);
+        $mform->setType("ottflix_ia", PARAM_TEXT);
+        $mform->hideIf("ottflix_ia", "origem", "eq", "upload");
+        $mform->hideIf("ottflix_ia", "origem", "eq", "youtube");
+        $mform->hideIf("ottflix_ia", "origem", "eq", "vimeo");
+        $mform->hideIf("ottflix_ia", "origem", "eq", "drive");
+        $mform->hideIf("ottflix_ia", "origem", "eq", "pandavideo");
+        $mform->hideIf("ottflix_ia", "origem", "eq", "link");
+
+        // Upload.
         if (!$supervideo || $supervideo->origem == "upload" || !in_array($supervideo->origem, $origems)) {
             $filemanageroptions = [
                 "accepted_types" => [".mp3", ".mp4", ".webm", ".m4v", ".mov", ".aac", ".m4a"],
-                "maxbytes" => 0,
-                "maxfiles" => 1,
+                "maxbytes" => -1,
+                // Retornar "maxfiles" => 1,.
             ];
-            $mform->addElement("filemanager", "videofile", get_string("videofile", "mod_supervideo"), null, $filemanageroptions);
+            $mform->addElement("filepicker", "videofile", get_string("videofile", "mod_supervideo"), null, $filemanageroptions);
             $mform->addHelpButton("videofile", "videofile", "mod_supervideo");
 
             if (!$supervideo || !in_array($supervideo->origem, $origems)) {
@@ -114,11 +157,9 @@ class mod_supervideo_mod_form extends moodleform_mod {
             }
         }
 
+        // Player size.
         $sizeoptions = [
-            1 => "Video HD (16x9)",
-            2 => "Video ED (4x3)",
-
-            5 => "PDF / DOC / XLS",
+            "pdf" => "PDF / DOC / XLS",
             "4x3" => "Video 4x3",
             "16x9" => "Video 16x9",
         ];
@@ -133,6 +174,7 @@ class mod_supervideo_mod_form extends moodleform_mod {
         $mform->hideIf("playersize", "origem", "eq", "vimeo");
         $mform->hideIf("playersize", "origem", "eq", "youtube");
         $mform->hideIf("playersize", "origem", "eq", "ottflix");
+        $mform->hideIf("playersize", "origem", "eq", "pandavideo");
         $mform->hideIf("playersize", "origem", "eq", "link");
 
         $config = get_config("supervideo");
@@ -141,12 +183,14 @@ class mod_supervideo_mod_form extends moodleform_mod {
             $mform->addElement("advcheckbox", "showcontrols", get_string("showcontrols_desc", "mod_supervideo"));
             $mform->setDefault("showcontrols", $config->showcontrols);
             $mform->hideIf("showcontrols", "origem", "eq", "ottflix");
+            $mform->hideIf("showcontrols", "origem", "eq", "pandavideo");
         }
 
         if ($config->autoplay <= 1) {
             $mform->addElement("advcheckbox", "autoplay", get_string("autoplay_desc", "mod_supervideo"));
             $mform->setDefault("autoplay", $config->autoplay);
             $mform->hideIf("autoplay", "origem", "eq", "ottflix");
+            $mform->hideIf("autoplay", "origem", "eq", "pandavideo");
         }
 
         // Adding the standard "intro" and "introformat" fields.
@@ -165,8 +209,12 @@ class mod_supervideo_mod_form extends moodleform_mod {
         ];
         $mform->addElement("select", "grade_approval", get_string("grade_approval", "mod_supervideo"), $values);
 
-        $mform->addElement("select", "gradecat", get_string("gradecategoryonmodform", "grades"),
-            grade_get_categories_menu($COURSE->id, false));
+        $mform->addElement(
+            "select",
+            "gradecat",
+            get_string("gradecategoryonmodform", "grades"),
+            grade_get_categories_menu($COURSE->id, false)
+        );
         $mform->addHelpButton("gradecat", "gradecategoryonmodform", "grades");
         $mform->hideIf("gradecat", "grade_approval", "eq", "0");
 
@@ -189,11 +237,17 @@ class mod_supervideo_mod_form extends moodleform_mod {
             $course = $this->optional_param("course", 0, PARAM_INT);
             $section = $this->optional_param("section", false, PARAM_INT);
             if ($course && $section !== false) {
-                $courseinfo = "course={$course}&section={$section}&sesskey=" . sesskey();
+                $courseinfo = "course={$course}&section={$section}&token=" . sesskey();
             }
         }
+
+        $config = get_config("supervideo");
         $PAGE->requires->strings_for_js(["record_kapture"], "supervideo");
-        $PAGE->requires->js_call_amd("mod_supervideo/mod_form", "init", [$supervideo->origem, $USER->lang, $courseinfo]);
+        $PAGE->requires->js_call_amd(
+            "mod_supervideo/mod_form",
+            "init",
+            [$USER->lang, $courseinfo]
+        );
     }
 
     /**
@@ -204,12 +258,10 @@ class mod_supervideo_mod_form extends moodleform_mod {
     public function data_preprocessing(&$defaultvalues) {
         parent::data_preprocessing($defaultvalues);
         if ($this->current->instance) {
-
             $draftitemid = file_get_submitted_draft_itemid("videofile");
-
             if (isset($defaultvalues["id"])) {
                 $id = intval($defaultvalues["id"]);
-                file_prepare_draft_area($draftitemid, $this->context->id, "mod_supervideo", "content", $id, ['subdirs' => true]);
+                file_prepare_draft_area($draftitemid, $this->context->id, "mod_supervideo", "content", $id, ["subdirs" => true]);
                 $defaultvalues["videofile"] = $draftitemid;
             }
         }
@@ -242,11 +294,10 @@ class mod_supervideo_mod_form extends moodleform_mod {
      * add_completion_rules_oold function
      *
      * @return array
-     *
-     * @throws coding_exception
+     * @throws Exception
      */
     public function add_completion_rules_oold() {
-        $mform =& $this->_form;
+        $mform = &$this->_form;
 
         $mform->addElement("text", "completionpercent", get_string("completionpercent", "mod_supervideo"), ["size" => 4]);
         $mform->addHelpButton("completionpercent", "completionpercent", "mod_supervideo");
@@ -260,21 +311,33 @@ class mod_supervideo_mod_form extends moodleform_mod {
      * Part of the API defined by moodleform_mod
      *
      * @return array Array of string IDs of added items, empty array if none
-     *
-     * @throws coding_exception
+     * @throws Exception
      */
     public function add_completion_rules() {
         $mform = &$this->_form;
         $group = [
-            $mform->createElement("checkbox", "completionpercentenabled", "",
-                get_string("completionpercent_label", "mod_supervideo")),
-            $mform->createElement("text", "completionpercent",
-                get_string("completionpercent_label", "mod_supervideo"), ["size" => "2"]),
+            $mform->createElement(
+                "checkbox",
+                "completionpercentenabled",
+                "",
+                get_string("completionpercent_label", "mod_supervideo")
+            ),
+            $mform->createElement(
+                "text",
+                "completionpercent",
+                get_string("completionpercent_label", "mod_supervideo"),
+                ["size" => "2"]
+            ),
             $mform->createElement("html", "%"),
         ];
 
-        $mform->addGroup($group, "completionpercentgroup", get_string("completionpercent", "mod_supervideo"),
-            [" "], false);
+        $mform->addGroup(
+            $group,
+            "completionpercentgroup",
+            get_string("completionpercent", "mod_supervideo"),
+            [" "],
+            false
+        );
         $mform->disabledIf("completionpercent", "completionpercentenabled", "notchecked");
         $mform->setDefault("completionpercent", 0);
         $mform->setType("completionpercent", PARAM_INT);
@@ -285,7 +348,6 @@ class mod_supervideo_mod_form extends moodleform_mod {
      * completion_rule_enabled function
      *
      * @param array $data
-     *
      * @return bool
      */
     public function completion_rule_enabled($data) {
@@ -297,10 +359,8 @@ class mod_supervideo_mod_form extends moodleform_mod {
      *
      * @param $data
      * @param $files
-     *
      * @return array
-     *
-     * @throws coding_exception
+     * @throws Exception
      */
     public function validation($data, $files) {
         global $USER;
@@ -330,8 +390,8 @@ class mod_supervideo_mod_form extends moodleform_mod {
         if ($origem == "upload") {
             $usercontext = context_user::instance($USER->id);
             $fs = get_file_storage();
-            if (!$videofile = $fs->get_area_files($usercontext->id, 'user', 'draft', $data['videofile'], 'sortorder, id', false)) {
-                $errors['videofile'] = get_string('required');
+            if (!$videofile = $fs->get_area_files($usercontext->id, "user", "draft", $data["videofile"], "sortorder, id", false)) {
+                $errors["videofile"] = get_string("required");
                 return $errors;
             }
         } else {
@@ -345,7 +405,6 @@ class mod_supervideo_mod_form extends moodleform_mod {
                 }
             }
         }
-
         return $errors;
     }
 }

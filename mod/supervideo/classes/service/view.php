@@ -32,7 +32,7 @@ require_once("$CFG->libdir/externallib.php");
  * Service view for mod_supervideo.
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view extends external_api {
@@ -75,7 +75,6 @@ class view extends external_api {
 
         $context = context_module::instance($cm->id);
         self::validate_context($context);
-
         require_capability('mod/supervideo:view', $context);
 
         supervideo_view($supervideo, $course, $cm, $context);

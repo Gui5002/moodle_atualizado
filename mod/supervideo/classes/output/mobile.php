@@ -16,13 +16,15 @@
 
 namespace mod_supervideo\output;
 
-use mod_supervideo;
+use core_external\util;
+use Exception;
+use moodle_url;
 
 /**
  * Output Mobile for mod_supervideo.
  *
  * @package   mod_supervideo
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mobile {
@@ -33,25 +35,43 @@ class mobile {
      * @param $args
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public static function mobile_course_view($args) {
-        global $CFG, $OUTPUT, $USER;
+        global $OUTPUT;
 
+        $url = new moodle_url("/mod/supervideo/view-mobile.php", [
+            "id" => $args["cmid"],
+            "token" => self::get_token(),
+        ]);
         $data = [
-            'cmid' => $args['cmid'],
-            'wwwroot' => $CFG->wwwroot,
-            'user_id' => $USER->id,
-            't' => time(),
+            "cmid" => $args["cmid"],
+            "iframe-url" => $url->out(false),
         ];
 
         return [
-            'templates' => [
+            "templates" => [
                 [
-                    'id' => 'main',
-                    'html' => $OUTPUT->render_from_template('mod_supervideo/mobile_view_page', $data),
+                    "id" => "main",
+                    "html" => $OUTPUT->render_from_template("mod_supervideo/mobile", $data),
                 ],
             ],
+            "javascript" => "",
+            "otherdata" => "",
+            "files" => [],
         ];
+    }
+
+    /**
+     * Get Token from access
+     *
+     * @return int returns token id.
+     * @throws Exception
+     */
+    private static function get_token() {
+        global $DB;
+
+        $service = $DB->get_record("external_services", ["shortname" => MOODLE_OFFICIAL_MOBILE_SERVICE], "*", MUST_EXIST);
+        return util::generate_token_for_current_user($service)->token;
     }
 }

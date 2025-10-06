@@ -19,7 +19,7 @@
  *
  * @package   mod_supervideo
  * @category  backup
- * @copyright 2024 Eduardo kraus (http://eduardokraus.com)
+ * @copyright 2024 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -64,7 +64,7 @@ class restore_supervideo_activity_structure_step extends restore_activity_struct
             $data->timemodified = time();
         }
 
-        if ($data->grade < 0) {
+        if (isset($data->grade) && $data->grade < 0) {
             // Scale found, get mapping.
             $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }

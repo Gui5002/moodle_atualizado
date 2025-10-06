@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy information for administration tool upload enrolment methods- no user data stored.
+ * Privacy information for Atto Word import plugin - no user data stored.
  *
  * @package     atto_wordimport
  * @copyright   2018 Eoin Campbell
@@ -23,8 +23,6 @@
  */
 
 namespace atto_wordimport\privacy;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for atto_wordimport implementing null_provider.
@@ -40,7 +38,7 @@ class provider implements \core_privacy\local\metadata\null_provider {
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }
