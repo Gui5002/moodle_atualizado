@@ -1,4 +1,0 @@
-<?php
-$plugin->component = 'block_eva_abouteva_info';
-$plugin->version = 2020082613.59;
-$plugin->requires = 2018051700;

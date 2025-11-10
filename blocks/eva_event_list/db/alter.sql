@@ -1,1 +1,0 @@
-ALTER TABLE moodle.mdl_event ADD eventimage varchar(200) NULL;

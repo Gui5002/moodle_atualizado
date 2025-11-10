@@ -1,7 +1,0 @@
-{
-    "moodle-atto_reciteditor-button": {
-        "requires": [
-            "moodle-editor_atto-plugin"
-        ]
-    }
-}

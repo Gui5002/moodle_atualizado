@@ -1,1 +1,0 @@
-ALTER TABLE moodle.mdl_post ADD category BIGINT(10) NULL;
