@@ -1,0 +1,57 @@
+
+@media screen and (max-width: 790px) {
+    .felement .d-md-inline-block, .form-autocomplete-multiple {
+        width: 95% !important;
+    }
+    .ccnDashBlCt {
+        padding: 0;
+        font-size: 1rem;
+    }
+    .bitem .icon {
+        text-align: left!important;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .felement .d-md-inline-block, .form-autocomplete-multiple {
+        width: 50% !important;
+    }
+    .bitem .custom-select {
+        width: 50%!important;
+    }
+    .bitem .afastamento_id, .bitem .resp_default {
+        width: 95%!important;
+    }
+    .bitem .data_select {
+        width: 100% !important;
+    }
+    .bitem .qt_dias {
+        width: 10% !important;
+    }
+    .bitem .notacapes {
+        width: 10% !important;
+    }
+
+}
+
+/*.btoggler {*/
+/*    !* display: none; *!*/
+/*    width: 47%;*/
+/*    !*margin-left: 16.5%;*!*/
+/*    font-weight: 600;*/
+/*    margin-bottom: 0px;*/
+/*    padding: 4px 0px;*/
+/*}*/
+
+.fdescription {
+    text-align: center;
+}
+
+.badge {
+    padding: .5rem!important;
+}
+
+.cardprimary {
+    background: #0c3551;
+    color: white;
+}

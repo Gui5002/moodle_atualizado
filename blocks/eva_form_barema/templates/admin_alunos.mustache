@@ -1,0 +1,173 @@
+<style>
+    @media (max-width: 320px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+        .main-title h3 {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500!important;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .main-title p {
+            font-size: 14px;
+            text-align: justify!important;
+        }
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column}
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: center!important;
+        }
+        .rtable tbody tr {
+            border: 1px solid #e5e5e5;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            content: none!important;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+        }
+    }
+    @media (max-width: 790px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column;}
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: right;
+        }
+        .rtable tbody tr {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            width: 40%;
+            content: attr(data-title);
+            text-align: left;
+            display: block;
+            position: absolute;
+            background-color: #0c3551;
+            top: 0;
+            left: 0;
+            height: 50px;
+            padding: 10px 20px;
+            color: #FFFFFF;
+        }
+        .rtable tbody tr .btnbg:before {
+            display: none;
+        }
+        /*.rtable .btnEditModal, .rtable .btnDeleteModal {*/
+        /*    text-align: center;*/
+        /*    !*display: flex; flex-direction: column;*!*/
+        /*}*/
+    }
+    @media only screen and (max-width: 1200px) {
+    }
+    .main-title h3 {
+        display: inline-block;
+        font-size: 25px;
+        font-weight: 600!important;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .card {
+        border: 1px solid rgba(0,0,0,.125);;
+    }
+    .tableprimary {
+        background: #0c3551;
+        color: white;
+    }
+    .tableprimary:hover {
+        background: #0c3551;
+    }
+    .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
+        padding: 12px 16px;
+        background-color: #01101f;
+        border: 1px solid #01101f;
+        color: #fff;
+    }
+    .btn-thm:hover {
+        color: #0c3551!important;
+    }
+    .status_red{
+        color: red;
+    }
+    .status_blue{
+        color: #0a78d1;
+    }
+    .status_verde{
+        color: #157e07;
+    }
+    tbody a .i-con {
+        font-size: 18px; color: #19538D; margin: 0;
+    }
+</style>
+{{> block_eva_form_barema/modal_autoriza }}
+<div class="">
+    <div class="card-title text-center">Alunos</div>
+    <div class="fz17 fw500"><b>Avaliador(a) :</b> {{avaliador_selecionado}}</div>
+    <div class="fz17 fw400"><b>Barema :</b> {{barema}}</div>
+    <div class="fz17 fw400"><b>Curso :</b> {{curso}}</div>
+    <div class="fz17 fw400"><b>Atividade :</b> {{atividade}}</div>
+    <br>
+    <div class="section mb20">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-primary btn-thm btnAdicionarModal"
+                   data-baremaid="{{baremaid}}"
+                   data-root="{{{ config.wwwroot }}}"
+                   href="/blocks/eva_form_barema/gerencia.php?admin=curso"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
+            </div>
+        </div>
+    </div>
+<!--    <h4><b class="fw700">Avaliador(a) :</b> {{avaliador}}</h4>-->
+    <table class="table table-sm table-striped table-responsive-sm table-hover rtable">
+        <thead class="tableprimary text-left">
+        <tr>
+            <th class="text-center">#</th>
+            <th>Aluno</th>
+            <th class="text-center">Suap</th>
+            <th class="text-center">Data Avaliação</th>
+            <th class="text-center">Nota</th>
+            <th class="text-center">Ação</th>
+        </tr>
+        </thead>
+        <tbody class="fz14">
+        {{#listagrupoalunos}}
+            <tr>
+                <td class="text-center">{{alunoid}}</td>
+                <td data-title="#" class="{{textColor}}">{{nome}}{{{acao_link}}}</td>
+                <td class="text-center">{{suap}}</td>
+                <td class="text-center">{{data}}</td>
+                <td class="{{status}} text-center fw600">{{nota}}</td>
+                <td class="text-center">
+                    <a href="#" class="autorizacao {{display}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       data-id="{{idatribuicao}}"
+                       data-idaluno="{{alunoid}}"
+                       data-toggle="modal"
+                       data-target="#modalAutoriza"><i class="flaticon-key-1 i-con fw700" title="Autorizar"></i>
+                    </a>
+                </td>
+            </tr>
+        {{/listagrupoalunos}}
+        </tbody>
+    </table>
+<!--    page 1, {{results}} results-->
+</div>
+<script type="text/javascript" src="/blocks/eva_form_barema/js/modal_autoriza.js"></script>

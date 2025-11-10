@@ -1,0 +1,217 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" xmlns="http://www.w3.org/1999/html"/>
+<link rel="stylesheet" href="/blocks/eva_form_barema/css/alunos_avaliado.css">
+
+<div class="section mb20">
+    <div class="row">
+        <div class="col-md-12">
+            <a class="btn btn-primary btn-thm btnAdicionarModal"
+               data-baremaid="{{baremaid}}"
+               data-root="{{{ config.wwwroot }}}"
+               href="/blocks/eva_form_barema/gerencia.php?avaliador={{voltar}}"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
+        </div>
+    </div>
+</div>
+
+<div class="">
+
+    <h4><b class="fw700">Curso :</b> {{cursoalunos}}</h4>
+    <h4><b class="fw700">Avaliador(a) :</b> {{nomeavaliador}}</h4>
+    <h4 class="text-center"><b class="fw600" style="font-size: 20px;">Lista de alunos para avaliação</b></h4>
+
+    <div class="row form-group">
+        <div class="col-md-6 offset-md-3 col-form-label d-flex pb-0 pr-md-0">
+            <table class="table table-sm table-striped table-responsive-sm table-hover rtable">
+                <thead class="tableprimary ">
+                <tr>
+                    <th>#</th>
+                    <th>Alunos</th>
+                    <th class="text-center">Ação</th>
+                </tr>
+                </thead>
+                <tbody class="fz14">
+                {{#listalunos}}
+                    <tr>
+                        <td data-title="#">{{id}}</td>
+                        <td data-title="Aluno" class="{{textColor}}">{{alunos}}</td>
+<!--                        <td data-title="link" class="tc"><a href="{{href_link}}" title="Fazer Avaliação"><i class="flaticon-download-1 {{dnone}}" style="font-weight: 600;font-size: 15px;"></i></a></td>-->
+                        <td data-title="link" class="tc"><a href="{{href_link}}" title="Fazer Avaliação">{{{acao_link}}}</a></td>
+                    </tr>
+                {{/listalunos}}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <hr>
+
+
+
+    <div class="row form-group">
+        <div class="col-md-12 col-form-label d-flex pb-0 pr-md-0">
+
+            <table class="table table-sm table-striped table-responsive-sm table-hover text-left rtable">
+                <caption style="font-size: 20px;">Alunos Avaliados
+                    <section class="section">
+                        <form method="get" class="form-busca">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group fg">
+                                        <div class="col-md-3">
+                                            <label>Curso</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select name="curso" id="id_curso" class="custom-select" style="width: 100%">
+                                                <option value=""></option>
+                                                {{#cursos}}
+                                                    <option value="{{valor}}" {{selected}}>{{selecao}}</option>
+                                                {{/cursos}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group fg">
+                                        <div class="col-md-3">
+                                            <label>Atividade</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select name="atividade" id="id_atividade" class="custom-select" style="width: 100%">
+                                                <option value=""></option>
+                                                {{#atividades}}
+                                                    <option value="{{valor}}" {{selected}}>{{selecao}}</option>
+                                                {{/atividades}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group fg {{hidden}}">
+                                        <div class="col-md-3">
+                                            <label>Aluno</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select name="aluno" id="idaluno" class="custom-select" style="width: 100%">
+                                                <option value=""></option>
+                                                {{#alunos}}
+                                                    <option value="{{valor}}" {{selected}} >{{selecao}}</option>
+                                                {{/alunos}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="qt_aluno_por_avaliador" value="{{id_tbavaliador}}">
+                                    <div class="d-flex align-items-center mt-4">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary" name="listar">
+                                                <i class="flaticon-magnifying-glass" id="yui_3_17_2_1_1647205690370_21" style="font-weight: 600;font-size: 15px;"></i>
+                                            </button>
+                                            <a href="{{{ config.wwwroot }}}/blocks/eva_form_barema/gerencia.php?qt_aluno_por_avaliador={{id_tbavaliador}}" class="btn btn-primary">
+                                                <i class="flaticon-delete-button" id="yui_3_17_2_1_1647205690370_21" style="font-weight: 400;font-size: 15px;"></i> Limpar Filtro
+                                            </a>
+                                            <button type="submit" name="relatorio" class="btn btn-primary" href="#" onclick="open('barema_lista.php?PDF{{filters}}&relatorio=pdf','','status=no, Width=1200, Height=800');">
+                                                <i class="ccn-flaticon-document" id="yui_3_17_2_1_1647205690370_21" style="font-weight: 400;font-size: 15px;"></i> PDF
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                </caption>
+                <thead class="tableprimary fz15">
+                <tr>
+                    <th>Curso</th>
+                    <th>Atividade</th>
+                    <th {{hidden}}>Avaliador</th>
+                    <th>Aluno</th>
+                    <th class="text-center">Avaliação</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#dadosAvaliacao}}
+                    <tr class="{{fwdata}}" style="font-size: 13px;">
+
+                        <td data-title="Curso">{{curso}}</td>
+                        <td data-title="Atividade">{{atividade}}</td>
+                        <td data-title="Avaliador" {{hidden}}>{{avaliador}}</td>
+                        <td data-title="Aluno">{{aluno}}</td>
+                        <td class="tdright fw600" data-title="Data">{{data_avaliacao}}</td>
+                        <td class="tdright" data-title="Ação">
+                            <a class="" href="#" onclick="open('barema_lista.php?attemp=view&id={{id}}','','status=no, Width=1000, Height=800');">
+                            <i class="flaticon-preview" id="yui_3_17_2_1_1647205690370_21" style="font-weight: 600;font-size: 18px;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {{/dadosAvaliacao}}
+                </tbody>
+                <tfoot class="bg-gray text-right pr20">
+                <!--        <tr class="bg-gray"><td colspan="8"><sapn>Pagina {{page}}, {{results}} resultados, Total de {{registros}} registros</sapn></td></tr>-->
+                <tr><td colspan="8" class="fz14"><span>Total de {{registros}} registros</span></td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <nav aria-label="paginacao">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="{{primeiro}}" aria-label="Previous">
+                <span aria-hidden="true">Primeiro</span>
+            </a>
+            </li>
+            <!--    =============== AQUI INCLUI DUAS PAGINAS A- ANTES DO ATUAL =================-->
+            {{#links_ant}}
+                <li class="page-item {{select}}">
+                    <a href="{{href_ant}}" class="page-link">{{pg_ant}}</a>
+                </li>
+            {{/links_ant}}
+
+            <!--    =============== AQUI É A PAGINA ATUAL=================-->
+            {{#links_atual}}
+                <li class="page-item {{select}}">
+                    <a class="page-link">{{pg_atual}}</a>
+                </li>
+            {{/links_atual}}
+
+            <!--    =============== AQUI INCLUI DUAS PAGINAS A+ DEPOIS DO ATUAL =================-->
+            {{#links_dep}}
+                <li class="page-item {{select}}">
+                    <a href="{{href_dep}}" class="page-link">{{pg_dep}}</a>
+                </li>
+            {{/links_dep}}
+            <!--   ============== AQUI INCLUI OS PONTOS E A ULTIMA PG DEPOIS NO FINAL ============-->
+            {{#links_ultimo}}
+                <li class="page-item {{select}}">
+                    <a href="#" class="page-link">{{pontos}}</a>
+                </li>
+                <li class="page-item {{select}}">
+                    <a href="{{href_ultimo}}" class="page-link">{{ultima_pg}}</a>
+                </li>
+            {{/links_ultimo}}
+            <li class="page-item">
+                <a class="page-link" href="{{ultima}}" aria-label="Next">
+                    <span aria-hidden="true">Última</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    setTimeout(function (){
+        $(".notifications .alert").fadeOut("slow", function () {
+            $(this).alert('close');
+        });
+    }, 5000);
+
+    $(".custom-select").select2({
+        placeholder: 'Buscar',
+        width: 'resolve'
+    });
+    $('.ccnDashBlHd ').addClass('hidden');
+    $(document).ready(function (){
+        $("[data-toggle=tooltip]").tooltip();
+    });
+</script>
+
+<br>
+<br>
+
+

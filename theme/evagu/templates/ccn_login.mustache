@@ -1,0 +1,44 @@
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+    {{> theme_evagu/ccn_preloader }}
+    <div class="wrapper" id="page-content">
+        {{> theme_boost/navbar }}
+        {{{ output.standard_top_of_body_html }}}
+        <section class="our-log bgc-fa d-flex align-items-center justify-content-center"
+            style="min-height: calc(100vh - 100px);">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-lg-8">
+                        <div class="login_form inner_page">
+                            <button type="button" class="btn-close custom-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            <section class="login_text-center">
+                                <div class="logo-esagu img-fluid">
+                                    <img src="/theme/evagu/images/login/logo-esagu.png" alt="Logo Esagu">
+                                </div>
+                                {{{ output.main_content }}}
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{> theme_boost/footer }}
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</body>
+
+</html>
+
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+M.util.js_complete('theme_boost/loader');
+});
+M.util.js_pending('theme_boost/drawer');
+require(['theme_boost/drawer'], function(mod) {
+mod.init();
+M.util.js_complete('theme_boost/drawer');
+});
+{{/js}}

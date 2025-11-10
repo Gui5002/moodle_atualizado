@@ -1,0 +1,55 @@
+.title {
+    display: none;
+}
+
+.blog_tag_widget {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.card-header2 {
+    border-top: 1px solid rgb(121 132 138) !important;
+    margin-bottom: -5px!important;
+    border-radius: 0px!important;
+    position: relative;
+    padding: 15px 20px !important;
+    color: inherit;
+    border-bottom: 0px !important;
+    background-color: none!important;
+}
+
+.cor_acordion2,
+.card-header2 {
+    background-color: hsl(240deg 5% 96%);
+}
+
+@media (min-width: 996px) {
+    .w-card {
+        max-width: 600px;
+    }
+    .img_about {
+        width: 640px;
+        height: 700px;
+    }
+}
+
+.ccn-row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#accordion {
+    width: 100%;
+    position: relative;
+}
+
+.fl-right {
+    text-align: -webkit-right;
+    text-align: -moz-right;
+}
+
+.pl {
+    padding: -1px!important;
+    padding-left: 30px;
+    padding-bottom: 40px;
+}

@@ -1,0 +1,117 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+}
+
+input[type=text], select, input[type=number] {
+    height: 44px !important;
+    /*box-shadow: none !important;*/
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 9%);
+
+}
+
+textarea {
+    box-shadow: none !important;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 9%);
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.fontSize2{
+    font-size: 16px !important;
+    text-align: left;
+}
+.cifrao {
+    position: absolute;
+    z-index: 4;
+    top: 10px;
+    left: 13px;
+    font-weight: 500;
+    color: #777777;
+}
+.pl-6 {
+    padding-left: 45px !important;
+}
+.form-label-addon {
+    margin-left: auto;
+}
+
+.boxe {
+    overflow-y: scroll;
+    height: 150px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid rgba(153, 170, 203, 0.44);
+}
+
+@media (min-width: 440px) and (max-width: 697px) {
+    .ccnBlockContent{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .ccnDashBlCt{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+@media (min-width: 365px) and (max-width: 439px) {
+    .fontSize{
+        font-size: 20px !important;
+    }
+
+    .container-fluid{
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .ccnBlockContent{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .ccnDashBlCt{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 364px) {
+    .fontSize{
+        font-size: 10px !important;
+    }
+
+    .fontSize2{
+        font-size: 8px !important;
+    }
+
+    .container-fluid{
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .ccnBlockContent{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .ccnDashBlCt{
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+}

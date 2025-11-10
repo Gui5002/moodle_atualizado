@@ -1,0 +1,451 @@
+@media (max-width: 500px) {
+
+    .rtable tbody tr td {
+        position: relative;
+    }
+
+    .main-title h3 {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 500 !important;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .main-title p {
+        font-size: 14px;
+        text-align: justify !important;
+    }
+
+    .ccnDashBlCt {
+        padding: 10px 10px;
+        font-size: 1rem;
+    }
+
+    .rtable thead {
+        display: none;
+    }
+
+    .rtable tbody td {
+        display: flex;
+        flex-direction: column
+    }
+
+    .rtable tbody tr td {
+        /*display: block;*/
+        text-align: center !important;
+    }
+
+    .rtable tbody tr {
+        border: 1px solid #e5e5e5;
+
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .rtable tbody tr td:before {
+        content: none !important;
+    }
+
+    .rtable .btnEditModal,
+    .rtable .btnDeleteModal {
+        text-align: center;
+        /*display: flex; flex-direction: column;*/
+
+    }
+
+}
+
+@media (min-width: 320px) {
+    .breadcrumb_widgets {
+        margin-top: 12px;
+    }
+
+    .ccnDashBlCt {
+        padding: 0px 10px !important;
+    }
+
+    section {
+        padding: 10px 0 !important;
+    }
+
+    /*.select2-container {*/
+    /*    width: 150%!important;*/
+    /*    position: relative;*/
+    /*}*/
+    .col-xs-12,
+    .col-sm-12,
+    .col-lg-12 {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .form-busca .col-md-3,
+    .col-md-9 {
+        padding-left: 0px !important;
+    }
+
+    .fg {
+        width: 100%;
+    }
+
+    .tc {
+        text-align: right;
+    }
+
+    .dashboard_main_content .breadcrumb_widgets .title {
+        margin-top: 15px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 38px;
+        font-size: 14px;
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+        font-size: 13px;
+    }
+
+    label {
+        margin-bottom: 0px !important;
+    }
+}
+
+@media (min-width: 401px) {
+    .dashboard_main_content .breadcrumb_widgets .title {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .table-responsive-sm {
+        display: table;
+        !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .rtable tbody tr td {
+        position: relative;
+    }
+
+    .ccnDashBlCt {
+        padding: 10px 10px;
+        font-size: 1rem;
+    }
+
+    .rtable thead {
+        display: none;
+    }
+
+    .rtable tbody td {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rtable tbody tr td {
+        /*display: block;*/
+        text-align: right;
+        !important;
+    }
+
+    .rtable tbody tr {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .rtable tbody tr td:before {
+        width: 40%;
+        content: attr(data-title);
+        text-align: left;
+        display: block;
+        position: absolute;
+        background-color: #0c3551;
+        top: 0;
+        left: 0;
+        height: 34px;
+        padding: 6px 12px;
+        color: #FFFFFF;
+
+    }
+
+    .rtable tbody tr .btnbg:before {
+        display: none;
+    }
+
+    .rtable .btnEditModal,
+    .rtable .btnDeleteModal {
+        text-align: center;
+        /*display: flex; flex-direction: column;*/
+
+    }
+}
+
+@media (min-width: 768px) {
+    .breadcrumb_widgets {
+        margin-top: 15px;
+    }
+
+    .ccnDashBlCt {
+        padding: 0px 10px !important;
+    }
+
+    section {
+        padding: 10px 0 !important;
+    }
+
+    /*.select2-container {*/
+    /*    width: 100%!important;*/
+    /*    position: relative;*/
+    /*}*/
+    .col-xs-12,
+    .col-sm-12,
+    .col-lg-12 {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+
+    .form-busca .col-md-3,
+    .col-md-9 {
+        padding-left: 5px !important;
+        max-width: 100%;
+    }
+
+    .fg {
+        width: 50%;
+        !important;
+    }
+
+    .dashboard_main_content .breadcrumb_widgets .title {
+        margin-top: 4px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 38px;
+        font-size: 14px;
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+        font-size: 13px;
+    }
+
+    label {
+        margin-bottom: 0px !important;
+    }
+}
+
+@media (min-width: 993px) {
+    .breadcrumb_widgets {
+        margin-top: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .ccnDashBlCt {
+        padding: 20px 30px !important;
+    }
+
+    section {
+        padding: 10px 0 !important;
+    }
+
+    .col-xs-12,
+    .col-sm-12,
+    .col-lg-12 {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .form-busca .col-md-3,
+    .col-md-9 {
+        padding-left: 0px !important;
+    }
+
+    .fg {
+        width: 32%;
+    }
+
+    .tc,
+    .tdright {
+        text-align: center;
+    }
+
+    .dashboard_main_content .breadcrumb_widgets .title {
+        margin-top: 4px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 38px;
+        font-size: 14px;
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+        font-size: 13px;
+    }
+
+    label {
+        margin-bottom: 0px !important;
+    }
+}
+
+@media (min-width: 1689px) {
+    .ccnDashBlCt {
+        padding: 20px 30px !important;
+    }
+
+    section {
+        padding: 10px 0 !important;
+    }
+
+    .col-xs-12,
+    .col-sm-12,
+    .col-lg-12 {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .form-busca .col-md-3,
+    .col-md-9 {
+        padding-left: 0px !important;
+    }
+
+    .fg {
+        width: 25%;
+    }
+
+    .tc,
+    .tdright {
+        text-align: center;
+    }
+
+    .dashboard_main_content .breadcrumb_widgets .title {
+        margin-top: 4px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 38px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 38px;
+        font-size: 14px;
+    }
+
+    .select2-container--default .select2-results>.select2-results__options {
+        font-size: 13px;
+    }
+
+    label {
+        margin-bottom: 0px !important;
+    }
+}
+
+.table td,
+.table th {
+    padding: .40rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.dashboard_main_content .btn-primary,
+.modal:not(.sign_up_modal) .btn-primary,
+.btn-primary {
+    padding: 12px 16px;
+    background-color: #01101f;
+    border: 1px solid #01101f;
+    color: #fff;
+
+}
+
+.btn-thm:hover {
+    color: #0c3551 !important;
+}
+
+.dashboard_main_content .btn:not(.btn-link) {
+    color: #fff !Important;
+    line-height: 1;
+    padding: 8px 14px;
+    margin-right: 5px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    background-color: #0c3551;
+}
+
+/*===============================================================*/
+
+.main-title h3 {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 600 !important;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.card {
+    border: 1px solid rgba(0, 0, 0, .125);
+    ;
+}
+
+.tableprimary {
+    background: #0c3551;
+    color: white;
+}
+
+.tableprimary:hover {
+    background: #0c3551;
+}
+
+.dashboard_main_content .btn-primary,
+.modal:not(.sign_up_modal) .btn-primary,
+.btn-primary {
+    padding: 12px 16px;
+    background-color: #01101f;
+    border: 1px solid #01101f;
+    color: #fff;
+
+}
+
+.btn-thm:hover {
+    color: #0c3551 !important;
+}
+
+table caption section {
+    font-weight: 100;
+    !important;
+    font-size: 16px;
+}
+
+
+.fw-hoje {
+    font-weight: 600;
+    color: green;
+}
+
+.fw-old {
+    font-weight: 400;
+}
+
+/*.status_orange{*/
+/*    color: #e78900;*/
+/*}*/
+
+/*.lb-alunos{*/
+/*    align-self: center;*/
+/*}*/
+/*.slect-alunos{*/
+/*    width: 70%;*/
+/*}*/

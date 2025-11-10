@@ -1,0 +1,2 @@
+# evadeclaration
+Bloco gera declaração

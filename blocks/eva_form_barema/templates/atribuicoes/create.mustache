@@ -1,0 +1,77 @@
+
+<link rel="stylesheet" href="/blocks/eva_form_barema/css/form_criar_barema.css">
+
+
+<!--{{> block_eva_form_barema/customize_config}}-->
+<div class="container-fluid">
+    <div class="">
+        <div class="section mb20">
+            <div class="row">
+                <div class="col-lg-12">
+<!--                       data-buiedit="{{idbarema}}"-->
+                    <a class="btn btn-primary btnConfigEdit"
+                       data-root="{{{ config.wwwroot }}}"
+                       href="/blocks/eva_form_barema/modelos/create.php?modelo=novo">
+                        <i class="icon fa flaticon-settings fa-fw"></i>Novo Modelo Barema
+                    </a>
+                    <a class="btn"
+                       id=""
+                       href="{{{ config.wwwroot }}}/blocks/eva_form_barema/avaliadores/list.php">
+                        <i class="icon fa ccn-flaticon-users fa-fw"></i>Gerenciar Avaliadores
+                    </a>
+                    <a class="btn"
+                       id="{{ idmsgpermission }}"
+                       href="{{admavaliacao}}">
+                        <i class="icon fa ccn-flaticon-agenda fa-fw"></i>Administração de Avaliação
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-info" role="alert">
+                    <strong>Configurar Barema para Avaliação</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border">
+                <div class="card-header text-center cardprimary">
+                    Formulário de atribuição
+                </div>
+                <div class="card-body bg-light wwwroot" data-root="{{{ config.wwwroot }}}">
+                    {{{formbarema}}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{{> block_eva_form_barema/modal_distribuicao_avaliacao}}
+{{> block_eva_form_barema/msg_sucesso}}
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script src="/blocks/eva_form_barema/js/eventoselect.js"></script>
+<script>
+    // $('.ccnDashBlHd ').addClass('d-none')
+    $(document).ready(function (){
+
+        setTimeout(function (){
+            $(".notifications .alert").fadeOut("slow", function () {
+                $(this).alert('close');
+            });
+        }, 5000);
+    });
+</script>
+
+

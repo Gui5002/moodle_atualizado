@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/blocks/eva_about_databases/databases.css">
+<div class="container-fluid" style="background-color: white">
+    <div class="container">
+        <div class="row cor_acordion pt-5 pb-5 mt15 {{reverso}} ">
+            <div class="col-lg-6">
+                <div class="text-{{posicion_info}} divimg1">
+                    <div class="divimg2"></div>
+                    <img data-ccn="image" data-ccn-img="src" class="img-fluid img_about" src="{{img}}">
+                </div>
+            </div>
+            <div class="col-lg-6 fl-{{posicion_img}} mt30">
+                {{#info}}
+                <div class="text-left dbtexto">
+                    <div style="font-size: 20px; font-weight: 600; color: #000; text-shadow: 1px 1px 7px #aeaeae;">{{main_title}}</div>
+                    <hr>
+                    <p ata-ccn="{{{ccnAccBody}}}">{{{info_text}}}</p>
+                </div>
+                {{/info}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<section id="eva-catalogo-container-{{instanceid}}" class="eva-catalogo-container" data-cursos="{{cursos_json}}">
+
+    <h1 class="eva-title">Catálogo de Cursos</h1>
+
+    <form class="js-filter-form" autocomplete="off">
+        <div class="eva-catalogo-filtros d-flex justify-content-center flex-wrap mb-3">
+
+            <div class="filter-box search-box w-100 mb-3">
+                <input type="text" name="nome" placeholder="Buscar por nome do curso..."
+                    class="js-filtro-nome search-input w-100" value="{{nome}}" />
+                <button type="submit" class="search-button" title="Buscar">
+                    <i class="icon fa fa-search fa-fw"></i>
+                </button>
+            </div>
+
+            <div class="dropdown mr-2 mb-2">
+                <button class="btn btn-sec dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Carga Horária
+                </button>
+                <div class="dropdown-menu p-2" aria-labelledby="dropdownCargaHoraria">
+                    {{#cargas}}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="carga_horaria"
+                            id="ch-{{value}}-{{instanceid}}" value="{{value}}" {{#checked}}checked{{/checked}}>
+                        <label class="form-check-label" for="ch-{{value}}-{{instanceid}}">{{label}}</label>
+                    </div>
+                    {{/cargas}}
+                </div>
+            </div>
+
+            <div class="dropdown mr-2 mb-2">
+                <button class="btn btn-sec dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Categorias
+                </button>
+                <div class="dropdown-menu p-3 keep-open dropdown-menu-scrollable" aria-labelledby="dropdownCategorias"
+                    style="min-width: 300px;">
+                    {{#categorylist}}
+                    <div class="mb-2">
+                        <strong>{{topparent}}</strong>
+                        <div style="margin-left: 0.6em; margin-top: 0.4em;">
+                            {{#categories}}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="category[]" value="{{value}}"
+                                    id="cat-{{id}}-{{instanceid}}" {{#checked}}checked{{/checked}}>
+                                <label class="form-check-label" for="cat-{{id}}-{{instanceid}}">{{name}}</label>
+                            </div>
+                            {{/categories}}
+                        </div>
+                    </div>
+                    {{/categorylist}}
+                </div>
+            </div>
+
+            <div class="dropdown mr-2 mb-2">
+                <button class="btn btn-sec dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Tags
+                </button>
+                <div class="dropdown-menu p-2 keep-open dropdown-menu-scrollable" aria-labelledby="dropdownTags"
+                    style="min-width: 250px;">
+                    <div class="filter-options"
+                        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                        {{#tagslist}}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="tags[]"
+                                id="tag-{{name}}-{{instanceid}}" value="{{name}}" {{#checked}}checked{{/checked}}>
+                            <label class="form-check-label" for="tag-{{name}}-{{instanceid}}">{{name}}</label>
+                        </div>
+                        {{/tagslist}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown mr-2 mb-2">
+                <button class="btn btn-sec dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Data
+                </button>
+                <div class="dropdown-menu p-3 keep-open" aria-labelledby="dropdownData">
+                    <div class="form-group mb-2">
+                        <label for="datainicio-{{instanceid}}">De</label>
+                        <input type="date" class="js-filtro-data-inicio form-control" name="datainicio"
+                            id="datainicio-{{instanceid}}" value="{{datainicio}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="datafim-{{instanceid}}">Até</label>
+                        <input type="date" class="js-filtro-data-fim form-control" name="datafim"
+                            id="datafim-{{instanceid}}" value="{{datafim}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-2">
+                <button type="button" class="js-btn-clear btn btn-one shadow ml-2">
+                    Limpar Filtro
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="js-catalogo-cards eva-catalogo-lista">
+        {{#cursos}}
+        <div class="eva-card">
+            <img src="{{image}}" alt="{{title}}" class="eva-img" />
+            <div class="eva-content">
+                <a href="{{courseurl}}">
+                    <h3>{{title}}</h3>
+                </a>
+                <p><strong>Carga horária:</strong> {{workload}}</p>
+                <div class="eva-botao">
+                    <a href="{{courseurl}}" class="btn-one" style="border:none">Ver mais</a>
+                    <a href="{{url}}" class="btn-sec" style="border:none">Inscrição</a>
+                </div>
+            </div>
+            <div class="eva_tags mb-2 ms-2" style="min-height: 2.2rem;">
+                {{#tags_array}}
+                <span class="eva-tag">{{.}}</span>
+                {{/tags_array}}
+            </div>
+        </div>
+        {{/cursos}}
+        {{^cursos}}
+        <div class="no-results">Nenhum curso encontrado com os filtros selecionados.</div>
+        {{/cursos}}
+    </div>
+
+    <div class="js-pagination-container col-sm-12"></div>
+</section>

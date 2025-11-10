@@ -1,0 +1,112 @@
+.title {
+    display: none;
+}
+.blog_tag_widget {
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+}
+.block_eva_continuing_education_b2 {
+    margin-top: 0px !important;
+}
+@media (min-width: 100px) and (max-width: 991px) {
+    .blockquotebar {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-left: 3px solid #ccc;
+        font-size: 1.2rem;
+        padding-left: 20px;
+        word-wrap: break-word;
+        position: relative;
+        font-style: italic;
+        text-align: justify;
+        color: #000000;
+    }
+    .textoPrincipal {
+        font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+        font-size: 1rem;
+        word-wrap: break-word;
+        position: relative;
+        text-align: justify;
+    }
+    .blockImage {
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .botaoPrincipal {
+        width: 100px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+    }
+    .botaoPrincipal:hover {
+        width: 100px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+    .divPrincipal {
+        padding: 30px;
+    }
+    .tituloPrincipal {
+        font-weight: 600;
+        margin: 0 auto !important;
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: justify;
+        line-height: 1.5rem;
+        font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+    }
+}
+@media (min-width: 992px) {
+    .blockquotebar {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-left: 3px solid #ccc;
+        font-size: 1.2rem;
+        padding-left: 20px;
+        word-wrap: break-word;
+        position: relative;
+        font-style: italic;
+        text-align: justify;
+    }
+    .textoPrincipal {
+        font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+        font-size: 1.2rem;
+        word-wrap: break-word;
+        position: relative;
+        text-align: justify;
+    }
+    .blockImage {
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .botaoPrincipal {
+        width: 100px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+    .botaoPrincipal:hover {
+        width: 100px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+    }
+    .divPrincipal {
+        padding: 30px;
+    }
+    .tituloPrincipal {
+        font-weight: 600;
+        margin: 0 auto !important;
+        font-size: 1.7em;
+        width: 100%;
+        text-align: justify;
+        font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+    }
+}

@@ -1,0 +1,738 @@
+<style>
+    .sombreamento {
+        -webkit-box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.42);
+        box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.42);
+    }
+
+    .row {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+
+    .jumbotron {
+        background-color: rgb(239 245 255 / 33%);
+        border-top: 2px solid rgb(225 230 239);
+        box-shadow: 0 5px 20px 0 rgb(0 0 0 / 16%);
+    }
+
+    #ccnSearchOverlayWrap {
+        display: none;
+    }
+
+    .ccnDashBlHd {
+        display: none;
+    }
+</style>
+<div id="divMsg" name="divMsg"></div>
+<div class="shortcode_widget_accprdons" style="width: 100%;">
+    <div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h1 class="fontSize" data-ccn="title" style="text-align: center;">{{title}}</h1>
+        </div>
+    </div>
+    <div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <p class="fontSize2" style="text-align: justify;" data-ccn="heading">{{heading}}</p>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h3 class="fontSize" data-ccn="subtitle">{{subtitle}}</h3>
+        </div>
+    </div>
+    <div class="jumbotron" style="margin-left: 0px !important; margin-right: 0px !important;">
+        <input type="hidden" id="ts" name="ts" value="{{ts}}">
+        <input type="hidden" id="pageid" name="pageid" value="{{pageid}}">
+
+        <div class="form-group row mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Cargo :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Selecione o Cargo."
+                        aria-label="Necessários"></i>
+                </label>
+
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <select data-ccn="select1" class="form-control" id="eva_slc_cargo" name="eva_slc_cargo">
+                    <option value="">&nbsp;</option>
+                    {{#for_op}}
+                    <option value="{{valor}}" {{selected_cargo}}>{{cargo}}</option>
+                    {{/for_op}}
+                </select>
+                <div class="form-control-feedback invalid-feedback"> - O Campo cargo esta vazio.</div>
+            </div>
+        </div>
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    <!--Órgão de direção superior :-->
+                    Órgão de Exercício :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Selecione a unidade da AGU, à qual se refere a necessidade de treinamento"
+                        aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <select data-ccn="select1" class="form-control" id="eva_slc_1" name="eva_slc_1">
+                    <option value="">&nbsp;</option>
+                    {{{select1_op}}}
+                </select>
+                <div class="form-control-feedback invalid-feedback"> - O Campo Órgão de direção superior esta vazio.
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    <!--                    Tema do treinamento :-->
+                    Tema da Capacitação :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Grave resumidamente o assunto do treinamento pretendido" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <textarea class="form-control" rows="3" id="eva_txtarea_1" name="eva_txtarea_1">{{ds_theme}}</textarea>
+                <div class="form-control-feedback invalid-feedback"> - O Campo Tema do treinamento esta vazio.</div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Áreas prioritárias correspondentes ao tema sugerido :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Se o treinamento se referir a mais de uma área prioritária, selecione cada uma das áreas correspondentes"
+                        aria-label="Necessários"></i>
+
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <div class="boxe" style="height: 300px;">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="0" id="eva_checkbox_10"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_10">Não aplicável</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="eva_checkbox_11"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_11">1. Meios adequados de resolução
+                            de conflitos na administração pública</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="2" id="eva_checkbox_12"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_12">2. Representação de agentes
+                            públicos pela AGU</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="3" id="eva_checkbox_13"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_13">3. Proteção da probidade e
+                            combate à corrupção</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="4" id="eva_checkbox_14"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_14">4. Direito digital, sigilo de
+                            dados e comunicação e direito à informação</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5" id="eva_checkbox_15"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_15">5. Recuperação de ativos</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="6" id="eva_checkbox_16"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_16">6. Direito Administrativo
+                            Sancionador</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="7" id="eva_checkbox_17"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_17">7. Proteção de políticas
+                            públicas</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="8" id="eva_checkbox_18"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_18">8. Licitações, contratos,
+                            convênios</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="9" id="eva_checkbox_19"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_19">9. Direito da saúde e
+                            judicialização da saúde</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="10" id="eva_checkbox_110"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_110">10. Recursos e Sistema de
+                            Precedentes no Processo Civil</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="11" id="eva_checkbox_111"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_111">11. Direito previdenciário e
+                            judicialização previdenciária</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="12" id="eva_checkbox_112"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_112">12. Controle de
+                            constitucionalidade e processo constitucional</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="13" id="eva_checkbox_113"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_113">13. Direito
+                            internacional</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="14" id="eva_checkbox_114"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_114">14. Processo Tributário</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="15" id="eva_checkbox_115"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_115">15. Direito Ambiental</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="16" id="eva_checkbox_116"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_116">16. Defesa da
+                            Democracia</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="17" id="eva_checkbox_117"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_117">17. Direito Regulatório</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="18" id="eva_checkbox_118"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_118">18. Crimes Contra a
+                            Administração Pública e Assistência da Acusação</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="19" id="eva_checkbox_119"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_119">19. Liderança, Competências
+                            Comportamentais, Comunicação e Gestão de Pessoas</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="20" id="eva_checkbox_120"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_120">20. Transformação Digital,
+                            Inteligência Artificial e Law Design</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="21" id="eva_checkbox_121"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_121">21. Governança, Gestão Pública,
+                            Gestão Estratégica e Auditoria Interna</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="22" id="eva_checkbox_122"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_122">22. Tecnologia da Informação e
+                            Análise de dados</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="23" id="eva_checkbox_123"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_123">23. Ética, Cidadania,
+                            Integridade e Transparência</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="24" id="eva_checkbox_124"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_124">24. Educação e Gestão
+                            Corporativa</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="25" id="eva_checkbox_125"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_125">25. Plano de logística
+                            sustentável e compras públicas</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="26" id="eva_checkbox_126"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_126">26. Gestão orçamentária</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="27" id="eva_checkbox_127"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_127">27. Diversidade e Gestão
+                            Inclusiva</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="28" id="eva_checkbox_128"
+                            name="eva_checkbox_1" {{checked1}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_128">28. Sustentabilidade
+                            Ambiental</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Justificativa / Necessidade a ser atendida com a capacitação:
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Discuta brevemente a necessidade de desenvolvimento em sua unidade que será atendida pelo treinamento sugerido"
+                        aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <textarea class="form-control fontSize2" rows="3" id="eva_txtarea_2"
+                    name="eva_txtarea_2">{{ds_development_need}}</textarea>
+                <div class="form-control-feedback invalid-feedback"> - Escreva as idéias descutida que será atendida
+                    pelo treinamento sugerido.</div>
+
+            </div>
+        </div>
+        <br />
+        <hr /><br />
+
+
+        <!--
+        <br/><hr/><br/>
+       <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Articulação com área prioritária para capacitação da AGU - eixo técnico-jurídico de gestão :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Se o treinamento se referir a mais de uma área prioritária, selecione cada uma das áreas correspondentes" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <div class="boxe">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="0" id="eva_checkbox_21" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_21">
+                            Não aplicável
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="38" id="eva_checkbox_22" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_22">
+                            38. Gestão de competências
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="39" id="eva_checkbox_23" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_23">
+                            39. Educação Corporativa
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="40" id="eva_checkbox_25" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_25">
+                            40. Designer industrial
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="41" id="eva_checkbox_26" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_26">
+                            41. Produção e edição de vídeo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="42" id="eva_checkbox_27" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_27">
+                            42. Design gráfico
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="43" id="eva_checkbox_28" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_28">
+                            43. Transformação digital e inteligência artificial
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="44" id="eva_checkbox_29" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_29">
+                            44. Inovação e tecnologia
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="45" id="eva_checkbox_30" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_30">
+                            45. Ciência da informação e de dados
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="46" id="eva_checkbox_31" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_31">
+                            46. Tecnologia da informação aplicada às atividades jurídicas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="47" id="eva_checkbox_32" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_32">
+                            47. Gestão pública e planejamento estratégico
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="48" id="eva_checkbox_33" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_33">
+                            48. Liderança e gestão de pessoas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="49" id="eva_checkbox_34" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_34">
+                            49. Gestão de projetos
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="50" id="eva_checkbox_35" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_35">
+                            50. Processo decisório
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="51" id="eva_checkbox_36" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_36">
+                            51. Gestão orçamentária e financeira
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="52" id="eva_checkbox_37" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_37">
+                            52. Governança e infraestrutura de rede
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="53" id="eva_checkbox_38" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_38">
+                            53. Plano de logística sustentável
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="54" id="eva_checkbox_39" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_39">
+                            54. Licitação e contratos
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="55" id="eva_checkbox_40" name="eva_checkbox_2" {{checked2}}>
+                        <label class="form-check-label fontSize2" for="eva_checkbox_40">
+                            55. Law design
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!--        <br/><hr/><br/>-->
+        <!--
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Competência associada :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Caso o tema da capacitação seja técnico ou gerencial, selecionar a qual competência está associado. Caso o tema seja jurídico, selecionar a opção (Não se Aplica)" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <select data-ccn="select1" class="form-control" id="eva_slc_comp" name="eva_slc_comp">
+                    <option value="">&nbsp;</option>
+                    {{#for_comp}}
+                        <option value="{{valor}}" {{selected_comp}}>{{comp_asc}}</option>
+                    {{/for_comp}}
+                </select>
+                <div class="form-control-feedback invalid-feedback"> - O Campo Competência associada está vazia.</div>
+            </div>
+        </div>
+-->
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Público-alvo :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Descreva qual é o público-alvo do treinamento sugerido. Ex equipe, tema ou coordenação"
+                        aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório"
+                            aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <input class="form-control" type="text" id="eva_input_1" name="eva_input_1"
+                    value="{{ds_target_audience}}">
+                <div class="form-control-feedback invalid-feedback"> - O Campo Publico alvo está vazio.</div>
+            </div>
+        </div>
+        <!--
+       <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Número de participantes :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Informe o número de participantes que precisam do treinamento sugerido" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <input class="form-control" type="number" min="1" value="{{nu_participants}}" id="eva_input_2" name="eva_input_2">
+                <div class="form-control-feedback invalid-feedback"> - O Campo Número de participantes está vazio.</div>
+            </div>
+        </div>
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Transversalidade :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Informe se este treinamento é relevante apenas para o seu órgão / unidade ou pode atender a todos" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <select data-ccn="select2" class="form-control" id="eva_slc_2" name="eva_slc_2">
+                    <option value="">&nbsp;</option>
+                    {{{ds_transversality}}}
+                </select>
+                <div class="form-control-feedback invalid-feedback"> - O Campo Transversalidade está vazio.</div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Carga horária :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Informar, em média, a carga horária adequada para o treinamento sugerido" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <input class="form-control" type="text" value="{{ds_workload}}" id="eva_input_3" name="eva_input_3">
+                <div class="form-control-feedback invalid-feedback"> - O Campo Carga horária está vazio.</div>
+            </div>
+        </div>
+-->
+        <br />
+        <hr /><br />
+        <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Modalidade :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Caso queira sugerir, selecione as modalidades de treinamento, entre as opções que melhor atenderiam a demanda, em função do tema, necessidades e público"
+                        aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="1" id="eva_checkbox_61" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_61">
+                        Presencial
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="1" id="eva_checkbox_61" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_61">
+                        Online
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="1" id="eva_checkbox_61" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_61">
+                        Hibrido
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="2" id="eva_checkbox_62" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_62">
+                        Transmissão interna ao vivo (teams)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="3" id="eva_checkbox_63" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_63">
+                        Sala de estudo virtual (moodle)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="4" id="eva_checkbox_64" name="eva_checkbox_3"
+                        {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_64">
+                        Ciclo permanente de ações de treinamento a distância
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr /><br />
+        <!--
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Forma de realização sugerida :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Caso queira sugerir, selecione a forma de realização proposta para atendimento desta necessidade." aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <select data-ccn="select1" class="form-control" id="eva_slc_realizacao" name="eva_slc_realizacao">
+                    <option value="">&nbsp;</option>
+                    {{#op_realizacao}}
+                        <option value="{{valor}}" {{selected_realizacao}}>{{realizacoes}}</option>
+                    {{/op_realizacao}}
+                </select>
+                <div class="form-control-feedback invalid-feedback"> - O Campo Forma de realizacao associada está vazia.</div>
+            </div>
+        </div>
+-->
+        <div class="row form-group mb-3">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Sugestão de Curso / Instituição / Instrutor :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw "
+                        title="Informe se você conhece a instituição ou o nome do instrutor para oferecer o treinamento sugerido"
+                        aria-label="Necessários"></i>
+                </label>
+                <!--                <div class="form-label-addon d-flex align-items-center align-self-start">-->
+                <!--                    <div class="text-danger" title="Necessários">-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <input class="form-control" type="text" value="{{no_institution_instructor}}" id="eva_input_4"
+                    name="eva_input_4">
+                <!--                <div class="form-control-feedback invalid-feedback"> - O Campo Instituição / Instrutor está vazio.</div>-->
+            </div>
+        </div>
+        <!--
+        <div class="row form-group">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Valor estimado :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Informe se conhece o valor estimado da aquisição / contratação" aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <div class="input-group mb-3">
+                    <span class="cifrao" class="input-group-text">R$</span>
+                    <input class="form-control pl-6" type="text" onKeyPress="return(moeda(this,'.',',',event));" value="{{nu_estimated_value}}" id="eva_input_5" name="eva_input_5">
+                    <div class="form-control-feedback invalid-feedback"> - O Campo Valor estimado está vazio.</div>
+                </div>
+            </div>
+        </div>
+-->
+        <!--
+        <div class="row form-group mb-5">
+            <div class="col-md-3 col-form-label d-flex pb-0 pr-md-0">
+                <label class="d-inline word-break fontSize2" style="font-weight: 600;">
+                    Previsão de diárias e passagens :
+                    <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Selecionar este campo caso haja previsão de necessidade de custeio de passagens e ou diárias para palestrantes ou participantes." aria-label="Necessários"></i>
+                </label>
+                <div class="form-label-addon d-flex align-items-center align-self-start">
+                    <div class="text-danger" title="Necessários">
+                        &nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="eva_checkbox_41" name="eva_checkbox_4" {{checked3}}>
+                    <label class="form-check-label fontSize2" for="eva_checkbox_41">
+                        Selecionar este campo caso haja previsão de necessidade de custeio de passagens e ou diárias para palestrantes ou participantes.
+                    </label>
+                </div>
+            </div>
+        </div>
+-->
+        <div class="row form-group">
+            <input onclick="saveTrainingSuggestion();" class="btn btn-primary btn-lg ml-3" type="button"
+                id="eva_button_1" name="eva_button_1" value="Enviar">
+            <input onclick="window.location.href = '{{wwwroot}}'" class="btn btn-primary btn-lg ml-3" type="button"
+                id="eva_button_2" name="eva_button_2" value="Voltar">
+        </div>
+        <div class="fdescription required fontSize2 text-center">
+            Este formulário contém campos obrigatórios marcados com
+            <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Campo obrigatório" role="img"
+                aria-label="Campo obrigatório"></i>.
+        </div>
+        <div class="fdescription required fontSize2 text-center">
+            Informaçoes para ajudar no preenchimento dos campos
+            <i class="icon fa ccn-flaticon-info text-info fa-fw " title="Informaçoes de Preenchimento" role="img"
+                aria-label="Informaçoes de Preenchimento"></i>.
+        </div>
+    </div>
+</div>

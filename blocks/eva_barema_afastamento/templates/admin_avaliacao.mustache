@@ -1,0 +1,220 @@
+<style>
+
+
+
+    @media (max-width: 320px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+
+        .main-title h3 {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500!important;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+        .main-title p {
+            font-size: 14px;
+            text-align: justify!important;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: center!important;
+        }
+        .rtable tbody tr {
+            border: 1px solid #e5e5e5;
+
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            content: none!important;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+
+    }
+
+    @media (max-width: 790px) {
+        .rtable tbody tr td {
+            position: relative;
+        }
+
+        .ccnDashBlCt {
+            padding: 10px 10px;
+            font-size: 1rem;
+        }
+
+        .rtable thead{display: none;}
+        .rtable tbody td{display: flex; flex-direction: column;}
+
+        .rtable tbody tr td {
+            /*display: block;*/
+            text-align: right;
+        }
+        .rtable tbody tr {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .rtable tbody tr td:before {
+            width: 40%;
+            content: attr(data-title);
+            text-align: left;
+            display: block;
+            position: absolute;
+            background-color: #0c3551;
+            top: 0;
+            left: 0;
+            height: 50px;
+            padding: 10px 20px;
+            color: #FFFFFF;
+
+        }
+        .rtable tbody tr .btnbg:before {
+            display: none;
+        }
+        .rtable .btnEditModal, .rtable .btnDeleteModal {
+            text-align: center;
+            /*display: flex; flex-direction: column;*/
+
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+
+    }
+
+    .main-title h3 {
+        display: inline-block;
+        font-size: 25px;
+        font-weight: 600!important;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .card {
+        border: 1px solid rgba(0,0,0,.125);;
+    }
+    .tableprimary {
+        background: #0c3551;
+        color: white;
+    }
+    .tableprimary:hover {
+        background: #0c3551;
+    }
+    .dashboard_main_content .btn-primary, .modal:not(.sign_up_modal) .btn-primary, .btn-primary {
+        padding: 12px 16px;
+        background-color: [[setting:color_primary]];
+        border: 1px solid #01101f;
+        color: #fff;
+
+    }
+    .btn-thm:hover {
+        color: #0c3551!important;
+    }
+    .status_red{
+        color: red;
+    }
+    .status_blue{
+        color: #0a78d1;
+    }
+
+</style>
+
+<div class="{{avaliador}}">
+    <!--{{> block_eva_form_barema/customize_config}}-->
+    <h5 class="card-title">Controle de avaliações pendentes</h5>
+<!--    <h5>Avaliador: {{avaliador}}</h5>-->
+    <div class="section mb20">
+        <div class="row">
+            <div class="col-lg-12">
+                <a class="btn-primary btn-thm btnAdicionarModal"
+                   data-baremaid="{{baremaid}}"
+                   data-root="{{{ config.wwwroot }}}"
+                   href="/blocks/eva_barema_afastamento/create.php?id=1"><i class="icon fa ccn-flaticon-back fa-fw"></i>Voltar</a>
+                <a class="btn-primary btn-thm btnAdicionarModal"
+                   data-baremaid="{{baremaid}}"
+                   data-root="{{{ config.wwwroot }}}"
+                   href="/blocks/eva_barema_afastamento/avaliacao_lista.php"><i class="icon fa ccn-flaticon-list fa-fw"></i>Relatórios</a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-responsive-sm table-striped table-hover text-left rtable">
+        <thead class="tableprimary text-center">
+        <tr>
+            <th>#</th>
+            <th>Anteprojeto</th>
+            <th>Avaliador</th>
+            <th>Data do Envio</th>
+            <th>Tempo Restante</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {{#avaliacao_afastamento}}
+            <tr>
+                <td>{{id_user}}</td>
+                <td data-title="link">Anteprojeto {{anteprojeto}}</td>
+                <td class="text-center">{{avaliador}}
+                    <a href="#"
+                        class="infosubstituicao"
+                        data-idatribuicao="{{id_atribuicao}}"
+                        data-toggle="modal"
+                        data-target="#modalInfoSubstituicao"
+                    >{{{info}}}</a>
+                </td>
+                <td>{{data_ini_avaliacao}}</td>
+                <td>{{{timerestante}}}</td>
+                <td data-title="status" class="font-weight-bold {{statuscolor}}">
+                    {{status}}
+                </td>
+                <td class="btnbg">
+                    <a class="envioEmailPendente"
+                       id="id_email_pendente"
+                       data-id="{{id_atribuicao}}"
+                       data-tempo="{{timerestante}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       data-toggle="modal"
+                       data-target="#modalemailpendente"
+                       href="#">{{{enviar_email}}}
+                    </a>
+                    <a href="#"
+                       data-id="{{id_atribuicao}}"
+                       data-root="{{{ config.wwwroot }}}"
+                       class="exchangeAvaliador"
+                       data-toggle="modal"
+                       data-target="#modalExchangeAvaliador">{{{email_substituicao}}}
+                    </a>
+                </td>
+            </tr>
+        {{/avaliacao_afastamento}}
+        </tbody>
+    </table>
+<!--    page 1, {{results}} results-->
+
+</div>
+{{> block_eva_barema_afastamento/modal_informacao_substituicao }}
+{{> block_eva_barema_afastamento/modal_email_pendente }}
+{{> block_eva_barema_afastamento/modal_exchange_avaliador }}
+<br>
+<br>
+<!--<script src="https://code.jquery.com/jquery-3.6.0.js"></script>-->
+<!--<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>-->
+<script type="text/javascript" src="/blocks/eva_barema_afastamento/js/modal_email_pendente.js"></script>
+<!--<script>$('.ccnDashBlHd ').addClass('hidden')</script>-->
+
+

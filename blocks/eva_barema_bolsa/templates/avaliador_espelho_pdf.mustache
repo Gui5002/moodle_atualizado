@@ -1,0 +1,183 @@
+<!doctype html>
+<html dir="ltr" lang="pt-br" xml:lang="pt-br" class="yui3-js-enabled js no-touch csstransitions">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Espelho da Avaliacao - Barema</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<style>
+    *{
+        font-size: 1rem;
+        font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+    }
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+    }
+    .table-bordered th, td {
+        border: 1px solid #dee2e6!important;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.05);
+    }
+
+    .text-center {
+        text-align: center!important;
+    }
+    .text-right {
+        text-align: right!important;
+    }
+    .text-left {
+        text-align: right!important;
+    }
+    .table td, .table th {
+        padding: .75rem;
+    }
+    .table {
+        border-collapse: collapse;
+    }
+    .table-sm td, .table-sm th {
+        padding: .3rem;
+    }
+    .table-light, .table-light>td, .table-light>th {
+        background-color: #a8a8a8;
+    }
+
+    .rtable tbody tr td {
+        position: relative;
+    }
+
+    .rtable thead{display: none;}
+    .rtable tbody td{display: flex; flex-direction: column;}
+
+    .rtable tbody tr td {
+        text-align: right;
+    }
+    .rtable tbody tr {
+        display: block;
+    }
+    .rtable tbody tr td:before {
+        width: 30%;
+        content: attr(data-title);
+        text-align: left;
+        display: block;
+        position: absolute;
+        background-color: #0c3551;
+        top: 0;
+        left: 0;
+        height: 27px;
+        padding: 9px 14px;
+        color: #FFFFFF;
+        font-weight: 400;
+    }
+
+    .rtable tbody tr .btnbg:before {
+        display: none;
+    }
+
+    .table>:not(caption)>*>* {
+        padding: 0.9rem 0.5rem;
+        border-bottom-width: 1px;
+    }
+
+    .unlist li span {
+        margin-left: 20px;
+    }
+
+    .unlist {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .ntable .th1{width: 20px; }
+    /*.ntable .th2{width: 320px; }*/
+    /*.ntable .th3{width: 50px; }*/
+    .ntable .th4{width: 115px; }
+    .ntable .th5{width: 15px; }
+
+    .th2, .th3, .th4, .th5, .tdf{
+        font-size: 15px;
+    }
+
+</style>
+<body>
+
+<div class="col-lg-12 text-center" style="font-size: 14px;">
+    <span>Escola da Advocacia-Geral da União Ministro Victor Nunes Leal</span>
+    <p style="font-size: 14px;">Edital de Seleção para Concessão de Bolsas de Estudo para Custeio de Cursos de Pós-Graduação</p>
+    Espelho do Barema do Avaliador
+</div>
+
+<table class="table table-bordered rtable">
+    <thead class="tableprimary">
+    <tr>
+        <th>Anteprojeto</th>
+        <th>Data da Avaliação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-title="Anteprojeto">{{anteprojeto}}</td>
+        <td data-title="Data da Avaliação">{{datatime}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<table class="table table-sm table-bordered table-striped ntable" style="">
+    <thead class="table-light">
+        <tr>
+            <th class="th1">#</th>
+            <th class="th2">Quesito</th>
+            <th class="th3">Critério</th>
+            <th class="th4">Faixa</th>
+            <th class="th5">Pontos</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#barema}}
+        <tr>
+            <td class="text-center tdf">{{id}}</td>
+            <td class="tdf">{{nota_maxima}}</td>
+            <td class="tdf">{{criterio}}</td>
+            <td class="tdf" style="padding-right: 10px;">
+                <ul class="unlist" style="width: 100%">
+                    <li>
+                        <div style="display: {{hidden_baixa}}">({{checked_1}}) <span>{{label_baixa}}</span></div>
+                    </li>
+                    <li>
+                        <div style="display: {{hidden_media1}}">({{checked_2}}) <span>{{label_media1}}</span></div>
+                    </li>
+                    <li>
+                        <div style="display: {{hidden_media2}}">({{checked_3}}) <span>{{label_media2}}</span></div>
+                    </li>
+                    <li>
+                        <div style="display: {{hidden_media3}}">({{checked_4}}) <span>{{label_media3}}</span></div>
+                    </li>
+                    <li>
+                        <div style="display: {{hidden_alta}}">({{checked_5}}) <span>{{label_alta}}</span></div>
+                    </li>
+                </ul>
+            </td>
+            <td class="text-center tdf" id="id_nota{{id}}" style="">{{notachecked}}</td>
+        </tr>
+    {{/barema}}
+    </tbody>
+    <tfoot class="table-light">
+<!--        <tr>-->
+<!--            <td colspan="4" class="text-center tdf" >Nota Capes</td>-->
+<!--            <td class="tdf" id="id_nota_capes" style="text-align: center">{{notacapes}}</td>-->
+<!--        </tr>-->
+        <tr >
+            <td colspan="4" class="text-center tdf" >Total</td>
+            <td class="tdf" id="id_nota_final" style="text-align: center">{{notaAvaliador}}</td>
+
+        </tr>
+    </tfoot>
+</table>
+</body>
+</html>
+

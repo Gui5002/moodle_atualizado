@@ -1,0 +1,132 @@
+.title {
+    display: none;
+}
+
+.blog_tag_widget {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.mform .col-form-label .form-label-addon {
+    margin-left: .25rem;
+}
+
+/* .container{
+    max-width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+} */
+
+.ftoggler {
+    display: none;
+}
+
+
+.fcontainer.clearfix {
+    color: #000;
+    background-color: #d1e9ff4d;
+    padding: 15px 13px;
+    border-top: 2px solid #aac3e84f;
+}
+
+
+.fdescription {
+    text-align: center;
+}
+
+.logo-solicitacao {
+    text-align: center;
+}
+
+#fitem_id_button .felement {
+    display: flex;
+    align-items: center;
+    gap: 0.50rem;
+}
+#fitem_id_button .felement .btn-primary {
+    background-color: #185287;
+    border: 2px solid #185287;
+    color: #fff;
+}
+#fitem_id_button .felement .btn-primary:hover {
+    background-color: transparent;
+    border-color: '[[setting:color_primary]]';
+    color: #000!important;
+}
+
+@media (min-width: 320px) {
+
+    .fcontainer .fitem {
+        width: unset;
+        margin-left: -13px;
+    }
+    .flex-wrap {
+        margin-left: 24%;
+    }
+    .main-title p {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 1.2rem;
+        display: block;
+    }
+}
+
+@media (min-width: 576px) {
+    .col-form-label .form-label-addon {
+        margin-left: auto;
+    }
+
+    .form-inline .form-control{
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+    }
+    .fitem .custom-select {
+        width: 100%;
+    }
+}
+
+
+
+@media (min-width: 1240px) {
+
+    .titulo {
+        width: 450px;
+    }
+    .fcontainer {
+        padding-right: 20px;
+    }
+
+    .fcontainer .fitem {
+        /* width: 50%;
+        margin-left: 25%; */
+    }
+
+    .flex-wrap {
+        margin-left: 24%;
+    }
+
+    .notifications {
+        /*position: absolute;*/
+        margin: 0 auto;
+        /*top: 95%;*/
+        /*left: 29%;*/
+        width: 50%;
+    }
+
+    .fitem .custom-select {
+        width: 100%;
+    }
+
+    .main-title p {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 1.2rem;
+        display: block;
+    }
+}
+
+.form-control-feedback {
+    text-align: left;
+}

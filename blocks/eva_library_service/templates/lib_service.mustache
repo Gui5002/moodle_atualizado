@@ -1,0 +1,184 @@
+<link rel="stylesheet" href="/blocks/eva_library_service/lib_services.css">
+
+<style>
+
+</style>
+<div class="container-fluid cor_fundo">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12 pt20 pb20">
+                <div width="100%" class="text-center mt20">
+                    <h5 class="mt-0" style="font-size: 30px; font-weight: 600; color: #000000; text-shadow: 1px 1px 7px #aeaeae; margin-top: -10px!important;" data-ccn="title">{{title}}</h5>
+                </div>
+
+                <ul class="nav nav-pills no-list-style" id="pills-tab" role="tablist">
+                    {{#info}}
+                        <li class="nav-item" role="presentation" style="margin: 0;
+                    background: linear-gradient(#f5f6f7,#e2e6eb);
+                    border-radius: 10px 10px 0 0;
+                    overflow: hidden;
+                    overflow: hidden;
+                    transition: all 0.3s ease 0.15s;">
+                            <button type="button" class="nav-link {{info_active}}" id="pills-{{id}}-tab" data-toggle="pill" data-target="#pills{{id}}" role="tab" aria-controls="pills-home" aria-selected="true">{{info_tabs}}</button>
+                        </li>
+                    {{/info}}
+                    <li class="nav-item" role="presentation" style="margin: 0;
+                    background: linear-gradient(#f5f6f7,#e2e6eb);
+                    border-radius: 10px 10px 0 0;
+                    overflow: hidden;
+                    overflow: hidden;
+                    transition: all 0.3s ease 0.15s;">
+                        <button type="button" class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="true">Contato</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    {{#info}}
+                        <div class="tab-pane fade {{info_show}} {{info_active}} bg-white" id="pills{{id}}" role="tabpanel" aria-labelledby="pills-{{id}}-tab">
+                            <div class="row p25">
+                                <div class="col-sm-12 col-lg-3">
+                                    <img data-ccn="image" data-ccn-img="src" class="img-fluid tabs_img" src="{{image}}">
+                                </div>
+                                <div class="col-sm-12 col-lg-6">
+                                    <p class="text-justify" data-ccn="" data-ccn-c="color_body{{id}}" data-ccn-co="content">{{{info_body}}}</p>
+                                    <!--                                <p class="text-justify" data-ccn="body{{id}}" data-ccn-c="color_body{{id}}" data-ccn-co="content">{{{info_body}}}</p>-->
+                                </div>
+                                <div class="col-sm-12 col-lg-3">
+                                    <ul class="button_tabs no-list-style">
+                                        <li>
+                                            <a href="{{link1}}" target="{{{link_target}}}" class="{{hiden1}}" data-toggle="{{tt1}}" data-placement="left" data-html="true" title='{{tooltip1}}'>
+                                                <div class="ccn_tabs" data-ccn-c="color{{id}}" data-ccn-co="bg">
+                                                    <div class="overlay">
+                                                        <div class="details">
+                                                            <h5 class="m0 fw600" data-ccn="" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt1}}</h5>
+                                                            <!--                                                        <h5 class="m0 fw600" data-ccn="title{{id}}" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt1}}</h5>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{link2}}" target="{{{link_target}}}" class="{{hiden2}}" data-toggle="{{tt2}}" data-placement="left" data-html="true" title='{{tooltip2}}'>
+                                                <div class="ccn_tabs" data-ccn-c="color{{id}}" data-ccn-co="bg">
+                                                    <div class="overlay">
+                                                        <div class="details">
+                                                            <h5 class="m0 fw600" data-ccn="" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt2}}</h5>
+                                                            <!--                                                        <h5 class="m0 fw600" data-ccn="title{{id}}" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt2}}</h5>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{link3}}" target="{{{link_target}}}" class="{{hiden3}}" data-toggle="{{tt3}}" data-placement="left" data-html="true" title='{{tooltip3}}'>
+                                                <div class="ccn_tabs" data-ccn-c="color{{id}}" data-ccn-co="bg">
+                                                    <div class="overlay">
+                                                        <div class="details">
+                                                            <h5 class="m0 fw600" data-ccn="" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt3}}</h5>
+                                                            <!--                                                        <h5 class="m0 fw600" data-ccn="title{{id}}" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt3}}</h5>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{link4}}" target="{{{link_target}}}" class="{{hiden4}}" data-toggle="{{tt4}}" data-placement="left" data-html="true" title='{{tooltip4}}'>
+                                                <div class="ccn_tabs" data-ccn-c="color{{id}}" data-ccn-co="bg">
+                                                    <div class="overlay">
+                                                        <div class="details">
+                                                            <h5 class="m0 fw600" data-ccn="" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt4}}</h5>
+                                                            <!--                                                        <h5 class="m0 fw600" data-ccn="title{{id}}" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt4}}</h5>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{link5}}" target="{{{link_target}}}" class="{{hiden5}}" data-toggle="{{tt5}}" data-placement="left" data-html="true" title='{{tooltip5}}'>
+                                                <div class="ccn_tabs" data-ccn-c="color{{id}}" data-ccn-co="bg">
+                                                    <div class="overlay">
+                                                        <div class="details">
+                                                            <h5 class="m0 fw600" data-ccn="" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt5}}</h5>
+                                                            <!--                                                        <h5 class="m0 fw600" data-ccn="title{{id}}" data-ccn-c="color_title{{id}}" data-ccn-co="content" style="color:#0a0a0a">{{bt5}}</h5>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {{/info}}
+                    <div class="tab-pane fade show bg-white" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="row p25">
+                            <!--                            <div class="col-sm-12 col-lg-3">-->
+                            <!--                                <img data-ccn="image" data-ccn-img="src" class="img-fluid tabs_img" src="{{image}}">-->
+                            <!--                            </div>-->
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="text-center">
+                                    <span class="font-weight-normal" style="font-size: 22px;">Entre em contato com a Biblioteca da AGU para dúvidas, sugestões e reclamações.</span>
+                                </div>
+                                <form action="{{{config.wwwroot}}}/local/contact/index.php" method="post" class="pt30 lib-service">
+<!--                                <form action="{{{config.wwwroot}}}/mod/page/view.php?id=7" method="post" class="pt30 lib-service">-->
+
+                                    <input type="hidden" name="solicitante">
+                                    <input type="hidden" name="name" value="{{name}}">
+                                    <input type="hidden" name="email" value="{{email}}">
+                                    <div class="row contact_pg">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="name" id="namelabel">{{#str}}your_name, block_eva_library_service{{/str}}</label>
+                                                <input class="form-control" id="name" name="nome_do_solicitante" type="text" title="{{#str}}your_name_requirements, theme_evagu{{/str}}" required="required" value="">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email" id="emaillabel">{{#str}}email_address, block_eva_library_service{{/str}}</label>
+                                                <input class="form-control" id="email" name="email_do_solicitante" type="email" required="required" title="{{#str}}email_address_requirements, theme_evagu{{/str}}" value="">
+                                                <input type="hidden" name="nome_do_destinatario">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message" id="messagelabel">{{#str}}to, block_eva_library_service{{/str}}</label>
+                                                <select class="form-control" name="biblioteca" id="id_biblioteca">
+                                                    <option value="">---Enviar Para---</option>
+                                                    {{#options}}
+                                                        <option value="{{e_mail}}">{{destino}}</option>
+                                                    {{/options}}
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="message" id="messagelabel">{{#str}}message, block_eva_library_service{{/str}}</label>
+                                                <textarea class="form-control" id="message" name="message" rows="6" title="{{#str}}message_requirements, theme_evagu{{/str}}" required="required"></textarea>
+                                            </div>
+                                            <div class="form-group text-center">
+                                                <input type="hidden" id="sesskey" name="sesskey" value="">
+                                                <script>
+                                                    document.getElementById('sesskey').value = M.cfg.sesskey;
+                                                </script>
+                                                <a class="mt40 mb20 btn btn-danger {{hiden}}" href="{{{config.wwwroot}}}/admin/settings.php?section=manageauths"><i class="fa fa-warning"></i> Configure reCAPTCHA keys</a>
+                                            </div>
+
+                                            <div class="form-group text-center mt50 mb0">
+                                                <button type="submit" name="submit" value="biblioteca" id="submit" class="btn dbxshad btn-lg btn-thm2 rounded w-60">{{#str}}send, block_eva_library_service{{/str}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function (){
+        $("[data-toggle=tooltip]").tooltip();
+    });
+</script>

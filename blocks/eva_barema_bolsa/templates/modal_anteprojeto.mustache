@@ -1,0 +1,169 @@
+<link rel="stylesheet" href="/blocks/eva_barema_bolsa/css/create_avaliador_modal.css">
+
+
+<div class="anteprojeto_Modal modal fade" id="modalanteproject" tabindex="-1" aria-labelledby="modalanteprojectLabel" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalanteprojectLabel"> Anteprojeto</h5>
+                <button type="button" class="btn-close modalClose" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" enctype="multipart/form-data" id="form_file" >
+                    <input type="hidden" id="wwwroot" value="{{{ config.wwwroot }}}">
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="anteprojeto"> Anteprojeto  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <input type="text" id="anteprojeto" class="form-control anteprojeto" name="anteprojeto" required>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo anteprojeto esta vazio.</div>                  
+                        </div>
+                        <div class="container-fluid">
+                            <label for="programa">Programa <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <select name="programa" id="programa" class="form-select " aria-label=".form-select">
+                                <option value="">--Selecione--</option>
+                                <option value="Doutorado">Doutorado</option>
+                                <option value="Mestrado">Mestrado</option>
+                                <option value="llm">LL.M.</option>
+                                <option value="pos-graduacao lato sensu">Pós-graduação Lato Sensu</option>
+                            </select>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo programa esta vazio.</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="pesquisa">Nome da Pesquisa  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <textarea type="text" class="form-control" id="pesquisa" name="pesquisa" rows="1" cols="100"></textarea>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo pesquisa esta vazio.</div>               
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label>Eixo Jurídico  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+
+                            <div class="boxe">
+                                <div class="check position-relative">
+                                    <input class="form-check-input" type="checkbox" value="0" id="ch_0" name="cap_eixo_juridico" {{checked1}}>
+                                    <label class="form-check-label fontSize2" for="ch_0">Não aplicável</label>
+                                </div>
+                                {{#chekejuridico}}
+                                <div class="check position-relative">
+                                    <input class="form-check-input" type="checkbox" value="{{numero}}" data-label="{{numero}}. {{articulacaojuridica}}" id="ch_{{id}}" name="cap_eixo_juridico" {{checked1}}>
+                                    <label class="form-check-label fontSize2" for="ch_{{id}}">{{numero}}. {{articulacaojuridica}}</label>
+                                </div>
+                                {{/chekejuridico}}
+                            </div>
+                            <input type="hidden" class="form-control juridico">
+                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>    
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label>Eixo Governança e Gestão<i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+
+                            <div class="boxe">
+                                <div class="check position-relative">
+                                    <input class="form-check-input" type="checkbox" value="0" id="che_0" name="cap_tecnico_juridico" {{checked1}}>
+                                    <label class="form-check-label fontSize2" for="che_0">Não aplicável</label>
+                                </div>
+                                {{#chekegestao}}
+                                    <div class="check position-relative">
+                                        <input class="form-check-input" type="checkbox" value="{{numero}}" data-label="{{numero}}. {{articulacaotecnica}}" id="ch_{{id}}" name="cap_tecnico_juridico" {{checked2}}>
+                                        <label class="form-check-label fontSize2" for="ch_{{id}}">{{numero}}. {{articulacaotecnica}}</label>
+                                    </div>
+                                {{/chekegestao}}
+                            </div>
+                            <input type="hidden" class="form-control tec_juridico">
+                            <div class="form-control-feedback invalid-feedback">- Marque pelo menos um campo</div>  
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid">
+                            <label for="anteprojeto">Arquivo Anteprojeto  <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <select name="fileanteprojeto" id="nomeArquivo" class="form-select w100" aria-label=".form-select">
+                                <option value="">--Selecione--</option>
+                                {{#selectfile}}
+                                    <option value="{{path}}">{{nome}}</option>
+                                {{/selectfile}}
+                            </select>
+                            <div class="form-control-feedback invalid-feedback"> - O Campo Nome do Arquivo esta vazio.</div>               
+                        </div>
+                        <div class="container-fluid">
+                            <label for="notacapes">Nota Capes <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            <input type="text" id="id_notacapes" class="form-control notacapes" name="notacapes" required maxlength="4">
+                            <div id="invalid_notacapes" class="form-control-feedback invalid-feedback">- Nota Capes esta vazio</div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="container-fluid label">
+                                <label for="distribuicao">Distribuição <i class="icon fa ccn-flaticon-warning text-danger fa-fw " title="Obrigatório" aria-label="Necessários"></i></label>
+                            </div>
+                            <fieldset class="check">
+                                <div class="container-fluid">
+                                    <div class="radio-check">
+                                        <div><input class="form-check-input" type="radio" value="j" id="juridico" name="distribuicao" {{checked2}}></div>
+                                        <div><label class="form-check-label fontSize2" for="juridico">Jurídico</label></div>
+                                    </div>
+
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="radio-check"> 
+                                        <div><input class="form-check-input" type="radio" value="g" id="tecnico" name="distribuicao" {{checked2}}></div>
+                                        <div><label class="form-check-label fontSize2" for="tecnico">Gestão</label></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="container-fluid md">
+                            <button type="button" id="btnfechar" class="btn btn-secondary modalFechar">Fechar</button>
+                            <input type="button" id="btnanteprojeto" class="btn btn-primary btnEvento" name="btn_anteprojeto" value="Cadastrar">
+                            <input 
+                                type="button" 
+                                id="anteprojeto-preview" class="btn btn-primary btnEventoPreview" value="Preview">
+                        </div>
+                        <div class="container-fluid sm">
+                            <div class="alert alert-primary al-msg d-none" id="id_alert" role="alert"></div>
+                            <div class="alert alert-danger al-msg d-none" id="id_alert_w" role="alert"></div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <div class="modal-foot hidden">
+                    <div class="field-main">
+                        <h3>Dados Anteprojeto</h3>
+                        <span>
+                            <div class="div1">Anteprojeto :</div>
+                            <div class="div2" id="atp"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Programa :</div>
+                            <div class="div2" id="prog"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Pesquisa :</div>
+                            <div class="div2" id="pesq"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Área prioritária para capacitação :</div>
+                            <div class="div2" id="area"></div>
+                        </span>
+                        <span>
+                            <div class="div1">Documento Anteprojeto :</div>
+                            <div class="div2" id="file"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> block_eva_barema_bolsa/modal_preview_antprojeto }}
+<script src="/blocks/eva_barema_bolsa/js/jquery.mask.js"></script>
+<script src="./js/create_anteprojeto_modal.js"></script>

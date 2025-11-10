@@ -1,0 +1,305 @@
+.em10 {
+    font-size: 1.0em;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.em15 {
+    font-size: 1.5em;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.em30 {
+    font-size: 2em;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.em20 {
+    font-size: 2em;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.em25 {
+    font-size: 2em;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.floatR {
+    float: right;
+}
+
+.floatL {
+    float: left;
+}
+
+.negrito {
+    font-weight: 600;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.sombreamento {
+    -webkit-box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.42);
+    box-shadow: 2px 3px 20px 1px rgba(0, 0, 0, 0.42);
+}
+
+.fGray {
+    color: rgb(5, 180, 247);
+    font-size: 18px;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.fWhite {
+    color: rgb(255, 255, 255);
+}
+
+.verticalLine {
+    border-right: 1px solid #669999;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__rendered {
+    font-size: 10px;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.select2-container--classic .select2-selection--single .select2-selection__arrow {
+    height: 28px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 30px !important;
+}
+
+/*.select2-container .select2-selection--single {*/
+/*    box-sizing: border-box;*/
+/*    cursor: pointer;*/
+/*    display: block;*/
+/*    user-select: none;*/
+/*    -webkit-user-select: none;*/
+/*}*/
+.select2-container--classic .select2-results>.select2-results__options {
+    font-size: 10px !important;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.checkContainer {
+    border: 1px solid #669999;
+    width: 100%;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+#box::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+#box::-webkit-scrollbar-track {
+    background: #c7c9c9;
+    /* color of the tracking area */
+    border-radius: 20px;
+}
+
+#box::-webkit-scrollbar-thumb {
+    background-color: rgb(130, 130, 131);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid rgb(130, 130, 131);
+    /* creates padding around scroll thumb */
+}
+
+#box {
+    border: none;
+}
+
+th {
+    background-color: rgb(24 82 135) !important;
+    color: #fff !important;
+    font-size: 10px;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+td {
+    font-size: 10px;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+.search_overlay {
+    display: none !important;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+    font-size: 10px;
+    font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
+}
+
+#btnLimparFiltro {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnLimparFiltro2 {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnLimparFiltro3 {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnLimparFiltro4 {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+}
+
+#btnLimparFiltro5 {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnLimparFiltro6 {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnLimparFiltro:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnLimparFiltro2:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnLimparFiltro3:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnLimparFiltro4:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnLimparFiltro5:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnLimparFiltro6:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+#btnVoltar {
+    background-color: rgb(24 82 135) !important;
+    padding: 5px 20px;
+    width: 47%;
+    height: 30px;
+    margin: 0;
+}
+
+#btnVoltar:hover {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+.copyButton {
+    margin-right: 1em;
+    background-color: rgb(24 82 135) !important
+}
+
+.pdfButton {
+    margin-right: 1em;
+    background-color: rgb(24 82 135) !important
+}
+
+.excelButton {
+    margin-right: 1em;
+    background-color: rgb(24 82 135) !important
+}
+
+.csvButton {
+    margin-right: 1em;
+    background-color: rgb(24 82 135) !important
+}
+
+.ccnDashBlHd {
+    display: none;
+}
+
+#loader {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #3498db;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-left: 47%;
+    margin-top: 0px;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-wrapper {
+    background-color: rgb(24 82 135) !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    transition: all 0.2s;
+}
+
+.spinner-border {
+    color: white;
+    height: 60px;
+    width: 60px;
+}

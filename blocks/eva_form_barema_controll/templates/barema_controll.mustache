@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/blocks/eva_form_barema_controll/css/barema_controle.css">
+<ul class="unlist">
+    <li class="{{hidden_novo}}">
+        <div class="column c1">
+            <a href="/blocks/eva_form_barema/atribuicao/create.php?id=1">
+                <img class="icon navicon" alt="Página" title="Página" src="{{{ config.wwwroot }}}/theme/image.php/evagu/page/1645205620/icon" tabindex="-1">Criar novo Barema
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="column c1 {{hidden_lista}}">
+            <!--            <a href="/blocks/eva_form_barema/avaliadores.php">-->
+            <a href="/blocks/eva_form_barema/barema_lista.php">
+                <i class="icon fa flaticon-settings fa-fw"></i>Listar Barema
+            </a>
+        </div>
+    </li>
+</ul>
+<h5 class="{{hidden_info}}" style="font-size: 1rem; color: #555;">Não há informação de avaliação.</h5>
+
+<script>
+    $('.block_eva_form_barema_controll').addClass('block_controls');
+    $('.block_eva_form_barema_controll h4').addClass('ccnDashBlBc');
+</script>
+

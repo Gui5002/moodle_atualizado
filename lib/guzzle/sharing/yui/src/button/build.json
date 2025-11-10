@@ -1,0 +1,10 @@
+{
+  "name": "moodle-atto_sharing-button",
+  "builds": {
+    "moodle-atto_sharing-button": {
+      "jsfiles": [
+        "button.js"
+      ]
+    }
+  }
+}
