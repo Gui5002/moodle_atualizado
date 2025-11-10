@@ -2687,8 +2687,8 @@ body.pagelayout-mydashboard {
     right: 0;
     bottom: 0;
     margin: auto;
-    height: 13px;
-    width: 13px;
+    height: 16px;
+    width: 16px;
 }
 
 .ccn_context_focus .ccn_dashbord_nav_list .cc_tab .panel-body .section .activity .availabilityinfo {
@@ -2729,7 +2729,7 @@ body.pagelayout-mydashboard {
     display: block;
     font-family: '[[setting:primary_font]]', helvetica, arial, sans-serif;
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
 }
 
