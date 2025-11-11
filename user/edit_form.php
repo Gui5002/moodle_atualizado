@@ -237,38 +237,30 @@ class user_edit_form extends moodleform {
 //==============VALIDATE - CPF ======================
 if (isset($usernew->cpf)) {
     $cpf = $usernew->cpf;
-    // Verifica se o CPF contém apenas dígitos
+//            if ($DB->record_exists('user', array('cpf' => $usernew->cpf, 'mnethostid' => $CFG->mnet_localhost_id))) {
+//                $errors['cpf'] = get_string('cpfexists');
+//            }else
     if (!ctype_digit($cpf)) {
         $errors['cpf'] = get_string('cpf_digits');
-        return;
-    }
-    // Verifica se o CPF tem exatamente 11 caracteres
-    if (strlen($cpf) != 11) {
-        $errors['cpf'] = get_string('cpf_size');
-        return;
-    }
-    // Verifica se o CPF está na lista de sequências inválidas
-    $invalidCpfs = [
-        '00000000000', '11111111111', '22222222222',
-        '33333333333', '44444444444', '55555555555',
-        '66666666666', '77777777777', '88888888888', '99999999999'
-    ];
-    if (in_array($cpf, $invalidCpfs)) {
-        $errors['cpf'] = get_string('cpf_invalid');
-        return;
-    }
-    // Validação do dígito verificador do CPF
-    for ($t = 9; $t < 11; $t++) {
-        $d = 0;
-        for ($c = 0; $c < $t; $c++) {
-            $d += substr($cpf, $c, 1) * (($t + 1) - $c);
-        }
-        $calculatedDigit = ((10 * $d) % 11) % 10;
-        if ($calculatedDigit != substr($cpf, $t, 1)) {
-            $errors['cpf'] = get_string('cpf_invalid');
-            return;
-        }
-    }
+    }else
+        if (strlen($cpf) != 11) {
+            $errors['cpf'] = get_string('cpf_size');
+        }else
+            if (in_array($cpf, array('00000000000', '11111111111', '22222222222', '33333333333', '44444444444', '55555555555', '66666666666', '77777777777', '88888888888', '99999999999'))) {
+                $errors['cpf'] = get_string('cpf_invalid');
+            }else {
+                for ($t = 9; $t < 11; $t++) {
+                    for ($d = 0, $c = 0; $c < $t; $c++) {
+                        $v = substr($cpf, $c, 1);
+                        $d += $v * (($t + 1) - $c);
+                    }
+                    $v = substr($cpf, $c, 1);
+                    $d = ((10 * $d) % 11) % 10;
+                    if ($v != $d) {
+                        $errors['cpf'] = get_string('cpf_invalid');
+                    }
+                }
+            }
 }
         // Next the customisable profile fields.
         $errors += profile_validation($usernew, $files);
