@@ -3,6 +3,7 @@
 defined('MOODLE_INTERNAL') || die();
 require_once ($CFG->dirroot . '/course/renderer.php');
 include_once ($CFG->dirroot . '/course/lib.php');
+require_once ($CFG->libdir . '/coursecatlib.php');
 
 class ccnCourseHandler
 {
@@ -36,7 +37,7 @@ class ccnCourseHandler
             /* @ccnBreak */
             $categoryId = $courseRecord->category;
             try {
-                $courseCategory = core_course_category::get($categoryId);
+                $courseCategory = coursecat::get($categoryId);
                 $categoryName = $courseCategory->get_formatted_name();
                 $categoryUrl = $CFG->wwwroot . '/course/index.php?categoryid=' . $categoryId;
             } catch (Exception $e) {
@@ -529,7 +530,7 @@ class ccnCourseHandler
     public function ccnListCategories()
     {
         global $DB, $CFG;
-        $topcategory = core_course_category::top();
+        $topcategory = coursecat::get(0);
         $topcategorykids = $topcategory->get_children();
         $areanames = array();
         foreach ($topcategorykids as $areaid => $topcategorykids) {
@@ -547,7 +548,7 @@ class ccnCourseHandler
         if ($DB->record_exists('course_categories', array('id' => $categoryId))) {
             $categoryRecord = $DB->get_record('course_categories', array('id' => $categoryId));
             $chelper = new coursecat_helper();
-            $categoryObject = core_course_category::get($categoryId);
+            $categoryObject = coursecat::get($categoryId);
             $ccnCategory = new \stdClass();
             $categoryId = $categoryRecord->id;
             $categoryName = format_text($categoryRecord->name, FORMAT_HTML, array('filter' => true));
