@@ -144,8 +144,17 @@ class course_renderer extends \core_course_renderer
         }
         $ccnCourseHandler = new ccnCourseHandler();
         $ccnCourseCount = $ccnCourseHandler->ccnGetCourseCategoryFilterCount($coursecat);
-        $ccnCategoryDetails = $ccnCourseHandler->ccnGetCategoryDetails($category);
-        $ccnSubcategoryCount = $ccnCategoryDetails->subcategoriesCount;
+
+        // The root pseudo-category (id 0) does not have a database record.
+        // Use coursecat directly there and only request stored category details
+        // for real categories.
+        $ccnCategoryDetails = null;
+        if (!empty($coursecat->id)) {
+            $ccnCategoryDetails = $ccnCourseHandler->ccnGetCategoryDetails($coursecat->id);
+        }
+        $ccnSubcategoryCount = $ccnCategoryDetails
+            ? $ccnCategoryDetails->subcategoriesCount
+            : $coursecat->get_children_count();
         $ccnCourseCountRender = '';
         if ($ccnCourseCount > 0) {
             $ccnCourseCountRender .= '<span class="color-dark pr5">' . $ccnCourseCount . '</span> ' . get_string('courses') . ' ';
