@@ -642,7 +642,14 @@ if (!empty($USER->lang)) {
 $secondarynavigation = false;
 $overflow = '';
 
-if (method_exists($PAGE, 'has_secondary_navigation') && $PAGE->has_secondary_navigation()) {
+if (
+    (int)$ccnMdlVersion >= 400 &&
+    method_exists($PAGE, 'has_secondary_navigation') &&
+    $PAGE->has_secondary_navigation() &&
+    method_exists($PAGE, 'has_tablist_secondary_navigation') &&
+    property_exists($PAGE, 'secondarynav') &&
+    class_exists('core\\navigation\\output\\more_menu')
+) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
     $moremenu = new \core\navigation\output\more_menu(
         $PAGE->secondarynav,
@@ -653,10 +660,13 @@ if (method_exists($PAGE, 'has_secondary_navigation') && $PAGE->has_secondary_nav
 
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
 
-    $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
+    if (is_object($PAGE->secondarynav) &&
+        method_exists($PAGE->secondarynav, 'get_overflow_menu_data')) {
+        $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
 
-    if (!is_null($overflowdata)) {
-        $overflow = $overflowdata->export_for_template($OUTPUT);
+        if (!is_null($overflowdata)) {
+            $overflow = $overflowdata->export_for_template($OUTPUT);
+        }
     }
 }
 
@@ -675,7 +685,7 @@ if ((int)$ccnMdlVersion < 400) {
 /*
  * Navegação utilizada por versões mais recentes do Moodle.
  */
-if (class_exists('core\navigation\output\primary')) {
+if ((int)$ccnMdlVersion >= 400 && class_exists('core\navigation\output\primary')) {
 
     $primary = new \theme_evagu\navigation\primary($PAGE);
 
