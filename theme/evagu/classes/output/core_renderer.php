@@ -1340,7 +1340,15 @@ class core_renderer extends \core_renderer {
             $header->navbar = $this->navbar();
             $header->pageheadingbutton = $this->page_heading_button();
             $header->courseheader = $this->course_header();
-            $header->headeractions = $this->page->get_header_actions();
+
+            // Moodle 3.5 does not expose the modern page header actions API.
+            // Keep the template variable available without calling a missing method.
+            if (method_exists($this->page, 'get_header_actions')) {
+                $header->headeractions = $this->page->get_header_actions();
+            } else {
+                $header->headeractions = array();
+            }
+
             return $this->render_from_template('core/full_header', $header);
         }
     }
