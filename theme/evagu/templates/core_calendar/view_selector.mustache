@@ -1,0 +1,37 @@
+<div class="ccn-calendar-header-option">
+    <div data-region="view-selector">
+        <button id="calendarviewdropdown" type="button" class="btn btn-outline-secondary dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="d-sm-inline-block" data-active-item-text>
+                {{#viewingmonth}}{{#str}} month {{/str}}{{/viewingmonth}} {{#viewingday
+
+                }}{{#str}} day, core_calendar {{/str}}{{/viewingday}} {{#viewingupcoming
+
+                }}{{#str}} upcomingevents, core_calendar {{/str}}{{/viewingupcoming}}
+            </span>
+        </button>
+        <ul class="dropdown-menu" data-show-active-item aria-labelledby="calendarviewdropdown">
+            <li>
+                <a class="dropdown-item {{#viewingmonth}}active{{/viewingmonth}}" href="#" data-view="month"
+                    data-year="{{ date.year }}" data-month="{{ date.mon }}" data-day="{{ date.mday }}"
+                    data-courseid="{{ courseid }}" data-categoryid="{{ categoryid }}">
+                    {{#str}} month {{/str}}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{#viewingday}}active{{/viewingday}}" href="#" data-view="day"
+                    data-year="{{ date.year }}" data-month="{{ date.mon }}" data-day="{{ date.mday }}"
+                    data-courseid="{{ courseid }}" data-categoryid="{{ categoryid }}">
+                    {{#str}} day, core_calendar {{/str}}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item {{#viewingupcoming}}active{{/viewingupcoming}}" href="#" data-view="upcoming"
+                    data-year="{{ date.year }}" data-month="{{ date.mon }}" data-day="{{ date.mday }}"
+                    data-courseid="{{ courseid }}" data-categoryid="{{ categoryid }}">
+                    {{#str}} upcomingevents, core_calendar {{/str}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

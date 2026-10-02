@@ -1,0 +1,29 @@
+{{!
+@ccnRef: @template block_login
+}}
+<div class="login-container">
+    <div class="login-box">
+
+        <div class="logo-container">
+            <img class="logo-img img-fluid" src="/theme/evagu/images/login/logo-esagu.png"
+                alt="Logo Escola Virtual da AGU" title="Escola Superior Virtual da AGU">
+        </div>
+
+        <div class="heading mb-4">
+            <h3 class="login_form text-center">{{#str}} login_welcome, theme_evagu {{/str}}</h3>
+            {{#signup_is_enabled}}
+            <p class="text-center">
+                {{#str}} login_no_account, theme_evagu {{/str}}
+                <a class="text-thm" href="{{{ config.wwwroot }}}/login/signup.php">
+                    {{#str}} signup, theme_evagu {{/str}}
+                </a>
+            </p>
+            {{/signup_is_enabled}}
+        </div>
+
+        <div class="login-form-wrapper">
+            {{{ ccn_login }}}
+        </div>
+
+    </div>
+</div>

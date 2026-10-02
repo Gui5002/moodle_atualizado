@@ -1,0 +1,13 @@
+/* CCN SHIP DASHBOARD */
+/* CCN SHIP THIRD PARTY  */
+.path-admin-report-overviewstats .chartslist {}
+
+.path-admin-report-overviewstats .chartslist>li {}
+
+.path-admin-report-overviewstats .axisLabel {
+    top: 10px;
+}
+
+.dashbord .container-fluid {
+    max-width: 2000px;
+}

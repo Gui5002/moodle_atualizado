@@ -1,0 +1,49 @@
+.usermenu:focus-within,
+div.dropdown-item:focus-within,
+.form-autocomplete-suggestions li[aria-selected="true"] {
+  box-shadow: none;
+  background-color: #e1e6ef;
+}
+.form-autocomplete-suggestions li:hover,
+.form-autocomplete-suggestions li:focus,
+.form-autocomplete-suggestions li[aria-selected="true"] {
+  background-color: #c0ccdb;
+}
+.badge {
+  background-color: #96bff3;
+}
+#page-my-index {
+  background-color: #f0f0f0;
+}
+.btn.dropdown-toggle::after {
+  position: relative;
+  top: -3px;
+}
+.dropdown.dropup .btn.dropdown-toggle::after {
+  position: relative;
+  top: 1px;
+}
+#ccnSettingsMenuContainer .dropdown-item:focus-within:not(:hover) {
+  color: #212529;
+  background: inherit;
+}
+#ccnSettingsMenuContainer .dropdown-item:focus-within:not(:hover) a {
+  color: #212529;
+}
+#ccnSettingsMenuContainer .dropdown-item:active,
+#ccnSettingsMenuContainer .dropdown-item:hover,
+#ccnSettingsMenuContainer .dropdown-item:focus {
+  background: [[setting:color_primary]];
+  color: #fff;
+}
+#ccnSettingsMenuContainer .dropdown-item:hover a {
+  color: #fff;
+}
+.simplesearchform input {
+  border-radius: 5px !important;
+}
+.simplesearchform .form-inline .input-group-append .btn {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 4px;
+}
