@@ -597,7 +597,12 @@ class ccnCourseHandler
                     if ($child_course === reset($categoryCourses)) {
                         foreach ($child_course->get_course_overviewfiles() as $file) {
                             if ($file->is_valid_image()) {
-                                $imagepath = '/' . $file->get_contextid() . '/' . $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename();
+                                $imagepath = '/' . $file->get_contextid()
+                                    . '/' . $file->get_component()
+                                    . '/' . $file->get_filearea()
+                                    . '/' . $file->get_itemid()
+                                    . $file->get_filepath()
+                                    . $file->get_filename();
                                 $imageurl = file_encode_url($CFG->wwwroot . '/pluginfile.php', $imagepath, false);
                                 $outputimage = $imageurl;
                                 // Use the first image found.
