@@ -87,7 +87,9 @@
                                             class="{{#sidebar_right}}col-lg-8 col-xl-8{{/sidebar_right}} {{^sidebar_right}}col-lg-12{{/sidebar_right}}">
                                             {{/disable_dashboard_drawer}}
                                             {{{ output.standard_top_of_body_html }}}
+                                            {{#is_4}}
                                             {{{ output.full_header }}}
+                                            {{/is_4}}
                                             {{#primarymoremenu}}
                                             <div class="primary-navigation">
                                                 {{> core/moremenu}}
@@ -99,7 +101,9 @@
                                             </div>
                                             {{/secondarymoremenu}}
                                             {{{ output.edit_switch }}}
+                                            {{#is_4}}
                                             {{{ output.region_main_settings_menu }}}
+                                            {{/is_4}}
                                             {{#has_blocks_above_content}}
                                             {{{ blocks_above_content }}}
                                             {{/has_blocks_above_content}}
