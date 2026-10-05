@@ -1,0 +1,40 @@
+LICENÇA DE USO
+Copyright (c) [2021] Escola Superior da Advocacia-Geral da União (AGU) - Portal EVA
+Todos os direitos reservados.
+
+---
+## 1. DEFINIÇÕES
+Para os fins desta licença, os termos abaixo terão os seguintes significados:
+- **Software**: Refere-se aos blocos personalizados e ao thema e outras implementações personalizadas desenvolvidas no moodle para o portal EVA, hospedado em https://eva.agu.gov.br.
+- **Licenciado**: A entidade ou indivíduo autorizado a usar o Software.
+- **Organização**: Escola Superior da Advocacia-Geral da União (AGU), responsável pelo desenvolvimento e manutenção do Software.
+- **Código exclusivo: ID_01012020AGU_ESAGU2021 - GNU License
+
+---
+## 2. DIREITOS CONCEDIDOS
+A AGU concede o direito limitado, revogável, intransferível e não exclusivo de:
+1. Usar o Software exclusivamente no ambiente autorizado e para os fins permitidos pela ESAGU- AGU.
+2. Realizar personalizações que não alterem a funcionalidade principal do Software, desde que com prévia autorização por escrito da ESAGU- AGU.
+
+---
+## 3. RESTRIÇÕES DE USO
+O Licenciado NÃO está autorizado a:
+1. Copiar, redistribuir ou sublicenciar o Software, no todo ou em parte, sem a permissão explícita da ESAGU- AGU.
+2. Modificar, descompilar, desmontar, realizar engenharia reversa ou de qualquer forma tentar derivar o código-fonte ou funcionalidades do Software, salvo disposição em contrário pela lei aplicável.
+3. Utilizar o Software para fins comerciais ou em qualquer ambiente não autorizado pela ESAGU- AGU.
+4. Remover, ocultar ou alterar qualquer notificação de propriedade, direitos autorais ou marcações presentes no Software.
+
+---
+## 4. PROPRIEDADE INTELECTUAL
+O Software é de propriedade exclusiva da ESAGU- AGU. Todos os direitos não expressamente concedidos nesta licença estão reservados à ESAGU- AGU.
+
+---
+## 5. LEGISLAÇÃO E FORO
+Esta licença será regida pelas leis da República Federativa do Brasil. Fica eleito o foro da Seção Judiciária de Brasília, Distrito Federal, como competente para dirimir quaisquer disputas decorrentes deste instrumento.
+
+---
+## 6. CONTATO
+Para dúvidas ou solicitações relacionadas a esta licença, entre em contato com:
+Escola Superior da Advocacia-Geral da União
+Email: eva@agu.gov.br
+Site: https://eva.agu.gov.br

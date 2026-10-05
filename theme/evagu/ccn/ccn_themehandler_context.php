@@ -300,6 +300,7 @@ $ccnLcVbCollection = array(
     'eva_course_intro',
     'eva_course_list',
     'eva_course_overview',
+    'eva_course_promotion',
     'eva_course_rating',
     'eva_courses_slider',
     'eva_custom_html',
