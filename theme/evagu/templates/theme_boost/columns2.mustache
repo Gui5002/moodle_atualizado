@@ -20,7 +20,12 @@
             </div>
             {{{ output.standard_top_of_body_html }}}
             <div>
+                {{! Moodle 3.x: EVAGU already renders its own header/breadcrumb in theme_boost/navbar.
+                    Calling output.full_header here injects the native Boost header from Moodle 3.5,
+                    causing duplicated/blank header regions and layout distortion. Keep it only for Moodle 4+. }}
+                {{#is_4}}
                 {{{ output.full_header }}}
+                {{/is_4}}
                 {{#primarymoremenu}}
                 <div class="primary-navigation">
                     {{> core/moremenu}}
