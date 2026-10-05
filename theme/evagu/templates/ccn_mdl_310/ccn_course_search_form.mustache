@@ -41,9 +41,9 @@ Example context (json):
         {{#hiddenfields}}
         <input type="hidden" name="{{ name }}" value="{{ value }}">
         {{/hiddenfields}}
-        <input type="text" id="searchinput-{{uniqid}}" class="form-control" placeholder="{{ searchstring }}"
-            aria-label="{{ searchstring }}" name="{{ inputname }}" data-region="input" autocomplete="off"
-            value="{{ query }}">
+        <input type="text" id="searchinput-{{uniqid}}" class="form-control" placeholder="{{{ searchstring }}}"
+            aria-label="{{{ searchstring }}}" name="{{{ inputname }}}" data-region="input" autocomplete="off"
+            value="{{{ query }}}">
         <button class="btn my-2 my-sm-0" type="submit"><span class="flaticon-magnifying-glass"></span></button>
         {{#otherfields}}
         <div class="ml-2">{{{ otherfields }}}</div>

@@ -243,13 +243,7 @@ $hasleftblocks = strpos($leftblocks, 'data-block=') !== false;
 /* End: Deprecate these variables soon; copied & renamed immediately below */
 $sidebar_left = strpos($leftblocks, 'data-block=') !== false;
 $sidebar_right = strpos($blockshtml, 'data-block=') !== false;
-// Compatibilidade com versões do Moodle que não possuem
-// region_main_settings_menu() no core_renderer.
-if (method_exists($OUTPUT, 'region_main_settings_menu')) {
-    $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
-} else {
-    $regionmainsettingsmenu = '';
-}
+$regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
 $hassideblocks = ($hasblocks || $hasleftblocks);
 $sidebar_single = (($hasblocks && !$hasleftblocks) || (!$hasblocks && $hasleftblocks));
 $sidebar_single_left = (!$hasblocks && $hasleftblocks);
@@ -641,83 +635,24 @@ if (!empty($USER->lang)) {
 }
 $secondarynavigation = false;
 $overflow = '';
-
 if (method_exists($PAGE, 'has_secondary_navigation') && $PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
-    $moremenu = new \core\navigation\output\more_menu(
-        $PAGE->secondarynav,
-        'nav-tabs',
-        true,
-        $tablistnav
-    );
-
+    $moremenu = new \core\navigation\output\more_menu($PAGE->secondarynav, 'nav-tabs', true, $tablistnav);
     $secondarynavigation = $moremenu->export_for_template($OUTPUT);
-
     $overflowdata = $PAGE->secondarynav->get_overflow_menu_data();
-
     if (!is_null($overflowdata)) {
         $overflow = $overflowdata->export_for_template($OUTPUT);
     }
 }
-
-/*
- * Compatibilidade com Moodle 3.5.
- * region_main_settings_menu() não existe no renderer desta versão.
- */
-$regionmainsettingsmenu = '';
-
-if ((int)$ccnMdlVersion < 400) {
-    if (method_exists($OUTPUT, 'region_main_settings_menu')) {
-        $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
-    }
-}
-
-/*
- * Navegação utilizada por versões mais recentes do Moodle.
- */
+if ((int) $ccnMdlVersion < 400)
+    $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
 if (class_exists('core\navigation\output\primary')) {
-
     $primary = new \theme_evagu\navigation\primary($PAGE);
-
     $renderer = $PAGE->get_renderer('core');
-
     $primarymenu = $primary->export_for_template($renderer);
-
-    /*
-     * Essas APIs também pertencem a versões mais recentes.
-     * Só executamos se estiverem disponíveis.
-     */
-    $buildregionmainsettings = false;
-
-    if (
-        method_exists($PAGE, 'include_region_main_settings_in_header_actions') &&
-        method_exists($PAGE, 'has_secondary_navigation')
-    ) {
-        $buildregionmainsettings =
-            !$PAGE->include_region_main_settings_in_header_actions() &&
-            !$PAGE->has_secondary_navigation();
-    }
-
-    if (
-        $buildregionmainsettings &&
-        method_exists($OUTPUT, 'region_main_settings_menu')
-    ) {
-        $regionmainsettingsmenu = $OUTPUT->region_main_settings_menu();
-    } else {
-        $regionmainsettingsmenu = false;
-    }
-
-    /*
-     * activityheader também pertence a Moodle mais recente.
-     */
-    if (property_exists($PAGE, 'activityheader')) {
-        $header = $PAGE->activityheader;
-
-        if (
-            is_object($header) &&
-            method_exists($header, 'export_for_template')
-        ) {
-            $headercontent = $header->export_for_template($renderer);
-        }
-    }
+    $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_actions() && !$PAGE->has_secondary_navigation();
+    // If the settings menu will be included in the header then don't add it here.
+    $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
+    $header = $PAGE->activityheader;
+    $headercontent = $header->export_for_template($renderer);
 }

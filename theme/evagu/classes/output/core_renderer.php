@@ -1310,30 +1310,15 @@ class core_renderer extends \core_renderer {
             }
             return $this->render_from_template('theme_evagu/ccn_mdl_400/full_header', $header);
         } else {
-
-    /*
-     * Compatibilidade Moodle 3.5.
-     *
-     * region_main_settings_menu() e
-     * include_region_main_settings_in_header_actions()
-     * podem não existir nesta versão.
-     */
-    if (
-        method_exists($this->page, 'include_region_main_settings_in_header_actions') &&
-        method_exists($this, 'region_main_settings_menu') &&
-        $this->page->include_region_main_settings_in_header_actions() &&
-        !$this->page->blocks->is_block_present('settings')
-    ) {
-        $this->page->add_header_action(
-            html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                array('id' => 'region-main-settings-menu')
-            )
-        );
-    }
-
-    $header = new stdClass();
+            if ($this->page->include_region_main_settings_in_header_actions() &&
+                    !$this->page->blocks->is_block_present('settings')) {
+                $this->page->add_header_action(html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+                ));
+            }
+            $header = new stdClass();
             $header->settingsmenu = $this->context_header_settings_menu();
             $header->contextheader = $this->context_header();
             $header->hasnavbar = empty($this->page->layout_options['nonavbar']);
