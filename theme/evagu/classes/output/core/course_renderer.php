@@ -22,7 +22,6 @@ use completion_info;
 use context_course;
 use context_module;
 use context_system;
-use core_course_category;
 use core_course_list_element;
 use core_course_renderer;
 use core_tag;
@@ -37,6 +36,7 @@ use single_select;
 use stdClass;
 
 require_once ($CFG->dirroot . '/course/renderer.php');
+require_once ($CFG->libdir . '/coursecatlib.php');
 require_once ($CFG->dirroot . '/theme/evagu/ccn/course_handler/ccn_course_handler.php');
 require_once ($CFG->dirroot . '/theme/evagu/ccn/mdl_handler/ccn_mdl_handler.php');
 require_once ($CFG->dirroot . '/theme/evagu/ccn/user_handler/ccn_user_handler.php');
@@ -50,7 +50,7 @@ class course_renderer extends \core_course_renderer
      * Returns HTML to display a tree of subcategories and courses in the given category
      *
      * @param coursecat_helper $chelper various display options
-     * @param core_course_category $coursecat top category (this category's name and description will NOT be added to the tree)
+     * @param coursecat $coursecat top category (this category's name and description will NOT be added to the tree)
      * @return string
      */
     protected function coursecat_tree(coursecat_helper $chelper, $coursecat)
@@ -76,7 +76,7 @@ class course_renderer extends \core_course_renderer
      * This method is re-used by AJAX to expand content of not loaded category
      *
      * @param coursecat_helper $chelper various display options
-     * @param core_course_category $coursecat
+     * @param coursecat $coursecat
      * @param int $depth depth of the category in the current tree
      * @return string
      */
@@ -134,18 +134,27 @@ class course_renderer extends \core_course_renderer
     public function course_category($category)
     {
         global $CFG, $PAGE;
-        $usertop = core_course_category::user_top();
+        $usertop = coursecat::get(0);
         if (empty($category)) {
             $coursecat = $usertop;
-        } else if (is_object($category) && $category instanceof core_course_category) {
+        } else if (is_object($category) && $category instanceof coursecat) {
             $coursecat = $category;
         } else {
-            $coursecat = core_course_category::get(is_object($category) ? $category->id : $category);
+            $coursecat = coursecat::get(is_object($category) ? $category->id : $category);
         }
         $ccnCourseHandler = new ccnCourseHandler();
         $ccnCourseCount = $ccnCourseHandler->ccnGetCourseCategoryFilterCount($coursecat);
-        $ccnCategoryDetails = $ccnCourseHandler->ccnGetCategoryDetails($category);
-        $ccnSubcategoryCount = $ccnCategoryDetails->subcategoriesCount;
+
+        // The root pseudo-category (id 0) does not have a database record.
+        // Use coursecat directly there and only request stored category details
+        // for real categories.
+        $ccnCategoryDetails = null;
+        if (!empty($coursecat->id)) {
+            $ccnCategoryDetails = $ccnCourseHandler->ccnGetCategoryDetails($coursecat->id);
+        }
+        $ccnSubcategoryCount = $ccnCategoryDetails
+            ? $ccnCategoryDetails->subcategoriesCount
+            : $coursecat->get_children_count();
         $ccnCourseCountRender = '';
         if ($ccnCourseCount > 0) {
             $ccnCourseCountRender .= '<span class="color-dark pr5">' . $ccnCourseCount . '</span> ' . get_string('courses') . ' ';
@@ -168,16 +177,16 @@ class course_renderer extends \core_course_renderer
         //   $this->page->set_button($managebutton);
         // }
         if (!$coursecat->id || !$coursecat->is_uservisible()) {
-            $categorieslist = core_course_category::make_categories_list();
+            $categorieslist = coursecat::make_categories_list();
             $strcategories = get_string('categories');
             $this->page->set_title("$site->shortname: $strcategories");
         } else {
             $strfulllistofcourses = get_string('fulllistofcourses');
             $this->page->set_title("$site->shortname: $strfulllistofcourses");
             // Print the category selector
-            $categorieslist = core_course_category::make_categories_list();
+            $categorieslist = coursecat::make_categories_list();
             // if (count($categorieslist) > 1) {
-            $select = new single_select(new moodle_url('/course/index.php'), 'categoryid', core_course_category::make_categories_list(), $coursecat->id, null, 'switchcategory');
+            $select = new single_select(new moodle_url('/course/index.php'), 'categoryid', coursecat::make_categories_list(), $coursecat->id, null, 'switchcategory');
             // }
         }
         // 202003031234 - check that the user is within a course category and not just on the /courses/index.php page, because below demands a category ID
@@ -456,7 +465,7 @@ class course_renderer extends \core_course_renderer
         }
         $totalcount = $coursecat->get_children_count();
         if (!$totalcount) {
-            // Note that we call core_course_category::get_children_count() AFTER core_course_category::get_children()
+            // Note that we call coursecat::get_children_count() AFTER coursecat::get_children()
             // to avoid extra DB requests.
             // Categories count is cached during children categories retrieval.
             return '';
@@ -1091,7 +1100,7 @@ class course_renderer extends \core_course_renderer
                     $imgwithlink = html_writer::link($url, $img);
                     $coursename = html_writer::link($url, $course->get_formatted_name());
                     $details = '';
-                    if ($showcategories && ($cat = core_course_category::get($course->category, IGNORE_MISSING))) {
+                    if ($showcategories && ($cat = coursecat::get($course->category, IGNORE_MISSING))) {
                         $details = get_string('category') . ': '
                             . html_writer::link(new moodle_url('/course/index.php', array('categoryid' => $cat->id)),
                                 $cat->get_formatted_name(), array('class' => $cat->visible ? '' : 'dimmed'));

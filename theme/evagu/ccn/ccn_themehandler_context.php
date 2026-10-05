@@ -300,7 +300,6 @@ $ccnLcVbCollection = array(
     'eva_course_intro',
     'eva_course_list',
     'eva_course_overview',
-    'eva_course_promotion',
     'eva_course_rating',
     'eva_courses_slider',
     'eva_custom_html',
@@ -363,9 +362,23 @@ $ccnControlBlockListUri = $CFG->wwwroot . '/theme/evagu/ccn/visualize/ccn_block/
 $ccnControlBlockListUriThumb = $CFG->wwwroot . '/theme/evagu/ccn/visualize/ccn_block/jpeg/thumb/';
 $PAGE->requires->js_init_call('ccnCommentHandler', array(get_string('add_comment', 'theme_evagu')));
 $PAGE->requires->js_init_call('ccnControl', array($ccnControlBlockListUri, $ccnControlBlockListUriThumb, $ccnLcVbCollection, $ccnMdlVersion));
-$nav = $PAGE->flatnav;
+/*
+ * Navegação lateral.
+ * Compatibilidade entre diferentes versões do Moodle.
+ */
+$nav = property_exists($PAGE, 'flatnav') ? $PAGE->flatnav : false;
+
 $templatecontext['flatnavigation'] = $nav;
-$templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+
+/*
+ * get_collectionlabel() is not available in Moodle 3.5 flat_navigation.
+ * Keep a safe fallback for the older navigation implementation.
+ */
+if (is_object($nav) && method_exists($nav, 'get_collectionlabel')) {
+    $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
+} else {
+    $templatecontext['firstcollectionlabel'] = '';
+}
 if ($PAGE->pagetype == 'admin-setting-themesettingevagu') {
     $PAGE->requires->css('/theme/evagu/style/eva.editor.theme.css');
     $PAGE->requires->js('/theme/evagu/javascript/eva.editor.theme.js', true);
