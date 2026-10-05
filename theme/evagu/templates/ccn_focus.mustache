@@ -64,7 +64,10 @@
                                             class="{{#sidebar_right}}col-lg-8 col-xl-8{{/sidebar_right}} {{^sidebar_right}}col-lg-12{{/sidebar_right}}">
                                             {{/disable_dashboard_drawer}}
                                             {{{ output.standard_top_of_body_html }}}
+                                            {{! Moodle 3.x focus layout already owns the page chrome; avoid the native Boost header there. }}
+                                            {{#is_4}}
                                             {{{ output.full_header }}}
+                                            {{/is_4}}
                                             {{#primarymoremenu}}
                                             <div class="primary-navigation">
                                                 {{> core/moremenu}}
