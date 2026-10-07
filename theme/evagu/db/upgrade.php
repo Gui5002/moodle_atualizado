@@ -95,5 +95,18 @@ function xmldb_theme_evagu_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020050618, 'theme', 'evagu');
     }
 
-  return $result;
+    // Moodle 3.5 compatibility: the core My overview block expects
+    // block_myoverview/defaulttab to exist. In databases that came from a
+    // newer EVAGU/Moodle setup this setting may be absent, which causes an
+    // Undefined property: stdClass::$defaulttab notice before the dashboard
+    // can be rendered.
+    if ($oldversion < 202610070001) {
+        if (get_config('block_myoverview', 'defaulttab') === false) {
+            set_config('defaulttab', 'timeline', 'block_myoverview');
+        }
+
+        upgrade_plugin_savepoint(true, 202610070001, 'theme', 'evagu');
+    }
+
+    return $result;
 }

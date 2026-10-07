@@ -366,13 +366,13 @@ $PAGE->requires->js_init_call('ccnControl', array($ccnControlBlockListUri, $ccnC
  * Navegação lateral.
  * Compatibilidade entre diferentes versões do Moodle.
  */
-$nav = $PAGE->flatnav;
+$nav = property_exists($PAGE, 'flatnav') ? $PAGE->flatnav : false;
 
 $templatecontext['flatnavigation'] = $nav;
 
 /*
- * get_collectionlabel() não existe no flat_navigation
- * utilizado pelo Moodle 3.5.
+ * get_collectionlabel() is not available in Moodle 3.5 flat_navigation.
+ * Keep a safe fallback for the older navigation implementation.
  */
 if (is_object($nav) && method_exists($nav, 'get_collectionlabel')) {
     $templatecontext['firstcollectionlabel'] = $nav->get_collectionlabel();
